@@ -19,7 +19,8 @@ import java.util.logging.Level;
 /** Disposable lab fixture. All live world access and ticket ownership stays on Paper's main thread. */
 public final class NativeStructuresLab extends JavaPlugin implements Listener, CommandExecutor {
     private static final long SLICE_NANOS = 1_500_000L;
-    private static final int MAX_POSITIONS = 512, MAX_PREPARING = 2;
+    private static final int MAX_POSITIONS = 4096, MAX_PREPARATION_OPERATIONS = 512, MAX_PREPARING = 1;
+    private static final List<String> WARMUP_STATES = List.of("minecraft:air", "minecraft:stone", "minecraft:deepslate");
     private static final long DEADLINE_NANOS = TimeUnit.MINUTES.toNanos(10);
     private enum Stage { BOOT, BASELINE, DECODE, PALETTE, PREPARE, RESET, APPLY, SETTLE, REPORT, IDLE, STOPPED }
     private Stage stage = Stage.STOPPED;
@@ -38,8 +39,8 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
     private List<Fixtures.Fixture> fixtures = List.of();
     private Job job;
     private BlockData air;
-    private int stageTicks, fixtureIndex, serverDataVersion;
-    private long token, runStarted, phaseStarted, manualDecodeStarted;
+    private int stageTicks, fixtureIndex, serverDataVersion, warmupCursor, remainingNativeChunkTickets = -1;
+    private long token, runStarted, phaseStarted, manualDecodeStarted, startupWarmupNanos;
     private boolean benchmark, collecting, observedActive;
     private String observedPhase = "boot", terminalStatus = "complete", terminalMessage = "";
     private String serverVersion, startedAt, worldGenerator;
@@ -50,6 +51,7 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
         try {
             benchmark = true;
             collecting = false; observedActive = false; fixtureIndex = 0;
+            warmupCursor = 0; startupWarmupNanos = 0; remainingNativeChunkTickets = -1;
             results.clear(); tickSamples.clear(); sliceSamples.clear(); overallTicks = new Samples();
             manualLoad = null; reportWrite = null;
             startedAt = Instant.now().toString();
@@ -95,10 +97,16 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
             observedPhase = phaseName();
             observedActive = stage == Stage.DECODE || stage == Stage.PALETTE || stage == Stage.PREPARE
                     || stage == Stage.RESET || stage == Stage.APPLY || stage == Stage.SETTLE;
-            SliceBudget budget = new SliceBudget(System::nanoTime, SLICE_NANOS, MAX_POSITIONS);
+            int hardLimit = stage == Stage.RESET || stage == Stage.APPLY ? MAX_POSITIONS : MAX_PREPARATION_OPERATIONS;
+            SliceBudget budget = new SliceBudget(System::nanoTime, SLICE_NANOS, hardLimit);
             switch (stage) {
                 case BOOT -> {
-                    if (++stageTicks >= 100 && fixtureLoad.isDone()) {
+                    while (warmupCursor < WARMUP_STATES.size() && budget.next()) {
+                        long started = System.nanoTime();
+                        try { preparePaletteState(WARMUP_STATES.get(warmupCursor++)); }
+                        finally { startupWarmupNanos += System.nanoTime() - started; }
+                    }
+                    if (++stageTicks >= 100 && warmupCursor == WARMUP_STATES.size() && fixtureLoad.isDone()) {
                         fixtures = fixtureLoad.get(); benchmark = true; token = fence.begin();
                         startedAt = Instant.now().toString(); runStarted = System.nanoTime();
                         benchmarkBaseX = 4096 + (int) (System.currentTimeMillis() % 40_000L) * 16;
@@ -154,14 +162,18 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
             int index = job.paletteCursor++;
             String state = job.schematic.palette.get(index);
             if (state == null) continue; // Sparse palette IDs are legal; codec validates every actual reference.
-            BlockData data = Bukkit.createBlockData(state);
-            if (data.createBlockState() instanceof TileState)
-                throw new IllegalArgumentException("Block-entity material unsupported: " + state);
-            job.palette[index] = data;
+            job.palette[index] = preparePaletteState(state);
         }
         if (job.paletteCursor == job.palette.length) {
             job.paletteNanos = System.nanoTime() - phaseStarted; transition(Stage.PREPARE);
         }
+    }
+
+    private static BlockData preparePaletteState(String state) {
+        BlockData data = Bukkit.createBlockData(state);
+        if (data.createBlockState() instanceof TileState)
+            throw new IllegalArgumentException("Block-entity material unsupported: " + state);
+        return data;
     }
 
     private void prepareChunks(SliceBudget budget) {
@@ -198,8 +210,10 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
 
     private void apply(SliceBudget budget, boolean reset) {
         SchematicCodec.Schematic schematic = job.schematic;
-        while (job.cursor < schematic.volume() && budget.next()) {
-            int index = job.cursor++;
+        int positions = reset ? schematic.volume() : schematic.placementCount();
+        while (job.cursor < positions && budget.next()) {
+            int cursor = job.cursor++;
+            int index = reset ? cursor : schematic.placementPosition(cursor);
             BlockData target = reset ? air : job.palette[schematic.block(index)];
             // Sparse structures preserve existing air-space; reset is explicit for the synthetic benchmark only.
             if (!reset && target.getMaterial().isAir()) { job.skippedAir++; continue; }
@@ -213,7 +227,7 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
             block.setBlockData(target, false);
             if (reset) job.resetWrites++; else job.actualWrites++;
         }
-        if (job.cursor == schematic.volume()) {
+        if (job.cursor == positions) {
             if (reset) {
                 job.resetNanos = System.nanoTime() - phaseStarted; job.cursor = 0; transition(Stage.APPLY);
             } else {
@@ -238,9 +252,12 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
         result.put("actualBlocksPerSecond", job.applyNanos == 0 ? 0D : job.actualWrites * 1_000_000_000D / job.applyNanos);
         result.put("maxTicketPinCallbackMs", job.maxPinNanos / 1_000_000D);
         result.put("totalJobMs", (System.nanoTime() - job.started) / 1_000_000D);
-        results.add(result);
-        getLogger().info("NATIVE_STRUCTURES_JOB status=complete name=" + job.name + " actualWrites=" + job.actualWrites);
+        String completedName = job.name;
+        int completedWrites = job.actualWrites;
         releaseJob();
+        result.put("remainingNativeChunkTickets", remainingNativeChunkTickets);
+        results.add(result);
+        getLogger().info("NATIVE_STRUCTURES_JOB status=complete name=" + completedName + " actualWrites=" + completedWrites);
         if (benchmark) { fixtureIndex++; startFixture(); } else completeRun("complete", "Placement completed");
     }
 
@@ -280,6 +297,8 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
         Samples overall = overallTicks;
         boolean benchReport = benchmark;
         String startTimestamp = startedAt, version = serverVersion, generator = worldGenerator;
+        long warmupNanos = startupWarmupNanos;
+        int remainingTickets = remainingNativeChunkTickets;
         Path reportFolder = dataFolder;
         String reportId = UUID.randomUUID().toString();
         long reportingToken = fence.begin();
@@ -291,13 +310,18 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
             report.put("server", version); report.put("java", System.getProperty("java.version"));
             report.put("world", LabGuard.WORLD); report.put("totalMs", totalNanos / 1_000_000D);
             report.put("worldGenerator", generator);
+            report.put("startupWarmupMs", warmupNanos / 1_000_000D);
+            report.put("startupWarmupStates", WARMUP_STATES);
+            report.put("startupWarmupWindow", "Sum of main-thread createBlockData and detached createBlockState validation calls during boot; excluded from idle baseline and active benchmark");
             report.put("sliceBudgetMs", SLICE_NANOS / 1_000_000D); report.put("maxPositionsPerTick", MAX_POSITIONS);
+            report.put("maxPreparationOperationsPerTick", MAX_PREPARATION_OPERATIONS);
             report.put("maxChunkRequestsInFlight", MAX_PREPARING); report.put("cases", completedResults);
+            report.put("remainingNativeChunkTickets", remainingTickets);
             report.put("tickMs", summarize(ticks)); report.put("ownSliceMs", summarize(slices));
             report.put("overallActiveTickMs", overall.summary());
             report.put("overallWindow", "Palette preparation, chunk preparation, reset, placement and settle; excludes boot, idle baseline and report IO");
             report.put("limits", List.of("Native calls cannot be preempted; time budget is checked between calls",
-                    "Ticket pinning occurs immediately in at most two in-flight chunk completions and is measured separately",
+                    "Ticket pinning occurs immediately with one chunk request in flight and is measured separately",
                     "Chunk preparation reports unloaded-vs-loaded, not an assumed on-disk generation state",
                     "Block entities, entities, biome changes and automatic data-version conversion are unsupported",
                     "Physics=false does not eliminate native lighting or later neighbour work; settle ticks are included",
@@ -330,14 +354,18 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
     }
     private void releaseJob() {
         Job old = job; job = null;
-        if (old == null) return;
-        for (CompletableFuture<Chunk> pending : new ArrayList<>(old.pending.values())) pending.cancel(false);
-        old.pending.clear();
-        for (HeldChunk held : old.held.values()) {
-            if (held.owned && Bukkit.getWorld(world.getUID()) == world)
-                world.removePluginChunkTicket(held.chunk.getX(), held.chunk.getZ(), this);
+        if (old != null) {
+            for (CompletableFuture<Chunk> pending : new ArrayList<>(old.pending.values())) pending.cancel(false);
+            old.pending.clear();
+            for (HeldChunk held : old.held.values()) {
+                if (held.owned && Bukkit.getWorld(world.getUID()) == world)
+                    world.removePluginChunkTicket(held.chunk.getX(), held.chunk.getZ(), this);
+            }
+            old.held.clear();
         }
-        old.held.clear();
+        // Capture native ownership on the main thread, not merely our cleared bookkeeping map.
+        remainingNativeChunkTickets = world != null && Bukkit.getWorld(world.getUID()) == world
+                ? world.getPluginChunkTickets().getOrDefault(this, List.of()).size() : -1;
     }
     @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof ConsoleCommandSender)) { sender.sendMessage("This lab command is console-only."); return true; }
@@ -392,6 +420,7 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
         Job(String name, SchematicCodec.Schematic schematic, int x, int y, int z, int expectedWrites, long decodeNanos) {
             this.name = name; this.schematic = schematic; this.x = x; this.y = y; this.z = z;
             this.expectedWrites = expectedWrites; this.decodeNanos = decodeNanos;
+            skippedAir = schematic.airCount();
             footprint = schematic.footprint(x, z); palette = new BlockData[schematic.palette.size()];
         }
     }

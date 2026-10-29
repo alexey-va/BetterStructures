@@ -1,0 +1,400 @@
+{
+  "active_plugins": [
+    "ArcNativeStructuresLab.jar"
+  ],
+  "jar_sha256": "912a40c01ac748ab46cf250b45878fce835c86fa32d43855677a44ffe444995c",
+  "report": {
+    "cases": [
+      {
+        "actualBlocksPerSecond": 5285.108463106181,
+        "actualWrites": 32768,
+        "chunkPreparationMs": 5681.369458,
+        "chunks": 4,
+        "chunksAlreadyLoadedAtRequest": 0,
+        "decodeMs": 49.847087,
+        "maxTicketPinCallbackMs": 6.29303,
+        "name": "dense32",
+        "noOps": 0,
+        "origin": [
+          149488,
+          200,
+          -8192
+        ],
+        "paletteMs": 117.991698,
+        "placementMs": 6200.061972,
+        "resetActualWrites": 0,
+        "resetMs": 3451.056124,
+        "skippedAir": 0,
+        "totalJobMs": 17449.803056,
+        "volume": 32768
+      },
+      {
+        "actualBlocksPerSecond": 1050.263074579566,
+        "actualWrites": 4096,
+        "chunkPreparationMs": 5399.821982,
+        "chunks": 4,
+        "chunksAlreadyLoadedAtRequest": 0,
+        "decodeMs": 6.685194,
+        "maxTicketPinCallbackMs": 0.235336,
+        "name": "sparse32",
+        "noOps": 0,
+        "origin": [
+          149744,
+          200,
+          -8192
+        ],
+        "paletteMs": 48.649074,
+        "placementMs": 3899.975253,
+        "resetActualWrites": 0,
+        "resetMs": 3300.402959,
+        "skippedAir": 28672,
+        "totalJobMs": 14648.845466,
+        "volume": 32768
+      },
+      {
+        "actualBlocksPerSecond": 10101.79155516003,
+        "actualWrites": 262144,
+        "chunkPreparationMs": 10850.323053,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 9,
+        "decodeMs": 78.292469,
+        "maxTicketPinCallbackMs": 0.850578,
+        "name": "dense64",
+        "noOps": 0,
+        "origin": [
+          150000,
+          200,
+          -8192
+        ],
+        "paletteMs": 49.070619,
+        "placementMs": 25950.248386,
+        "resetActualWrites": 0,
+        "resetMs": 25649.730219,
+        "skippedAir": 0,
+        "totalJobMs": 64499.30793,
+        "volume": 262144
+      },
+      {
+        "actualBlocksPerSecond": 1270.0808714087866,
+        "actualWrites": 32768,
+        "chunkPreparationMs": 11500.070427,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 9,
+        "decodeMs": 16.111063,
+        "maxTicketPinCallbackMs": 2.385431,
+        "name": "sparse64",
+        "noOps": 0,
+        "origin": [
+          150256,
+          200,
+          -8192
+        ],
+        "paletteMs": 49.570922,
+        "placementMs": 25799.931908,
+        "resetActualWrites": 0,
+        "resetMs": 25599.996288,
+        "skippedAir": 229376,
+        "totalJobMs": 64949.6824,
+        "volume": 262144
+      }
+    ],
+    "java": "25.0.4.1",
+    "limits": [
+      "Native calls cannot be preempted; time budget is checked between calls",
+      "Ticket pinning occurs immediately in at most two in-flight chunk completions and is measured separately",
+      "Chunk preparation reports unloaded-vs-loaded, not an assumed on-disk generation state",
+      "Block entities, entities, biome changes and automatic data-version conversion are unsupported",
+      "Physics=false does not eliminate native lighting or later neighbour work; settle ticks are included",
+      "Sparse placements skip air; only benchmark fixtures receive an explicit reset"
+    ],
+    "maxChunkRequestsInFlight": 2,
+    "maxPositionsPerTick": 512,
+    "message": "All fixtures completed",
+    "overallActiveTickMs": {
+      "maxMs": 85.09298,
+      "p50Ms": 1.011098,
+      "p95Ms": 4.772025,
+      "p99Ms": 14.191056,
+      "samples": 3230
+    },
+    "overallWindow": "Palette preparation, chunk preparation, reset, placement and settle; excludes boot, idle baseline and report IO",
+    "ownSliceMs": {
+      "dense32.chunk_prepare": {
+        "maxMs": 15.070619,
+        "p50Ms": 1.654217,
+        "p95Ms": 15.070619,
+        "p99Ms": 15.070619,
+        "samples": 4
+      },
+      "dense32.palette": {
+        "maxMs": 66.994129,
+        "p50Ms": 0.183612,
+        "p95Ms": 66.994129,
+        "p99Ms": 66.994129,
+        "samples": 2
+      },
+      "dense32.place": {
+        "maxMs": 7.299288,
+        "p50Ms": 1.508691,
+        "p95Ms": 4.201765,
+        "p99Ms": 6.968905,
+        "samples": 124
+      },
+      "dense32.reset": {
+        "maxMs": 5.334712,
+        "p50Ms": 0.902748,
+        "p95Ms": 3.906768,
+        "p99Ms": 5.334712,
+        "samples": 69
+      },
+      "dense64.chunk_prepare": {
+        "maxMs": 32.958363,
+        "p50Ms": 0.952977,
+        "p95Ms": 32.958363,
+        "p99Ms": 32.958363,
+        "samples": 8
+      },
+      "dense64.palette": {
+        "maxMs": 0.106504,
+        "p50Ms": 0.106504,
+        "p95Ms": 0.106504,
+        "p99Ms": 0.106504,
+        "samples": 1
+      },
+      "dense64.place": {
+        "maxMs": 3.180244,
+        "p50Ms": 0.564853,
+        "p95Ms": 1.047752,
+        "p99Ms": 1.543674,
+        "samples": 519
+      },
+      "dense64.reset": {
+        "maxMs": 1.770222,
+        "p50Ms": 0.104912,
+        "p95Ms": 0.210314,
+        "p99Ms": 0.587937,
+        "samples": 513
+      },
+      "sparse32.chunk_prepare": {
+        "maxMs": 5.765615,
+        "p50Ms": 1.157326,
+        "p95Ms": 5.765615,
+        "p99Ms": 5.765615,
+        "samples": 3
+      },
+      "sparse32.palette": {
+        "maxMs": 0.147099,
+        "p50Ms": 0.147099,
+        "p95Ms": 0.147099,
+        "p99Ms": 0.147099,
+        "samples": 1
+      },
+      "sparse32.place": {
+        "maxMs": 4.209371,
+        "p50Ms": 0.673983,
+        "p95Ms": 2.155582,
+        "p99Ms": 4.209371,
+        "samples": 78
+      },
+      "sparse32.reset": {
+        "maxMs": 3.319985,
+        "p50Ms": 0.102491,
+        "p95Ms": 0.314469,
+        "p99Ms": 3.319985,
+        "samples": 66
+      },
+      "sparse64.chunk_prepare": {
+        "maxMs": 5.445698,
+        "p50Ms": 1.250672,
+        "p95Ms": 5.445698,
+        "p99Ms": 5.445698,
+        "samples": 8
+      },
+      "sparse64.palette": {
+        "maxMs": 0.111165,
+        "p50Ms": 0.111165,
+        "p95Ms": 0.111165,
+        "p99Ms": 0.111165,
+        "samples": 1
+      },
+      "sparse64.place": {
+        "maxMs": 4.589469,
+        "p50Ms": 0.227879,
+        "p95Ms": 0.651741,
+        "p99Ms": 1.342182,
+        "samples": 516
+      },
+      "sparse64.reset": {
+        "maxMs": 0.819241,
+        "p50Ms": 0.09259,
+        "p95Ms": 0.202436,
+        "p99Ms": 0.35692,
+        "samples": 512
+      }
+    },
+    "runId": "fb402ea5-1aa9-406e-b843-1b17afdf3d65",
+    "server": "1.21.11-2568-f57bd86 (MC: 1.21.11)",
+    "sliceBudgetMs": 1.5,
+    "startedAt": "2026-10-29T15:02:49.087630424Z",
+    "status": "complete",
+    "tickMs": {
+      "baseline": {
+        "maxMs": 4.886431,
+        "p50Ms": 1.320711,
+        "p95Ms": 2.327553,
+        "p99Ms": 3.980089,
+        "samples": 200
+      },
+      "boot": {
+        "maxMs": 2.499666,
+        "p50Ms": 2.499666,
+        "p95Ms": 2.499666,
+        "p99Ms": 2.499666,
+        "samples": 1
+      },
+      "dense32.chunk_prepare": {
+        "maxMs": 40.158415,
+        "p50Ms": 0.978252,
+        "p95Ms": 4.015246,
+        "p99Ms": 15.928564,
+        "samples": 114
+      },
+      "dense32.palette": {
+        "maxMs": 68.240651,
+        "p50Ms": 0.687318,
+        "p95Ms": 68.240651,
+        "p99Ms": 68.240651,
+        "samples": 2
+      },
+      "dense32.place": {
+        "maxMs": 45.019642,
+        "p50Ms": 2.57466,
+        "p95Ms": 11.752368,
+        "p99Ms": 40.519566,
+        "samples": 124
+      },
+      "dense32.reset": {
+        "maxMs": 57.164799,
+        "p50Ms": 3.207231,
+        "p95Ms": 34.481778,
+        "p99Ms": 57.164799,
+        "samples": 69
+      },
+      "dense32.settle": {
+        "maxMs": 19.255763,
+        "p50Ms": 0.94183,
+        "p95Ms": 4.42875,
+        "p99Ms": 19.255763,
+        "samples": 40
+      },
+      "dense64.chunk_prepare": {
+        "maxMs": 61.722243,
+        "p50Ms": 0.750298,
+        "p95Ms": 6.541623,
+        "p99Ms": 28.246029,
+        "samples": 217
+      },
+      "dense64.palette": {
+        "maxMs": 5.2466,
+        "p50Ms": 5.2466,
+        "p95Ms": 5.2466,
+        "p99Ms": 5.2466,
+        "samples": 1
+      },
+      "dense64.place": {
+        "maxMs": 5.488805,
+        "p50Ms": 1.413875,
+        "p95Ms": 2.142407,
+        "p99Ms": 3.724779,
+        "samples": 519
+      },
+      "dense64.reset": {
+        "maxMs": 41.129185,
+        "p50Ms": 1.030672,
+        "p95Ms": 4.001514,
+        "p99Ms": 7.735433,
+        "samples": 513
+      },
+      "dense64.settle": {
+        "maxMs": 14.191056,
+        "p50Ms": 0.835234,
+        "p95Ms": 1.362662,
+        "p99Ms": 14.191056,
+        "samples": 40
+      },
+      "sparse32.chunk_prepare": {
+        "maxMs": 13.334964,
+        "p50Ms": 0.746087,
+        "p95Ms": 6.582574,
+        "p99Ms": 11.653338,
+        "samples": 108
+      },
+      "sparse32.palette": {
+        "maxMs": 6.64362,
+        "p50Ms": 6.64362,
+        "p95Ms": 6.64362,
+        "p99Ms": 6.64362,
+        "samples": 1
+      },
+      "sparse32.place": {
+        "maxMs": 85.09298,
+        "p50Ms": 2.606176,
+        "p95Ms": 11.656372,
+        "p99Ms": 85.09298,
+        "samples": 78
+      },
+      "sparse32.reset": {
+        "maxMs": 30.951835,
+        "p50Ms": 1.088105,
+        "p95Ms": 9.823217,
+        "p99Ms": 30.951835,
+        "samples": 66
+      },
+      "sparse32.settle": {
+        "maxMs": 15.38145,
+        "p50Ms": 1.23064,
+        "p95Ms": 3.948201,
+        "p99Ms": 15.38145,
+        "samples": 40
+      },
+      "sparse64.chunk_prepare": {
+        "maxMs": 53.710497,
+        "p50Ms": 0.682708,
+        "p95Ms": 5.459933,
+        "p99Ms": 14.36399,
+        "samples": 230
+      },
+      "sparse64.palette": {
+        "maxMs": 3.596313,
+        "p50Ms": 3.596313,
+        "p95Ms": 3.596313,
+        "p99Ms": 3.596313,
+        "samples": 1
+      },
+      "sparse64.place": {
+        "maxMs": 5.139619,
+        "p50Ms": 0.897492,
+        "p95Ms": 1.655905,
+        "p99Ms": 3.099985,
+        "samples": 516
+      },
+      "sparse64.reset": {
+        "maxMs": 8.454717,
+        "p50Ms": 0.776966,
+        "p95Ms": 1.985648,
+        "p99Ms": 4.474481,
+        "samples": 512
+      },
+      "sparse64.settle": {
+        "maxMs": 1.658802,
+        "p50Ms": 0.724881,
+        "p95Ms": 0.968714,
+        "p99Ms": 1.658802,
+        "samples": 39
+      }
+    },
+    "totalMs": 171550.758562,
+    "world": "rc_native_lab",
+    "worldGenerator": "native-default"
+  }
+}

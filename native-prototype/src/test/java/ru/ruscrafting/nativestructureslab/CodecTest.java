@@ -42,6 +42,44 @@ class CodecTest {
                 .putByteArray("BlockData", new byte[]{(byte) 128, 1});
         var result = SchematicCodec.decode(tag);
         assertEquals(128, result.block(0)); assertEquals("minecraft:stone", result.palette.get(128));
+        assertEquals(1, result.placementCount()); assertEquals(0, result.placementPosition(0));
+    }
+    @Test void compactionPreservesDenseAndSparseSpongeCoordinatesAcrossVersions() throws Exception {
+        for (int version : new int[]{2, 3}) for (boolean sparse : new boolean[]{false, true}) {
+            var result = SchematicCodec.decode(Fixtures.tag(32, sparse, version));
+            int step = sparse ? 8 : 1;
+            assertEquals(32768, result.volume()); // The full reset footprint remains available.
+            assertEquals(32768 / step, result.placementCount());
+            assertEquals(32768 - 32768 / step, result.airCount());
+            for (int cursor = 0; cursor < result.placementCount(); cursor++) {
+                int position = cursor * step;
+                assertEquals(position, result.placementPosition(cursor));
+                assertEquals((position % 2) + 1, result.block(position));
+                assertEquals(position % 32, result.x(position));
+                assertEquals(position / 32 % 32, result.z(position));
+                assertEquals(position / 1024, result.y(position));
+            }
+        }
+    }
+    @Test void compactionSkipsOnlyTheThreeVanillaAirTypesIncludingDefaultNamespace() throws Exception {
+        String[] states = {"air", "minecraft:air", "cave_air", "minecraft:cave_air", "void_air", "minecraft:void_air",
+                "minecraft:structure_void", "minecraft:oak_stairs[facing=east,half=top,shape=straight,waterlogged=false]"};
+        var palette = CompoundBinaryTag.builder();
+        for (int index = 0; index < states.length; index++) palette.putInt(states[index], index);
+        var tag = Fixtures.tag(2, false, 2).put("Palette", palette.build())
+                .putByteArray("BlockData", new byte[]{0, 1, 2, 3, 4, 5, 6, 7});
+        var result = SchematicCodec.decode(tag);
+        assertEquals(6, result.airCount()); assertEquals(2, result.placementCount());
+        assertEquals(6, result.placementPosition(0)); assertEquals(7, result.placementPosition(1));
+        assertEquals(states[7], result.palette.get(result.block(result.placementPosition(1))));
+    }
+    @Test void allAirHasNoPlacementWorkButKeepsFullResetVolume() throws Exception {
+        var tag = Fixtures.tag(2, false, 2)
+                .put("Palette", CompoundBinaryTag.builder().putInt("minecraft:air", 0).build())
+                .putByteArray("BlockData", new byte[8]);
+        var result = SchematicCodec.decode(tag);
+        assertEquals(0, result.placementCount()); assertEquals(8, result.airCount()); assertEquals(8, result.volume());
+        for (int position = 0; position < result.volume(); position++) assertEquals(0, result.block(position));
     }
     @Test void negativeCoordinatesAndOffsetsPrepareEntireFootprint() throws Exception {
         var tag = Fixtures.tag(32, false, 2).putIntArray("Offset", new int[]{-1, 0, -1});

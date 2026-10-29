@@ -18,13 +18,19 @@ final class SchematicCodec {
         final int width, height, length, dataVersion, offsetX, offsetY, offsetZ;
         final List<String> palette;
         private final int[] blocks;
-        Schematic(int w, int h, int l, int dataVersion, int[] offset, List<String> palette, int[] blocks) {
+        private final int[] placementPositions;
+        Schematic(int w, int h, int l, int dataVersion, int[] offset, List<String> palette, int[] blocks,
+                  int[] placementPositions) {
             width = w; height = h; length = l; this.dataVersion = dataVersion;
             offsetX = offset[0]; offsetY = offset[1]; offsetZ = offset[2];
             this.palette = Collections.unmodifiableList(new ArrayList<>(palette)); this.blocks = blocks.clone();
+            this.placementPositions = placementPositions.clone();
         }
         int volume() { return blocks.length; }
         int block(int position) { return blocks[position]; }
+        int placementCount() { return placementPositions.length; }
+        int placementPosition(int cursor) { return placementPositions[cursor]; }
+        int airCount() { return blocks.length - placementPositions.length; }
         int x(int position) { return position % width; }
         int z(int position) { return position / width % length; }
         int y(int position) { return position / (width * length); }
@@ -78,7 +84,31 @@ final class SchematicCodec {
         }
         byte[] data = blocks.getByteArray(version == 3 ? "Data" : "BlockData");
         int[] indices = varints(data, (int) volume, palette);
-        return new Schematic(w, h, l, dataVersion, offset, Arrays.asList(Arrays.copyOf(palette, highest + 1)), indices);
+        int[] placementPositions = compactNonAir(indices, palette);
+        return new Schematic(w, h, l, dataVersion, offset, Arrays.asList(Arrays.copyOf(palette, highest + 1)),
+                indices, placementPositions);
+    }
+    private static int[] compactNonAir(int[] blocks, String[] palette) throws InterruptedIOException {
+        boolean[] air = new boolean[palette.length];
+        for (int i = 0; i < palette.length; i++) {
+            String state = palette[i];
+            if (state == null) continue;
+            int properties = state.indexOf('[');
+            String key = properties < 0 ? state : state.substring(0, properties);
+            // Bukkit validates the entire palette later, including any malformed air properties.
+            air[i] = switch (key) {
+                case "air", "minecraft:air", "cave_air", "minecraft:cave_air", "void_air", "minecraft:void_air" -> true;
+                default -> false;
+            };
+        }
+        int[] positions = new int[blocks.length];
+        int size = 0;
+        for (int position = 0; position < blocks.length; position++) {
+            if ((position & 4095) == 0 && Thread.currentThread().isInterrupted())
+                throw new InterruptedIOException("Compaction cancelled");
+            if (!air[blocks[position]]) positions[size++] = position;
+        }
+        return Arrays.copyOf(positions, size);
     }
     private static int dimension(CompoundBinaryTag tag, String key) throws IOException {
         if (!(tag.get(key) instanceof ShortBinaryTag value)) throw new IOException("Missing short dimension " + key);

@@ -19,6 +19,20 @@ tick-duration distributions. Entity and block-entity content is explicitly
 unsupported in this experiment. This branch tests placement mechanics; it does
 not replace BetterStructures world selection, content management or integrations.
 
+The placement queue shares a 1.5 ms tick budget, checks time after each operation,
+and caps block work at 4096 positions per tick. Schematic decoding compacts air
+off-thread while preserving coordinates; reset still visits the entire volume.
+Only one asynchronous chunk request is outstanding. Native block-state setup
+runs on the main thread; the initial warmup is measured separately from idle and
+active benchmark windows. An individual native call cannot be interrupted by
+the time budget, so measured tick maxima remain part of acceptance.
+
+Raw lab measurements live in `native-prototype/results/`. The first run used a
+512-position cap and is retained as `2026-10-29-lab-512.json`: its overall maximum
+was 85.09 ms, while warmed dense 64³ placement reached 10,102 writes/s with a
+3.72 ms p99 tick. Subsequent reports must distinguish startup, preparation,
+placement and reset, and include actual remaining native plugin chunk tickets.
+
 ## Upstream project
 
 BetterStructures adds schematic structures and modular dungeons to Minecraft worlds. It places content on the surface, underground, in the sky, and on liquid surfaces, with generator rules for terrain, biomes, worlds, spacing, and loot.
