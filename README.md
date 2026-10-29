@@ -19,7 +19,21 @@ tick-duration distributions. Entity and block-entity content is explicitly
 unsupported in this experiment. This branch tests placement mechanics; it does
 not replace BetterStructures world selection, content management or integrations.
 
-The placement queue shares a 1.5 ms tick budget, checks time after each operation,
+`native-generation-prototype/` adds a separate 0.2.0 candidate for placement
+during native terrain generation. Its immutable schematic plan assigns every
+non-air position to one central chunk. A `BlockPopulator` writes that slice using
+only `LimitedRegion` on generation workers, before FULL activation. The runner
+compares a vanilla control with generated structures, verifies target blocks
+after FULL activation under a main-thread read budget, and records a final
+post-release observation window. This variant uses its own
+`rc_native_generation_lab` world and the same lab-only plugin identity; install
+one candidate at a time.
+
+```sh
+./gradlew -p native-generation-prototype test assemble
+```
+
+The 0.1.0 placement queue shares a 1.5 ms tick budget, checks time after each operation,
 and caps block work at 4096 positions per tick. Schematic decoding compacts air
 off-thread while preserving coordinates; reset still visits the entire volume.
 Only one asynchronous chunk request is outstanding. Native block-state setup

@@ -1,0 +1,9 @@
+name: ArcNativeStructuresLab
+version: 0.2.0
+main: ru.ruscrafting.nativegenerationlab.NativeGenerationLab
+api-version: '1.21.11'
+description: Isolated generation-native LimitedRegion benchmark
+commands:
+  nativegeneration:
+    description: Console-only generation lab status or cancellation
+    usage: /nativegeneration <status|cancel>
