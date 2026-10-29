@@ -43,6 +43,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private long startedNanos, token, phaseStarted, startupNanos, ownTickNanos, releaseNanos, ticketReadbackNanos;
     private int observedStageTick;
     private boolean attached, observedActive;
+    private boolean profileSpark = true;
 
     @Override public void onEnable() {
         try {
@@ -57,6 +58,14 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             int baseX = 1_048_576 + (int) Math.floorMod(UUID.fromString(runId).getLeastSignificantBits(), 24_000L) * 512;
             int fixtureDataVersion = dataVersion; Path fixtureFolder = folder.resolve("generation-fixtures");
             decode = worker.submit(() -> {
+                Path optionsPath = fixtureFolder.getParent().resolve("assets/diagnostic.properties");
+                if (Files.isRegularFile(optionsPath, LinkOption.NOFOLLOW_LINKS)) {
+                    Properties options = new Properties();
+                    try (var input = Files.newInputStream(optionsPath)) { options.load(input); }
+                    String value = options.getProperty("profileSpark", "true");
+                    if (!value.equals("true") && !value.equals("false")) throw new IllegalArgumentException("profileSpark must be true or false");
+                    profileSpark = Boolean.parseBoolean(value);
+                }
                 List<GenerationPlan> list = new ArrayList<>();
                 list.add(GenerationPlan.control(baseX, -8192));
                 int index = 1;
@@ -70,7 +79,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             // The worker performs only fixture I/O and pure geometry; it never waits for main-thread work.
             plans = decode.get(30, TimeUnit.SECONDS);
             Path sparkDirectory = folder.resolveSibling("spark");
-            sparkCapture = worker.submit(() -> new SparkCapture(sparkDirectory)).get(5, TimeUnit.SECONDS);
+            if (profileSpark) sparkCapture = worker.submit(() -> new SparkCapture(sparkDirectory)).get(5, TimeUnit.SECONDS);
             preparePalette();
             token = fence.begin(); transition(Stage.WORLD);
             createWorld();
@@ -104,7 +113,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             SliceBudget budget = new SliceBudget(System::nanoTime, BUDGET_NANOS, MAX_POSITIONS);
             switch (stage) {
                 case BASELINE -> {
-                    if (!sparkCapture.dispatched()) sparkCapture.start(runId);
+                    if (sparkCapture != null && !sparkCapture.dispatched()) sparkCapture.start(runId);
                     if (++stageTicks >= 200) startCase();
                 }
                 case GENERATE -> requestNextChunk();
@@ -312,6 +321,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         report.put("status", status); report.put("message", message); report.put("runId", runId); report.put("startedAt", startedAt);
         report.put("server", serverVersion); report.put("java", System.getProperty("java.version")); report.put("world", LabGuard.WORLD);
         report.put("mode", "generation-native-limited-region"); report.put("worldGenerator", "native-default");
+        report.put("profileSpark", profileSpark);
         report.put("startupPreparationMs", startupNanos / 1_000_000D); report.put("totalMs", (System.nanoTime() - startedNanos) / 1_000_000D);
         report.put("startupPreparationWindow", "Fixture decode await (maximum 30 seconds), immutable palette preparation and world creation during onEnable, before the benchmark ticker starts");
         report.put("verifyBudgetMs", BUDGET_NANOS / 1_000_000D); report.put("maxChunkRequestsInFlight", 1);
