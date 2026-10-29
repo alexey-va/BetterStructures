@@ -1,0 +1,25 @@
+plugins { id 'java' }
+group = 'ru.ruscrafting.experiments'
+version = '0.1.0'
+repositories {
+    mavenCentral()
+    maven { url = 'https://artifactory.papermc.io/artifactory/universe/' }
+}
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.21.11-R0.1-20260511.115010-91'
+    implementation 'net.kyori:adventure-nbt:4.26.1'
+    implementation 'com.google.code.gson:gson:2.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.1.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.1.3'
+}
+java { toolchain { languageVersion = JavaLanguageVersion.of(25) } }
+tasks.withType(JavaCompile).configureEach { options.release = 21; options.encoding = 'UTF-8' }
+tasks.named('test') { useJUnitPlatform() }
+tasks.named('jar') {
+    archiveFileName = 'ArcNativeStructuresLab-0.1.0.jar'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { zipTree(it) } }
+    exclude 'META-INF/*.SF', 'META-INF/*.RSA', 'META-INF/*.DSA', 'module-info.class', 'META-INF/versions/**/module-info.class'
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}

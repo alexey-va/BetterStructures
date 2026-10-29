@@ -1,0 +1,10 @@
+name: ArcNativeStructuresLab
+version: '0.1.0'
+main: ru.ruscrafting.nativestructureslab.NativeStructuresLab
+api-version: '1.21.11'
+description: Loopback-only native structure placement benchmark.
+authors: [RusCrafting]
+commands:
+  nativestructures:
+    description: Console-only lab placement, status and cancellation.
+    usage: /nativestructures <status|cancel|place filename.schem x y z>

@@ -1,5 +1,26 @@
 # BetterStructures
 
+## Native placement experiment
+
+Branch `experiment/native-structures` contains an independent lab prototype in
+`native-prototype/`. It reads Sponge `.schem` block palettes without WorldEdit,
+prepares chunks asynchronously, and applies block changes in a shared tick
+budget. It runs only on the isolated loopback lab backend on port 54295 and only
+in its own `rc_native_lab` world.
+
+```sh
+./gradlew -p native-prototype test assemble
+```
+
+The test plugin is `native-prototype/build/libs/ArcNativeStructuresLab-0.1.0.jar`.
+Startup runs synthetic dense/sparse placements through the same schematic decoder
+and placement queue and records per-phase timings, actual block writes and native
+tick-duration distributions. Entity and block-entity content is explicitly
+unsupported in this experiment. This branch tests placement mechanics; it does
+not replace BetterStructures world selection, content management or integrations.
+
+## Upstream project
+
 BetterStructures adds schematic structures and modular dungeons to Minecraft worlds. It places content on the surface, underground, in the sky, and on liquid surfaces, with generator rules for terrain, biomes, worlds, spacing, and loot.
 
 [Download](https://nightbreak.io/plugin/betterstructures/) · [Modrinth](https://modrinth.com/plugin/betterstructures) · [Documentation](https://wiki.nightbreak.io/) · [Support](https://discord.gg/nightbreak)
