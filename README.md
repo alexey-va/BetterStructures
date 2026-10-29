@@ -150,6 +150,41 @@ complete before/expected/final block hashes and settled differences are checked.
 The production artifact described below is built on `master` and excludes this
 backend. These lab builds are not production candidates.
 
+## Real-schematic A/B result, 2026-10-29
+
+Both engines used the same four original production schematics, seed 384291,
+anchors, provider JAR and constant STONE pedestal. All four initial volume
+hashes matched. This tests the clipboard block phase with identity transforms;
+99 of the 103 inventory assets were rejected for this restricted native subset.
+
+| Measured active window | DEFAULT | NATIVE_GENERATION |
+| --- | ---: | ---: |
+| Main tick maximum | 3306.07 ms | 147.94 ms |
+| Main tick p99 | 71.45 ms | 38.82 ms |
+| Main tick p95 | 27.99 ms | 7.96 ms |
+| Final volume equal to saved block states | 3 / 4 | 4 / 4 |
+
+Three final hashes also match across engines. DEFAULT changed two nether-cistern
+stairs from `inner_left` to `straight`; native retained the stored shapes.
+The strict DEFAULT benchmark therefore failed and remains recorded as failed;
+this is not evidence that the engines are universally equivalent. Native wrote
+1621 blocks in 41.76 ms of summed population-worker time, including observation
+capture. That worker time is a different metric from DEFAULT's queued wall time.
+
+Active tick windows exclude startup, content wait, idle baseline and report IO.
+Content-wait ticks reached 570.24 ms / 595.95 ms; native FULL activation, unload,
+physics and GC still produced ticks above 50 ms. This is one controlled pair on
+the isolated two-CPU/2 GiB lab, without production or client load. The next
+experiment addresses the independently confirmed sync chunk loads in automatic
+terrain fitting and physics; it is separate from this frozen comparison.
+
+[Comparison and exact inputs](lab-results/2026-10-29/comparison.json),
+[DEFAULT report](lab-results/2026-10-29/default-report.json),
+[native report](lab-results/2026-10-29/native-report.json).
+The [latest upstream probe](lab-results/2026-10-29/upstream-scan-report.json)
+loaded all 103 schematics, exercised 16 fresh surface-grid origins and completed
+eight natural structures without a deadlock. Its maximum tick was 3054.76 ms.
+
 ## Cold tick investigation, 2026-10-29
 
 A replay reproduced a **892.82 ms** vanilla-control tick with no structure

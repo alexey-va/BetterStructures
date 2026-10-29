@@ -1,0 +1,4353 @@
+{
+  "status": "complete",
+  "message": "All selected real assets verified",
+  "runId": "39703bce-1bfc-4f1c-9fe9-f609363d53ff",
+  "startedAt": "2026-10-29T18:48:17.757184149Z",
+  "engine": "NATIVE_GENERATION",
+  "scope": "CLIPBOARD_BLOCK_PHASE",
+  "world": "rc_bs_ab_native_generation_39703bce",
+  "seed": 384291,
+  "server": "1.21.11-2568-f57bd86 (MC: 1.21.11)",
+  "java": "25.0.4.1",
+  "worldEditProviders": [
+    {
+      "name": "FastAsyncWorldEdit",
+      "enabled": "true",
+      "version": "2.15.5-SNAPSHOT+1079481"
+    }
+  ],
+  "pedestalMaterial": "STONE",
+  "percentageOfTickUsedForPasting": 0.2,
+  "preflight": [
+    {
+      "sha256": "673cb61c0b6aa4a7b2b439b5eedc06c879c574f9901af474ebf50fb37e39b31e",
+      "reasons": [
+        "Unsupported entities: 8",
+        "Unsupported block NBT: 20"
+      ],
+      "clipboardOrigin": [
+        137,
+        29,
+        -186
+      ],
+      "id": "betterstructures_airballoon_barren",
+      "policyCounts": {
+        "AIR": 11346,
+        "BLOCK": 1287,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 59,
+      "generatorConfigFilename": "generator_sky_barren.yml",
+      "blocksWithNbt": 20,
+      "paletteStates": 63,
+      "entities": 8,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "52c1df75bd8e92adc2b3e12c8725f85643596040f9df14f5172bdfb5e93af464",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        128,
+        24,
+        -195
+      ],
+      "file": "schematics/103_default_structures/betterstructures_airballoon_barren.schem",
+      "dimensions": [
+        19,
+        35,
+        19
+      ]
+    },
+    {
+      "sha256": "5ebe8936b14ffd009483929064614b6b4c87da467ae6cfe386d056e7c3ced645",
+      "reasons": [
+        "Unsupported entities: 13",
+        "Unsupported block NBT: 18"
+      ],
+      "clipboardOrigin": [
+        137,
+        29,
+        -122
+      ],
+      "id": "betterstructures_airballoon_desert",
+      "policyCounts": {
+        "AIR": 11348,
+        "BLOCK": 1285,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 64,
+      "generatorConfigFilename": "generator_sky_desert.yml",
+      "blocksWithNbt": 18,
+      "paletteStates": 68,
+      "entities": 13,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "765ce139086fbadc097968883141d68ee5cc97b8b8ffdacd36fbe2f7f6724932",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        128,
+        24,
+        -131
+      ],
+      "file": "schematics/103_default_structures/betterstructures_airballoon_desert.schem",
+      "dimensions": [
+        19,
+        35,
+        19
+      ]
+    },
+    {
+      "sha256": "4e497051b7dd4d658185ab3e5f0360656e33cb530485fd0e365d232382733f10",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 22"
+      ],
+      "clipboardOrigin": [
+        137,
+        29,
+        -250
+      ],
+      "id": "betterstructures_airballoon_end",
+      "policyCounts": {
+        "AIR": 11344,
+        "BLOCK": 1289,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 56,
+      "generatorConfigFilename": "generator_sky_end.yml",
+      "blocksWithNbt": 22,
+      "paletteStates": 59,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b3cf2b521826a27edbf645734935628d9de9ba480252e41cdae97580a46ca79c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        128,
+        24,
+        -259
+      ],
+      "file": "schematics/103_default_structures/betterstructures_airballoon_end.schem",
+      "dimensions": [
+        19,
+        35,
+        19
+      ]
+    },
+    {
+      "sha256": "59c1c101903c69775dec22dae6cf10c9e8ef159236ae53181b9f832d7c40822c",
+      "reasons": [
+        "Unsupported entities: 8",
+        "Unsupported block NBT: 26"
+      ],
+      "clipboardOrigin": [
+        139,
+        29,
+        -90
+      ],
+      "id": "betterstructures_airballoon_grassy",
+      "policyCounts": {
+        "AIR": 11348,
+        "BLOCK": 1285,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 60,
+      "generatorConfigFilename": "generator_sky_grassland.yml",
+      "blocksWithNbt": 26,
+      "paletteStates": 64,
+      "entities": 8,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "13a8b099ef9e97c12aa5fb79e92ffba38cee1f329d42f514d7f2473a4ad4ffe1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        128,
+        24,
+        -99
+      ],
+      "file": "schematics/103_default_structures/betterstructures_airballoon_grassy.schem",
+      "dimensions": [
+        19,
+        35,
+        19
+      ]
+    },
+    {
+      "sha256": "a53c3805368be5e2d3ede0b8437c61deaf1cabeb641a2bd17f9161591f1fbc65",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 20"
+      ],
+      "clipboardOrigin": [
+        136,
+        29,
+        -218
+      ],
+      "id": "betterstructures_airballoon_nether",
+      "policyCounts": {
+        "AIR": 11346,
+        "BLOCK": 1287,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 59,
+      "generatorConfigFilename": "generator_sky_nether.yml",
+      "blocksWithNbt": 20,
+      "paletteStates": 62,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "3802fdebbeb53393443578804ebc37b2477d6c2b6798973597398563d40dd2a8",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        128,
+        24,
+        -227
+      ],
+      "file": "schematics/103_default_structures/betterstructures_airballoon_nether.schem",
+      "dimensions": [
+        19,
+        35,
+        19
+      ]
+    },
+    {
+      "sha256": "670b0367af8bb27c33aefdce6ff05075e8d212d27868b996224319d5974e38b2",
+      "reasons": [
+        "Unsupported entities: 16",
+        "Unsupported block NBT: 28"
+      ],
+      "clipboardOrigin": [
+        137,
+        29,
+        -154
+      ],
+      "id": "betterstructures_airballoon_tundra",
+      "policyCounts": {
+        "AIR": 11346,
+        "BLOCK": 1287,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 60,
+      "generatorConfigFilename": "generator_sky_snowy.yml",
+      "blocksWithNbt": 28,
+      "paletteStates": 64,
+      "entities": 16,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "89b6d9b89c9a1fc3d7f4715b5737aa41ce6c8e7a2738c098a2ec96d358f0a6eb",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        128,
+        24,
+        -163
+      ],
+      "file": "schematics/103_default_structures/betterstructures_airballoon_tundra.schem",
+      "dimensions": [
+        19,
+        35,
+        19
+      ]
+    },
+    {
+      "sha256": "fc4d683ba9f3f4e4a07bb1225b14129dd55d24aed12e01267a287f37e9185993",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 18"
+      ],
+      "clipboardOrigin": [
+        239,
+        27,
+        -125
+      ],
+      "id": "betterstructures_boat_east",
+      "policyCounts": {
+        "AIR": 5403,
+        "BLOCK": 1206,
+        "MASK": 541
+      },
+      "propertyBearingPaletteStates": 58,
+      "generatorConfigFilename": "generator_liquid_overworld.yml",
+      "blocksWithNbt": 18,
+      "paletteStates": 63,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b4eb94659b967e9f857e1f84b635b97fc3e6ac8a8d973196d9718cdbc61396e1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        224,
+        23,
+        -125
+      ],
+      "file": "schematics/103_default_structures/betterstructures_boat_east.schem",
+      "dimensions": [
+        25,
+        22,
+        13
+      ]
+    },
+    {
+      "sha256": "68001c5c1f448f964afc1dd10ffcdefc2dd2eaa10a1639f10c5c42b51e416592",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 14"
+      ],
+      "clipboardOrigin": [
+        224,
+        27,
+        -265
+      ],
+      "id": "betterstructures_boat_end",
+      "policyCounts": {
+        "AIR": 6995,
+        "BLOCK": 589,
+        "MASK": 541
+      },
+      "propertyBearingPaletteStates": 49,
+      "generatorConfigFilename": "generator_sky_end.yml",
+      "blocksWithNbt": 14,
+      "paletteStates": 54,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b3cf2b521826a27edbf645734935628d9de9ba480252e41cdae97580a46ca79c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        224,
+        23,
+        -265
+      ],
+      "file": "schematics/103_default_structures/betterstructures_boat_end.schem",
+      "dimensions": [
+        13,
+        25,
+        25
+      ]
+    },
+    {
+      "sha256": "bc7771ded1b1355810b81af155035865c5d027a71cbae522011dbf453e7be687",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 14"
+      ],
+      "clipboardOrigin": [
+        236,
+        27,
+        -233
+      ],
+      "id": "betterstructures_boat_nether",
+      "policyCounts": {
+        "AIR": 5104,
+        "BLOCK": 1180,
+        "MASK": 541
+      },
+      "propertyBearingPaletteStates": 45,
+      "generatorConfigFilename": "generator_liquid_nether.yml",
+      "blocksWithNbt": 14,
+      "paletteStates": 52,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0243e07bf91be4e04dfc311b05615ab55ee2ae6aef96aa6b67d62bace09b65fb",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        224,
+        23,
+        -233
+      ],
+      "file": "schematics/103_default_structures/betterstructures_boat_nether.schem",
+      "dimensions": [
+        13,
+        21,
+        25
+      ]
+    },
+    {
+      "sha256": "7e3711c9594ab792370b7a0d456ae0bbdd2e8f48afda9fc597995dc7f7e6f7d8",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 20"
+      ],
+      "clipboardOrigin": [
+        224,
+        27,
+        -97
+      ],
+      "id": "betterstructures_boat_north",
+      "policyCounts": {
+        "AIR": 5402,
+        "BLOCK": 1207,
+        "MASK": 541
+      },
+      "propertyBearingPaletteStates": 64,
+      "generatorConfigFilename": "generator_liquid_overworld.yml",
+      "blocksWithNbt": 20,
+      "paletteStates": 69,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b4eb94659b967e9f857e1f84b635b97fc3e6ac8a8d973196d9718cdbc61396e1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        224,
+        23,
+        -105
+      ],
+      "file": "schematics/103_default_structures/betterstructures_boat_north.schem",
+      "dimensions": [
+        13,
+        22,
+        25
+      ]
+    },
+    {
+      "sha256": "ae837683cfde5ce5c7dc8e8afcfed8d03f1daf5fb9da4d3dd1ac6978352d73b3",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 19"
+      ],
+      "clipboardOrigin": [
+        236,
+        27,
+        -169
+      ],
+      "id": "betterstructures_boat_south",
+      "policyCounts": {
+        "AIR": 5726,
+        "BLOCK": 1208,
+        "MASK": 541
+      },
+      "propertyBearingPaletteStates": 59,
+      "generatorConfigFilename": "generator_liquid_overworld.yml",
+      "blocksWithNbt": 19,
+      "paletteStates": 64,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b4eb94659b967e9f857e1f84b635b97fc3e6ac8a8d973196d9718cdbc61396e1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        224,
+        23,
+        -169
+      ],
+      "file": "schematics/103_default_structures/betterstructures_boat_south.schem",
+      "dimensions": [
+        13,
+        23,
+        25
+      ]
+    },
+    {
+      "sha256": "6feb8424c1703a10f58c8d423f8a2f8c16d033b18bc4b394de85e1e218fdb84a",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 19"
+      ],
+      "clipboardOrigin": [
+        236,
+        27,
+        -169
+      ],
+      "id": "betterstructures_boat_west",
+      "policyCounts": {
+        "AIR": 5726,
+        "BLOCK": 1208,
+        "MASK": 541
+      },
+      "propertyBearingPaletteStates": 59,
+      "generatorConfigFilename": "generator_liquid_overworld.yml",
+      "blocksWithNbt": 19,
+      "paletteStates": 64,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b4eb94659b967e9f857e1f84b635b97fc3e6ac8a8d973196d9718cdbc61396e1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        224,
+        23,
+        -169
+      ],
+      "file": "schematics/103_default_structures/betterstructures_boat_west.schem",
+      "dimensions": [
+        13,
+        23,
+        25
+      ]
+    },
+    {
+      "sha256": "cca0a9502c5a6668cd89d5e4d5a708f8e28fb98d529bd5262368b3ce25418e72",
+      "reasons": [
+        "Unsupported entities: 2"
+      ],
+      "clipboardOrigin": [
+        -59,
+        34,
+        -179
+      ],
+      "id": "betterstructures_cistern_barren",
+      "policyCounts": {
+        "AIR": 868,
+        "BLOCK": 515,
+        "MASK": 432
+      },
+      "propertyBearingPaletteStates": 35,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 41,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "a371a11c731de74ad6c0ccce7c079a55a65cc103495213d5a96b84dd975b8399",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -64,
+        24,
+        -187
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cistern_barren.schem",
+      "dimensions": [
+        11,
+        15,
+        11
+      ]
+    },
+    {
+      "sha256": "cfe9ae66774f23ef49651660bd6f88db9cb600cb3719494b5178538a7069d27e",
+      "reasons": [
+        "Unsupported entities: 2"
+      ],
+      "clipboardOrigin": [
+        -59,
+        34,
+        -115
+      ],
+      "id": "betterstructures_cistern_desert",
+      "policyCounts": {
+        "AIR": 1110,
+        "BLOCK": 515,
+        "MASK": 432
+      },
+      "propertyBearingPaletteStates": 35,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 40,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -64,
+        24,
+        -123
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cistern_desert.schem",
+      "dimensions": [
+        11,
+        17,
+        11
+      ]
+    },
+    {
+      "sha256": "60ba9c2c78a470542bf3d30a6fff443cc2acf739123ff4c4cf95a299e29cca70",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 69"
+      ],
+      "clipboardOrigin": [
+        -59,
+        34,
+        -244
+      ],
+      "id": "betterstructures_cistern_end",
+      "policyCounts": {
+        "AIR": 920,
+        "BLOCK": 584,
+        "MASK": 432
+      },
+      "propertyBearingPaletteStates": 36,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 69,
+      "paletteStates": 41,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "1a2ab5f782d580a354c669a798ba9163d7cffcac901dbc68015ceebe7babe22e",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -64,
+        24,
+        -251
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cistern_end.schem",
+      "dimensions": [
+        11,
+        16,
+        11
+      ]
+    },
+    {
+      "sha256": "ae447edc57d5d7cf80f7aa28b29cbb848252c8d482c15be800fb9aec43a29d7a",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -59,
+        34,
+        -83
+      ],
+      "id": "betterstructures_cistern_grassy",
+      "policyCounts": {
+        "AIR": 976,
+        "BLOCK": 528,
+        "MASK": 432
+      },
+      "propertyBearingPaletteStates": 45,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 52,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -64,
+        24,
+        -91
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cistern_grassy.schem",
+      "dimensions": [
+        11,
+        16,
+        11
+      ]
+    },
+    {
+      "sha256": "61dd1c817d57e0ceb999161975ad50ba62fa210daaf9b2a712a17b5d2be19f4d",
+      "reasons": [],
+      "clipboardOrigin": [
+        -59,
+        34,
+        -211
+      ],
+      "id": "betterstructures_cistern_nether",
+      "policyCounts": {
+        "AIR": 786,
+        "BLOCK": 597,
+        "MASK": 432
+      },
+      "propertyBearingPaletteStates": 36,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 41,
+      "entities": 0,
+      "selected": true,
+      "supported": true,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -64,
+        24,
+        -219
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cistern_nether.schem",
+      "dimensions": [
+        11,
+        15,
+        11
+      ]
+    },
+    {
+      "sha256": "88bec7f3c520fc3f9d1c0729237a1af8ee0b3d23d4588792d8f624fff25fe337",
+      "reasons": [
+        "Unsupported entities: 2"
+      ],
+      "clipboardOrigin": [
+        -59,
+        34,
+        -147
+      ],
+      "id": "betterstructures_cistern_tundra",
+      "policyCounts": {
+        "AIR": 929,
+        "BLOCK": 575,
+        "MASK": 432
+      },
+      "propertyBearingPaletteStates": 33,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 40,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "53502b761eedc94a381b148bc16c47df53a8ab8518d6f20ad5b5cedaf0ad9c5c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -64,
+        24,
+        -155
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cistern_tundra.schem",
+      "dimensions": [
+        11,
+        16,
+        11
+      ]
+    },
+    {
+      "sha256": "ccd62aaa7b5ad0eea24ac368e7c0a5617e903fb220dd51a52c5947b71783db79",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        -85,
+        26,
+        -183
+      ],
+      "id": "betterstructures_cropfarm_barren",
+      "policyCounts": {
+        "AIR": 2037,
+        "BLOCK": 237,
+        "MASK": 148,
+        "PEDESTAL": 394
+      },
+      "propertyBearingPaletteStates": 27,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 33,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "a371a11c731de74ad6c0ccce7c079a55a65cc103495213d5a96b84dd975b8399",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -96,
+        24,
+        -192
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cropfarm_barren.schem",
+      "dimensions": [
+        16,
+        11,
+        16
+      ]
+    },
+    {
+      "sha256": "2b02796a779e6cb96716308bd6b0d96f8f978c780e3fb5c4e56bd29f0e22a554",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        -85,
+        26,
+        -118
+      ],
+      "id": "betterstructures_cropfarm_desert",
+      "policyCounts": {
+        "AIR": 1775,
+        "BLOCK": 523,
+        "MASK": 148,
+        "PEDESTAL": 114
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 30,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -96,
+        24,
+        -128
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cropfarm_desert.schem",
+      "dimensions": [
+        16,
+        10,
+        16
+      ]
+    },
+    {
+      "sha256": "6473093d3e3391dfaec5959e53a6458f83d13a99934f9fdf53985f9ec3a4bde1",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        -85,
+        26,
+        -246
+      ],
+      "id": "betterstructures_cropfarm_end",
+      "policyCounts": {
+        "AIR": 2351,
+        "BLOCK": 179,
+        "MASK": 148,
+        "PEDESTAL": 394
+      },
+      "propertyBearingPaletteStates": 11,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 18,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "1a2ab5f782d580a354c669a798ba9163d7cffcac901dbc68015ceebe7babe22e",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -96,
+        24,
+        -256
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cropfarm_end.schem",
+      "dimensions": [
+        16,
+        12,
+        16
+      ]
+    },
+    {
+      "sha256": "05bb1573413c6343b98d389c5387f7f45e611015a84675a9b46c99b3ec3507f4",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        -85,
+        26,
+        -84
+      ],
+      "id": "betterstructures_cropfarm_grassy",
+      "policyCounts": {
+        "AIR": 1743,
+        "BLOCK": 555,
+        "MASK": 148,
+        "PEDESTAL": 114
+      },
+      "propertyBearingPaletteStates": 26,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 34,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -96,
+        24,
+        -96
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cropfarm_grassy.schem",
+      "dimensions": [
+        16,
+        10,
+        16
+      ]
+    },
+    {
+      "sha256": "acb54ae4ca4f677b88eeef1eb08ecdfe2c1ac5a0f7ebfff6590919362ee625db",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        -85,
+        26,
+        -214
+      ],
+      "id": "betterstructures_cropfarm_nether",
+      "policyCounts": {
+        "AIR": 2035,
+        "BLOCK": 239,
+        "MASK": 148,
+        "PEDESTAL": 394
+      },
+      "propertyBearingPaletteStates": 7,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 14,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -96,
+        24,
+        -224
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cropfarm_nether.schem",
+      "dimensions": [
+        16,
+        11,
+        16
+      ]
+    },
+    {
+      "sha256": "67fb3113f895da8d1bc24ab654a8de54f8272ee6ae95dffcd634169303dbc3e6",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 4"
+      ],
+      "clipboardOrigin": [
+        -85,
+        26,
+        -149
+      ],
+      "id": "betterstructures_cropfarm_tundra",
+      "policyCounts": {
+        "AIR": 1899,
+        "BLOCK": 627,
+        "MASK": 148,
+        "PEDESTAL": 142
+      },
+      "propertyBearingPaletteStates": 31,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 4,
+      "paletteStates": 37,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "53502b761eedc94a381b148bc16c47df53a8ab8518d6f20ad5b5cedaf0ad9c5c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -96,
+        24,
+        -160
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cropfarm_tundra.schem",
+      "dimensions": [
+        16,
+        11,
+        16
+      ]
+    },
+    {
+      "sha256": "aaaed4b0b9a624b19ac3c2b2df3c26944c6d8e0e90f710f02abd0db6ec3fc424",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        8,
+        42,
+        -185
+      ],
+      "id": "betterstructures_dungeon_barren",
+      "policyCounts": {
+        "AIR": 2413,
+        "BLOCK": 1152,
+        "MASK": 2767,
+        "PEDESTAL": 166
+      },
+      "propertyBearingPaletteStates": 31,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 39,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "a371a11c731de74ad6c0ccce7c079a55a65cc103495213d5a96b84dd975b8399",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        0,
+        24,
+        -195
+      ],
+      "file": "schematics/103_default_structures/betterstructures_dungeon_barren.schem",
+      "dimensions": [
+        19,
+        18,
+        19
+      ]
+    },
+    {
+      "sha256": "902aa54788e6549ce8833a360c252db4b845ce1a5bbb2800043a9216b0ec12e0",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        7,
+        42,
+        -123
+      ],
+      "id": "betterstructures_dungeon_desert",
+      "policyCounts": {
+        "AIR": 2344,
+        "BLOCK": 1221,
+        "MASK": 2767,
+        "PEDESTAL": 166
+      },
+      "propertyBearingPaletteStates": 17,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 24,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        0,
+        24,
+        -131
+      ],
+      "file": "schematics/103_default_structures/betterstructures_dungeon_desert.schem",
+      "dimensions": [
+        19,
+        18,
+        19
+      ]
+    },
+    {
+      "sha256": "ca0d589b2732d7b8f79ba2b645d08dfaab1aa6b8acbff5c0a577c4f1c48da6be",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        9,
+        42,
+        -249
+      ],
+      "id": "betterstructures_dungeon_end",
+      "policyCounts": {
+        "AIR": 2414,
+        "BLOCK": 1151,
+        "MASK": 2767,
+        "PEDESTAL": 166
+      },
+      "propertyBearingPaletteStates": 19,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 25,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "1a2ab5f782d580a354c669a798ba9163d7cffcac901dbc68015ceebe7babe22e",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        0,
+        24,
+        -259
+      ],
+      "file": "schematics/103_default_structures/betterstructures_dungeon_end.schem",
+      "dimensions": [
+        19,
+        18,
+        19
+      ]
+    },
+    {
+      "sha256": "e99e1848330c03c9d2573fb24daa24d5a2cfe7174dea2de2e52a77ef113577d2",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        9,
+        42,
+        -89
+      ],
+      "id": "betterstructures_dungeon_grassy",
+      "policyCounts": {
+        "AIR": 2430,
+        "BLOCK": 1135,
+        "MASK": 2767,
+        "PEDESTAL": 166
+      },
+      "propertyBearingPaletteStates": 26,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 34,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        0,
+        24,
+        -99
+      ],
+      "file": "schematics/103_default_structures/betterstructures_dungeon_grassy.schem",
+      "dimensions": [
+        19,
+        18,
+        19
+      ]
+    },
+    {
+      "sha256": "11930a5e517dcda389fc2cc913229e04845cb676f0cd67b37a27bf4914ca91b2",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        8,
+        43,
+        -218
+      ],
+      "id": "betterstructures_dungeon_nether",
+      "policyCounts": {
+        "AIR": 2274,
+        "BLOCK": 1652,
+        "MASK": 2767,
+        "PEDESTAL": 166
+      },
+      "propertyBearingPaletteStates": 33,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 39,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        0,
+        24,
+        -227
+      ],
+      "file": "schematics/103_default_structures/betterstructures_dungeon_nether.schem",
+      "dimensions": [
+        19,
+        19,
+        19
+      ]
+    },
+    {
+      "sha256": "cd9358ce2040db1aa8b36d2c77d3e255703d81b71b246b34d5d1331035b5f8a6",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        10,
+        42,
+        -154
+      ],
+      "id": "betterstructures_dungeon_tundra",
+      "policyCounts": {
+        "AIR": 2282,
+        "BLOCK": 1283,
+        "MASK": 2767,
+        "PEDESTAL": 166
+      },
+      "propertyBearingPaletteStates": 17,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 24,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "53502b761eedc94a381b148bc16c47df53a8ab8518d6f20ad5b5cedaf0ad9c5c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        0,
+        24,
+        -163
+      ],
+      "file": "schematics/103_default_structures/betterstructures_dungeon_tundra.schem",
+      "dimensions": [
+        19,
+        18,
+        19
+      ]
+    },
+    {
+      "sha256": "fc774ca1ad038d20754caadf134b916fef2291a83db54cb21fb6c925bc7b1784",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        -120,
+        27,
+        -183
+      ],
+      "id": "betterstructures_graveyard_barren",
+      "policyCounts": {
+        "AIR": 1407,
+        "BLOCK": 137,
+        "PEDESTAL": 760
+      },
+      "propertyBearingPaletteStates": 24,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 31,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "a371a11c731de74ad6c0ccce7c079a55a65cc103495213d5a96b84dd975b8399",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -128,
+        24,
+        -192
+      ],
+      "file": "schematics/103_default_structures/betterstructures_graveyard_barren.schem",
+      "dimensions": [
+        16,
+        9,
+        16
+      ]
+    },
+    {
+      "sha256": "46874b80be57d894a57bfb9322bbccd38fbf739854ae6706f122afeab990387d",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        -120,
+        27,
+        -115
+      ],
+      "id": "betterstructures_graveyard_desert",
+      "policyCounts": {
+        "AIR": 2647,
+        "BLOCK": 937
+      },
+      "propertyBearingPaletteStates": 18,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 25,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -128,
+        24,
+        -128
+      ],
+      "file": "schematics/103_default_structures/betterstructures_graveyard_desert.schem",
+      "dimensions": [
+        16,
+        14,
+        16
+      ]
+    },
+    {
+      "sha256": "573e2b964c9d277dc9b416e123a836c8e5d270b819e7ec15b86ff64bb3bb68db",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        -121,
+        27,
+        -245
+      ],
+      "id": "betterstructures_graveyard_end",
+      "policyCounts": {
+        "AIR": 2914,
+        "BLOCK": 171,
+        "PEDESTAL": 755
+      },
+      "propertyBearingPaletteStates": 17,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 24,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "1a2ab5f782d580a354c669a798ba9163d7cffcac901dbc68015ceebe7babe22e",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -128,
+        24,
+        -256
+      ],
+      "file": "schematics/103_default_structures/betterstructures_graveyard_end.schem",
+      "dimensions": [
+        16,
+        15,
+        16
+      ]
+    },
+    {
+      "sha256": "65a4554e12b5c29c9211053779dc16745a637363921c4225b64938c9851f4b0b",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        -121,
+        27,
+        -86
+      ],
+      "id": "betterstructures_graveyard_grassy",
+      "policyCounts": {
+        "AIR": 1932,
+        "BLOCK": 884
+      },
+      "propertyBearingPaletteStates": 14,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 29,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -128,
+        24,
+        -96
+      ],
+      "file": "schematics/103_default_structures/betterstructures_graveyard_grassy.schem",
+      "dimensions": [
+        16,
+        11,
+        16
+      ]
+    },
+    {
+      "sha256": "ede824614e2397f21fa5e52823e2230d0b7967227ed99c75b74e6dd8d6781b49",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        -120,
+        27,
+        -212
+      ],
+      "id": "betterstructures_graveyard_nether",
+      "policyCounts": {
+        "AIR": 1470,
+        "BLOCK": 384,
+        "PEDESTAL": 706
+      },
+      "propertyBearingPaletteStates": 34,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 40,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -128,
+        24,
+        -224
+      ],
+      "file": "schematics/103_default_structures/betterstructures_graveyard_nether.schem",
+      "dimensions": [
+        16,
+        10,
+        16
+      ]
+    },
+    {
+      "sha256": "52c7b048043b373514f155aaa8b6e31c362d52b5802a6ccf7a4693a8c64d218a",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        -120,
+        32,
+        -149
+      ],
+      "id": "betterstructures_graveyard_tundra",
+      "policyCounts": {
+        "AIR": 2098,
+        "BLOCK": 1998
+      },
+      "propertyBearingPaletteStates": 23,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 33,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "53502b761eedc94a381b148bc16c47df53a8ab8518d6f20ad5b5cedaf0ad9c5c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -128,
+        24,
+        -160
+      ],
+      "file": "schematics/103_default_structures/betterstructures_graveyard_tundra.schem",
+      "dimensions": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "sha256": "8471cdb8b18c8d15e89e735c54e522744a9a5d78a6d1723e8103b04a03525abb",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        106,
+        52,
+        -198
+      ],
+      "id": "betterstructures_large_skyisland_barren",
+      "policyCounts": {
+        "AIR": 17122,
+        "BLOCK": 7756,
+        "MASK": 4
+      },
+      "propertyBearingPaletteStates": 5,
+      "generatorConfigFilename": "generator_sky_barren.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 11,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "52c1df75bd8e92adc2b3e12c8725f85643596040f9df14f5172bdfb5e93af464",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        96,
+        23,
+        -205
+      ],
+      "file": "schematics/103_default_structures/betterstructures_large_skyisland_barren.schem",
+      "dimensions": [
+        26,
+        33,
+        29
+      ]
+    },
+    {
+      "sha256": "a4da4eed6a3a7ca39aedcb38a1e1c295f12185771fe7776a731434bac3efe449",
+      "reasons": [
+        "Unsupported entities: 5",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        105,
+        52,
+        -125
+      ],
+      "id": "betterstructures_large_skyisland_desert",
+      "policyCounts": {
+        "AIR": 15711,
+        "BLOCK": 7661,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 16,
+      "generatorConfigFilename": "generator_sky_desert.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 20,
+      "entities": 5,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "765ce139086fbadc097968883141d68ee5cc97b8b8ffdacd36fbe2f7f6724932",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        96,
+        23,
+        -141
+      ],
+      "file": "schematics/103_default_structures/betterstructures_large_skyisland_desert.schem",
+      "dimensions": [
+        26,
+        31,
+        29
+      ]
+    },
+    {
+      "sha256": "20f208f3500fa415e3c248c20912a7ba72fe0d6edeefd5e8235ed2dfb60151de",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 58"
+      ],
+      "clipboardOrigin": [
+        104,
+        52,
+        -257
+      ],
+      "id": "betterstructures_large_skyisland_end",
+      "policyCounts": {
+        "AIR": 24753,
+        "BLOCK": 7667,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 14,
+      "generatorConfigFilename": "generator_sky_end.yml",
+      "blocksWithNbt": 58,
+      "paletteStates": 19,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b3cf2b521826a27edbf645734935628d9de9ba480252e41cdae97580a46ca79c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        96,
+        23,
+        -269
+      ],
+      "file": "schematics/103_default_structures/betterstructures_large_skyisland_end.schem",
+      "dimensions": [
+        26,
+        43,
+        29
+      ]
+    },
+    {
+      "sha256": "c8a49782a0c006e73e58afef06ee8111ac1595852d180a0bc937f73d56220521",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        109,
+        52,
+        -92
+      ],
+      "id": "betterstructures_large_skyisland_grassy",
+      "policyCounts": {
+        "AIR": 24986,
+        "BLOCK": 8188,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 25,
+      "generatorConfigFilename": "generator_sky_grassland.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 34,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "13a8b099ef9e97c12aa5fb79e92ffba38cee1f329d42f514d7f2473a4ad4ffe1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        96,
+        23,
+        -109
+      ],
+      "file": "schematics/103_default_structures/betterstructures_large_skyisland_grassy.schem",
+      "dimensions": [
+        26,
+        44,
+        29
+      ]
+    },
+    {
+      "sha256": "dd4f9bba60c66a37f23ea2f2280f7c6035175192b94411fd5706028c40ecfa39",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        106,
+        52,
+        -231
+      ],
+      "id": "betterstructures_large_skyisland_nether",
+      "policyCounts": {
+        "AIR": 14857,
+        "BLOCK": 7761,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 8,
+      "generatorConfigFilename": "generator_sky_nether.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 12,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "3802fdebbeb53393443578804ebc37b2477d6c2b6798973597398563d40dd2a8",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        96,
+        23,
+        -237
+      ],
+      "file": "schematics/103_default_structures/betterstructures_large_skyisland_nether.schem",
+      "dimensions": [
+        26,
+        30,
+        29
+      ]
+    },
+    {
+      "sha256": "2bacc7b87d34c557e6af4be6f02e528f736e73da5753de94f676601b8560d019",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 2"
+      ],
+      "clipboardOrigin": [
+        111,
+        52,
+        -163
+      ],
+      "id": "betterstructures_large_skyisland_tundra",
+      "policyCounts": {
+        "AIR": 20330,
+        "BLOCK": 8320,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 9,
+      "generatorConfigFilename": "generator_sky_snowy.yml",
+      "blocksWithNbt": 2,
+      "paletteStates": 14,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "89b6d9b89c9a1fc3d7f4715b5737aa41ce6c8e7a2738c098a2ec96d358f0a6eb",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        96,
+        23,
+        -173
+      ],
+      "file": "schematics/103_default_structures/betterstructures_large_skyisland_tundra.schem",
+      "dimensions": [
+        26,
+        38,
+        29
+      ]
+    },
+    {
+      "sha256": "0a22470ea252bb048ab21ff5ab956f38a1711da9987f9a6737f6e0edaacec5e1",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -184,
+        43,
+        -183
+      ],
+      "id": "betterstructures_mine_barren",
+      "policyCounts": {
+        "AIR": 467,
+        "BLOCK": 146,
+        "MASK": 5626,
+        "PEDESTAL": 119
+      },
+      "propertyBearingPaletteStates": 9,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 12,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "a371a11c731de74ad6c0ccce7c079a55a65cc103495213d5a96b84dd975b8399",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -192,
+        24,
+        -193
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_barren.schem",
+      "dimensions": [
+        17,
+        22,
+        17
+      ]
+    },
+    {
+      "sha256": "e50f563d28f514226a42d760247fdfc47963663e2bd6f887641a2618fb210314",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 11"
+      ],
+      "clipboardOrigin": [
+        336,
+        36,
+        -128
+      ],
+      "id": "betterstructures_mine_connector_deep",
+      "policyCounts": {
+        "AIR": 5467,
+        "BLOCK": 461,
+        "MASK": 6417,
+        "PEDESTAL": 967
+      },
+      "propertyBearingPaletteStates": 13,
+      "generatorConfigFilename": "generator_underground_deep.yml",
+      "blocksWithNbt": 11,
+      "paletteStates": 16,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "fa1da622c6cd6b194158482cc53b4d466e7a78cdac5f08e6294b110cf994aea5",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        320,
+        23,
+        -144
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_connector_deep.schem",
+      "dimensions": [
+        32,
+        13,
+        32
+      ]
+    },
+    {
+      "sha256": "59969bd85ef0f7f7377cf4f6316e5858ae8e251ba5c63c489ebbdf991bf053f4",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 6"
+      ],
+      "clipboardOrigin": [
+        336,
+        36,
+        -254
+      ],
+      "id": "betterstructures_mine_connector_end",
+      "policyCounts": {
+        "AIR": 5472,
+        "BLOCK": 456,
+        "MASK": 6417,
+        "PEDESTAL": 967
+      },
+      "propertyBearingPaletteStates": 13,
+      "generatorConfigFilename": "generator_underground_end.yml",
+      "blocksWithNbt": 6,
+      "paletteStates": 16,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b37f3160ae510be56e75b43e1342aff5719ee81dbe194e3248348bbd00ed8f63",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        320,
+        23,
+        -272
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_connector_end.schem",
+      "dimensions": [
+        32,
+        13,
+        32
+      ]
+    },
+    {
+      "sha256": "1e2a7c1a4e4fb4f23032b18ac9ed659743b00d33e8a5fa3694e4cae546b176e6",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 10"
+      ],
+      "clipboardOrigin": [
+        332,
+        36,
+        -232
+      ],
+      "id": "betterstructures_mine_connector_nether",
+      "policyCounts": {
+        "AIR": 5468,
+        "BLOCK": 460,
+        "MASK": 6009,
+        "PEDESTAL": 959
+      },
+      "propertyBearingPaletteStates": 13,
+      "generatorConfigFilename": "generator_underground_nether.yml",
+      "blocksWithNbt": 10,
+      "paletteStates": 17,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "566a79510ca45a7b080fbdbb966e72590662966084a1fff327873be4fa0b40d5",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        321,
+        23,
+        -240
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_connector_nether.schem",
+      "dimensions": [
+        31,
+        13,
+        32
+      ]
+    },
+    {
+      "sha256": "c0d276c419b5e01e06cbecc1629c2f1bd88e8af8cc58f08e8ee2c7e9f8261b12",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 8"
+      ],
+      "clipboardOrigin": [
+        335,
+        36,
+        -96
+      ],
+      "id": "betterstructures_mine_connector_shallow",
+      "policyCounts": {
+        "AIR": 5499,
+        "BLOCK": 458,
+        "MASK": 6388,
+        "PEDESTAL": 967
+      },
+      "propertyBearingPaletteStates": 16,
+      "generatorConfigFilename": "generator_underground_shallow.yml",
+      "blocksWithNbt": 8,
+      "paletteStates": 18,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "05794258186f1007f5cede0e890beb61fb32b2f03c18664df38d41bd421bce3b",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        320,
+        23,
+        -112
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_connector_shallow.schem",
+      "dimensions": [
+        32,
+        13,
+        32
+      ]
+    },
+    {
+      "sha256": "c58aa2a6910f025fa5fcdcd4256ffef2612cf4853cc9dd7dea6d0b39f71779c5",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -184,
+        43,
+        -119
+      ],
+      "id": "betterstructures_mine_desert",
+      "policyCounts": {
+        "AIR": 446,
+        "BLOCK": 183,
+        "MASK": 5626,
+        "PEDESTAL": 103
+      },
+      "propertyBearingPaletteStates": 9,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 15,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -192,
+        24,
+        -129
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_desert.schem",
+      "dimensions": [
+        17,
+        22,
+        17
+      ]
+    },
+    {
+      "sha256": "c5bdd1ed22a7387c53f944fa0df2b33ae69caca7ff5af2219daf94623a5fd3dc",
+      "reasons": [
+        "Unsupported entities: 2"
+      ],
+      "clipboardOrigin": [
+        -182,
+        43,
+        -250
+      ],
+      "id": "betterstructures_mine_end",
+      "policyCounts": {
+        "AIR": 462,
+        "BLOCK": 151,
+        "MASK": 5626,
+        "PEDESTAL": 119
+      },
+      "propertyBearingPaletteStates": 8,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 12,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "1a2ab5f782d580a354c669a798ba9163d7cffcac901dbc68015ceebe7babe22e",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -192,
+        24,
+        -257
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_end.schem",
+      "dimensions": [
+        17,
+        22,
+        17
+      ]
+    },
+    {
+      "sha256": "68e39a51769b112c01965f1fe65e9a95a485ddc476bd31134d3ed07c938d7fd7",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -182,
+        43,
+        -91
+      ],
+      "id": "betterstructures_mine_grassland",
+      "policyCounts": {
+        "AIR": 446,
+        "BLOCK": 183,
+        "MASK": 5626,
+        "PEDESTAL": 103
+      },
+      "propertyBearingPaletteStates": 10,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 14,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -192,
+        24,
+        -97
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_grassland.schem",
+      "dimensions": [
+        17,
+        22,
+        17
+      ]
+    },
+    {
+      "sha256": "226d5142b7daf40c98c60062cc1ed70539cea264dab0094eda15336b473955ed",
+      "reasons": [
+        "Unsupported entities: 6"
+      ],
+      "clipboardOrigin": [
+        -184,
+        43,
+        -215
+      ],
+      "id": "betterstructures_mine_nether",
+      "policyCounts": {
+        "AIR": 467,
+        "BLOCK": 146,
+        "MASK": 5626,
+        "PEDESTAL": 119
+      },
+      "propertyBearingPaletteStates": 8,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 12,
+      "entities": 6,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -192,
+        24,
+        -225
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_nether.schem",
+      "dimensions": [
+        17,
+        22,
+        17
+      ]
+    },
+    {
+      "sha256": "ee9d9170ef13bab862d4c24e6da3e37f56fed6f1857cb52c2a8bd417f608ab33",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 5"
+      ],
+      "clipboardOrigin": [
+        177,
+        40,
+        -128
+      ],
+      "id": "betterstructures_mine_oredeposit_deep",
+      "policyCounts": {
+        "AIR": 6689,
+        "BLOCK": 461,
+        "MASK": 9692,
+        "PEDESTAL": 566
+      },
+      "propertyBearingPaletteStates": 13,
+      "generatorConfigFilename": "generator_underground_deep.yml",
+      "blocksWithNbt": 5,
+      "paletteStates": 19,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "fa1da622c6cd6b194158482cc53b4d466e7a78cdac5f08e6294b110cf994aea5",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        160,
+        23,
+        -144
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_oredeposit_deep.schem",
+      "dimensions": [
+        32,
+        17,
+        32
+      ]
+    },
+    {
+      "sha256": "d795bf04b4225ae1b6eca85c49cd1c4feea4a5188d9db396190b931e91fe2170",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 5"
+      ],
+      "clipboardOrigin": [
+        174,
+        40,
+        -258
+      ],
+      "id": "betterstructures_mine_oredeposit_end",
+      "policyCounts": {
+        "AIR": 6657,
+        "BLOCK": 493,
+        "MASK": 9692,
+        "PEDESTAL": 566
+      },
+      "propertyBearingPaletteStates": 15,
+      "generatorConfigFilename": "generator_underground_end.yml",
+      "blocksWithNbt": 5,
+      "paletteStates": 21,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b37f3160ae510be56e75b43e1342aff5719ee81dbe194e3248348bbd00ed8f63",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        160,
+        23,
+        -272
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_oredeposit_end.schem",
+      "dimensions": [
+        32,
+        17,
+        32
+      ]
+    },
+    {
+      "sha256": "8f1a8b4258be3fb28b2f395778c8c863a1324c031ff020bf9f8da3c5358fce7d",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 4"
+      ],
+      "clipboardOrigin": [
+        175,
+        40,
+        -221
+      ],
+      "id": "betterstructures_mine_oredeposit_nether",
+      "policyCounts": {
+        "AIR": 6689,
+        "BLOCK": 461,
+        "MASK": 9692,
+        "PEDESTAL": 566
+      },
+      "propertyBearingPaletteStates": 13,
+      "generatorConfigFilename": "generator_underground_nether.yml",
+      "blocksWithNbt": 4,
+      "paletteStates": 20,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "566a79510ca45a7b080fbdbb966e72590662966084a1fff327873be4fa0b40d5",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        160,
+        23,
+        -240
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_oredeposit_nether.schem",
+      "dimensions": [
+        32,
+        17,
+        32
+      ]
+    },
+    {
+      "sha256": "42ed4f0ebff0b521570e4b83560b9d7767a761edb2757a58ef399a4173d8e82a",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 5"
+      ],
+      "clipboardOrigin": [
+        177,
+        40,
+        -103
+      ],
+      "id": "betterstructures_mine_oredeposit_shallow",
+      "policyCounts": {
+        "AIR": 6691,
+        "BLOCK": 461,
+        "MASK": 9689,
+        "PEDESTAL": 567
+      },
+      "propertyBearingPaletteStates": 15,
+      "generatorConfigFilename": "generator_underground_shallow.yml",
+      "blocksWithNbt": 5,
+      "paletteStates": 20,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "05794258186f1007f5cede0e890beb61fb32b2f03c18664df38d41bd421bce3b",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        160,
+        23,
+        -112
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_oredeposit_shallow.schem",
+      "dimensions": [
+        32,
+        17,
+        32
+      ]
+    },
+    {
+      "sha256": "d7ed91c82b3aef4332ed4e7aedfdd52289dcf734d4abf079b41d5542a8457ae9",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 7"
+      ],
+      "clipboardOrigin": [
+        366,
+        36,
+        -126
+      ],
+      "id": "betterstructures_mine_storage_deep",
+      "policyCounts": {
+        "AIR": 2443,
+        "BLOCK": 200,
+        "MASK": 7479,
+        "PEDESTAL": 278
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_underground_deep.yml",
+      "blocksWithNbt": 7,
+      "paletteStates": 23,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "fa1da622c6cd6b194158482cc53b4d466e7a78cdac5f08e6294b110cf994aea5",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        352,
+        23,
+        -137
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_storage_deep.schem",
+      "dimensions": [
+        32,
+        13,
+        25
+      ]
+    },
+    {
+      "sha256": "0863a1f597e96b52a2f95174560ff78270d82f8cd9b50919e272600553b7dfc5",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 6"
+      ],
+      "clipboardOrigin": [
+        368,
+        36,
+        -254
+      ],
+      "id": "betterstructures_mine_storage_end",
+      "policyCounts": {
+        "AIR": 2445,
+        "BLOCK": 198,
+        "MASK": 7479,
+        "PEDESTAL": 278
+      },
+      "propertyBearingPaletteStates": 12,
+      "generatorConfigFilename": "generator_underground_end.yml",
+      "blocksWithNbt": 6,
+      "paletteStates": 19,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b37f3160ae510be56e75b43e1342aff5719ee81dbe194e3248348bbd00ed8f63",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        352,
+        23,
+        -265
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_storage_end.schem",
+      "dimensions": [
+        32,
+        13,
+        25
+      ]
+    },
+    {
+      "sha256": "8f241280ced63f1f33de64c3236978de0b02f7ff60382f3c9b430e8ff9afbf0b",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        368,
+        36,
+        -221
+      ],
+      "id": "betterstructures_mine_storage_nether",
+      "policyCounts": {
+        "AIR": 2443,
+        "BLOCK": 200,
+        "MASK": 7479,
+        "PEDESTAL": 278
+      },
+      "propertyBearingPaletteStates": 15,
+      "generatorConfigFilename": "generator_underground_nether.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 22,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "566a79510ca45a7b080fbdbb966e72590662966084a1fff327873be4fa0b40d5",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        352,
+        23,
+        -233
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_storage_nether.schem",
+      "dimensions": [
+        32,
+        13,
+        25
+      ]
+    },
+    {
+      "sha256": "07663a85016bf7eb920842cfa81d7a04137071962c9a3ee832e84f6fc3a24969",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 7"
+      ],
+      "clipboardOrigin": [
+        369,
+        36,
+        -91
+      ],
+      "id": "betterstructures_mine_storage_shallow",
+      "policyCounts": {
+        "AIR": 2443,
+        "BLOCK": 200,
+        "MASK": 7479,
+        "PEDESTAL": 278
+      },
+      "propertyBearingPaletteStates": 22,
+      "generatorConfigFilename": "generator_underground_shallow.yml",
+      "blocksWithNbt": 7,
+      "paletteStates": 25,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "05794258186f1007f5cede0e890beb61fb32b2f03c18664df38d41bd421bce3b",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        352,
+        23,
+        -105
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_storage_shallow.schem",
+      "dimensions": [
+        32,
+        13,
+        25
+      ]
+    },
+    {
+      "sha256": "10dee58f94345b3225f2576f235f7a981b990d517ef0f7b678140896876832f2",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 16"
+      ],
+      "clipboardOrigin": [
+        304,
+        72,
+        -187
+      ],
+      "id": "betterstructures_mine_surfacebore_barren",
+      "policyCounts": {
+        "AIR": 28983,
+        "BLOCK": 569,
+        "MASK": 32479,
+        "PEDESTAL": 433
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 16,
+      "paletteStates": 22,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "763c9e75a68d81b6d9c4348896f71d6acdc20bc96f3c4afb94fbf9b82e678a18",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        288,
+        23,
+        -208
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_surfacebore_barren.schem",
+      "dimensions": [
+        32,
+        61,
+        32
+      ]
+    },
+    {
+      "sha256": "97b66b9426ee7e08dc67c841b2c95d18df3ca3392952a7c05a4bc73acba1d402",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 17"
+      ],
+      "clipboardOrigin": [
+        304,
+        72,
+        -120
+      ],
+      "id": "betterstructures_mine_surfacebore_desert",
+      "policyCounts": {
+        "AIR": 30006,
+        "BLOCK": 570,
+        "MASK": 32479,
+        "PEDESTAL": 433
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 17,
+      "paletteStates": 22,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "58def64955fcaf5578550aceba38fdc26927bb9155eaa559ad412aad310768bc",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        288,
+        23,
+        -144
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_surfacebore_desert.schem",
+      "dimensions": [
+        32,
+        62,
+        32
+      ]
+    },
+    {
+      "sha256": "3dd5162f1ea6c25cd84c98635d857baaf53fac38d4871f44fe9847b0940ada4a",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 9"
+      ],
+      "clipboardOrigin": [
+        303,
+        72,
+        -250
+      ],
+      "id": "betterstructures_mine_surfacebore_end",
+      "policyCounts": {
+        "AIR": 28861,
+        "BLOCK": 920,
+        "MASK": 32250,
+        "PEDESTAL": 433
+      },
+      "propertyBearingPaletteStates": 24,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 9,
+      "paletteStates": 28,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "dfb3103904ca53d0144c1af82dae1063846d8523d57d5bbe0a10c2f47ff3f8e6",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        288,
+        23,
+        -272
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_surfacebore_end.schem",
+      "dimensions": [
+        32,
+        61,
+        32
+      ]
+    },
+    {
+      "sha256": "f38d421b48d386b50dc2893963d976be711e8d4de27eeac9cb32a801f387faf6",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 17"
+      ],
+      "clipboardOrigin": [
+        304,
+        72,
+        -88
+      ],
+      "id": "betterstructures_mine_surfacebore_grassy",
+      "policyCounts": {
+        "AIR": 30006,
+        "BLOCK": 570,
+        "MASK": 32479,
+        "PEDESTAL": 433
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 17,
+      "paletteStates": 22,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "af1f8630669dbc6045cfe41f13868c6d09134d6d01928df882845a269496c6b1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        288,
+        23,
+        -112
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_surfacebore_grassy.schem",
+      "dimensions": [
+        32,
+        62,
+        32
+      ]
+    },
+    {
+      "sha256": "bfa518e38992360cdc5d1a5a5680350df4147199c2e13a035d2e7216495fcb5d",
+      "reasons": [
+        "Unsupported entities: 5",
+        "Unsupported block NBT: 6"
+      ],
+      "clipboardOrigin": [
+        303,
+        47,
+        -217
+      ],
+      "id": "betterstructures_mine_surfacebore_nether",
+      "policyCounts": {
+        "AIR": 22735,
+        "BLOCK": 419,
+        "MASK": 13277,
+        "PEDESTAL": 433
+      },
+      "propertyBearingPaletteStates": 17,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 6,
+      "paletteStates": 22,
+      "entities": 5,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "40552eaa35eeb94ade1b1cda81e34cecdfb721037ba8be8d856bf259dac68f67",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        288,
+        23,
+        -240
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_surfacebore_nether.schem",
+      "dimensions": [
+        32,
+        36,
+        32
+      ]
+    },
+    {
+      "sha256": "b362d9b9ace87725be577ddc4b0d5fc7b86c2810a0f5a901517798b870ff6a54",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 17"
+      ],
+      "clipboardOrigin": [
+        303,
+        72,
+        -154
+      ],
+      "id": "betterstructures_mine_surfacebore_tundra",
+      "policyCounts": {
+        "AIR": 26934,
+        "BLOCK": 570,
+        "MASK": 32479,
+        "PEDESTAL": 433
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 17,
+      "paletteStates": 22,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "de00dead1feb72d676dd0ea50365c3d3a4430eb5112571fb191c9ec7d3c2e686",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        288,
+        23,
+        -176
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_surfacebore_tundra.schem",
+      "dimensions": [
+        32,
+        59,
+        32
+      ]
+    },
+    {
+      "sha256": "d9f77ce86227c9fdf1bc29344f12627684ef9e9f131b32005b2b8cbcbdac4260",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 4"
+      ],
+      "clipboardOrigin": [
+        207,
+        68,
+        -129
+      ],
+      "id": "betterstructures_mine_tailingdump_deep",
+      "policyCounts": {
+        "AIR": 8558,
+        "BLOCK": 1019,
+        "MASK": 35659,
+        "PEDESTAL": 844
+      },
+      "propertyBearingPaletteStates": 18,
+      "generatorConfigFilename": "generator_underground_deep.yml",
+      "blocksWithNbt": 4,
+      "paletteStates": 22,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "fa1da622c6cd6b194158482cc53b4d466e7a78cdac5f08e6294b110cf994aea5",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        192,
+        23,
+        -144
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_tailingdump_deep.schem",
+      "dimensions": [
+        32,
+        45,
+        32
+      ]
+    },
+    {
+      "sha256": "57224b7b3e9e86094e2ef4cc3ea8cc7e65263645764bd07774895db5c7e98eab",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 5"
+      ],
+      "clipboardOrigin": [
+        207,
+        68,
+        -263
+      ],
+      "id": "betterstructures_mine_tailingdump_end",
+      "policyCounts": {
+        "AIR": 8560,
+        "BLOCK": 1017,
+        "MASK": 35659,
+        "PEDESTAL": 844
+      },
+      "propertyBearingPaletteStates": 16,
+      "generatorConfigFilename": "generator_underground_end.yml",
+      "blocksWithNbt": 5,
+      "paletteStates": 21,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b37f3160ae510be56e75b43e1342aff5719ee81dbe194e3248348bbd00ed8f63",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        192,
+        23,
+        -272
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_tailingdump_end.schem",
+      "dimensions": [
+        32,
+        45,
+        32
+      ]
+    },
+    {
+      "sha256": "acd294cb53cfa089e9a8cf97ddd15ef37b8dfade1599c1ca08de892a3d2cdcab",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 4"
+      ],
+      "clipboardOrigin": [
+        208,
+        68,
+        -227
+      ],
+      "id": "betterstructures_mine_tailingdump_nether",
+      "policyCounts": {
+        "AIR": 8561,
+        "BLOCK": 1016,
+        "MASK": 35659,
+        "PEDESTAL": 844
+      },
+      "propertyBearingPaletteStates": 16,
+      "generatorConfigFilename": "generator_underground_nether.yml",
+      "blocksWithNbt": 4,
+      "paletteStates": 21,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "566a79510ca45a7b080fbdbb966e72590662966084a1fff327873be4fa0b40d5",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        192,
+        23,
+        -240
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_tailingdump_nether.schem",
+      "dimensions": [
+        32,
+        45,
+        32
+      ]
+    },
+    {
+      "sha256": "4f90b77cb8b384d6a4dbfec254fc4dbfc1512c1b27e6662696deff2d178c5d4f",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 4"
+      ],
+      "clipboardOrigin": [
+        207,
+        68,
+        -96
+      ],
+      "id": "betterstructures_mine_tailingdump_shallow",
+      "policyCounts": {
+        "AIR": 8559,
+        "BLOCK": 1017,
+        "MASK": 35660,
+        "PEDESTAL": 844
+      },
+      "propertyBearingPaletteStates": 19,
+      "generatorConfigFilename": "generator_underground_shallow.yml",
+      "blocksWithNbt": 4,
+      "paletteStates": 23,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "05794258186f1007f5cede0e890beb61fb32b2f03c18664df38d41bd421bce3b",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        192,
+        23,
+        -112
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_tailingdump_shallow.schem",
+      "dimensions": [
+        32,
+        45,
+        32
+      ]
+    },
+    {
+      "sha256": "d7c29e9cca77fffabf2bfc0c2604226116aa0f1945e857234e48834d6f5ed247",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -182,
+        43,
+        -154
+      ],
+      "id": "betterstructures_mine_tundra",
+      "policyCounts": {
+        "AIR": 467,
+        "BLOCK": 162,
+        "MASK": 5626,
+        "PEDESTAL": 103
+      },
+      "propertyBearingPaletteStates": 9,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 13,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "53502b761eedc94a381b148bc16c47df53a8ab8518d6f20ad5b5cedaf0ad9c5c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -192,
+        24,
+        -161
+      ],
+      "file": "schematics/103_default_structures/betterstructures_mine_tundra.schem",
+      "dimensions": [
+        17,
+        22,
+        17
+      ]
+    },
+    {
+      "sha256": "85b2d2fd30c45a8e038084a291cca490e877ad2021785d893219b2c0c7f77ff9",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 21"
+      ],
+      "clipboardOrigin": [
+        256,
+        26,
+        -122
+      ],
+      "id": "betterstructures_raft_east",
+      "policyCounts": {
+        "AIR": 1699,
+        "BLOCK": 408,
+        "MASK": 53
+      },
+      "propertyBearingPaletteStates": 31,
+      "generatorConfigFilename": "generator_liquid_overworld.yml",
+      "blocksWithNbt": 21,
+      "paletteStates": 35,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b4eb94659b967e9f857e1f84b635b97fc3e6ac8a8d973196d9718cdbc61396e1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        256,
+        24,
+        -125
+      ],
+      "file": "schematics/103_default_structures/betterstructures_raft_east.schem",
+      "dimensions": [
+        15,
+        12,
+        12
+      ]
+    },
+    {
+      "sha256": "58d8dac89121820376e0288e13badede3af52d07e3798c8d0da6094e73c6e121",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        263,
+        26,
+        -241
+      ],
+      "id": "betterstructures_raft_end",
+      "policyCounts": {
+        "AIR": 1985,
+        "BLOCK": 122,
+        "MASK": 53
+      },
+      "propertyBearingPaletteStates": 23,
+      "generatorConfigFilename": "generator_sky_end.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 27,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b3cf2b521826a27edbf645734935628d9de9ba480252e41cdae97580a46ca79c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        256,
+        24,
+        -255
+      ],
+      "file": "schematics/103_default_structures/betterstructures_raft_end.schem",
+      "dimensions": [
+        12,
+        12,
+        15
+      ]
+    },
+    {
+      "sha256": "aa1884b1a62593d3d0a24d84a24057eb15ac158162742f61eb0d949cacefabee",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 4"
+      ],
+      "clipboardOrigin": [
+        262,
+        26,
+        -209
+      ],
+      "id": "betterstructures_raft_nether",
+      "policyCounts": {
+        "AIR": 1700,
+        "BLOCK": 407,
+        "MASK": 233
+      },
+      "propertyBearingPaletteStates": 25,
+      "generatorConfigFilename": "generator_liquid_nether.yml",
+      "blocksWithNbt": 4,
+      "paletteStates": 30,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0243e07bf91be4e04dfc311b05615ab55ee2ae6aef96aa6b67d62bace09b65fb",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        256,
+        23,
+        -223
+      ],
+      "file": "schematics/103_default_structures/betterstructures_raft_nether.schem",
+      "dimensions": [
+        12,
+        13,
+        15
+      ]
+    },
+    {
+      "sha256": "3cdb71fb17251ffc48f7cfa91d5b9a8ad9679dfe7ff9d70ef3107178d7728681",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 22"
+      ],
+      "clipboardOrigin": [
+        259,
+        26,
+        -81
+      ],
+      "id": "betterstructures_raft_north",
+      "policyCounts": {
+        "AIR": 1698,
+        "BLOCK": 409,
+        "MASK": 53
+      },
+      "propertyBearingPaletteStates": 30,
+      "generatorConfigFilename": "generator_liquid_overworld.yml",
+      "blocksWithNbt": 22,
+      "paletteStates": 34,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b4eb94659b967e9f857e1f84b635b97fc3e6ac8a8d973196d9718cdbc61396e1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        256,
+        24,
+        -95
+      ],
+      "file": "schematics/103_default_structures/betterstructures_raft_north.schem",
+      "dimensions": [
+        12,
+        12,
+        15
+      ]
+    },
+    {
+      "sha256": "940857c8ea1207acf2820a110dd0e37bd5167e7c5963d4b5862e7e67b0ac7045",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 22"
+      ],
+      "clipboardOrigin": [
+        268,
+        26,
+        -155
+      ],
+      "id": "betterstructures_raft_south",
+      "policyCounts": {
+        "AIR": 1699,
+        "BLOCK": 408,
+        "MASK": 233
+      },
+      "propertyBearingPaletteStates": 31,
+      "generatorConfigFilename": "generator_liquid_overworld.yml",
+      "blocksWithNbt": 22,
+      "paletteStates": 35,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b4eb94659b967e9f857e1f84b635b97fc3e6ac8a8d973196d9718cdbc61396e1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        257,
+        23,
+        -160
+      ],
+      "file": "schematics/103_default_structures/betterstructures_raft_south.schem",
+      "dimensions": [
+        12,
+        13,
+        15
+      ]
+    },
+    {
+      "sha256": "ceefec2a1b3a49ba5633e9567140b0ae4049ae2a966230d6255beadc7c8d0716",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 22"
+      ],
+      "clipboardOrigin": [
+        271,
+        26,
+        -184
+      ],
+      "id": "betterstructures_raft_west",
+      "policyCounts": {
+        "AIR": 1698,
+        "BLOCK": 409,
+        "MASK": 233
+      },
+      "propertyBearingPaletteStates": 30,
+      "generatorConfigFilename": "generator_liquid_overworld.yml",
+      "blocksWithNbt": 22,
+      "paletteStates": 34,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b4eb94659b967e9f857e1f84b635b97fc3e6ac8a8d973196d9718cdbc61396e1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        257,
+        23,
+        -188
+      ],
+      "file": "schematics/103_default_structures/betterstructures_raft_west.schem",
+      "dimensions": [
+        15,
+        13,
+        12
+      ]
+    },
+    {
+      "sha256": "9f1a97e0c88db1fc6e6d2bdd7d598fa0e983c16735405d9cb82f13fa4d36f8c3",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        69,
+        36,
+        -182
+      ],
+      "id": "betterstructures_skyisland_barren",
+      "policyCounts": {
+        "AIR": 1468,
+        "BLOCK": 510,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 5,
+      "generatorConfigFilename": "generator_sky_barren.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 11,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "52c1df75bd8e92adc2b3e12c8725f85643596040f9df14f5172bdfb5e93af464",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        64,
+        23,
+        -188
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_barren.schem",
+      "dimensions": [
+        11,
+        15,
+        12
+      ]
+    },
+    {
+      "sha256": "df15ada46675606809d28a061a8c70ac6917cd02f35bb5bdb29e4a0973c53ee8",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        68,
+        36,
+        -216
+      ],
+      "id": "betterstructures_skyisland_crimsonforest",
+      "policyCounts": {
+        "AIR": 6587,
+        "BLOCK": 553
+      },
+      "propertyBearingPaletteStates": 3,
+      "generatorConfigFilename": "generator_sky_crimson_forest.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 11,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "3ba7ed6dff6802fb9f48c5000cbccdbf33833b262964e1c5e6cf6665c79f584f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        62,
+        21,
+        -222
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_crimsonforest.schem",
+      "dimensions": [
+        14,
+        34,
+        15
+      ]
+    },
+    {
+      "sha256": "dc2a8286eb66c47e106ffa5e6b39bb7658dca6bd8dfb18c4502c930b3cc35a60",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        68,
+        36,
+        -119
+      ],
+      "id": "betterstructures_skyisland_desert",
+      "policyCounts": {
+        "AIR": 1632,
+        "BLOCK": 478,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 6,
+      "generatorConfigFilename": "generator_sky_desert.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 12,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "765ce139086fbadc097968883141d68ee5cc97b8b8ffdacd36fbe2f7f6724932",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        64,
+        23,
+        -124
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_desert.schem",
+      "dimensions": [
+        11,
+        16,
+        12
+      ]
+    },
+    {
+      "sha256": "312d131b9b098a68b46c29e6a3e3652244ad9c42ddfda9da02642cc3b2eba896",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        69,
+        36,
+        -247
+      ],
+      "id": "betterstructures_skyisland_end",
+      "policyCounts": {
+        "AIR": 1643,
+        "BLOCK": 467,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 3,
+      "generatorConfigFilename": "generator_sky_end.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 7,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "b3cf2b521826a27edbf645734935628d9de9ba480252e41cdae97580a46ca79c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        64,
+        23,
+        -252
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_end.schem",
+      "dimensions": [
+        11,
+        16,
+        12
+      ]
+    },
+    {
+      "sha256": "c314e39e3bf7ef7fb3c2b460c1ee07545dbe834d3ca1c1e6d40dd6916b8e719a",
+      "reasons": [
+        "Unsupported entities: 3",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        68,
+        36,
+        -88
+      ],
+      "id": "betterstructures_skyisland_grassy",
+      "policyCounts": {
+        "AIR": 1972,
+        "BLOCK": 534,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 10,
+      "generatorConfigFilename": "generator_sky_grassland.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 17,
+      "entities": 3,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "13a8b099ef9e97c12aa5fb79e92ffba38cee1f329d42f514d7f2473a4ad4ffe1",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        64,
+        23,
+        -92
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_grassy.schem",
+      "dimensions": [
+        11,
+        19,
+        12
+      ]
+    },
+    {
+      "sha256": "544241dad44e0fe9e65918e1195b057d08aadb87caa65005b0245ef5a78d8376",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        90,
+        36,
+        -235
+      ],
+      "id": "betterstructures_skyisland_netherwastes",
+      "policyCounts": {
+        "AIR": 2335,
+        "BLOCK": 472,
+        "MASK": 1
+      },
+      "propertyBearingPaletteStates": 3,
+      "generatorConfigFilename": "generator_sky_nether_wastes.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 6,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "bcc016b3c570996f04cbc1285aee44c9f0fda6bd84fa73355c69962eb4949d3c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        84,
+        23,
+        -240
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_netherwastes.schem",
+      "dimensions": [
+        12,
+        18,
+        13
+      ]
+    },
+    {
+      "sha256": "d6138f19ac730ee0cc08f5fc412d5c8d88ebaf8dba9164ee6ba1c63b232d597e",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        69,
+        35,
+        -233
+      ],
+      "id": "betterstructures_skyisland_soulsand",
+      "policyCounts": {
+        "AIR": 5715,
+        "BLOCK": 473
+      },
+      "propertyBearingPaletteStates": 1,
+      "generatorConfigFilename": "generator_sky_soul_sand.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 7,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "e6a060b82cfd7f0abb46d35591c6709dc87605765c9cffc31af12308eb9b0b56",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        62,
+        21,
+        -240
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_soulsand.schem",
+      "dimensions": [
+        17,
+        26,
+        14
+      ]
+    },
+    {
+      "sha256": "229e34f11eb92440981ea4b0e04827846182d6fe6adb1c5e96d0a885aa1bc451",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        70,
+        35,
+        -153
+      ],
+      "id": "betterstructures_skyisland_tundra",
+      "policyCounts": {
+        "AIR": 2332,
+        "BLOCK": 702,
+        "MASK": 2
+      },
+      "propertyBearingPaletteStates": 10,
+      "generatorConfigFilename": "generator_sky_snowy.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 15,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "89b6d9b89c9a1fc3d7f4715b5737aa41ce6c8e7a2738c098a2ec96d358f0a6eb",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        64,
+        23,
+        -156
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_tundra.schem",
+      "dimensions": [
+        11,
+        23,
+        12
+      ]
+    },
+    {
+      "sha256": "ee4e1be0713241a34ae3b1be81f20f82ce26243951b2f6e21e80dbb42e77ab8d",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        91,
+        35,
+        -216
+      ],
+      "id": "betterstructures_skyisland_warpedforest",
+      "policyCounts": {
+        "AIR": 5644,
+        "BLOCK": 596
+      },
+      "propertyBearingPaletteStates": 2,
+      "generatorConfigFilename": "generator_sky_warped_forest.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 11,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "de465c9f91aaaf4c2ea72f89782b801f4816a551256ceaadc7c1b8378c7a351c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        83,
+        21,
+        -222
+      ],
+      "file": "schematics/103_default_structures/betterstructures_skyisland_warpedforest.schem",
+      "dimensions": [
+        13,
+        30,
+        16
+      ]
+    },
+    {
+      "sha256": "320bf7bf2d478dbf39988cfeb4220f7fcf7eff8261864fa8a472054c58bb7205",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        39,
+        48,
+        -199
+      ],
+      "id": "betterstructures_tomb_barren",
+      "policyCounts": {
+        "AIR": 4763,
+        "BLOCK": 2617,
+        "MASK": 4196,
+        "PEDESTAL": 328
+      },
+      "propertyBearingPaletteStates": 37,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 46,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "a371a11c731de74ad6c0ccce7c079a55a65cc103495213d5a96b84dd975b8399",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        32,
+        24,
+        -207
+      ],
+      "file": "schematics/103_default_structures/betterstructures_tomb_barren.schem",
+      "dimensions": [
+        16,
+        24,
+        31
+      ]
+    },
+    {
+      "sha256": "0d32d54a894d409316e68af3f82091fdc045ebc9a6e5c95cd2f8f36efb106aab",
+      "reasons": [
+        "Unsupported entities: 4",
+        "Unsupported block NBT: 4"
+      ],
+      "clipboardOrigin": [
+        39,
+        48,
+        -128
+      ],
+      "id": "betterstructures_tomb_desert",
+      "policyCounts": {
+        "AIR": 4543,
+        "BLOCK": 2837,
+        "MASK": 4196,
+        "PEDESTAL": 328
+      },
+      "propertyBearingPaletteStates": 35,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 4,
+      "paletteStates": 43,
+      "entities": 4,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        32,
+        24,
+        -143
+      ],
+      "file": "schematics/103_default_structures/betterstructures_tomb_desert.schem",
+      "dimensions": [
+        16,
+        24,
+        31
+      ]
+    },
+    {
+      "sha256": "8148d9a52867e37a8653935242618869ecb9b03c277b17316e96b3699745deac",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 5"
+      ],
+      "clipboardOrigin": [
+        39,
+        48,
+        -256
+      ],
+      "id": "betterstructures_tomb_end",
+      "policyCounts": {
+        "AIR": 4775,
+        "BLOCK": 2605,
+        "MASK": 4196,
+        "PEDESTAL": 328
+      },
+      "propertyBearingPaletteStates": 22,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 5,
+      "paletteStates": 30,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "1a2ab5f782d580a354c669a798ba9163d7cffcac901dbc68015ceebe7babe22e",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        32,
+        24,
+        -271
+      ],
+      "file": "schematics/103_default_structures/betterstructures_tomb_end.schem",
+      "dimensions": [
+        16,
+        24,
+        31
+      ]
+    },
+    {
+      "sha256": "b42d0198c63745b8bf33f3fd750e19ee134dafe518e85d1ae9e5f61e1c61d14b",
+      "reasons": [
+        "Unsupported entities: 2",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        42,
+        48,
+        -95
+      ],
+      "id": "betterstructures_tomb_grassy",
+      "policyCounts": {
+        "AIR": 4763,
+        "BLOCK": 2617,
+        "MASK": 4196,
+        "PEDESTAL": 328
+      },
+      "propertyBearingPaletteStates": 31,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 40,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        32,
+        24,
+        -111
+      ],
+      "file": "schematics/103_default_structures/betterstructures_tomb_grassy.schem",
+      "dimensions": [
+        16,
+        24,
+        31
+      ]
+    },
+    {
+      "sha256": "e7a5f43d03ed4d0bd2396d00b66faccc96352b250ddb43a0da623aa2ee2c8647",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        40,
+        49,
+        -227
+      ],
+      "id": "betterstructures_tomb_nether",
+      "policyCounts": {
+        "AIR": 4627,
+        "BLOCK": 3249,
+        "MASK": 4196,
+        "PEDESTAL": 328
+      },
+      "propertyBearingPaletteStates": 19,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 26,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        32,
+        24,
+        -239
+      ],
+      "file": "schematics/103_default_structures/betterstructures_tomb_nether.schem",
+      "dimensions": [
+        16,
+        25,
+        31
+      ]
+    },
+    {
+      "sha256": "ad51dbd3e10639977df0fb163a2474eb78274d86350227ba6aac19eae7caf81d",
+      "reasons": [
+        "Unsupported entities: 8",
+        "Unsupported block NBT: 3"
+      ],
+      "clipboardOrigin": [
+        41,
+        48,
+        -165
+      ],
+      "id": "betterstructures_tomb_tundra",
+      "policyCounts": {
+        "AIR": 4401,
+        "BLOCK": 2979,
+        "MASK": 4196,
+        "PEDESTAL": 328
+      },
+      "propertyBearingPaletteStates": 21,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 3,
+      "paletteStates": 31,
+      "entities": 8,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "53502b761eedc94a381b148bc16c47df53a8ab8518d6f20ad5b5cedaf0ad9c5c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        32,
+        24,
+        -175
+      ],
+      "file": "schematics/103_default_structures/betterstructures_tomb_tundra.schem",
+      "dimensions": [
+        16,
+        24,
+        31
+      ]
+    },
+    {
+      "sha256": "f88a6355cf85d68ecf49f22699045cf9fe6280953deb64f13e7f56a5d11f7b1e",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 5"
+      ],
+      "clipboardOrigin": [
+        -152,
+        26,
+        -184
+      ],
+      "id": "betterstructures_waypoint_barren",
+      "policyCounts": {
+        "AIR": 442,
+        "BLOCK": 92,
+        "MASK": 256,
+        "PEDESTAL": 178
+      },
+      "propertyBearingPaletteStates": 18,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 5,
+      "paletteStates": 23,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "a371a11c731de74ad6c0ccce7c079a55a65cc103495213d5a96b84dd975b8399",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -160,
+        24,
+        -187
+      ],
+      "file": "schematics/103_default_structures/betterstructures_waypoint_barren.schem",
+      "dimensions": [
+        11,
+        8,
+        11
+      ]
+    },
+    {
+      "sha256": "539f443e6f1e16121a34ed624b9af53929579067b0fe8e5630ed0aeedc8072ba",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -152,
+        26,
+        -120
+      ],
+      "id": "betterstructures_waypoint_desert",
+      "policyCounts": {
+        "AIR": 442,
+        "BLOCK": 270,
+        "MASK": 256
+      },
+      "propertyBearingPaletteStates": 16,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 22,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -160,
+        24,
+        -123
+      ],
+      "file": "schematics/103_default_structures/betterstructures_waypoint_desert.schem",
+      "dimensions": [
+        11,
+        8,
+        11
+      ]
+    },
+    {
+      "sha256": "02addb0a38f6ff9c68d77e7443e8435e4dc37bfdc24ecd4db66df41b1a17ff12",
+      "reasons": [
+        "Unsupported entities: 1",
+        "Unsupported block NBT: 1"
+      ],
+      "clipboardOrigin": [
+        -152,
+        26,
+        -249
+      ],
+      "id": "betterstructures_waypoint_end",
+      "policyCounts": {
+        "AIR": 443,
+        "BLOCK": 269,
+        "MASK": 256
+      },
+      "propertyBearingPaletteStates": 16,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 1,
+      "paletteStates": 22,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "1a2ab5f782d580a354c669a798ba9163d7cffcac901dbc68015ceebe7babe22e",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -160,
+        24,
+        -251
+      ],
+      "file": "schematics/103_default_structures/betterstructures_waypoint_end.schem",
+      "dimensions": [
+        11,
+        8,
+        11
+      ]
+    },
+    {
+      "sha256": "931ee6bc2a8a48a05ed3881ed79f7d676fbe646d91ed48d843c2b8a56e54d3cf",
+      "reasons": [],
+      "clipboardOrigin": [
+        -152,
+        26,
+        -88
+      ],
+      "id": "betterstructures_waypoint_grassy",
+      "policyCounts": {
+        "AIR": 442,
+        "BLOCK": 181,
+        "MASK": 256,
+        "PEDESTAL": 89
+      },
+      "propertyBearingPaletteStates": 17,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 26,
+      "entities": 0,
+      "selected": true,
+      "supported": true,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -160,
+        24,
+        -91
+      ],
+      "file": "schematics/103_default_structures/betterstructures_waypoint_grassy.schem",
+      "dimensions": [
+        11,
+        8,
+        11
+      ]
+    },
+    {
+      "sha256": "3e4f02101097b7eeb5c6b42d532d4cdc0fcf7bc35d26285ffa0c5177d6db0057",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -152,
+        26,
+        -216
+      ],
+      "id": "betterstructures_waypoint_nether",
+      "policyCounts": {
+        "AIR": 442,
+        "BLOCK": 92,
+        "MASK": 256,
+        "PEDESTAL": 178
+      },
+      "propertyBearingPaletteStates": 16,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 23,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -160,
+        24,
+        -219
+      ],
+      "file": "schematics/103_default_structures/betterstructures_waypoint_nether.schem",
+      "dimensions": [
+        11,
+        8,
+        11
+      ]
+    },
+    {
+      "sha256": "b5badf6aed32459327ead1fced371fac0ebc1139cee229e526812a8c9d91e126",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -152,
+        26,
+        -152
+      ],
+      "id": "betterstructures_waypoint_tundra",
+      "policyCounts": {
+        "AIR": 401,
+        "BLOCK": 222,
+        "MASK": 256,
+        "PEDESTAL": 89
+      },
+      "propertyBearingPaletteStates": 18,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 25,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "53502b761eedc94a381b148bc16c47df53a8ab8518d6f20ad5b5cedaf0ad9c5c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -160,
+        24,
+        -155
+      ],
+      "file": "schematics/103_default_structures/betterstructures_waypoint_tundra.schem",
+      "dimensions": [
+        11,
+        8,
+        11
+      ]
+    },
+    {
+      "sha256": "42dc3a677e18f9e9425df5b283e4ea463a0fccf6c824bee684b0a03c6ae42ac1",
+      "reasons": [
+        "Unsupported entities: 2"
+      ],
+      "clipboardOrigin": [
+        -29,
+        42,
+        -183
+      ],
+      "id": "betterstructures_well_barren",
+      "policyCounts": {
+        "AIR": 450,
+        "BLOCK": 367,
+        "MASK": 408
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_barren.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 26,
+      "entities": 2,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "a371a11c731de74ad6c0ccce7c079a55a65cc103495213d5a96b84dd975b8399",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -32,
+        24,
+        -183
+      ],
+      "file": "schematics/103_default_structures/betterstructures_well_barren.schem",
+      "dimensions": [
+        7,
+        25,
+        7
+      ]
+    },
+    {
+      "sha256": "74c0269798ab05d47b0929466c3c9647c228e4dd2e64de1e7bb18b64f18cdf06",
+      "reasons": [],
+      "clipboardOrigin": [
+        -29,
+        42,
+        -119
+      ],
+      "id": "betterstructures_well_desert",
+      "policyCounts": {
+        "AIR": 449,
+        "BLOCK": 368,
+        "MASK": 408
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 25,
+      "entities": 0,
+      "selected": true,
+      "supported": true,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -32,
+        24,
+        -119
+      ],
+      "file": "schematics/103_default_structures/betterstructures_well_desert.schem",
+      "dimensions": [
+        7,
+        25,
+        7
+      ]
+    },
+    {
+      "sha256": "8ce776b1f83beca454569c1a2d2d2f3c88456bb894defb1d35c24df9a3fb1c46",
+      "reasons": [
+        "Unsupported block NBT: 9"
+      ],
+      "clipboardOrigin": [
+        -29,
+        42,
+        -247
+      ],
+      "id": "betterstructures_well_end",
+      "policyCounts": {
+        "AIR": 489,
+        "BLOCK": 377,
+        "MASK": 408
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_end.yml",
+      "blocksWithNbt": 9,
+      "paletteStates": 25,
+      "entities": 0,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "1a2ab5f782d580a354c669a798ba9163d7cffcac901dbc68015ceebe7babe22e",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -32,
+        24,
+        -247
+      ],
+      "file": "schematics/103_default_structures/betterstructures_well_end.schem",
+      "dimensions": [
+        7,
+        26,
+        7
+      ]
+    },
+    {
+      "sha256": "6d001dee15e766d880af4085194417d4ee562f4d4863c2c36563a374b4312e45",
+      "reasons": [
+        "Unsupported entities: 1"
+      ],
+      "clipboardOrigin": [
+        -29,
+        42,
+        -87
+      ],
+      "id": "betterstructures_well_grassy",
+      "policyCounts": {
+        "AIR": 364,
+        "BLOCK": 404,
+        "MASK": 408
+      },
+      "propertyBearingPaletteStates": 26,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 33,
+      "entities": 1,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -32,
+        24,
+        -87
+      ],
+      "file": "schematics/103_default_structures/betterstructures_well_grassy.schem",
+      "dimensions": [
+        7,
+        24,
+        7
+      ]
+    },
+    {
+      "sha256": "ca7759b152ddd688f1977e140bab19ebea97377bafd73de65d8a36d049a9dd82",
+      "reasons": [],
+      "clipboardOrigin": [
+        -29,
+        42,
+        -215
+      ],
+      "id": "betterstructures_well_nether",
+      "policyCounts": {
+        "AIR": 382,
+        "BLOCK": 386,
+        "MASK": 408
+      },
+      "propertyBearingPaletteStates": 21,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 26,
+      "entities": 0,
+      "selected": true,
+      "supported": true,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -32,
+        24,
+        -215
+      ],
+      "file": "schematics/103_default_structures/betterstructures_well_nether.schem",
+      "dimensions": [
+        7,
+        24,
+        7
+      ]
+    },
+    {
+      "sha256": "67941327c84a70ca3c5a3586be0ab955a0423051cd521f6dba3c42c4904d8b87",
+      "reasons": [
+        "Unsupported entities: 6"
+      ],
+      "clipboardOrigin": [
+        -29,
+        42,
+        -151
+      ],
+      "id": "betterstructures_well_tundra",
+      "policyCounts": {
+        "AIR": 348,
+        "BLOCK": 420,
+        "MASK": 408
+      },
+      "propertyBearingPaletteStates": 21,
+      "generatorConfigFilename": "generator_surface_snowy.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 27,
+      "entities": 6,
+      "selected": false,
+      "supported": false,
+      "sidecarSha256": "53502b761eedc94a381b148bc16c47df53a8ab8518d6f20ad5b5cedaf0ad9c5c",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -32,
+        24,
+        -151
+      ],
+      "file": "schematics/103_default_structures/betterstructures_well_tundra.schem",
+      "dimensions": [
+        7,
+        24,
+        7
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "sha256": "61dd1c817d57e0ceb999161975ad50ba62fa210daaf9b2a712a17b5d2be19f4d",
+      "reasons": [],
+      "clipboardOrigin": [
+        -59,
+        34,
+        -211
+      ],
+      "id": "betterstructures_cistern_nether",
+      "policyCounts": {
+        "AIR": 786,
+        "BLOCK": 597,
+        "MASK": 432
+      },
+      "propertyBearingPaletteStates": 36,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 41,
+      "entities": 0,
+      "selected": true,
+      "supported": true,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -64,
+        24,
+        -219
+      ],
+      "file": "schematics/103_default_structures/betterstructures_cistern_nether.schem",
+      "dimensions": [
+        11,
+        15,
+        11
+      ],
+      "status": "matched",
+      "anchor": [
+        12000,
+        200,
+        12000
+      ],
+      "populationReceipts": 4,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 4
+      },
+      "populationWorkerTotalMs": 22.581828,
+      "populationMaxChunkMs": 13.79818,
+      "nativeSetBlockDataCalls": 597,
+      "observedChangedCells": 597,
+      "fullPreparationMs": 6949.127285,
+      "defaultPasteMs": 0.0,
+      "beforeSnapshotMs": 0.0,
+      "verificationMs": 699.352613,
+      "maxFullRequestMs": 17.038449,
+      "maxPinCallbackMs": 4.304106,
+      "maxReadbackSliceMs": 3.473506,
+      "verifiedCells": 1815,
+      "expectedHash": "cee3066813dcd786",
+      "actualHash": "cee3066813dcd786",
+      "beforeHash": "6c59100bf75ad541",
+      "mismatches": 0,
+      "mismatchExamples": [],
+      "totalCaseMs": 9551.311992,
+      "remainingNativeChunkTickets": 0
+    },
+    {
+      "sha256": "931ee6bc2a8a48a05ed3881ed79f7d676fbe646d91ed48d843c2b8a56e54d3cf",
+      "reasons": [],
+      "clipboardOrigin": [
+        -152,
+        26,
+        -88
+      ],
+      "id": "betterstructures_waypoint_grassy",
+      "policyCounts": {
+        "AIR": 442,
+        "BLOCK": 181,
+        "MASK": 256,
+        "PEDESTAL": 89
+      },
+      "propertyBearingPaletteStates": 17,
+      "generatorConfigFilename": "generator_surface_grassland.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 26,
+      "entities": 0,
+      "selected": true,
+      "supported": true,
+      "sidecarSha256": "0e6d710861bb85cb6058a26b1313bcfcacaf44a0aa79389fb5b64568b0bde6af",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -160,
+        24,
+        -91
+      ],
+      "file": "schematics/103_default_structures/betterstructures_waypoint_grassy.schem",
+      "dimensions": [
+        11,
+        8,
+        11
+      ],
+      "status": "matched",
+      "anchor": [
+        13536,
+        200,
+        12000
+      ],
+      "populationReceipts": 4,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 4
+      },
+      "populationWorkerTotalMs": 6.751084,
+      "populationMaxChunkMs": 4.839527,
+      "nativeSetBlockDataCalls": 270,
+      "observedChangedCells": 270,
+      "fullPreparationMs": 7484.605248,
+      "defaultPasteMs": 0.0,
+      "beforeSnapshotMs": 0.0,
+      "verificationMs": 249.301203,
+      "maxFullRequestMs": 8.170092,
+      "maxPinCallbackMs": 0.73252,
+      "maxReadbackSliceMs": 3.28343,
+      "verifiedCells": 968,
+      "expectedHash": "6c2d3e8db5e3f647",
+      "actualHash": "6c2d3e8db5e3f647",
+      "beforeHash": "a32f003ac174323d",
+      "mismatches": 0,
+      "mismatchExamples": [],
+      "totalCaseMs": 9688.06208,
+      "remainingNativeChunkTickets": 0
+    },
+    {
+      "sha256": "74c0269798ab05d47b0929466c3c9647c228e4dd2e64de1e7bb18b64f18cdf06",
+      "reasons": [],
+      "clipboardOrigin": [
+        -29,
+        42,
+        -119
+      ],
+      "id": "betterstructures_well_desert",
+      "policyCounts": {
+        "AIR": 449,
+        "BLOCK": 368,
+        "MASK": 408
+      },
+      "propertyBearingPaletteStates": 20,
+      "generatorConfigFilename": "generator_surface_desert.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 25,
+      "entities": 0,
+      "selected": true,
+      "supported": true,
+      "sidecarSha256": "690214c08b1b1abecb498e5ac2a84f663757d4ccd93dd335d86a38efd57ae135",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -32,
+        24,
+        -119
+      ],
+      "file": "schematics/103_default_structures/betterstructures_well_desert.schem",
+      "dimensions": [
+        7,
+        25,
+        7
+      ],
+      "status": "matched",
+      "anchor": [
+        12512,
+        200,
+        12000
+      ],
+      "populationReceipts": 2,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 2
+      },
+      "populationWorkerTotalMs": 8.497316,
+      "populationMaxChunkMs": 4.497647,
+      "nativeSetBlockDataCalls": 368,
+      "observedChangedCells": 368,
+      "fullPreparationMs": 5851.612056,
+      "defaultPasteMs": 0.0,
+      "beforeSnapshotMs": 0.0,
+      "verificationMs": 217.939101,
+      "maxFullRequestMs": 4.141112,
+      "maxPinCallbackMs": 0.20948,
+      "maxReadbackSliceMs": 3.496094,
+      "verifiedCells": 1225,
+      "expectedHash": "1668bb0627cb9afb",
+      "actualHash": "1668bb0627cb9afb",
+      "beforeHash": "f03eba6e7c829242",
+      "mismatches": 0,
+      "mismatchExamples": [],
+      "totalCaseMs": 8068.99216,
+      "remainingNativeChunkTickets": 0
+    },
+    {
+      "sha256": "ca7759b152ddd688f1977e140bab19ebea97377bafd73de65d8a36d049a9dd82",
+      "reasons": [],
+      "clipboardOrigin": [
+        -29,
+        42,
+        -215
+      ],
+      "id": "betterstructures_well_nether",
+      "policyCounts": {
+        "AIR": 382,
+        "BLOCK": 386,
+        "MASK": 408
+      },
+      "propertyBearingPaletteStates": 21,
+      "generatorConfigFilename": "generator_surface_nether.yml",
+      "blocksWithNbt": 0,
+      "paletteStates": 26,
+      "entities": 0,
+      "selected": true,
+      "supported": true,
+      "sidecarSha256": "4cf498dfdfaeb77c6166a49a15e2e7d8e27df395c0b54b573817c84a9f3d549f",
+      "sidecarPedestalMaterial": "",
+      "clipboardMinimum": [
+        -32,
+        24,
+        -215
+      ],
+      "file": "schematics/103_default_structures/betterstructures_well_nether.schem",
+      "dimensions": [
+        7,
+        24,
+        7
+      ],
+      "status": "matched",
+      "anchor": [
+        13024,
+        200,
+        12000
+      ],
+      "populationReceipts": 2,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 2
+      },
+      "populationWorkerTotalMs": 3.928226,
+      "populationMaxChunkMs": 2.064775,
+      "nativeSetBlockDataCalls": 386,
+      "observedChangedCells": 386,
+      "fullPreparationMs": 5728.136799,
+      "defaultPasteMs": 0.0,
+      "beforeSnapshotMs": 0.0,
+      "verificationMs": 150.797581,
+      "maxFullRequestMs": 4.44115,
+      "maxPinCallbackMs": 0.174322,
+      "maxReadbackSliceMs": 4.756539,
+      "verifiedCells": 1176,
+      "expectedHash": "77ae2f031074f927",
+      "actualHash": "77ae2f031074f927",
+      "beforeHash": "40f65ccc725cd175",
+      "mismatches": 0,
+      "mismatchExamples": [],
+      "totalCaseMs": 7879.418628,
+      "remainingNativeChunkTickets": 0
+    }
+  ],
+  "startupPreparationMs": 30386.752572,
+  "totalMs": 92318.14338,
+  "warmEntityAdapters": true,
+  "entityAdapterWarmupMs": 747.158811,
+  "entityAdapterWarmupRegisteredEntity": false,
+  "remainingNativeChunkTickets": 0,
+  "overallActiveTickMs": {
+    "p95Ms": 7.957702,
+    "p50Ms": 0.947256,
+    "p99Ms": 38.819273,
+    "maxMs": 147.935236,
+    "samples": 904
+  },
+  "tickMs": {
+    "wait_content": {
+      "p95Ms": 18.607219,
+      "p50Ms": 1.743454,
+      "p99Ms": 201.697001,
+      "maxMs": 595.95076,
+      "samples": 109
+    },
+    "baseline": {
+      "p95Ms": 3.616129,
+      "p50Ms": 1.51677,
+      "p99Ms": 5.286133,
+      "maxMs": 14.083777,
+      "samples": 200
+    },
+    "betterstructures_cistern_nether.full": {
+      "p95Ms": 5.36794,
+      "p50Ms": 1.077837,
+      "p99Ms": 75.841349,
+      "maxMs": 147.935236,
+      "samples": 137
+    },
+    "betterstructures_cistern_nether.settle": {
+      "p95Ms": 5.038859,
+      "p50Ms": 1.273572,
+      "p99Ms": 6.067481,
+      "maxMs": 6.067481,
+      "samples": 40
+    },
+    "betterstructures_cistern_nether.verify": {
+      "p95Ms": 124.902636,
+      "p50Ms": 3.821549,
+      "p99Ms": 124.902636,
+      "maxMs": 124.902636,
+      "samples": 14
+    },
+    "betterstructures_waypoint_grassy.full": {
+      "p95Ms": 22.110021,
+      "p50Ms": 0.87846,
+      "p99Ms": 96.956422,
+      "maxMs": 138.77162,
+      "samples": 149
+    },
+    "betterstructures_waypoint_grassy.settle": {
+      "p95Ms": 3.347191,
+      "p50Ms": 1.166572,
+      "p99Ms": 7.957702,
+      "maxMs": 7.957702,
+      "samples": 40
+    },
+    "betterstructures_waypoint_grassy.verify": {
+      "p95Ms": 29.535338,
+      "p50Ms": 5.111556,
+      "p99Ms": 29.535338,
+      "maxMs": 29.535338,
+      "samples": 5
+    },
+    "betterstructures_well_desert.full": {
+      "p95Ms": 11.387121,
+      "p50Ms": 0.895755,
+      "p99Ms": 13.499685,
+      "maxMs": 17.998553,
+      "samples": 117
+    },
+    "betterstructures_well_desert.settle": {
+      "p95Ms": 2.686315,
+      "p50Ms": 0.803321,
+      "p99Ms": 3.892151,
+      "maxMs": 3.892151,
+      "samples": 40
+    },
+    "betterstructures_well_desert.verify": {
+      "p95Ms": 38.819273,
+      "p50Ms": 3.769806,
+      "p99Ms": 38.819273,
+      "maxMs": 38.819273,
+      "samples": 4
+    },
+    "betterstructures_well_nether.full": {
+      "p95Ms": 6.581547,
+      "p50Ms": 0.885559,
+      "p99Ms": 9.154648,
+      "maxMs": 12.843887,
+      "samples": 115
+    },
+    "betterstructures_well_nether.settle": {
+      "p95Ms": 2.529717,
+      "p50Ms": 1.040865,
+      "p99Ms": 3.377593,
+      "maxMs": 3.377593,
+      "samples": 40
+    },
+    "betterstructures_well_nether.verify": {
+      "p95Ms": 22.672872,
+      "p50Ms": 5.927425,
+      "p99Ms": 22.672872,
+      "maxMs": 22.672872,
+      "samples": 3
+    },
+    "tail": {
+      "p95Ms": 6.339113,
+      "p50Ms": 0.806046,
+      "p99Ms": 13.16895,
+      "maxMs": 74.235513,
+      "samples": 200
+    }
+  },
+  "overallWindow": "FULL, before-snapshot, actual DEFAULT paste or native population, settle, verification, final 200-tick post-release tail; excludes startup/content wait/idle baseline/report IO",
+  "limits": [
+    "This opt-in manifest tests the actual clipboard block phase, not automatic fitting, Preparation/Finishing, loot, markers or entity placement",
+    "WorldEdit/FAWE is retained as reader and DEFAULT implementation; native population makes no WE write calls",
+    "AIR clears occupied terrain but preserves existing air variants; BARRIER preserves terrain; BEDROCK uses the same explicit constant provider and solid-destination condition",
+    "Only identity transforms are accepted; unsupported selected assets fail preflight before either world is generated",
+    "DEFAULT retains its normal physics and special-material WE path; LimitedRegion has no physics, and settled state differences fail acceptance",
+    "Before snapshots and final hashing are benchmark validation overhead, separated by phase; native population timing includes observation capture",
+    "FULL ticket propagation, vanilla generation, unload/save and GC may still stall main ticks; native calls are indivisible",
+    "The bootstrap runs in onEnable; one inert populator remains until world shutdown to avoid racing CraftWorld\u0027s ArrayList"
+  ],
+  "spark": {
+    "sparkVersion": "1.10.152",
+    "samplerStartedAtEpochMs": 1793299734755,
+    "path": "plugins/spark/profile-2026-10-29_21.49.50.sparkprofile",
+    "sha256": "df1bcef2e9842e1517be20cbd96dbf4d04a504c2a0a6ecd063f07e7083b9c41e",
+    "intervalMs": 1,
+    "comment": "native-lab-39703bce-1bfc-4f1c-9fe9-f609363d53ff",
+    "bytes": 354665,
+    "onlyTicksOverMs": 50,
+    "ownershipVerified": true
+  }
+}

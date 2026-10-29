@@ -1,0 +1,166 @@
+{
+  "formatVersion": 1,
+  "runtimeSha256": "d420acf918619981a8d7960936adb90c6fc63d434e2e0b6c375d595f913f9f12",
+  "upstreamCommit": "15808b170622d31255e0525f43847c2b2b242120",
+  "runtimeVersion": "2.7.10-ruscrafting.lab.3+upstream.15808b1",
+  "scope": "CLIPBOARD_BLOCK_PHASE, identity transforms, explicit STONE pedestal; excludes automatic fitting and finishing",
+  "environment": {
+    "server": "1.21.11-2568-f57bd86 (MC: 1.21.11)",
+    "java": "25.0.4.1",
+    "cpuAffinity": "0-1",
+    "maximumHeapGiB": 2,
+    "faweSha256": "9d3603ea0fb57397a9aa99607db61aba71562870fdce19d93493ab064c6b6c91"
+  },
+  "pairedInputs": {
+    "seed": 384291,
+    "sameAllInitialHashes": true,
+    "inventory": 103,
+    "preflightSupported": 4,
+    "warmEntityAdapters": true
+  },
+  "default": {
+    "status": "failed",
+    "activeTickMs": {
+      "p50Ms": 1.235673,
+      "p95Ms": 27.987522,
+      "samples": 1116,
+      "maxMs": 3306.074842,
+      "p99Ms": 71.445991
+    },
+    "waitContentTickMs": {
+      "p50Ms": 1.427604,
+      "p95Ms": 20.051674,
+      "samples": 126,
+      "maxMs": 570.235362,
+      "p99Ms": 138.933716
+    },
+    "spark": {
+      "sha256": "fc8fe1bd190bdb265e24940cc6006b0b41f7aaaafc6c916679b5ee9ad0a859fb",
+      "path": "plugins/spark/profile-2026-10-29_21.41.03.sparkprofile",
+      "samplerStartedAtEpochMs": 1793299193458,
+      "sparkVersion": "1.10.152",
+      "ownershipVerified": true,
+      "onlyTicksOverMs": 50,
+      "bytes": 1136502,
+      "comment": "native-lab-13d5cb89-7ab3-4c8d-9b12-a25b5a5828a0",
+      "intervalMs": 1
+    }
+  },
+  "native": {
+    "status": "complete",
+    "activeTickMs": {
+      "p95Ms": 7.957702,
+      "p50Ms": 0.947256,
+      "p99Ms": 38.819273,
+      "maxMs": 147.935236,
+      "samples": 904
+    },
+    "waitContentTickMs": {
+      "p95Ms": 18.607219,
+      "p50Ms": 1.743454,
+      "p99Ms": 201.697001,
+      "maxMs": 595.95076,
+      "samples": 109
+    },
+    "spark": {
+      "sparkVersion": "1.10.152",
+      "samplerStartedAtEpochMs": 1793299734755,
+      "path": "plugins/spark/profile-2026-10-29_21.49.50.sparkprofile",
+      "sha256": "df1bcef2e9842e1517be20cbd96dbf4d04a504c2a0a6ecd063f07e7083b9c41e",
+      "intervalMs": 1,
+      "comment": "native-lab-39703bce-1bfc-4f1c-9fe9-f609363d53ff",
+      "bytes": 354665,
+      "onlyTicksOverMs": 50,
+      "ownershipVerified": true
+    }
+  },
+  "cases": [
+    {
+      "id": "betterstructures_cistern_nether",
+      "sameInitialHash": true,
+      "sameFinalHash": false,
+      "defaultReadyAndPasteMs": 14541.464763,
+      "nativeReadyAndPasteMs": 6949.127285,
+      "defaultPasteWallMs": 6798.086652,
+      "nativePopulationWorkerMs": 22.581828,
+      "nativeWrites": 597,
+      "defaultLiteralMismatches": 2,
+      "nativeLiteralMismatches": 0,
+      "defaultDifferences": [
+        {
+          "policy": "BLOCK",
+          "xyz": [
+            11997,
+            195,
+            12000
+          ],
+          "expected": "minecraft:nether_brick_stairs[facing=west,half=top,shape=inner_left,waterlogged=false]",
+          "actual": "minecraft:nether_brick_stairs[facing=west,half=top,shape=straight,waterlogged=false]"
+        },
+        {
+          "policy": "BLOCK",
+          "xyz": [
+            11998,
+            196,
+            11999
+          ],
+          "expected": "minecraft:nether_brick_stairs[facing=west,half=top,shape=inner_left,waterlogged=false]",
+          "actual": "minecraft:nether_brick_stairs[facing=west,half=top,shape=straight,waterlogged=false]"
+        }
+      ]
+    },
+    {
+      "id": "betterstructures_waypoint_grassy",
+      "sameInitialHash": true,
+      "sameFinalHash": true,
+      "defaultReadyAndPasteMs": 8579.716838,
+      "nativeReadyAndPasteMs": 7484.605248,
+      "defaultPasteWallMs": 449.411978,
+      "nativePopulationWorkerMs": 6.751084,
+      "nativeWrites": 270,
+      "defaultLiteralMismatches": 0,
+      "nativeLiteralMismatches": 0,
+      "defaultDifferences": []
+    },
+    {
+      "id": "betterstructures_well_desert",
+      "sameInitialHash": true,
+      "sameFinalHash": true,
+      "defaultReadyAndPasteMs": 7840.73813,
+      "nativeReadyAndPasteMs": 5851.612056,
+      "defaultPasteWallMs": 499.628204,
+      "nativePopulationWorkerMs": 8.497316,
+      "nativeWrites": 368,
+      "defaultLiteralMismatches": 0,
+      "nativeLiteralMismatches": 0,
+      "defaultDifferences": []
+    },
+    {
+      "id": "betterstructures_well_nether",
+      "sameInitialHash": true,
+      "sameFinalHash": true,
+      "defaultReadyAndPasteMs": 8368.058761,
+      "nativeReadyAndPasteMs": 5728.136799,
+      "defaultPasteWallMs": 678.494792,
+      "nativePopulationWorkerMs": 3.928226,
+      "nativeWrites": 386,
+      "defaultLiteralMismatches": 0,
+      "nativeLiteralMismatches": 0,
+      "defaultDifferences": []
+    }
+  ],
+  "interpretation": [
+    "Native matches all four literal schematics after settle; DEFAULT matches three and changes two nether cistern stair shapes from inner_left to straight",
+    "Three final hashes match across engines; cistern differs. Do not describe the modes as universally equivalent",
+    "DEFAULT strict literal-state benchmark failed; native passed. This evidence is preserved rather than relabelled",
+    "Ready-and-paste wall time combines FULL preparation plus DEFAULT paste; native placement happens before FULL. Worker CPU time is a separate metric",
+    "Active maxima exclude content wait, startup, baseline and report IO. Content-wait maxima remain visible (570.24/595.95ms)",
+    "Single controlled pair on an isolated two-CPU lab; no production-load or client-visual acceptance",
+    "NBT/entities, rotations and ordinary terrain fitting/finishing are not supported by this native subset; no global under-50ms guarantee"
+  ],
+  "sourceReportSha256": {
+    "default-report.json": "55367c45a91695adcf3e97b91c5c3d2906b79a46690c003503f27dd76e5b538e",
+    "native-report.json": "a2ae574b17c00e5855c1fc272f743f45f25a53e2537456575234f8311ab8537b",
+    "upstream-scan-report.json": "c7df7d2bcdc8627d76828a537f7494877c2b6b05c2c3703277a6d38fe8855c73"
+  }
+}
