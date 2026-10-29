@@ -1,3 +1,6 @@
+import java.security.MessageDigest
+import java.util.zip.ZipFile
+
 plugins {
     id 'java-library'
     id 'idea'
@@ -6,11 +9,45 @@ plugins {
 }
 
 group = 'com.magmaguy'
-version = '2.7.10'
+version = '2.7.10-ruscrafting.2+upstream.15808b1'
+
+def upstreamCommit = '15808b170622d31255e0525f43847c2b2b242120'
+def paperApi = 'io.papermc.paper:paper-api:1.21.11-R0.1-20260511.115010-91'
+def magmaCoreJar = file(findProperty('magmaCoreJar') ?: 'build/inputs/MagmaCore-2.2.0-ruscrafting.paper-1.21.11-upstream.9ccd02d.jar')
+def worldEditApiJar = file(findProperty('worldEditApiJar') ?: 'build/inputs/FastAsyncWorldEdit-Paper-2.15.5-1079481.jar')
+def eliteMobsApiJar = file(findProperty('eliteMobsApiJar') ?: 'build/inputs/EliteMobs-10.9.11.jar')
+def verifyPinnedLibraries = tasks.register('verifyPinnedLibraries') {
+    inputs.files(magmaCoreJar, worldEditApiJar, eliteMobsApiJar)
+    inputs.property('magmaCoreSha256', providers.gradleProperty('magmaCoreSha256'))
+    doLast {
+        def expected = [(magmaCoreJar): providers.gradleProperty('magmaCoreSha256').get(),
+                        (worldEditApiJar): '9d3603ea0fb57397a9aa99607db61aba71562870fdce19d93493ab064c6b6c91',
+                        (eliteMobsApiJar): '807c43c515662e798b8eb47b16cb965be3cca182ba3f746f2d4ef8f49b5afec1']
+        expected.each { artifact, sha ->
+            if (!artifact.isFile()) throw new GradleException("Missing pinned build input: ${artifact}")
+            String actual = MessageDigest.getInstance('SHA-256').digest(artifact.bytes).encodeHex().toString()
+            if (actual != sha) throw new GradleException("SHA-256 mismatch for ${artifact.name}: ${actual}")
+        }
+        // Gradle does not verify changing modules. These optional compile-only APIs must
+        // therefore keep their observed bytes even if their SNAPSHOT URLs are republished.
+        def snapshotApis = ['io.lumine:MythicLib-dist:1.5.2-SNAPSHOT':
+                                    'f8f4743d1062f0d5b74524cb129e14af043b60c7aba9f96a75b5b32ff007fc20',
+                            'net.Indyuce:MMOItems-API:6.9.2-SNAPSHOT':
+                                    '1cfe0eba7f0d26f0f632fc8a9052ebce58e993c6e9acd97a93852c7efc6b19d4']
+        configurations.compileClasspath.resolvedConfiguration.resolvedArtifacts.each { artifact ->
+            String coordinate = artifact.moduleVersion.id.toString()
+            String sha = snapshotApis.remove(coordinate)
+            if (sha != null) {
+                String actual = MessageDigest.getInstance('SHA-256').digest(artifact.file.bytes).encodeHex().toString()
+                if (actual != sha) throw new GradleException("SHA-256 mismatch for ${coordinate}: ${actual}")
+            }
+        }
+        if (!snapshotApis.isEmpty()) throw new GradleException("Missing pinned optional API: ${snapshotApis.keySet()}")
+    }
+}
 
 repositories {
     mavenCentral()
-    mavenLocal()
     maven {
         name = 'spigotmc-repo'
         url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
@@ -18,28 +55,35 @@ repositories {
     maven { url = 'https://repo.magmaguy.com/releases' }
     maven { url = "https://repo.magmaguy.com/snapshots" }
     maven { url = 'https://repo.codemc.org/repository/maven-public' }
-    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven {
+        url = 'https://repo.papermc.io/repository/maven-public/'
+        // The immutable 1.21.11 timestamp's Gradle module metadata declares SNAPSHOT,
+        // which otherwise creates two identities in Gradle's checksum writer.
+        metadataSources {
+            mavenPom()
+            artifact()
+            ignoreGradleMetadataRedirection()
+        }
+    }
     maven { url = 'https://maven.enginehub.org/repo/' }
     maven { url = 'https://nexus.phoenixdevt.fr/repository/maven-public/' }
     maven { url = 'https://mvn.lumine.io/repository/maven-public/' }
 }
 
 dependencies {
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+    compileOnly 'org.projectlombok:lombok:1.18.42'
 
-    implementation (group: 'com.magmaguy', name: 'MagmaCore', version: '2.2.0-SNAPSHOT'){
-        changing = true
-    }
+    implementation files(magmaCoreJar)
     implementation group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
     implementation group: 'org.joml', name: 'joml', version: '1.10.8'
-    compileOnly group: 'com.magmaguy', name: 'EliteMobs', version: '10.9.7'
+    compileOnly files(eliteMobsApiJar)
     compileOnly group: 'io.lumine', name: 'Mythic-Dist', version: '5.2.1'
     compileOnly group: 'io.lumine', name: 'MythicLib-dist', version: '1.5.2-SNAPSHOT'
     compileOnly group: 'net.Indyuce', name: 'MMOItems-API', version: '6.9.2-SNAPSHOT'
     compileOnly group: 'com.sk89q.worldguard', name: 'worldguard-bukkit', version: '7.0.7'
-    compileOnly 'com.sk89q.worldedit:worldedit-bukkit:7.4.2'
-    compileOnly 'org.spigotmc:spigot-api:26.3-R0.1-SNAPSHOT'
+    compileOnly files(worldEditApiJar)
+    compileOnly paperApi
     //The server's logging backend, used only to collapse the per-block conversion errors Mojang's
     //data converter emits while reading schematics (see SchematicConversionLog). compileOnly: the
     //server always provides it, and a runtime without it degrades to the original output.
@@ -51,35 +95,21 @@ dependencies {
     testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v26.2:4.116.1'
     testImplementation 'io.papermc.paper:paper-api:26.2.build.111-stable'
     // The cache ticket test exercises the production Clipboard seam without starting Bukkit.
-    testImplementation 'com.sk89q.worldedit:worldedit-core:7.4.2'
-    testImplementation 'com.sk89q.worldedit:worldedit-bukkit:7.4.2'
-    testImplementation('com.magmaguy:EliteMobs:10.9.7') {
-        changing = true
-        exclude group: 'org.spigotmc', module: 'spigot-api'
-    }
+    testImplementation files(worldEditApiJar)
+    testImplementation files(eliteMobsApiJar)
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // Bukkit/Paper supplies these libraries. WorldEdit's strict pins describe its server baseline,
-    // which differs from the selected API version; retain the server's dependency declarations.
-    components {
-        ['worldedit-core', 'worldedit-bukkit'].each { module ->
-            withModule("com.sk89q.worldedit:${module}") {
-                allVariants {
-                    withDependencyConstraints {
-                        removeAll { it.group in ['com.google.guava', 'com.google.code.gson'] }
-                    }
-                    withDependencies {
-                        removeAll { it.group in ['com.google.guava', 'com.google.code.gson'] }
-                    }
-                }
-            }
-        }
-    }
 }
 
-//This allows any modules tagged as changing to be updated every time, which is extremely convenient for some of the shaded libs
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+configurations.configureEach {
+    // The exact runtime provider is supplied above; do not mix another WorldEdit API into its classpath.
+    exclude group: 'com.sk89q.worldedit'
+}
+
+dependencyLocking {
+    lockAllConfigurations()
+    // Paper's immutable timestamp still describes itself as SNAPSHOT in module metadata.
+    ignoredDependencies.add('io.papermc.paper:paper-api')
 }
 
 artifacts { // task 'build' runs generates uberjar
@@ -124,7 +154,9 @@ if (mcDistDir) {
 }
 
 tasks.withType(JavaCompile) {
+    dependsOn verifyPinnedLibraries
     options.encoding = 'UTF-8'
+    options.release = 21
 }
 
 tasks.named('test') {
@@ -148,13 +180,69 @@ ext {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21) // or your target version
+        languageVersion = JavaLanguageVersion.of(25)
     }
+    withSourcesJar()
 }
 
 processResources {
+    inputs.property('runtimePluginVersion', project.version.toString())
     filter org.apache.tools.ant.filters.ReplaceTokens, tokens: resourceTokens
+    filesMatching('plugin.yml') {
+        filter { line -> line == "version: '2.7.10'" ? "version: '${project.version}'" : line }
+    }
 }
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.withType(Jar).configureEach {
+    manifest.attributes('Implementation-Version': project.version.toString(),
+            'Build-Upstream-Commit': upstreamCommit, 'Build-Target-Minecraft': '1.21.11',
+            'Build-Bytecode-Release': '21',
+            'Build-WorldEdit-Provider': 'FastAsyncWorldEdit 2.15.5-SNAPSHOT+1079481',
+            'Build-WorldEdit-API-SHA256': '9d3603ea0fb57397a9aa99607db61aba71562870fdce19d93493ab064c6b6c91',
+            'Build-EliteMobs-API-Version': '10.9.11',
+            'Build-MagmaCore-Commit': providers.gradleProperty('magmaCoreSourceCommit').get(),
+            'Build-MagmaCore-SHA256': providers.gradleProperty('magmaCoreSha256').get())
+}
+
+tasks.named('sourcesJar') {
+    dependsOn verifyPinnedLibraries
+    from(files('build.gradle', 'settings.gradle', 'gradle.properties')) { into 'META-INF/build' }
+    from('gradle/magmacore-paper-1.21.11.init.gradle') { into 'META-INF/build/gradle' }
+    from(files('gradle.lockfile', 'gradle/verification-metadata.xml')) { into 'META-INF/build' }
+    from('docs/build-upstream-15808b1.md') { into 'META-INF/build' }
+}
+
+def verifyProductionJar = tasks.register('verifyProductionJar') {
+    dependsOn tasks.named('shadowJar')
+    inputs.file(tasks.named('shadowJar').flatMap { it.archiveFile })
+    doLast {
+        new ZipFile(tasks.named('shadowJar').get().archiveFile.get().asFile).withCloseable { zip ->
+            String descriptor = zip.getInputStream(zip.getEntry('plugin.yml')).getText('UTF-8')
+            if (!descriptor.contains("version: '${project.version}'")) throw new GradleException('Runtime plugin version was not stamped')
+            for (String required : ['com/magmaguy/betterstructures/util/PluginChunkHolds.class',
+                                    'com/magmaguy/betterstructures/easyminecraftgoals/v1_21_R7_paper/NMSAdapter.class']) {
+                if (zip.getEntry(required) == null) throw new GradleException("Missing production class: ${required}")
+            }
+            zip.entries().each { entry ->
+                if (entry.name.startsWith('ru/ruscrafting/native') || entry.name.contains('/v26/') ||
+                        entry.name.startsWith('org/bukkit/') || entry.name.startsWith('com/sk89q/worldedit/') ||
+                        entry.name.startsWith('com/magmaguy/elitemobs/'))
+                    throw new GradleException("Unexpected packaged platform or experimental class: ${entry.name}")
+                if (entry.name.endsWith('.class')) {
+                    byte[] bytes = zip.getInputStream(entry).bytes
+                    int major = ((bytes[6] & 255) << 8) | (bytes[7] & 255)
+                    if (major > 65) throw new GradleException("Class exceeds Java 21: ${entry.name} (${major})")
+                }
+            }
+        }
+    }
+}
+tasks.named('assemble') { dependsOn verifyProductionJar }
 
 publishing {
     repositories {
