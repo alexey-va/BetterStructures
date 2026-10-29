@@ -1,5 +1,57 @@
 # BetterStructures
 
+## Temporary RusCrafting build: 2.7.10-ruscrafting.1
+
+This fork temporarily restores the chunk-load callback correction described in
+[upstream issue #71](https://github.com/MagmaGuy/BetterStructures/issues/71).
+The official 2.7.10 binary still scans terrain inside `ChunkLoadEvent`, although
+the public GitHub source already defers that work. On Purpur 1.21.11 this path
+blocked the main thread while a terrain read waited for an unfinished chunk.
+The [maintainer confirmed](https://github.com/MagmaGuy/BetterStructures/issues/71#issuecomment-6498340825)
+that deferral was deliberately reverted because pregenerators could unload a
+chunk before its deferred scan. This fork retains the chunk until that scan
+finishes, rather than restoring deferral alone.
+
+The runtime build starts from the exact official 2.7.10 release, SHA-256
+`77219d27dcdd423fbeddd95a735d5bcd600a6a0f4e002ce52df262a587846aff`.
+It compiles the recovered 2.7.10 listener, reentrancy guard and paste-readiness
+owner with the callback fix and a small shared ticket lease. Queued scans retain
+their chunk until the scan finishes, including during pregeneration. Scan and
+paste consumers share ticket ownership, so finishing one cannot release the
+other's chunk. Only these class families, the new lease helper and the plugin
+version change; every other archive entry is verified against the baseline.
+The original license and bundled dependencies are preserved. The upstream `src/`
+tree remains the public 2.7.7 source; `ruscrafting/` owns the matching 2.7.10 runtime
+correction and build. The three existing runtime source classes were recovered with
+[CFR 0.152](https://www.benf.org/other/cfr/cfr-0.152.jar), SHA-256
+`f686e8f3ded377d7bc87d216a90e9e9512df4156e75b06c655a16648ae8765b2`.
+The callback change follows upstream commit
+[`f6057b6`](https://github.com/MagmaGuy/BetterStructures/commit/f6057b6f8d68162b223c495bb1dc2064cf3190ad).
+
+Build and verify the fork with JDK 25 (production bytecode targets Java 21):
+
+```sh
+./gradlew -p ruscrafting check assemble
+```
+
+The runtime artifact is
+`ruscrafting/build/libs/BetterStructures-2.7.10-ruscrafting.1.jar`.
+The focused regression executes the real packaged event and paste handlers,
+checks next-tick scheduling, pregenerator unloads, shared scan/paste ownership,
+reload/error/shutdown cleanup and nested-scan suppression, and rejects the
+official 2.7.10 handler. It verifies the observed callback boundary; native
+terrain generation and lighting behavior still require observation on the target
+server. The existing drain limits each tick's work; it does not impose a hard
+cap on pending tickets if a producer indefinitely outruns the queue. No pending
+structure is silently dropped to enforce such a cap.
+
+Published runtime JAR:
+[ru.ruscrafting.forks:betterstructures:2.7.10-ruscrafting.1](https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/forks/betterstructures/2.7.10-ruscrafting.1/betterstructures-2.7.10-ruscrafting.1.jar).
+Return to an official release after checking that its binary contains the
+callback-deferral correction and verifying the affected gameplay path.
+
+## Upstream project
+
 BetterStructures adds schematic structures and modular dungeons to Minecraft worlds. It places content on the surface, underground, in the sky, and on liquid surfaces, with generator rules for terrain, biomes, worlds, spacing, and loot.
 
 [Download](https://nightbreak.io/plugin/betterstructures/) · [Modrinth](https://modrinth.com/plugin/betterstructures) · [Documentation](https://wiki.nightbreak.io/) · [Support](https://discord.gg/nightbreak)
