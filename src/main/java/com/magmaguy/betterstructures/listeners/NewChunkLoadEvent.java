@@ -2,6 +2,7 @@ package com.magmaguy.betterstructures.listeners;
 
 import com.magmaguy.betterstructures.BetterStructures;
 import com.magmaguy.betterstructures.MetadataHandler;
+import com.magmaguy.betterstructures.lab.NativeBackendLab;
 import com.magmaguy.betterstructures.buildingfitter.FitAirBuilding;
 import com.magmaguy.betterstructures.buildingfitter.FitLiquidBuilding;
 import com.magmaguy.betterstructures.buildingfitter.FitSurfaceBuilding;
@@ -65,6 +66,7 @@ public class NewChunkLoadEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onChunkLoad(ChunkLoadEvent event) {
         Chunk chunk = event.getChunk();
+        if (NativeBackendLab.manages(chunk.getWorld())) return;
         LoadingChunkKey loadingChunkKey = LoadingChunkKey.from(chunk);
         boolean deferred = deferredNewChunks.contains(loadingChunkKey);
         boolean deferredDungeon = delayedDungeonScans.isDeferred(loadingChunkKey);

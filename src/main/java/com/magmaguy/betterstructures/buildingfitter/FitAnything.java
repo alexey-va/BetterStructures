@@ -1,6 +1,7 @@
 package com.magmaguy.betterstructures.buildingfitter;
 
 import com.magmaguy.betterstructures.api.BuildCustomMarkerEvent;
+import com.magmaguy.betterstructures.lab.NativeBackendLab;
 import com.magmaguy.betterstructures.api.BuildPasteCompleteEvent;
 import com.magmaguy.betterstructures.api.BuildPlaceEvent;
 import com.magmaguy.betterstructures.api.ChestFillEvent;
@@ -75,6 +76,7 @@ public class FitAnything {
     }
 
     public static void commandBasedCreation(Chunk chunk, GeneratorConfigFields.StructureType structureType, SchematicContainer container) {
+        NativeBackendLab.requireLatePasteAllowed(chunk.getWorld());
         switch (structureType) {
             case SKY:
                 new FitAirBuilding(chunk, container);
@@ -105,6 +107,7 @@ public class FitAnything {
     }
 
     protected void paste(Location location) {
+        NativeBackendLab.requireLatePasteAllowed(location.getWorld());
         BuildPlaceEvent buildPlaceEvent = new BuildPlaceEvent(this);
         Bukkit.getServer().getPluginManager().callEvent(buildPlaceEvent);
         if (buildPlaceEvent.isCancelled()) return;

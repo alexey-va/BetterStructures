@@ -15,6 +15,7 @@ import com.magmaguy.betterstructures.content.BSPackage;
 import com.magmaguy.betterstructures.content.BSPackageRefresher;
 import com.magmaguy.betterstructures.listeners.FirstTimeSetupWarner;
 import com.magmaguy.betterstructures.listeners.NewChunkLoadEvent;
+import com.magmaguy.betterstructures.lab.NativeBackendLab;
 import com.magmaguy.betterstructures.modules.ModulesContainer;
 import com.magmaguy.betterstructures.modules.WFCGenerator;
 import com.magmaguy.betterstructures.schematics.SchematicContainer;
@@ -54,6 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class BetterStructures extends JavaPlugin {
+    private NativeBackendLab nativeBackendLab;
     private volatile boolean contentReloadInProgress;
     private final List<CommandSender> activeReloadSenders = new ArrayList<>();
     private final List<CommandSender> queuedReloadSenders = new ArrayList<>();
@@ -85,12 +87,22 @@ public final class BetterStructures extends JavaPlugin {
                 Bukkit.getPluginManager().isPluginEnabled("MythicMobs"));
         // Content parsing runs on a worker thread and must not resolve registry entries itself.
         RegistrySnapshot.capture();
+        // The opt-in lab must attach immutable population plans before its world starts generating.
+        // World creation belongs to startup, never a scheduled tick after the server becomes ready.
+        try {
+            nativeBackendLab = NativeBackendLab.startIfConfigured(this);
+        } catch (Exception | LinkageError failure) {
+            getLogger().log(java.util.logging.Level.SEVERE, "NATIVE_STRUCTURES_BENCH status=failed phase=startup", failure);
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
         MagmaCore.startInitialization(this,
                 new PluginInitializationConfig("BetterStructures", "betterstructures.*", 17, resolveInitializationDependencies()),
                 this::asyncInitialization,
                 this::syncInitialization,
                 () -> {
                     Logger.info("BetterStructures fully initialized!");
+                    if (nativeBackendLab != null) nativeBackendLab.contentReady();
                     NightbreakPluginUpdater.autoDownloadPluginUpdateIfEnabled(this, NIGHTBREAK_PLUGIN_SPEC);
                     CommandSender pendingReloadSender = NightbreakPluginStateRegistry.consumePendingReloadSender(this);
                     if (pendingReloadSender == null) {
@@ -125,6 +137,12 @@ public final class BetterStructures extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (nativeBackendLab != null) {
+            try { nativeBackendLab.close(); }
+            catch (RuntimeException | LinkageError failure) {
+                getLogger().log(java.util.logging.Level.WARNING, "Failed to close the manifest lab; continuing plugin shutdown", failure);
+            } finally { nativeBackendLab = null; }
+        }
         // bStats runs its own scheduler thread; without this every reload leaves one
         // reporting for, and holding on to, the previous instance.
         if (metrics != null) {
@@ -299,6 +317,10 @@ public final class BetterStructures extends JavaPlugin {
         if (!isEnabled() || MagmaCore.isShutdownRequested(this)) return;
         if (!Bukkit.isPrimaryThread()) {
             Bukkit.getScheduler().runTask(this, () -> reloadImportedContent(commandSender));
+            return;
+        }
+        if (nativeBackendLab != null) {
+            if (commandSender != null) Logger.sendMessage(commandSender, "The manifest A/B lab is boot-only. Restart the isolated lab to change its engine or assets.");
             return;
         }
         if (MagmaCore.getInitializationState(getName()) == PluginInitializationState.INITIALIZING

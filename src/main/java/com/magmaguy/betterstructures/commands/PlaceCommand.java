@@ -1,6 +1,7 @@
 package com.magmaguy.betterstructures.commands;
 
 import com.magmaguy.betterstructures.BetterStructures;
+import com.magmaguy.betterstructures.lab.NativeBackendLab;
 import com.magmaguy.betterstructures.buildingfitter.FitAnything;
 import com.magmaguy.betterstructures.config.generators.GeneratorConfigFields;
 import com.magmaguy.betterstructures.schematics.SchematicContainer;
@@ -38,6 +39,7 @@ public class PlaceCommand extends AdvancedCommand {
 
     @Override
     public void execute(CommandData commandData) {
+        if (NativeBackendLab.rejectLateCommand(commandData.getPlayerSender().getWorld(), commandData.getCommandSender())) return;
         if (BetterStructures.rejectContentCommandDuringReload(
                 commandData.getCommandSender())) return;
         placeSchematic(commandData.getStringArgument("schematic"), commandData.getStringArgument("type"), commandData.getPlayerSender());

@@ -1,6 +1,7 @@
 package com.magmaguy.betterstructures.modules;
 
 import com.magmaguy.betterstructures.MetadataHandler;
+import com.magmaguy.betterstructures.lab.NativeBackendLab;
 import com.magmaguy.betterstructures.api.ChestFillEvent;
 import com.magmaguy.betterstructures.config.DefaultConfig;
 import com.magmaguy.betterstructures.chests.ChestContents;
@@ -81,6 +82,7 @@ public final class ModulePasting {
     private final ModuleGeneratorsConfigFields moduleGeneratorsConfigFields;
 
     public ModulePasting(World world, File worldFolder, Deque<WFCNode> WFCNodeDeque, String spawnPoolSuffix, Location startLocation, ModuleGeneratorsConfigFields moduleGeneratorsConfigFields) {
+        NativeBackendLab.requireLatePasteAllowed(world);
         //Generators without spawnPoolSuffix must look up "[pool:name]" as name.yml, not namenull.yml
         this.spawnPoolSuffix = spawnPoolSuffix == null ? "" : spawnPoolSuffix;
         this.startLocation = startLocation;
@@ -129,6 +131,7 @@ public final class ModulePasting {
     }
 
     public static void paste(Clipboard clipboard, Location location, Integer rotation) {
+        NativeBackendLab.requireLatePasteAllowed(location.getWorld());
         if (rotation == null) {
             return;
         }
@@ -194,6 +197,7 @@ public final class ModulePasting {
     }
 
     public static void pasteArmorStands(Clipboard clipboard, Location location, Integer rotation) {
+        NativeBackendLab.requireLatePasteAllowed(location.getWorld());
         if (rotation == null) rotation = 0;
 
         AffineTransform transform = new AffineTransform().rotateY(normalizeRotation(rotation));

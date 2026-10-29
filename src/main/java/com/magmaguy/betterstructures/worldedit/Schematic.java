@@ -1,6 +1,7 @@
 package com.magmaguy.betterstructures.worldedit;
 
 import com.magmaguy.betterstructures.MetadataHandler;
+import com.magmaguy.betterstructures.lab.NativeBackendLab;
 import com.magmaguy.betterstructures.config.DefaultConfig;
 import com.magmaguy.betterstructures.util.WorldEditUtils;
 import com.magmaguy.magmacore.util.Logger;
@@ -148,6 +149,7 @@ public class Schematic {
      * @param location  The location to paste at
      */
     public static void paste(Clipboard clipboard, Location location) {
+        NativeBackendLab.requireLatePasteAllowed(location.getWorld());
         World world = BukkitAdapter.adapt(location.getWorld());
         try (EditSession editSession = WorldEdit.getInstance().newEditSession(world)) {
             Operation operation = new ClipboardHolder(clipboard)
@@ -237,6 +239,7 @@ public class Schematic {
             Vector schematicOffset,
             Function<Boolean, Material> pedestalMaterialProvider,
             Runnable onComplete) {
+        NativeBackendLab.requireLatePasteAllowed(location.getWorld());
         pasteQueue.add(new ClipboardPasteOperation(
                 schematicClipboard,
                 location.clone().add(schematicOffset),
@@ -369,6 +372,22 @@ public class Schematic {
         if (activePasteOperation != null) activePasteOperation.close();
         activePasteOperation = null;
         activePasteTask = null;
+    }
+
+    /** Cancels only this lab world's clipboard operations, preserving unrelated queue owners. Main thread only. */
+    public static void cancelClipboardPastesInWorld(org.bukkit.World world) {
+        if (!Bukkit.isPrimaryThread()) throw new IllegalStateException("Paste cancellation requires the server thread");
+        pasteQueue.removeIf(operation -> {
+            if (!(operation instanceof ClipboardPasteOperation paste) || paste.adjustedLocation.getWorld() != world) return false;
+            operation.close();
+            return true;
+        });
+        if (activePasteOperation instanceof ClipboardPasteOperation paste && paste.adjustedLocation.getWorld() == world) {
+            if (activePasteTask != null) activePasteTask.cancel();
+            abortActivePaste();
+            if (MetadataHandler.PLUGIN != null && MetadataHandler.PLUGIN.isEnabled()) processNextPaste();
+            else isDistributedPasting = false;
+        }
     }
 
     /**

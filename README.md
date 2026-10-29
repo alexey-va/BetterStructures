@@ -132,6 +132,24 @@ jfr print --json --events ru.ruscrafting.NativeSlice,jdk.ExecutionSample,jdk.GCP
 
 
 
+## Integrated BetterStructures lab backend
+
+This experimental branch builds `2.7.10-ruscrafting.lab.3+upstream.15808b1`.
+Its opt-in [manifest](src/main/resources/native-lab.example.yml) lives at
+`plugins/BetterStructures/assets/native-lab.yml` and selects `DEFAULT` or
+`NATIVE_GENERATION`. It is restricted to the loopback lab at `127.0.0.1:54295`.
+Each boot creates a unique vanilla world with the same explicit seed and inputs.
+
+The comparison covers the clipboard block phase: DEFAULT uses the real
+BetterStructures shared paste queue; NATIVE_GENERATION writes immutable slices
+through `LimitedRegion` before FULL activation. WorldEdit remains the schematic
+reader. Automatic terrain fitting, loot, entities and finishing are outside
+this subset. Unsupported metadata is rejected and recorded. AIR clears,
+BARRIER preserves and BEDROCK uses an explicit constant pedestal provider;
+complete before/expected/final block hashes and settled differences are checked.
+The production artifact described below is built on `master` and excludes this
+backend. These lab builds are not production candidates.
+
 ## Cold tick investigation, 2026-10-29
 
 A replay reproduced a **892.82 ms** vanilla-control tick with no structure

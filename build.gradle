@@ -9,7 +9,7 @@ plugins {
 }
 
 group = 'com.magmaguy'
-version = '2.7.10-ruscrafting.2+upstream.15808b1'
+version = '2.7.10-ruscrafting.lab.3+upstream.15808b1'
 
 def upstreamCommit = '15808b170622d31255e0525f43847c2b2b242120'
 def paperApi = 'io.papermc.paper:paper-api:1.21.11-R0.1-20260511.115010-91'
@@ -217,16 +217,17 @@ tasks.named('sourcesJar') {
     from('docs/build-upstream-15808b1.md') { into 'META-INF/build' }
 }
 
-def verifyProductionJar = tasks.register('verifyProductionJar') {
+def verifyLabJar = tasks.register('verifyLabJar') {
     dependsOn tasks.named('shadowJar')
     inputs.file(tasks.named('shadowJar').flatMap { it.archiveFile })
     doLast {
         new ZipFile(tasks.named('shadowJar').get().archiveFile.get().asFile).withCloseable { zip ->
             String descriptor = zip.getInputStream(zip.getEntry('plugin.yml')).getText('UTF-8')
             if (!descriptor.contains("version: '${project.version}'")) throw new GradleException('Runtime plugin version was not stamped')
-            for (String required : ['com/magmaguy/betterstructures/util/PluginChunkHolds.class',
+            for (String required : ['com/magmaguy/betterstructures/lab/NativeBackendLab.class',
+                                    'com/magmaguy/betterstructures/util/PluginChunkHolds.class',
                                     'com/magmaguy/betterstructures/easyminecraftgoals/v1_21_R7_paper/NMSAdapter.class']) {
-                if (zip.getEntry(required) == null) throw new GradleException("Missing production class: ${required}")
+                if (zip.getEntry(required) == null) throw new GradleException("Missing lab class: ${required}")
             }
             zip.entries().each { entry ->
                 if (entry.name.startsWith('ru/ruscrafting/native') || entry.name.contains('/v26/') ||
@@ -242,7 +243,7 @@ def verifyProductionJar = tasks.register('verifyProductionJar') {
         }
     }
 }
-tasks.named('assemble') { dependsOn verifyProductionJar }
+tasks.named('assemble') { dependsOn verifyLabJar }
 
 publishing {
     repositories {

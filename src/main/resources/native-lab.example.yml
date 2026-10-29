@@ -1,0 +1,28 @@
+# Copy to plugins/BetterStructures/assets/native-lab.yml only on the isolated 127.0.0.1:54295 lab.
+# Ordinary production worlds keep their existing BetterStructures behaviour.
+enabled: false
+scope: CLIPBOARD_BLOCK_PHASE
+engine: DEFAULT # DEFAULT or NATIVE_GENERATION; use identical inputs for the two boots.
+seed: 384291
+pedestalMaterial: STONE
+profileSpark: true
+# Profiling accepts only Paper's pinned bundled spark-paper 1.10.152 implementation.
+# A foreign foreground capture is refused; Spark's normal background transition is allowed.
+# The asynchronous start is confirmed by sampler identity; receipts must match run UUID/start time.
+# Same explicit setting for both engines. Costs are reported as startup work.
+warmEntityAdapters: false
+assets:
+  - id: real_asset
+    file: native-lab-assets/example.schem # Matching example.yml sidecar is required.
+    sha256: 'REPLACE_WITH_EXACT_SOURCE_SHA256'
+    benchmark: true
+    x: 12000 # Separate cases by at least 256 blocks, far from world spawn.
+    y: 200
+    z: 12000
+    rotation: 0
+# Mark unsupported inventory entries benchmark: false to retain their preflight rejection reasons.
+# NBT, entities, tile blocks, non-identity transforms and loot sidecar overrides are refused.
+# Each boot creates a unique vanilla world. The manifest owns only its planned block phase:
+# ordinary late paste commands and automatic structure scans refuse/skip that world explicitly.
+# AIR clears occupied terrain; BARRIER preserves; BEDROCK fills non-solid cells with the fixed provider.
+# DEFAULT retains normal physics. Settled block-state differences fail the benchmark.
