@@ -40,6 +40,8 @@ final class ChunkPreparationTest {
     }
 
     @Test void guardRefusesEveryNonLabTarget() {
+        assertDoesNotThrow(() -> LabChunkPreparation.validateVersion("1.21.11"));
+        assertThrows(IllegalArgumentException.class, () -> LabChunkPreparation.validateVersion("1.21.10"));
         assertDoesNotThrow(() -> LabChunkPreparation.validateConfig("127.0.0.1", 54295, LabChunkPreparation.WORLD, 64, 256));
         assertThrows(IllegalArgumentException.class, () -> LabChunkPreparation.validateConfig("0.0.0.0", 54295, LabChunkPreparation.WORLD, 64, 256));
         assertThrows(IllegalArgumentException.class, () -> LabChunkPreparation.validateConfig("127.0.0.1", 25565, LabChunkPreparation.WORLD, 64, 256));
@@ -68,7 +70,7 @@ final class ChunkPreparationTest {
             f.complete(c(0, 0)); f.coordinator.tick();
             assertEquals(2, f.requests.size()); assertNull(entered.get());
             f.complete(c(1, 0)); f.coordinator.tick();
-            assertNull(entered.get()); assertEquals(0, f.added.get(), "No plugin ticket before the FULL activation halo");
+            assertNull(entered.get()); assertEquals(2, f.added.get(), "Desired must be pinned before transient FULL callbacks end");
             f.drainRequests();
             assertNotNull(entered.get()); assertEquals(2, f.added.get());
             assertTrue(entered.get().readyAt(new Location(f.world, 31, 100, 0)));
@@ -115,7 +117,7 @@ final class ChunkPreparationTest {
             assertEquals(0, f.added.get()); assertEquals(0, scans.get());
             f.coordinator.tick(); assertEquals(0, scans.get());
             f.complete(c(3, -2)); f.coordinator.tick();
-            assertEquals(0, scans.get()); assertEquals(0, f.added.get());
+            assertEquals(0, scans.get()); assertEquals(1, f.added.get());
             f.drainRequests();
             assertEquals(1, scans.get()); assertEquals(1, f.added.get()); assertEquals(1, f.removed.get());
             assertEquals(1L, LabChunkPreparation.metrics().get("originReadBoundaries"));
@@ -218,11 +220,11 @@ final class ChunkPreparationTest {
             AtomicInteger pins = new AtomicInteger();
             f.onPin = center -> {
                 assertTrue(desired.contains(center), "Halo-only coordinates must not create their own activation halo");
-                assertTrue(f.loaded.containsAll(activation), "Initial FULL preflight must finish before the first ticket");
                 for (int dx = -2; dx <= 2; dx++)
                     for (int dz = -2; dz <= 2; dz++) {
                         var at = c(center.x() + dx, center.z() + dz);
-                        assertTrue(f.loaded.contains(at));
+                        // Ticket propagation can make a previously absent neighbour FULL during pinning.
+                        f.loaded.add(at);
                         // Every coordinate is a possible origin with distance=1. The real listener must
                         // return at suppression, before touching normal world/config/claim registries.
                         new NewChunkLoadEvent().onChunkLoad(new ChunkLoadEvent(f.chunk(at), true));
@@ -231,28 +233,68 @@ final class ChunkPreparationTest {
                 pins.incrementAndGet();
             };
             f.coordinator.enqueue(f.world, ChunkFootprint.rectangle(0, 0, 32, 32, 0), lease -> {
+                assertTrue(f.loaded.containsAll(activation), "Every activation chunk must be FULL before reading terrain");
                 assertFalse(LabChunkPreparation.suppresses(f.chunk(c(4, 0))), "Unrelated origins remain eligible");
                 lease.complete();
             });
             f.drainRequests();
             assertEquals(4, pins.get()); assertEquals(4, f.added.get()); assertEquals(4, f.removed.get());
-            assertEquals(36, f.requests.size()); assertEquals(false, LabChunkPreparation.metrics().get("failed"));
+            assertTrue(f.requests.size() <= 36); assertEquals(false, LabChunkPreparation.metrics().get("failed"));
         }
     }
 
-    @Test void previouslyPreparedButUnloadedHaloIsRequestedAgainBeforePinning() throws Exception {
+    @Test void missingActivationIsRequestedAgainBeforeReadingTerrain() throws Exception {
         try (Fixture f = new Fixture()) {
             var activation = ChunkFootprint.activation(ChunkFootprint.rectangle(0, 0, 1, 1, 0).chunks());
             f.loaded.addAll(activation); f.loaded.remove(c(2, 2));
             AtomicReference<LabChunkPreparation.Lease> entered = new AtomicReference<>();
-            f.onPin = center -> assertTrue(f.loaded.containsAll(activation), "All 5x5 neighbours must still be FULL at pin time");
+            f.onPin = center -> assertEquals(c(0, 0), center, "Only desired gets a plugin ticket");
             f.coordinator.enqueue(f.world, ChunkFootprint.rectangle(0, 0, 1, 1, 0), entered::set);
-            f.coordinator.tick(); assertTrue(f.requests.containsKey(c(2, 2))); assertEquals(0, f.added.get());
+            for (int i = 0; i < 32 && !f.requests.containsKey(c(2, 2)); i++) f.coordinator.tick();
+            assertTrue(f.requests.containsKey(c(2, 2))); assertEquals(1, f.added.get()); assertNull(entered.get());
             f.loaded.remove(c(-2, -2)); f.complete(c(2, 2));
-            assertEquals(0, f.added.get()); assertEquals(true, LabChunkPreparation.metrics().get("activeJob"));
-            f.coordinator.tick(); assertTrue(f.requests.containsKey(c(-2, -2))); assertEquals(0, f.added.get());
+            assertEquals(1, f.added.get()); assertNull(entered.get()); assertEquals(true, LabChunkPreparation.metrics().get("activeJob"));
+            f.coordinator.tick(); assertTrue(f.requests.containsKey(c(-2, -2))); assertEquals(1, f.added.get());
             f.complete(c(-2, -2)); f.coordinator.tick();
             assertNotNull(entered.get()); assertEquals(1, f.added.get()); entered.get().complete();
+        }
+    }
+
+    @Test void transientFullChunksCanUnloadImmediatelyWithoutCausingHaloReloadThrash() throws Exception {
+        try (Fixture f = new Fixture()) {
+            f.transientUnloads = true;
+            var desired = ChunkFootprint.rectangle(0, 0, 32, 1, 0);
+            var activation = ChunkFootprint.activation(desired.chunks());
+            AtomicInteger scanned = new AtomicInteger();
+            f.coordinator.enqueue(f.world, desired, lease -> {
+                assertTrue(f.loaded.containsAll(activation)); scanned.incrementAndGet(); lease.complete();
+            });
+            f.drainRequests();
+            assertEquals(1, scanned.get()); assertEquals(2, f.added.get()); assertEquals(2, f.removed.get());
+            assertEquals(activation.size(), f.requestCalls.get(), "No repeat requests for an unpinned halo");
+            assertEquals(false, LabChunkPreparation.metrics().get("failed"));
+            assertEquals(0L, LabChunkPreparation.metrics().get("held"));
+        }
+    }
+
+    @Test void abortedPinRetiresItsScopeByWorldTicksWithoutRequestsOrHaloTickets() throws Exception {
+        try (Fixture f = new Fixture()) {
+            f.coordinator.enqueue(f.world, ChunkFootprint.rectangle(0, 0, 1, 1, 0), lease -> fail());
+            f.coordinator.tick(); f.complete(c(0, 0)); assertEquals(1, f.added.get());
+            f.coordinator.tick(); // One original halo FULL request is still outstanding when cancelled.
+            var pending = f.requests.entrySet().stream().filter(e -> !e.getValue().isDone()).findFirst().orElseThrow();
+            LabChunkPreparation.prepareForReload();
+            assertEquals(1, f.removed.get()); assertTrue(LabChunkPreparation.suppresses(f.chunk(c(2, 2))));
+            assertEquals(true, LabChunkPreparation.metrics().get("activeJob"));
+            int requestsAtCancel = f.requestCalls.get();
+            f.gameTime.set(2); f.coordinator.tick();
+            assertTrue(LabChunkPreparation.suppresses(f.chunk(c(2, 2))));
+            f.gameTime.set(3); f.coordinator.tick();
+            assertFalse(LabChunkPreparation.suppresses(f.chunk(c(2, 2))));
+            assertTrue(LabChunkPreparation.suppresses(f.chunk(pending.getKey())), "Original future token outlives native retirement");
+            assertEquals(requestsAtCancel, f.requestCalls.get());
+            f.complete(pending.getKey()); assertFalse(LabChunkPreparation.suppresses(f.chunk(pending.getKey())));
+            assertEquals(false, LabChunkPreparation.metrics().get("activeJob"));
         }
     }
 
@@ -276,9 +318,13 @@ final class ChunkPreparationTest {
         final Plugin oldPlugin = MetadataHandler.PLUGIN;
         final UUID id = UUID.randomUUID();
         final Set<ChunkFootprint.Coordinate> loaded = new HashSet<>();
+        final Set<ChunkFootprint.Coordinate> nativeTickets = new HashSet<>();
         final Map<ChunkFootprint.Coordinate, CompletableFuture<Chunk>> requests = new LinkedHashMap<>();
         final Map<ChunkFootprint.Coordinate, Chunk> chunks = new HashMap<>();
         final AtomicInteger added = new AtomicInteger(), removed = new AtomicInteger();
+        final AtomicInteger requestCalls = new AtomicInteger();
+        final AtomicLong gameTime = new AtomicLong();
+        boolean transientUnloads;
         Consumer<ChunkFootprint.Coordinate> onPin = ignored -> { };
         final World world;
         final LabChunkPreparation coordinator;
@@ -287,10 +333,12 @@ final class ChunkPreparationTest {
         Fixture(int maxQueued) throws Exception {
             world = proxy(World.class, (p, method, args) -> switch (method.getName()) {
                 case "getUID" -> id; case "getName" -> LabChunkPreparation.WORLD;
+                case "getGameTime" -> gameTime.get();
                 case "isChunkLoaded" -> loaded.contains(c((int) args[0], (int) args[1]));
                 case "getChunkAt" -> { var coordinate = c((int) args[0], (int) args[1]); assertTrue(loaded.contains(coordinate), "Synchronous load forbidden"); yield chunk(coordinate); }
                 case "getChunkAtAsync" -> {
                     var coordinate = c((int) args[0], (int) args[1]);
+                    requestCalls.incrementAndGet();
                     assertTrue(requests.values().stream().allMatch(CompletableFuture::isDone), "Only one original FULL request may be outstanding");
                     var request = new CompletableFuture<Chunk>(); requests.put(coordinate, request); yield request;
                 }
@@ -314,12 +362,16 @@ final class ChunkPreparationTest {
             return chunks.computeIfAbsent(coordinate, ignored -> proxy(Chunk.class, (p, method, args) -> switch (method.getName()) {
                 case "getWorld" -> world; case "getX" -> coordinate.x(); case "getZ" -> coordinate.z();
                 case "isLoaded" -> loaded.contains(coordinate);
-                case "addPluginChunkTicket" -> { onPin.accept(coordinate); added.incrementAndGet(); yield true; }
-                case "removePluginChunkTicket" -> { removed.incrementAndGet(); yield true; }
+                case "addPluginChunkTicket" -> { nativeTickets.add(coordinate); onPin.accept(coordinate); added.incrementAndGet(); yield true; }
+                case "removePluginChunkTicket" -> { nativeTickets.remove(coordinate); removed.incrementAndGet(); yield true; }
                 default -> primitiveDefault(method.getReturnType());
             }));
         }
-        void complete(ChunkFootprint.Coordinate coordinate) { loaded.add(coordinate); requests.get(coordinate).complete(chunk(coordinate)); }
+        void complete(ChunkFootprint.Coordinate coordinate) {
+            loaded.add(coordinate); requests.get(coordinate).complete(chunk(coordinate));
+            if (transientUnloads)
+                loaded.removeIf(at -> nativeTickets.stream().noneMatch(ticket -> Math.abs(ticket.x() - at.x()) <= 2 && Math.abs(ticket.z() - at.z()) <= 2));
+        }
         void drainRequests() {
             for (int i = 0; i < 512; i++) {
                 coordinator.tick();
@@ -329,6 +381,7 @@ final class ChunkPreparationTest {
         @Override public void close() throws Exception {
             LabChunkPreparation.shutdown();
             for (var entry : requests.entrySet()) if (!entry.getValue().isDone()) complete(entry.getKey());
+            gameTime.addAndGet(3); LabChunkPreparation.metrics();
             PluginChunkHolds.shutdown(); MetadataHandler.PLUGIN = oldPlugin; serverField.set(null, oldServer);
         }
     }

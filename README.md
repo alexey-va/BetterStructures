@@ -134,7 +134,7 @@ jfr print --json --events ru.ruscrafting.NativeSlice,jdk.ExecutionSample,jdk.GCP
 
 ## Integrated BetterStructures lab backend
 
-This experimental branch builds `2.7.10-ruscrafting.lab.4+upstream.15808b1`.
+This experimental branch builds `2.7.10-ruscrafting.lab.5+upstream.15808b1`.
 The frozen four-schematic comparison below used lab.3; its runtime SHA is recorded with the results.
 Its opt-in [manifest](src/main/resources/native-lab.example.yml) lives at
 `plugins/BetterStructures/assets/native-lab.yml` and selects `DEFAULT` or
@@ -170,12 +170,24 @@ physics, NBT, loot, marker and entity handling. It accepts only the fixed
 loopback lab and world; the manifest comparison worlds are outside its scope.
 
 Paper's plugin tickets promote a two-chunk FULL activation ring. The experiment
-prepares/suppresses that separate activation contour before pinning; halo-only
-chunks never receive plugin tickets. Requests and work slices are bounded, and
+marks that activation contour before requesting chunks, pins each desired chunk
+inside its FULL callback, then waits for the whole activation contour before
+resuming fitting on a later tick. Halo-only chunks never receive plugin tickets.
+The opt-in requires Minecraft 1.21.11, whose ticket level and expiry behavior were
+checked against the running Paper source. After cancellation, suppression remains
+for three observed world ticks while native tickets retire; an in-flight request
+keeps its own marker until completion. Requests and work slices are bounded, and
 completion diagnostics include active/queued jobs, pending requests and holds.
 The probe's `requireChunkPreparation=true` option requires those counters to be
 idle before reporting completion. Runtime measurements are recorded separately
 from the frozen native/DEFAULT block-phase comparison.
+
+The first readiness run (lab.4) failed its liveness check: unretained FULL chunks
+unloaded while the coordinator waited for the whole contour, causing repeated
+halo requests before fitting could start. It produced no structure placements
+and is not a performance result. The [failed report](lab-results/2026-10-29/prepared-lab4-failed-report.json)
+and [receipt](lab-results/2026-10-29/prepared-lab4-failed-receipt.json) preserve
+that outcome. Lab.5 changes the retention order and adds an eviction regression.
 
 ## Real-schematic A/B result, 2026-10-29
 

@@ -1,0 +1,169 @@
+{
+  "version": "2.7.10-ruscrafting.lab.5+upstream.15808b1",
+  "jarSha256": "645756b1638ba7ef01f5e1d1d5b039351d676355c3fb3db0c7aa4d95fa0fa18c",
+  "jarBytes": 7205755,
+  "testSummary": {
+    "tests": 107,
+    "failures": 0,
+    "errors": 0
+  },
+  "testSuites": [
+    {
+      "name": "com.magmaguy.betterstructures.ContentReloadLifecycleTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.chests.ConfiguredLootTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.lab.ChunkPreparationTest",
+      "tests": "18",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.lab.LabBudgetLifecycleTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.lab.LabGeometryTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.lab.LabManifestTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.lab.LabPolicyTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.lab.SparkCaptureTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.listeners.DelayedDungeonScanTrackerTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.modules.ModularPasteCursorTest",
+      "tests": "18",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.modules.ModularPastingTest",
+      "tests": "12",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.modules.ModularWorldDifficultyTest",
+      "tests": "16",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.modules.NaturalDungeonReservationTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.util.WorldEditUtilsSignTextTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.worldedit.PasteBudgetTicketTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.worldedit.SchematicClipboardCacheTicketTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "com.magmaguy.betterstructures.worldedit.SchematicLabCancellationTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0"
+    }
+  ],
+  "probeJarSha256": "bfded8e378778ad536e3627ba2507efe00f7b4569818d56bff43834d83dcb2f2",
+  "probeJarBytes": 520156,
+  "probeChangesSince23PassingTests": "Report mode label and requireChunkPreparation flag only; assemble passed.",
+  "sourceCutoff": {
+    "baseCommit": "27fd6bfe1fa6423d15a9a836c20869c17a6c4fc8",
+    "files": {
+      "src/main/java/com/magmaguy/betterstructures/BetterStructures.java": "74f261662cdb4483a505cd4a6c9a3c6798fab269214a7136f64b3abaa022abd5",
+      "src/main/java/com/magmaguy/betterstructures/buildingfitter/FitAirBuilding.java": "14c626a29a3054f9051d3bd87e37787a4c38d5e494754a0b3444d4f29dd4866b",
+      "src/main/java/com/magmaguy/betterstructures/buildingfitter/FitAnything.java": "228e1d5fd71f6e762d45b10a1653438e5fcb119c359b0370b8d1e2f2d3805722",
+      "src/main/java/com/magmaguy/betterstructures/buildingfitter/FitLiquidBuilding.java": "37fb998b35b4787e4e74c8aa1b8bdb5a1e326ed1b3fc9e06b10390cd9a8c73c3",
+      "src/main/java/com/magmaguy/betterstructures/buildingfitter/FitSurfaceBuilding.java": "94c5d9f946309a4b900d319ba58a6664bda7b3e221e149c19660bc19601d3fe5",
+      "src/main/java/com/magmaguy/betterstructures/buildingfitter/FitUndergroundBuilding.java": "34249d29f66fd8f06b24c84c7c0225efe790e15cd03d09e9bad0de1c18166904",
+      "src/main/java/com/magmaguy/betterstructures/lab/ChunkFootprint.java": "3a4173a4b2463a108944e4b899a8a915ca9a698d34b3e8f2751ec5388c074de1",
+      "src/main/java/com/magmaguy/betterstructures/lab/LabChunkPreparation.java": "a1ae6f9c1ec94602eb109cdf298b28c70c94d21eb881b15971fd3ef84f07f9a6",
+      "src/main/java/com/magmaguy/betterstructures/listeners/NewChunkLoadEvent.java": "9e69719e662bb5e52930f95db0b110a464eb77904f6409b4f37998746709e710",
+      "src/main/java/com/magmaguy/betterstructures/worldedit/Schematic.java": "1a3861074f4b7307ea336d7cc30fd1ef02c9eb16f2a9c601c2d8a3aea36a2411",
+      "src/main/resources/chunk-preparation-lab.example.yml": "5aad2eed0522d22c4ea05dae9befcf5e8d0d53ce349700f3b39f6fce97ffea9b",
+      "src/test/java/com/magmaguy/betterstructures/lab/ChunkPreparationTest.java": "b9c74e610b6880e3dce2800512efd97be8aeb868ecaebe2da61d91a15fcaf209"
+    },
+    "aggregateSha256": "f9362f82f496204b43aa1481dd61361e1c18cd08fef09f8134dcb67e0e39a957",
+    "checks": [
+      {
+        "name": "com.magmaguy.betterstructures.lab.ChunkPreparationTest",
+        "tests": "18",
+        "failures": "0",
+        "errors": "0"
+      },
+      {
+        "name": "com.magmaguy.betterstructures.worldedit.PasteBudgetTicketTest",
+        "tests": "2",
+        "failures": "0",
+        "errors": "0"
+      },
+      {
+        "name": "com.magmaguy.betterstructures.worldedit.SchematicLabCancellationTest",
+        "tests": "1",
+        "failures": "0",
+        "errors": "0"
+      }
+    ],
+    "changedSincePreviousCutoff": [
+      "src/main/java/com/magmaguy/betterstructures/lab/LabChunkPreparation.java",
+      "src/test/java/com/magmaguy/betterstructures/lab/ChunkPreparationTest.java"
+    ],
+    "activationLimit": 1024,
+    "heldLimit": 256,
+    "nativeContract": "Paper1.21.11 desired ticket immediately in FULL completion; activation FULL before fitter; aborted scope retired after three observed world gameTime ticks; original request key outlives retirement",
+    "sources": [
+      "https://github.com/PaperMC/Paper/blob/bd74bf6581ce81e59bdab07eadbfbe5d485eefa7/paper-server/patches/features/0001-Moonrise-optimisation-patches.patch#L7442-L7450",
+      "https://github.com/PaperMC/Paper/blob/bd74bf6581ce81e59bdab07eadbfbe5d485eefa7/paper-server/patches/features/0001-Moonrise-optimisation-patches.patch#L7539-L7549",
+      "https://github.com/PaperMC/Paper/blob/bd74bf6581ce81e59bdab07eadbfbe5d485eefa7/paper-server/patches/sources/net/minecraft/server/level/TicketType.java.patch#L22-L25"
+    ]
+  },
+  "independentSourceReview": "No new P1/P2 findings; runtime not part of source review.",
+  "runtimeStatus": "Pending lab replay; no production activation."
+}

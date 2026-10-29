@@ -372,9 +372,11 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         Map<String, Object> report = new LinkedHashMap<>();
         report.put("status", status); report.put("message", message); report.put("runId", runId); report.put("startedAt", startedAt);
         report.put("server", serverVersion); report.put("java", System.getProperty("java.version")); report.put("world", LabGuard.WORLD);
-        report.put("mode", upstreamScanProbe ? "upstream-author-chunk-scan-probe" : "generation-native-limited-region");
+        report.put("mode", requireChunkPreparation ? "upstream-scan-with-lab-readiness"
+                : upstreamScanProbe ? "upstream-author-chunk-scan-probe" : "generation-native-limited-region");
         report.put("worldGenerator", "native-default");
         report.put("upstreamScanProbe", upstreamScanProbe);
+        report.put("requireChunkPreparation", requireChunkPreparation);
         report.put("upstreamReadinessWaitMs", upstreamReadyWaitNanos / 1_000_000D);
         if (upstreamProbe != null) report.put("upstream", upstreamProbe.snapshot());
         report.put("profileSpark", profileSpark);

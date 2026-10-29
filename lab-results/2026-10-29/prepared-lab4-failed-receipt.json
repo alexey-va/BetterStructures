@@ -1,0 +1,27 @@
+{
+  "status": "failed",
+  "runId": "0a7704ee-4088-41a9-aa85-e3742b9a08ab",
+  "runtimeVersion": "2.7.10-ruscrafting.lab.4+upstream.15808b1",
+  "runtimeJarSha256": "1e1f75a88041b42626011e88f40eb5cb86dd846ecd3f6a5a0a27644d57afc23e",
+  "reportSha256": "99e8cfd914d8a5c7386a9b043a7402036bdfa133ca712bda68a225427c2e96ad",
+  "spark": {
+    "sha256": "76817d35359351f8341aa1bc8823744ac550de66fc92e0c01cc3a80d0744cb5e",
+    "path": "plugins/spark/profile-2026-10-29_22.50.53.sparkprofile",
+    "samplerStartedAtEpochMs": 1793303326370,
+    "sparkVersion": "1.10.152",
+    "ownershipVerified": true,
+    "onlyTicksOverMs": 50,
+    "bytes": 990189,
+    "comment": "native-lab-0a7704ee-4088-41a9-aa85-e3742b9a08ab",
+    "intervalMs": 1
+  },
+  "cause": "Unretained FULL chunks unloaded while waiting for the activation contour before desired pins; repeated halo loads prevented fitter progress.",
+  "outcome": "No fitting or placement exercised. This failed run cannot establish a performance improvement.",
+  "cleanup": {
+    "activeJob": false,
+    "requestPending": false,
+    "queued": 0,
+    "held": 0
+  },
+  "nextRevision": "lab.5 pins desired chunks in each FULL completion, then waits for the activation contour."
+}

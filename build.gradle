@@ -9,7 +9,7 @@ plugins {
 }
 
 group = 'com.magmaguy'
-version = '2.7.10-ruscrafting.lab.4+upstream.15808b1'
+version = '2.7.10-ruscrafting.lab.5+upstream.15808b1'
 
 def upstreamCommit = '15808b170622d31255e0525f43847c2b2b242120'
 def paperApi = 'io.papermc.paper:paper-api:1.21.11-R0.1-20260511.115010-91'

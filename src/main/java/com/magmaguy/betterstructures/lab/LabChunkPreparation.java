@@ -26,8 +26,12 @@ public final class LabChunkPreparation {
     private static final long LOAD_TIMEOUT = TimeUnit.SECONDS.toNanos(60);
     private static final long STEP_BUDGET = 1_500_000L;
     private static final int MAX_LOADED_STEPS = 64;
+    // Pinned Paper 1.21.11 replaces a removed ticket with UNKNOWN(timeout=1), then applies
+    // the downgrade in its world ticket purge. Three observed world ticks cover either removal phase.
+    private static final long TICKET_RETIRE_WORLD_TICKS = 3;
     // Remains registered until the ORIGINAL request completes, including across content reloads.
     private static final Map<Key, Integer> collateral = new HashMap<>();
+    private static final List<RetiredScope> retired = new ArrayList<>();
     private static LabChunkPreparation active;
     private final Plugin plugin;
     private final int maxQueued, maxHeld;
@@ -45,14 +49,21 @@ public final class LabChunkPreparation {
 
     public static void configure(Plugin plugin) throws Exception {
         if (active != null) shutdown();
+        reapRetired();
         Path path = plugin.getDataFolder().toPath().resolve("assets/chunk-preparation-lab.yml");
         if (!Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)) return;
         YamlConfiguration config = new YamlConfiguration(); config.load(path.toFile());
         if (!config.getBoolean("enabled", false)) return;
+        validateVersion(plugin.getServer().getMinecraftVersion());
         validateConfig(plugin.getServer().getIp(), plugin.getServer().getPort(), config.getString("world"),
                 config.getInt("maxQueued", 64), config.getInt("maxHeld", 256));
         active = new LabChunkPreparation(plugin, config.getInt("maxQueued", 64), config.getInt("maxHeld", 256));
         active.log("enabled");
+    }
+
+    static void validateVersion(String minecraftVersion) {
+        if (!"1.21.11".equals(minecraftVersion))
+            throw new IllegalArgumentException("Chunk preparation ticket activation/retirement is verified only for Minecraft 1.21.11");
     }
 
     static void validateConfig(String ip, int port, String world, int maxQueued, int maxHeld) {
@@ -106,18 +117,23 @@ public final class LabChunkPreparation {
 
     /** Must be checked before the normal new-chunk/reload claim. Does not remove accepted origin jobs. */
     public static boolean suppresses(Chunk chunk) {
+        reapRetired();
         if (!collateral.containsKey(new Key(chunk.getWorld().getUID(), chunk.getX(), chunk.getZ()))) return false;
         if (active != null) active.suppressed++;
         return true;
     }
 
     void tick() {
+        reapRetired();
         if (closed || failed) return;
         long stop = System.nanoTime() + STEP_BUDGET;
         try {
             if (pending != null && System.nanoTime() - waitingSince > LOAD_TIMEOUT)
                 throw new IllegalStateException("Lab chunk preparation FULL request exceeded 60 seconds");
             if (current == null) {
+                // No new pins until an aborted scope has passed the native ticket-downgrade boundary.
+                // This bounds retained suppression to one activation scope, including during world freeze.
+                if (!retired.isEmpty()) return;
                 current = queued.pollFirst();
                 if (current != null) current.markCollateral();
             }
@@ -126,19 +142,24 @@ public final class LabChunkPreparation {
             lease.requireLive();
             if (lease.ready) return; // The paste queue owns this job until its finishing callback.
             if (System.nanoTime() - lease.progressAt > LOAD_TIMEOUT)
-                throw new IllegalStateException("No FULL/pin progress for 60 seconds; activation halo may be unloading before it can be pinned");
+                throw new IllegalStateException("No FULL/pin progress for 60 seconds");
             for (int step = 0; step < MAX_LOADED_STEPS && System.nanoTime() < stop; step++) {
                 if (pending != null) return;
+                var target = lease.firstUnheld();
+                if (target != null) {
+                    if (lease.world.isChunkLoaded(target.x(), target.z())) {
+                        lease.hold(target, lease.world.getChunkAt(target.x(), target.z())); alreadyLoaded++; continue;
+                    }
+                    request(lease, target); return;
+                }
                 var unprepared = lease.firstUnprepared();
                 if (unprepared != null) {
                     if (lease.world.isChunkLoaded(unprepared.x(), unprepared.z())) { lease.prepared(unprepared); alreadyLoaded++; continue; }
                     request(lease, unprepared); return;
                 }
-                var target = lease.firstUnheld();
-                if (target == null) { lease.becameReady(); return; }
-                var missing = lease.firstMissingRing(target);
+                var missing = lease.firstMissingActivation();
                 if (missing != null) { request(lease, missing); return; }
-                lease.hold(target, lease.world.getChunkAt(target.x(), target.z()));
+                lease.becameReady(); return;
             }
         } catch (Throwable failure) { fail(failure); }
     }
@@ -162,9 +183,10 @@ public final class LabChunkPreparation {
                 if (chunk == null || !chunk.isLoaded() || chunk.getWorld() != lease.world)
                     throw new IllegalStateException("Invalid FULL completion for ticket activation footprint");
                 lease.prepared(coordinate); loaded++;
-                // Pin while the last request's load ticket still exists, but only if its entire
-                // 5x5 FULL ring is resident. Never run the fitter or start another request here.
-                lease.pinAvailable();
+                // Pin desired immediately, before Paper drops this callback's transient load ticket.
+                // Waiting for an unpinned halo here causes repeated unload/reload with no progress.
+                // Halo-only requests never get plugin tickets; the fitter still resumes on a later tick.
+                if (lease.desired.contains(coordinate)) lease.hold(coordinate, chunk);
             } catch (Throwable failure) { fail(failure); }
             finally { removeCollateral(key); }
         });
@@ -172,6 +194,15 @@ public final class LabChunkPreparation {
 
     private static void removeCollateral(Key key) { collateral.computeIfPresent(key, (ignored, count) -> count == 1 ? null : count - 1); }
     private static void requireMain() { if (!Bukkit.isPrimaryThread()) throw new IllegalStateException("Chunk readiness requires the server thread"); }
+
+    private static void reapRetired() {
+        retired.removeIf(scope -> {
+            if (Bukkit.getWorld(scope.world.getUID()) == scope.world
+                    && scope.world.getGameTime() - scope.removedAt < TICKET_RETIRE_WORLD_TICKS) return false;
+            for (var coordinate : scope.activation) removeCollateral(new Key(scope.world.getUID(), coordinate.x(), coordinate.z()));
+            return true;
+        });
+    }
 
     private void fail(Throwable error) {
         if (failed || closed) return;
@@ -198,7 +229,7 @@ public final class LabChunkPreparation {
     }
 
     /** Probe-readable counters. Snapshot only on the main thread; no world loads or disk IO. */
-    public static Map<String, Object> metrics() { requireMain(); return active == null ? Map.of("enabled", false) : active.snapshot(); }
+    public static Map<String, Object> metrics() { requireMain(); reapRetired(); return active == null ? Map.of("enabled", false) : active.snapshot(); }
 
     private Map<String, Object> snapshot() {
         Map<String, Object> values = new LinkedHashMap<>();
@@ -206,7 +237,8 @@ public final class LabChunkPreparation {
         values.put("requested", requested); values.put("loaded", loaded); values.put("alreadyLoaded", alreadyLoaded);
         values.put("holdsAcquired", acquired); values.put("holdsReleased", released); values.put("held", acquired - released);
         values.put("peakHeld", peakHeld); values.put("queued", queued.size()); values.put("peakQueued", peakQueued);
-        values.put("activeJob", current != null); values.put("activationScope", current == null ? 0 : current.activation.size());
+        values.put("activeJob", current != null || !retired.isEmpty()); values.put("retiringScopes", retired.size());
+        values.put("activationScope", current == null ? 0 : current.activation.size());
         values.put("peakActivation", peakActivation); values.put("haloRequests", haloRequests); values.put("ringRevalidations", ringRevalidations);
         values.put("requestPending", pending != null); values.put("collateralSuppressed", suppressed);
         values.put("originReadBoundaries", originBoundaries);
@@ -226,7 +258,7 @@ public final class LabChunkPreparation {
         private final Set<ChunkFootprint.Coordinate> activation = new LinkedHashSet<>(), prepared = new HashSet<>();
         private final Map<ChunkFootprint.Coordinate, Chunk> held = new LinkedHashMap<>();
         private Consumer<Lease> continuation;
-        private boolean ready, releasedLease, succeeded, marked, pasteOwned;
+        private boolean ready, releasedLease, succeeded, marked, pasteOwned, everPinned;
         private long progressAt;
 
         private Lease(World world, ChunkFootprint footprint, Consumer<Lease> continuation, long generation, boolean origin) {
@@ -274,29 +306,17 @@ public final class LabChunkPreparation {
             if (prepared.add(coordinate)) progressAt = System.nanoTime();
         }
 
-        private ChunkFootprint.Coordinate firstMissingRing(ChunkFootprint.Coordinate center) {
+        private ChunkFootprint.Coordinate firstMissingActivation() {
             ringRevalidations++;
-            for (int dx = -2; dx <= 2; dx++)
-                for (int dz = -2; dz <= 2; dz++) {
-                    var coordinate = new ChunkFootprint.Coordinate(center.x() + dx, center.z() + dz);
-                    if (!world.isChunkLoaded(coordinate.x(), coordinate.z())) return coordinate;
-                }
+            for (var coordinate : activation)
+                if (!world.isChunkLoaded(coordinate.x(), coordinate.z())) return coordinate;
             return null;
-        }
-
-        private void pinAvailable() {
-            if (prepared.size() != activation.size()) return;
-            long stop = System.nanoTime() + STEP_BUDGET;
-            for (int step = 0; step < MAX_LOADED_STEPS && System.nanoTime() < stop; step++) {
-                var target = firstUnheld();
-                if (target == null || firstMissingRing(target) != null) return;
-                hold(target, world.getChunkAt(target.x(), target.z()));
-            }
         }
 
         private void hold(ChunkFootprint.Coordinate coordinate, Chunk chunk) {
             requireLive();
             if (held.containsKey(coordinate)) return;
+            everPinned = true;
             long began = System.nanoTime(); PluginChunkHolds.hold(chunk);
             maxPinNanos = Math.max(maxPinNanos, System.nanoTime() - began);
             held.put(coordinate, chunk); acquired++; peakHeld = Math.max(peakHeld, held.size());
@@ -334,7 +354,12 @@ public final class LabChunkPreparation {
                 catch (Throwable failure) { if (releaseFailure == null) releaseFailure = failure; }
             }
             held.clear();
-            if (marked) { for (var coordinate : activation) removeCollateral(key(coordinate)); marked = false; }
+            if (marked) {
+                if (!succeeded && everPinned && Bukkit.getWorld(world.getUID()) == world)
+                    retired.add(new RetiredScope(world, Set.copyOf(activation), world.getGameTime()));
+                else for (var coordinate : activation) removeCollateral(key(coordinate));
+                marked = false;
+            }
             if (current == this) current = null;
             if (succeeded) completed++; else aborted++;
             if (releaseFailure != null) {
@@ -346,4 +371,5 @@ public final class LabChunkPreparation {
     }
 
     private record Key(UUID world, int x, int z) { }
+    private record RetiredScope(World world, Set<ChunkFootprint.Coordinate> activation, long removedAt) { }
 }
