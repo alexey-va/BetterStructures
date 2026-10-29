@@ -3,8 +3,10 @@ package com.magmaguy.betterstructures.modules;
 import com.magmaguy.betterstructures.MetadataHandler;
 import com.magmaguy.betterstructures.api.WorldGenerationFinishEvent;
 import com.magmaguy.betterstructures.config.modulegenerators.ModuleGeneratorsConfigFields;
+import com.magmaguy.betterstructures.util.WorldEditUtils;
 import com.magmaguy.betterstructures.worldedit.Schematic;
 import com.sk89q.worldedit.extent.clipboard.Clipboard;
+import com.sk89q.worldedit.extent.transform.BlockTransformExtent;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.world.block.BaseBlock;
 import com.sk89q.worldedit.world.block.BlockState;
@@ -30,6 +32,8 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.world.ChunkMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
+import org.mockito.MockedConstruction;
+import org.mockito.MockedStatic;
 
 import java.nio.file.Path;
 import java.util.ArrayDeque;
@@ -37,6 +41,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -54,6 +59,8 @@ class ModularPastingTest {
     private final List<WorldGenerationFinishEvent> completions = new ArrayList<>();
     private final List<LogRecord> warnings = new ArrayList<>();
     private Handler logCapture;
+    private MockedConstruction<BlockTransformExtent> transformedBlocks;
+    private MockedStatic<WorldEditUtils> worldEditConversions;
 
     @BeforeEach
     void open() {
@@ -83,11 +90,32 @@ class ModularPastingTest {
             @Override public void close() { }
         };
         server.getLogger().addHandler(logCapture);
+
+        // This unit fixture does not boot FAWE's platform or block registry. Keep its two
+        // provider boundaries scoped to rotation-invariant blocks and consumed marker signs;
+        // the production cursor/AffineTransform, queue, Bukkit writes and sign parsing run normally.
+        worldEditConversions = mockStatic(WorldEditUtils.class, CALLS_REAL_METHODS);
+        worldEditConversions.when(() -> WorldEditUtils.adaptMaterial(any(BlockState.class)))
+                .thenAnswer(call -> Material.matchMaterial(fixtureState(call.getArgument(0))));
+        transformedBlocks = mockConstruction(BlockTransformExtent.class, (extent, context) -> {
+            Clipboard source = (Clipboard) context.arguments().getFirst();
+            when(extent.getFullBlock(any())).thenAnswer(call -> {
+                BaseBlock block = source.getFullBlock(call.getArgument(0));
+                String state = fixtureState(block.toImmutableState());
+                if (state.equals("minecraft:oak_sign")) {
+                    assertEquals(List.of("[spawn]", "VINDICATOR"), WorldEditUtils.getLines(block),
+                            "Sign fixture must be a consumed spawn marker, never a placed oriented sign");
+                }
+                return block;
+            });
+        });
     }
 
     @AfterEach
     void close() {
         Schematic.shutdown();
+        if (transformedBlocks != null) transformedBlocks.close();
+        if (worldEditConversions != null) worldEditConversions.close();
         if (logCapture != null) server.getLogger().removeHandler(logCapture);
         MetadataHandler.PLUGIN = null;
         MockBukkit.unmock();
@@ -261,6 +289,15 @@ class ModularPastingTest {
         when(block.getBlockType()).thenReturn(type);
         when(block.toImmutableState()).thenReturn(state);
         return block;
+    }
+
+    private static String fixtureState(BlockState state) {
+        String id = state.getBlockType().id();
+        assertTrue(Set.of("minecraft:air", "minecraft:barrier", "minecraft:glowstone",
+                        "minecraft:sea_lantern", "minecraft:oak_sign").contains(id),
+                "Fixture requires the real FAWE platform for oriented or unsupported state: " + id);
+        assertEquals(id, state.getAsString(), "Property-bearing state must use the real FAWE transform");
+        return id;
     }
 
     private static final class CountingWorld extends WorldMock {
