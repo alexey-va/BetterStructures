@@ -54,6 +54,30 @@ The current candidate prepares fixtures/palettes and creates the lab world in
 30-second await limit and never depends on main-thread tasks. Startup cost stays
 explicit in the report rather than appearing as an in-game WORLD phase.
 
+The final replay is preserved as
+`native-generation-prototype/results/2026-10-29-generation-final.json` (candidate
+SHA256 `8f2d2790dbe3a777f82f2ca7c7f462e79c76c4c3166b1fa6e9a3a0c9db81b385`).
+It loaded the existing lab world during startup in 1.37 s with no watchdog or
+ERROR lines; this does not repeat cold first-world creation. All 331,776 target
+blocks again matched independent hashes; all 56 callbacks ran on the generation
+worker and all native tickets were released.
+
+| Final case | Actual writes | Summed population worker time | Entire generation to FULL |
+| --- | ---: | ---: | ---: |
+| Vanilla control, 16 chunks | 0 | 2.93 ms | 20.40 s |
+| Dense 32³ | 32,768 | 59.10 ms | 7.89 s |
+| Sparse 32³ | 4,096 | 2.15 ms | 9.00 s |
+| Dense 64³ | 262,144 | 102.16 ms | 10.80 s |
+| Sparse 64³ | 32,768 | 27.21 ms | 17.40 s |
+
+The final dense 64³ generation phase had a 21.75 ms p99 and 25.04 ms maximum
+server tick. The whole active window still reached 1183.88 ms in control settle,
+and a control FULL request took 255.11 ms. No global no-spike guarantee follows
+from off-main structure writes. This is a two-CPU/2 GiB lab benchmark without
+client load driven by the test, not production-load acceptance. This prototype
+handles block palettes only; terrain-fit rules, block entities/loot, protection
+and content-pack integration remain outside its scope.
+
 ```sh
 ./gradlew -p native-generation-prototype test assemble
 ```
