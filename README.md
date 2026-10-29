@@ -33,6 +33,15 @@ was 85.09 ms, while warmed dense 64³ placement reached 10,102 writes/s with a
 3.72 ms p99 tick. Subsequent reports must distinguish startup, preparation,
 placement and reset, and include actual remaining native plugin chunk tickets.
 
+The optimized 4096-position run is retained as `2026-10-29-lab-4096.json`.
+All four write/air counters matched and all native ticket counts returned to
+zero. Dense 64³ apply improved from 25.95 s to 12.65 s; sparse 64³ from 25.80 s to
+1.95 s. The active maximum increased to 141.41 ms and a chunk-request slice took
+115.66 ms, so this run does **not** meet a no-spike acceptance criterion. Startup
+native-state warmup took 287.88 ms outside the active window. These synthetic
+measurements are from the isolated Purpur 1.21.11 lab with two-CPU affinity and a
+2 GiB maximum heap; they are not production or player-client acceptance.
+
 ## Upstream project
 
 BetterStructures adds schematic structures and modular dungeons to Minecraft worlds. It places content on the surface, underground, in the sky, and on liquid surfaces, with generator rules for terrain, biomes, worlds, spacing, and loot.
