@@ -58,7 +58,7 @@ final class GenerationPlan {
         slices = List.copyOf(result);
     }
 
-    private GenerationPlan(String name, int x, int z) {
+    private GenerationPlan(String name, int x, int z, boolean centralGridFirst) {
         this.name = name; this.schematic = null; this.x = x; this.y = 200; this.z = z;
         if (Math.floorMod(x, 16) != 0 || Math.floorMod(z, 16) != 0)
             throw new IllegalArgumentException("Control origin must be chunk-aligned");
@@ -66,10 +66,13 @@ final class GenerationPlan {
         for (int cx = Math.floorDiv(x, 16); cx < Math.floorDiv(x, 16) + 4; cx++)
             for (int cz = Math.floorDiv(z, 16); cz < Math.floorDiv(z, 16) + 4; cz++)
                 result.add(new Slice(cx, cz, 0, new int[0]));
+        // Probe requests its exact grid chunk before neighboring chunks can trigger terrain reads.
+        if (centralGridFirst) Collections.swap(result, 0, 5);
         slices = List.copyOf(result);
     }
 
-    static GenerationPlan control(int x, int z) { return new GenerationPlan("vanilla_control16", x, z); }
+    static GenerationPlan control(int x, int z) { return new GenerationPlan("vanilla_control16", x, z, false); }
+    static GenerationPlan control(String name, int x, int z) { return new GenerationPlan(name, x, z, true); }
     boolean control() { return schematic == null; }
     int expectedWrites() { return control() ? 0 : schematic.placementCount(); }
     int expectedSkippedAir() { return control() ? 0 : schematic.airCount(); }

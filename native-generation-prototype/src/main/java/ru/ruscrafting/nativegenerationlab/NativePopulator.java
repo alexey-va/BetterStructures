@@ -25,7 +25,7 @@ final class NativePopulator extends BlockPopulator {
     record Receipt(String caseName, int chunkX, int chunkZ, int actualWrites, int skippedAir, int noOps,
                    long nanos, String threadName, boolean mainThread, boolean cancelled) {}
     private record Work(Prepared prepared, GenerationPlan.Slice slice) {}
-    private final Map<Long, Work> work;
+    private final AtomicReference<Map<Long, Work>> work;
     private final Set<Long> claimed = ConcurrentHashMap.newKeySet();
     private final Map<Long, Receipt> receipts = new ConcurrentHashMap<>();
     private final AtomicBoolean active = new AtomicBoolean(true);
@@ -34,17 +34,32 @@ final class NativePopulator extends BlockPopulator {
 
     NativePopulator(List<Prepared> prepared, long mainThreadId) {
         this.mainThreadId = mainThreadId;
+        work = new AtomicReference<>(partition(prepared));
+    }
+
+    private static Map<Long, Work> partition(List<Prepared> prepared) {
         Map<Long, Work> planned = new HashMap<>();
         for (Prepared plan : prepared) for (var slice : plan.plan.slices)
             if (planned.put(slice.key(), new Work(plan, slice)) != null)
                 throw new IllegalArgumentException("Benchmark plans overlap a chunk");
-        work = Map.copyOf(planned);
+        return Map.copyOf(planned);
+    }
+
+    // Probe startup attaches one inert observer during WorldInit. Once BetterStructures
+    // is ready, publish control-only work without mutating Paper's live populator list.
+    void armControls(List<Prepared> prepared) {
+        if (Thread.currentThread().threadId() != mainThreadId || !active.get()
+                || prepared.isEmpty() || prepared.stream().anyMatch(p -> !p.plan.control()))
+            throw new IllegalStateException("Only active main-thread control plans may arm the probe observer");
+        Map<Long, Work> previous = work.get();
+        if (!previous.isEmpty() || !work.compareAndSet(previous, partition(prepared)))
+            throw new IllegalStateException("Probe observer was already armed");
     }
 
     @Override public void populate(WorldInfo info, Random random, int chunkX, int chunkZ, LimitedRegion region) {
         if (!active.get()) return;
         long key = GenerationPlan.key(chunkX, chunkZ);
-        Work current = work.get(key);
+        Work current = work.get().get(key);
         if (current == null) return;
         if (!claimed.add(key)) { failure.compareAndSet(null, "Duplicate population callback for " + chunkX + "," + chunkZ); return; }
         long started = System.nanoTime();

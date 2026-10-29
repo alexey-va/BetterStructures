@@ -4,9 +4,11 @@ version = '0.2.0'
 repositories {
     mavenCentral()
     maven { url = 'https://artifactory.papermc.io/artifactory/universe/' }
+    maven { url = 'https://repo.rus-crafting.ru/grocermc/' }
 }
 dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.21.11-R0.1-20260511.115010-91'
+    compileOnly('ru.ruscrafting.forks:betterstructures:2.7.10-ruscrafting.2-upstream.15808b1') { transitive = false }
     implementation 'net.kyori:adventure-nbt:4.26.1'
     implementation 'com.google.code.gson:gson:2.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:6.1.3'

@@ -19,7 +19,7 @@ import java.util.logging.Level;
 
 /** Generation-only lab: main thread coordinates native FULL loads and independent bounded readback. */
 public final class NativeGenerationLab extends JavaPlugin implements Listener, CommandExecutor {
-    private enum Stage { WORLD, BASELINE, GENERATE, VERIFY, SETTLE, TAIL, REPORT, IDLE, STOPPED }
+    private enum Stage { WORLD, WAIT_UPSTREAM, BASELINE, GENERATE, VERIFY, SETTLE, TAIL, REPORT, IDLE, STOPPED }
     private static final long BUDGET_NANOS = 1_500_000L, DEADLINE_NANOS = TimeUnit.MINUTES.toNanos(10);
     private static final int MAX_POSITIONS = 4096;
     private final RunFence fence = new RunFence();
@@ -32,6 +32,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private Future<Path> reportWrite;
     private BukkitTask ticker;
     private NativePopulator populator;
+    private UpstreamScanProbe upstreamProbe;
     private SparkCapture sparkCapture;
     private World world;
     private Stage stage = Stage.STOPPED;
@@ -39,12 +40,12 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private Case current;
     private Path folder;
     private String runId, startedAt, serverVersion, observedPhase = "startup", terminalStatus, terminalMessage;
-    private int caseCursor, stageTicks, dataVersion, remainingTickets = -1;
+    private int caseCursor, stageTicks, dataVersion, remainingTickets = -1, baseX;
     private long startedNanos, token, phaseStarted, startupNanos, ownTickNanos, releaseNanos, ticketReadbackNanos;
     private int observedStageTick;
     private boolean attached, observedActive;
-    private boolean profileSpark = true, warmEntityAdapters;
-    private long entityAdapterWarmupNanos;
+    private boolean profileSpark = true, warmEntityAdapters, upstreamScanProbe;
+    private long entityAdapterWarmupNanos, upstreamReadyWaitNanos;
 
     @Override public void onEnable() {
         try {
@@ -56,7 +57,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             worker = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(2), runnable -> {
                 Thread thread = new Thread(runnable, "ArcNativeGenerationLab-io"); thread.setDaemon(true); return thread;
             }, new ThreadPoolExecutor.AbortPolicy());
-            int baseX = 1_048_576 + (int) Math.floorMod(UUID.fromString(runId).getLeastSignificantBits(), 24_000L) * 512;
+            baseX = 1_048_576 + (int) Math.floorMod(UUID.fromString(runId).getLeastSignificantBits(), 24_000L) * 512;
             int fixtureDataVersion = dataVersion; Path fixtureFolder = folder.resolve("generation-fixtures");
             decode = worker.submit(() -> {
                 Path optionsPath = fixtureFolder.getParent().resolve("assets/diagnostic.properties");
@@ -69,7 +70,11 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
                     String warm = options.getProperty("warmEntityAdapters", "false");
                     if (!warm.equals("true") && !warm.equals("false")) throw new IllegalArgumentException("warmEntityAdapters must be true or false");
                     warmEntityAdapters = Boolean.parseBoolean(warm);
+                    String probe = options.getProperty("upstreamScanProbe", "false");
+                    if (!probe.equals("true") && !probe.equals("false")) throw new IllegalArgumentException("upstreamScanProbe must be true or false");
+                    upstreamScanProbe = Boolean.parseBoolean(probe);
                 }
+                if (upstreamScanProbe) return List.of(); // No fixture decode or fixture writes in this mode.
                 List<GenerationPlan> list = new ArrayList<>();
                 list.add(GenerationPlan.control(baseX, -8192));
                 int index = 1;
@@ -83,7 +88,12 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             // The worker performs only fixture I/O and pure geometry; it never waits for main-thread work.
             plans = decode.get(30, TimeUnit.SECONDS);
             Path sparkDirectory = folder.resolveSibling("spark");
-            if (profileSpark) sparkCapture = worker.submit(() -> new SparkCapture(sparkDirectory)).get(5, TimeUnit.SECONDS);
+            if (profileSpark) {
+                ClassLoader serverLoader = getServer().getClass().getClassLoader();
+                ConsoleCommandSender console = Bukkit.getConsoleSender();
+                sparkCapture = worker.submit(() -> new SparkCapture(sparkDirectory, worker,
+                        () -> PinnedSparkAccess.open(serverLoader, console))).get(5, TimeUnit.SECONDS);
+            }
             preparePalette();
             token = fence.begin(); transition(Stage.WORLD);
             createWorld();
@@ -119,20 +129,28 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             if (stage != Stage.REPORT && System.nanoTime() - startedNanos > DEADLINE_NANOS)
                 throw new TimeoutException("Generation lab exceeded ten minutes");
             if (populator != null && populator.failure() != null) throw new IllegalStateException(populator.failure());
+            if (upstreamProbe != null && stage != Stage.REPORT) upstreamProbe.check();
             observedPhase = phaseName();
             observedStageTick = stageTicks;
             observedActive = stage == Stage.GENERATE || stage == Stage.VERIFY || stage == Stage.SETTLE || stage == Stage.TAIL;
             SliceBudget budget = new SliceBudget(System::nanoTime, BUDGET_NANOS, MAX_POSITIONS);
             switch (stage) {
+                case WAIT_UPSTREAM -> prepareUpstreamProbe();
                 case BASELINE -> {
-                    if (sparkCapture != null && !sparkCapture.dispatched()) sparkCapture.start(runId);
+                    if (sparkCapture != null && !sparkCapture.start(runId)) {
+                        observedPhase = "profiler_start_wait";
+                        return;
+                    }
                     if (++stageTicks >= 200) startCase();
                 }
                 case GENERATE -> requestNextChunk();
                 case VERIFY -> verify(budget);
                 case SETTLE -> { if (++stageTicks >= 40) finishCase(); }
                 // Finish on the following tick so all 200 completed tail ticks enter the report snapshot.
-                case TAIL -> { if (++stageTicks > 200) complete("complete", "All generation plans verified"); }
+                case TAIL -> {
+                    if (++stageTicks > 200 && (upstreamProbe == null || upstreamProbe.settled()))
+                        complete("complete", upstreamScanProbe ? "All zero-write regions populated; upstream observations settled" : "All generation plans verified");
+                }
                 case REPORT -> {
                     if (reportWrite.isDone()) {
                         Path report = reportWrite.get();
@@ -185,6 +203,19 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
                 throw new IllegalStateException("Plan exceeds world height");
         }
         startupNanos = System.nanoTime() - startedNanos;
+        transition(upstreamScanProbe ? Stage.WAIT_UPSTREAM : Stage.BASELINE);
+    }
+    private void prepareUpstreamProbe() {
+        var provider = Bukkit.getPluginManager().getPlugin("BetterStructures");
+        if (provider == null) throw new IllegalStateException("upstreamScanProbe requires BetterStructures to be installed");
+        if (!UpstreamScanProbe.ready(provider)) { stageTicks++; return; }
+        upstreamProbe = new UpstreamScanProbe(this, provider, world, baseX);
+        plans = upstreamProbe.plans();
+        for (var plan : plans) prepared.add(new NativePopulator.Prepared(plan, new BlockData[0], new String[0]));
+        populator.armControls(List.copyOf(prepared));
+        upstreamReadyWaitNanos = System.nanoTime() - phaseStarted;
+        getLogger().info("UPSTREAM_SCAN_PROBE status=ready regions=" + plans.size()
+                + " listenerWaitMs=" + upstreamReadyWaitNanos / 1_000_000D + " worldSeed=" + world.getSeed());
         transition(Stage.BASELINE);
     }
     private void startCase() {
@@ -275,6 +306,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         }
         if (writes + noOps != plan.expectedWrites() || air != plan.expectedSkippedAir())
             throw new IllegalStateException("Population counters differ from fixture: writes=" + writes + ", skippedAir=" + air + ", noOps=" + noOps);
+        if (upstreamProbe != null) upstreamProbe.verifyCase(plan);
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("name", plan.name); result.put("control", plan.control()); result.put("origin", List.of(plan.x, plan.y, plan.z));
         result.put("chunks", plan.slices.size()); result.put("populationReceipts", plan.slices.size());
@@ -325,26 +357,45 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         ticketReadbackNanos = System.nanoTime() - readbackStarted;
     }
     private void complete(String status, String message) {
+        if (stage == Stage.WAIT_UPSTREAM) upstreamReadyWaitNanos = System.nanoTime() - phaseStarted;
         fence.cancel(); if (populator != null) populator.deactivate(); releaseCase();
+        if (upstreamProbe != null) upstreamProbe.stop();
         if (decode != null && !decode.isDone()) decode.cancel(true);
         terminalStatus = status; terminalMessage = message;
         if (sparkCapture != null) sparkCapture.stop(runId);
         Map<String, Object> report = new LinkedHashMap<>();
         report.put("status", status); report.put("message", message); report.put("runId", runId); report.put("startedAt", startedAt);
         report.put("server", serverVersion); report.put("java", System.getProperty("java.version")); report.put("world", LabGuard.WORLD);
-        report.put("mode", "generation-native-limited-region"); report.put("worldGenerator", "native-default");
+        report.put("mode", upstreamScanProbe ? "upstream-author-chunk-scan-probe" : "generation-native-limited-region");
+        report.put("worldGenerator", "native-default");
+        report.put("upstreamScanProbe", upstreamScanProbe);
+        report.put("upstreamReadinessWaitMs", upstreamReadyWaitNanos / 1_000_000D);
+        if (upstreamProbe != null) report.put("upstream", upstreamProbe.snapshot());
         report.put("profileSpark", profileSpark);
         report.put("warmEntityAdapters", warmEntityAdapters);
         report.put("entityAdapterWarmupMs", entityAdapterWarmupNanos / 1_000_000D);
         report.put("entityAdapterWarmupRegisteredEntity", false);
         report.put("startupPreparationMs", startupNanos / 1_000_000D); report.put("totalMs", (System.nanoTime() - startedNanos) / 1_000_000D);
-        report.put("startupPreparationWindow", "Fixture decode await (maximum 30 seconds), immutable palette preparation and world creation during onEnable, before the benchmark ticker starts");
+        report.put("startupPreparationWindow", upstreamScanProbe
+                ? "Diagnostic options and inert observer/world creation during onEnable; asynchronous BetterStructures readiness is awaited by ticks, before the idle baseline"
+                : "Fixture decode await (maximum 30 seconds), immutable palette preparation, world creation and optional detached entity-adapter warmup during onEnable, before the benchmark ticker starts");
         report.put("verifyBudgetMs", BUDGET_NANOS / 1_000_000D); report.put("maxChunkRequestsInFlight", 1);
         report.put("remainingNativeChunkTickets", remainingTickets); report.put("cases", new ArrayList<>(results));
         Map<String, Object> phases = new LinkedHashMap<>(); tickSamples.forEach((phase, samples) -> phases.put(phase, samples.summary()));
         report.put("tickMs", phases); report.put("overallActiveTickMs", activeTicks.summary());
-        report.put("overallWindow", "Control/fixture FULL generation, readback, per-case 40-tick settle and 200-tick final post-release tail; excludes startup and idle baseline");
-        report.put("limits", List.of("FULL request, native ticket propagation, vanilla generation, unload/save and GC still affect server ticks",
+        report.put("overallWindow", upstreamScanProbe
+                ? "Sixteen zero-write control regions and natural BetterStructures scans/pastes, per-region 40-tick settle and at least 200 post-release tail ticks until observed upstream tickets/events settle; excludes startup, upstream readiness wait and idle baseline"
+                : "Control/fixture FULL generation, readback, per-case 40-tick settle and 200-tick final post-release tail; excludes startup and idle baseline");
+        if (upstreamScanProbe) report.put("limits", List.of(
+                "The harness performs no fixture writes; all structure blocks/entities/loot come from ordinary BetterStructures behavior",
+                "Each region contains sixteen fresh population receipts and one exact SURFACE grid chunk with a fresh ChunkLoadEvent",
+                "Listener readiness and observed new grid chunks establish normal entry conditions; private fitter execution is not instrumented",
+                "Natural terrain fitting can reject every candidate; zero structure events is an observation, not a fabricated placement success",
+                "Events include ancillary natural structures across the lab world; temporal overlap alone is not per-region attribution",
+                "The tail waits for at least 200 ticks, zero observed BetterStructures tickets and two seconds without a structure event, within the ten-minute run deadline",
+                "Server MSPT includes native generation, ticket propagation, BetterStructures scans/pastes, unload/save and GC",
+                "The single control observer stays inert in the world's populator list after completion/disable"));
+        else report.put("limits", List.of("FULL request, native ticket propagation, vanilla generation, unload/save and GC still affect server ticks",
                 "One 16-chunk vanilla control matches 64x64 footprint; 32x32 cases have only four chunks",
                 "Population callback timings are concurrent worker durations, not main-thread MSPT or elapsed time",
                 "Independent main-thread readback and hashing are benchmark validation only; their VERIFY phase is separate from generation but included in overall ticks",
@@ -379,6 +430,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     @Override public void onDisable() {
         fence.cancel(); stage = Stage.STOPPED;
         if (populator != null) populator.deactivate();
+        if (upstreamProbe != null) upstreamProbe.stop();
         if (sparkCapture != null) {
             try { sparkCapture.stop(runId); }
             catch (RuntimeException error) { getLogger().log(Level.WARNING, "Could not stop owned spark capture", error); }
@@ -389,7 +441,8 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         releaseCase();
         // CraftWorld's populator list is an ArrayList iterated by generation workers.
         // Keep this single inert instance until world shutdown instead of racing an active iterator.
-        if (worker != null) worker.shutdownNow();
+        // The queued identity-checked Spark stop must survive disable without waiting on main.
+        if (worker != null) worker.shutdown();
     }
     private record Held(int x, int z, boolean owned) {}
     private static final class Case {
