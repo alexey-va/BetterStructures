@@ -1,0 +1,951 @@
+{
+  "schemaVersion": 1,
+  "analysisKind": "read-only sampled-stack causal assessment",
+  "status": "complete",
+  "conclusion": "The prepared lab run completed and the prior synchronous neighbour-chunk waits are absent from the captured slow-tick call tree. Significant residual slow-tick work remains, including a cold FAWE block-registry initialization reached by the normal per-block EditSession fallback. The exact 2759.14109 ms worst tick cannot be attributed completely to that branch from this aggregated profile.",
+  "artifacts": {
+    "profile": {
+      "file": "prepared-lab5.sparkprofile",
+      "sha256": "1695d964a22b72dbcf8b67e3c668d8b0fdbd1de2e92c30955fcf3270d99b6716"
+    },
+    "runtimeReport": {
+      "file": "prepared-lab5-report.json",
+      "sha256": "e2659db3e13bd1bf77993f4afb954bd7b187bbd4a80cf639c2d2a9a6cd45c659",
+      "runId": "3edb25cf-0d74-4c05-884f-e3154b86de98"
+    },
+    "baselineProfile": {
+      "file": "upstream-real-pack.sparkprofile",
+      "sha256": "ed2b554c7b78db2b9e8be183da968778c25c9d5b23fea9c4f4d6d24b69cb3648"
+    },
+    "faweJar": {
+      "file": "FastAsyncWorldEdit-Paper-2.15.5-SNAPSHOT.jar",
+      "sha256": "9d3603ea0fb57397a9aa99607db61aba71562870fdce19d93493ab064c6b6c91",
+      "sourceCommit": "1079481486d4cf04283aaa905309cf47cbbe9bf1"
+    },
+    "schemaSha256": "2f30adb98ca69145e639d0ff6283ac87d1438d537b5681cd5af707de30e1a0a0"
+  },
+  "methodology": {
+    "decoder": "decode.mjs with the official Spark protobuf schema",
+    "validator": "Imported analyze(Path) from spark-comparison-20261019/summarize.py; its CLI was not run.",
+    "validation": "PASS: all references, unique reachability, nonnegative per-window self weights, root/self conservation",
+    "statisticsCoverFullTickCount": true,
+    "thread": "Server thread",
+    "nodeCount": 25330,
+    "weightMeaning": "Integer weighted sampling milliseconds, not exact instrumented method elapsed time. Method comparison deduplicates same class.method on each ancestor path, merging overloads; nested categories overlap and must not be summed.",
+    "comparisonDesign": "Different natural fresh regions and selected schematics; baseline had 8 completed placements and prepared run had 9. This is a causal-path observation, not a paired A/B speedup estimate.",
+    "slowTickFilterMs": 50.0,
+    "samplingIntervalMs": 1.0
+  },
+  "capture": {
+    "upstream-real-pack": {
+      "startMsk": "2026-10-29T21:32:41.545000+03:00",
+      "endMsk": "2026-10-29T21:36:43.735000+03:00",
+      "durationSeconds": 242.19,
+      "includedTicksMetadata": 59,
+      "totalTicksMetadata": 4589,
+      "weightedMs": 13886,
+      "sampledWindows": 4,
+      "statisticsWindows": 5,
+      "windowMaxMspt": 3054.763797,
+      "validation": "PASS: all references, unique reachability, nonnegative per-window self weights, root/self conservation"
+    },
+    "prepared-lab5": {
+      "startMsk": "2026-10-29T23:14:01.985000+03:00",
+      "endMsk": "2026-10-29T23:19:05.233000+03:00",
+      "durationSeconds": 303.248,
+      "includedTicksMetadata": 88,
+      "totalTicksMetadata": 5991,
+      "weightedMs": 6336,
+      "sampledWindows": 5,
+      "statisticsWindows": 6,
+      "windowMaxMspt": 2759.14109,
+      "validation": "PASS: all references, unique reachability, nonnegative per-window self weights, root/self conservation"
+    }
+  },
+  "runtime": {
+    "server": "1.21.11-2568-f57bd86 (MC: 1.21.11)",
+    "java": "25.0.4.1",
+    "betterStructuresVersion": "2.7.10-ruscrafting.lab.5+upstream.15808b1",
+    "overallActiveTickMs": {
+      "p99Ms": 59.383742,
+      "maxMs": 2759.14109,
+      "samples": 5789,
+      "p95Ms": 27.5356,
+      "p50Ms": 1.529194
+    },
+    "overallWindow": "Sixteen zero-write control regions and natural BetterStructures scans/pastes, per-region 40-tick settle and at least 200 post-release tail ticks until observed upstream tickets/events settle; excludes startup, upstream readiness wait and idle baseline",
+    "baselineTickMs": {
+      "p99Ms": 14.864268,
+      "maxMs": 21.629973,
+      "samples": 200,
+      "p95Ms": 9.419022,
+      "p50Ms": 2.521585
+    },
+    "worstPhaseName": "upstream_surface_control16_2.generate",
+    "worstPhaseTickMs": {
+      "p99Ms": 218.404554,
+      "maxMs": 2759.14109,
+      "samples": 369,
+      "p95Ms": 49.551859,
+      "p50Ms": 2.386228
+    },
+    "tailTickMs": {
+      "p99Ms": 13.118111,
+      "maxMs": 102.118254,
+      "samples": 200,
+      "p95Ms": 3.845931,
+      "p50Ms": 1.027747
+    },
+    "upstreamReadinessWaitMs": 12267.373731,
+    "startupPreparationMs": 2003.207898,
+    "entityAdapterWarmupMs": 1416.362206,
+    "entityAdapterWarmupRegisteredEntity": false,
+    "loadedRealSchematicCount": 103,
+    "harnessFixtureWrites": 0,
+    "freshSurfaceGridChunkEvents": 16,
+    "acceptedBuildPlaceEvents": 9,
+    "buildPasteCompleteEvents": 9,
+    "remainingBetterStructuresChunkTickets": 0,
+    "remainingNativeChunkTickets": 0,
+    "chunkPreparation": {
+      "requested": 83,
+      "collateralSuppressed": 782,
+      "originReadBoundaries": 16,
+      "world": "rc_native_generation_lab",
+      "holdsAcquired": 182,
+      "peakHeld": 25,
+      "held": 0,
+      "maxRequestMs": 32.379494,
+      "failed": false,
+      "alreadyLoaded": 1157,
+      "ringRevalidations": 35,
+      "loaded": 83,
+      "activationScope": 0,
+      "queued": 0,
+      "activeJob": false,
+      "peakActivation": 81,
+      "pasteReadBoundaries": 108309,
+      "fitReadBoundaries": 10,
+      "completed": 26,
+      "failures": 0,
+      "aborted": 0,
+      "retiringScopes": 0,
+      "requestPending": false,
+      "maxPinMs": 5.933006,
+      "notReady": 506,
+      "peakQueued": 1,
+      "holdsReleased": 182,
+      "haloRequests": 83,
+      "enabled": true,
+      "runId": "ecdb2ca4-b800-40ed-86e9-72839b620d14"
+    }
+  },
+  "sampledMethodComparison": [
+    {
+      "label": "sync_chunk_wait",
+      "method": "net.minecraft.server.level.ServerChunkCache.syncLoad",
+      "baselineSampledInclusiveMs": 8607,
+      "preparedSampledInclusiveMs": 0,
+      "preparedWindowWeightsMs": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "terrain_topology",
+      "method": "com.magmaguy.betterstructures.buildingfitter.util.Topology.scan",
+      "baselineSampledInclusiveMs": 4732,
+      "preparedSampledInclusiveMs": 45,
+      "preparedWindowWeightsMs": [
+        44,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "terrain_adequacy",
+      "method": "com.magmaguy.betterstructures.buildingfitter.util.TerrainAdequacy.scan",
+      "baselineSampledInclusiveMs": 21,
+      "preparedSampledInclusiveMs": 23,
+      "preparedWindowWeightsMs": [
+        2,
+        21,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "bukkit_block_write_all_contexts",
+      "method": "org.bukkit.craftbukkit.block.CraftBlock.setBlockData",
+      "baselineSampledInclusiveMs": 4059,
+      "preparedSampledInclusiveMs": 94,
+      "preparedWindowWeightsMs": [
+        44,
+        40,
+        4,
+        3,
+        3
+      ]
+    },
+    {
+      "label": "bs_paste_block",
+      "method": "com.magmaguy.betterstructures.worldedit.Schematic.pasteBlock",
+      "baselineSampledInclusiveMs": 5814,
+      "preparedSampledInclusiveMs": 1847,
+      "preparedWindowWeightsMs": [
+        1596,
+        173,
+        49,
+        15,
+        14
+      ]
+    },
+    {
+      "label": "fawe_close",
+      "method": "com.sk89q.worldedit.EditSession.close",
+      "baselineSampledInclusiveMs": 1266,
+      "preparedSampledInclusiveMs": 1298,
+      "preparedWindowWeightsMs": [
+        1099,
+        147,
+        34,
+        10,
+        8
+      ]
+    },
+    {
+      "label": "fawe_flush",
+      "method": "com.sk89q.worldedit.EditSession.flushQueue",
+      "baselineSampledInclusiveMs": 1266,
+      "preparedSampledInclusiveMs": 1298,
+      "preparedWindowWeightsMs": [
+        1099,
+        147,
+        34,
+        10,
+        8
+      ]
+    },
+    {
+      "label": "fawe_heightmap",
+      "method": "com.fastasyncworldedit.core.extent.processor.heightmap.HeightmapProcessor.processSet",
+      "baselineSampledInclusiveMs": 1072,
+      "preparedSampledInclusiveMs": 953,
+      "preparedWindowWeightsMs": [
+        926,
+        21,
+        3,
+        1,
+        2
+      ]
+    },
+    {
+      "label": "fawe_chunk_read",
+      "method": "com.sk89q.worldedit.bukkit.adapter.impl.fawe.v1_21_11.PaperweightGetBlocks.update",
+      "baselineSampledInclusiveMs": 1047,
+      "preparedSampledInclusiveMs": 918,
+      "preparedWindowWeightsMs": [
+        900,
+        10,
+        5,
+        1,
+        2
+      ]
+    },
+    {
+      "label": "fawe_registry_init",
+      "method": "com.sk89q.worldedit.bukkit.adapter.impl.fawe.v1_21_11.PaperweightFaweAdapter.init",
+      "baselineSampledInclusiveMs": 1035,
+      "preparedSampledInclusiveMs": 878,
+      "preparedWindowWeightsMs": [
+        878,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "fawe_material",
+      "method": "com.sk89q.worldedit.bukkit.adapter.impl.fawe.v1_21_11.PaperweightFaweAdapter.getMaterial",
+      "baselineSampledInclusiveMs": 983,
+      "preparedSampledInclusiveMs": 819,
+      "preparedWindowWeightsMs": [
+        819,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "bukkit_blockdata_factory_all_overloads",
+      "method": "org.bukkit.Bukkit.createBlockData",
+      "baselineSampledInclusiveMs": 663,
+      "preparedSampledInclusiveMs": 549,
+      "preparedWindowWeightsMs": [
+        546,
+        1,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "gc_marker",
+      "method": "native.GC_active",
+      "baselineSampledInclusiveMs": 1203,
+      "preparedSampledInclusiveMs": 666,
+      "preparedWindowWeightsMs": [
+        157,
+        180,
+        145,
+        66,
+        118
+      ]
+    },
+    {
+      "label": "lab_preparation_tick_including_continuations",
+      "method": "com.magmaguy.betterstructures.lab.LabChunkPreparation.tick",
+      "baselineSampledInclusiveMs": 0,
+      "preparedSampledInclusiveMs": 230,
+      "preparedWindowWeightsMs": [
+        187,
+        41,
+        0,
+        0,
+        2
+      ]
+    }
+  ],
+  "primaryStacks": {
+    "faweColdRegistryInitialization": [
+      {
+        "nodeRef": 4990,
+        "method": "com.magmaguy.betterstructures.worldedit.Schematic.pasteBlock",
+        "descriptor": "(Lcom/magmaguy/betterstructures/worldedit/Schematic$PasteBlock;)V",
+        "sampledInclusiveMs": 1362,
+        "windowWeightsMs": [
+          1362,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 4359,
+        "method": "com.sk89q.worldedit.EditSession.close",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 1065,
+        "windowWeightsMs": [
+          1065,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 4358,
+        "method": "com.sk89q.worldedit.EditSession.flushQueue",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 1065,
+        "windowWeightsMs": [
+          1065,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 4307,
+        "method": "com.sk89q.worldedit.extent.AbstractDelegateExtent.commit",
+        "descriptor": "()Lcom/sk89q/worldedit/function/operation/Operation;",
+        "sampledInclusiveMs": 1058,
+        "windowWeightsMs": [
+          1058,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 4306,
+        "method": "com.fastasyncworldedit.core.queue.IQueueExtent.commit",
+        "descriptor": "()Lcom/sk89q/worldedit/function/operation/Operation;",
+        "sampledInclusiveMs": 1058,
+        "windowWeightsMs": [
+          1058,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 4305,
+        "method": "com.fastasyncworldedit.core.queue.implementation.SingleThreadQueueExtent.flush",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 1058,
+        "windowWeightsMs": [
+          1058,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 4304,
+        "method": "com.fastasyncworldedit.core.queue.implementation.SingleThreadQueueExtent.submitUnchecked",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/IQueueChunk;)Ljava/util/concurrent/Future;",
+        "sampledInclusiveMs": 1058,
+        "windowWeightsMs": [
+          1058,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 4303,
+        "method": "com.fastasyncworldedit.core.queue.implementation.chunk.ChunkHolder.call",
+        "descriptor": "()Ljava/util/concurrent/Future;",
+        "sampledInclusiveMs": 1058,
+        "windowWeightsMs": [
+          1058,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 4302,
+        "method": "com.fastasyncworldedit.core.queue.implementation.chunk.ChunkHolder.call",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/IQueueExtent;Lcom/fastasyncworldedit/core/queue/IChunkSet;Ljava/lang/Runnable;)Ljava/util/concurrent/Future;",
+        "sampledInclusiveMs": 1040,
+        "windowWeightsMs": [
+          1040,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3345,
+        "method": "com.fastasyncworldedit.core.extent.processor.BatchProcessorHolder.processSet",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/IChunk;Lcom/fastasyncworldedit/core/queue/IChunkGet;Lcom/fastasyncworldedit/core/queue/IChunkSet;)Lcom/fastasyncworldedit/core/queue/IChunkSet;",
+        "sampledInclusiveMs": 955,
+        "windowWeightsMs": [
+          955,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3344,
+        "method": "com.fastasyncworldedit.core.extent.processor.MultiBatchProcessor.processSet",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/IChunk;Lcom/fastasyncworldedit/core/queue/IChunkGet;Lcom/fastasyncworldedit/core/queue/IChunkSet;)Lcom/fastasyncworldedit/core/queue/IChunkSet;",
+        "sampledInclusiveMs": 955,
+        "windowWeightsMs": [
+          955,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3343,
+        "method": "com.fastasyncworldedit.core.extent.processor.MultiBatchProcessor.processSet",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/IBatchProcessor;Lcom/fastasyncworldedit/core/queue/IChunk;Lcom/fastasyncworldedit/core/queue/IChunkGet;Lcom/fastasyncworldedit/core/queue/IChunkSet;)Lcom/fastasyncworldedit/core/queue/IChunkSet;",
+        "sampledInclusiveMs": 946,
+        "windowWeightsMs": [
+          946,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3342,
+        "method": "com.fastasyncworldedit.core.extent.processor.heightmap.HeightmapProcessor.processSet",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/IChunk;Lcom/fastasyncworldedit/core/queue/IChunkGet;Lcom/fastasyncworldedit/core/queue/IChunkSet;)Lcom/fastasyncworldedit/core/queue/IChunkSet;",
+        "sampledInclusiveMs": 923,
+        "windowWeightsMs": [
+          923,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3341,
+        "method": "com.fastasyncworldedit.core.queue.implementation.blocks.CharBlocks.load",
+        "descriptor": "(I)[C",
+        "sampledInclusiveMs": 898,
+        "windowWeightsMs": [
+          898,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3340,
+        "method": "com.fastasyncworldedit.core.queue.implementation.blocks.CharBlocks$2.get",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/implementation/blocks/CharBlocks;I[C)[C",
+        "sampledInclusiveMs": 898,
+        "windowWeightsMs": [
+          898,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3339,
+        "method": "com.fastasyncworldedit.core.queue.implementation.blocks.CharBlocks$2.get",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/implementation/blocks/CharBlocks;I[CZ)[C",
+        "sampledInclusiveMs": 898,
+        "windowWeightsMs": [
+          898,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3338,
+        "method": "com.fastasyncworldedit.core.queue.implementation.blocks.CharBlocks$Section.update",
+        "descriptor": "(Lcom/fastasyncworldedit/core/queue/implementation/blocks/CharBlocks;IZ)[C",
+        "sampledInclusiveMs": 898,
+        "windowWeightsMs": [
+          898,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3337,
+        "method": "com.sk89q.worldedit.bukkit.adapter.impl.fawe.v1_21_11.PaperweightGetBlocks.update",
+        "descriptor": "(I[CZ)[C",
+        "sampledInclusiveMs": 898,
+        "windowWeightsMs": [
+          898,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3273,
+        "method": "com.sk89q.worldedit.bukkit.adapter.impl.fawe.v1_21_11.PaperweightGetBlocks.ordinal",
+        "descriptor": "(Lnet/minecraft/world/level/block/state/BlockState;Lcom/sk89q/worldedit/bukkit/adapter/impl/fawe/v1_21_11/PaperweightFaweAdapter;)C",
+        "sampledInclusiveMs": 878,
+        "windowWeightsMs": [
+          878,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3272,
+        "method": "com.sk89q.worldedit.bukkit.adapter.impl.fawe.v1_21_11.PaperweightFaweAdapter.adaptToChar",
+        "descriptor": "(Lnet/minecraft/world/level/block/state/BlockState;)C",
+        "sampledInclusiveMs": 878,
+        "windowWeightsMs": [
+          878,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "nodeRef": 3271,
+        "method": "com.sk89q.worldedit.bukkit.adapter.impl.fawe.v1_21_11.PaperweightFaweAdapter.init",
+        "descriptor": "()Z",
+        "sampledInclusiveMs": 878,
+        "windowWeightsMs": [
+          878,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "normalBukkitPhysicsWrite": [
+      {
+        "nodeRef": 24964,
+        "method": "java.lang.Thread.run",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 3953,
+        "windowWeightsMs": [
+          1991,
+          1400,
+          234,
+          103,
+          225
+        ]
+      },
+      {
+        "nodeRef": 24963,
+        "method": "java.lang.Thread.runWith",
+        "descriptor": "(Ljava/lang/Object;Ljava/lang/Runnable;)V",
+        "sampledInclusiveMs": 3953,
+        "windowWeightsMs": [
+          1991,
+          1400,
+          234,
+          103,
+          225
+        ]
+      },
+      {
+        "nodeRef": 24962,
+        "method": "net.minecraft.server.MinecraftServer$$Lambda.0x000000003605bb00.run",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 3953,
+        "windowWeightsMs": [
+          1991,
+          1400,
+          234,
+          103,
+          225
+        ]
+      },
+      {
+        "nodeRef": 24961,
+        "method": "net.minecraft.server.MinecraftServer.lambda$spin$2",
+        "descriptor": "(Ljava/util/concurrent/atomic/AtomicReference;)V",
+        "sampledInclusiveMs": 3953,
+        "windowWeightsMs": [
+          1991,
+          1400,
+          234,
+          103,
+          225
+        ]
+      },
+      {
+        "nodeRef": 24959,
+        "method": "net.minecraft.server.MinecraftServer.runServer",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 3952,
+        "windowWeightsMs": [
+          1990,
+          1400,
+          234,
+          103,
+          225
+        ]
+      },
+      {
+        "nodeRef": 24958,
+        "method": "net.minecraft.server.MinecraftServer.processPacketsAndTick",
+        "descriptor": "(Z)V",
+        "sampledInclusiveMs": 3946,
+        "windowWeightsMs": [
+          1989,
+          1397,
+          233,
+          103,
+          224
+        ]
+      },
+      {
+        "nodeRef": 24957,
+        "method": "net.minecraft.server.dedicated.DedicatedServer.tickServer",
+        "descriptor": "(Ljava/util/function/BooleanSupplier;)V",
+        "sampledInclusiveMs": 3694,
+        "windowWeightsMs": [
+          1769,
+          1378,
+          233,
+          103,
+          211
+        ]
+      },
+      {
+        "nodeRef": 24956,
+        "method": "net.minecraft.server.MinecraftServer.tickServer",
+        "descriptor": "(Ljava/util/function/BooleanSupplier;)V",
+        "sampledInclusiveMs": 3694,
+        "windowWeightsMs": [
+          1769,
+          1378,
+          233,
+          103,
+          211
+        ]
+      },
+      {
+        "nodeRef": 24189,
+        "method": "net.minecraft.server.MinecraftServer.tickChildren",
+        "descriptor": "(Ljava/util/function/BooleanSupplier;)V",
+        "sampledInclusiveMs": 3559,
+        "windowWeightsMs": [
+          1739,
+          1355,
+          225,
+          95,
+          145
+        ]
+      },
+      {
+        "nodeRef": 16415,
+        "method": "org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 1896,
+        "windowWeightsMs": [
+          816,
+          876,
+          158,
+          17,
+          29
+        ]
+      },
+      {
+        "nodeRef": 16394,
+        "method": "org.bukkit.craftbukkit.scheduler.CraftTask.run",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 1871,
+        "windowWeightsMs": [
+          803,
+          868,
+          154,
+          17,
+          29
+        ]
+      },
+      {
+        "nodeRef": 11972,
+        "method": "com.magmaguy.betterstructures.worldedit.Schematic$1.run",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 941,
+        "windowWeightsMs": [
+          331,
+          501,
+          74,
+          15,
+          20
+        ]
+      },
+      {
+        "nodeRef": 10189,
+        "method": "com.magmaguy.betterstructures.worldedit.Schematic$ClipboardPasteOperation.pasteNext",
+        "descriptor": "()V",
+        "sampledInclusiveMs": 509,
+        "windowWeightsMs": [
+          240,
+          186,
+          51,
+          15,
+          17
+        ]
+      },
+      {
+        "nodeRef": 10172,
+        "method": "com.magmaguy.betterstructures.worldedit.Schematic.pasteClipboardBlock",
+        "descriptor": "(Lcom/sk89q/worldedit/extent/clipboard/Clipboard;Lorg/bukkit/Location;Ljava/util/function/Function;Lcom/magmaguy/betterstructures/worldedit/Schematic$PasteCoordinate;)V",
+        "sampledInclusiveMs": 507,
+        "windowWeightsMs": [
+          239,
+          185,
+          51,
+          15,
+          17
+        ]
+      },
+      {
+        "nodeRef": 10069,
+        "method": "com.magmaguy.betterstructures.worldedit.Schematic.pasteBlock",
+        "descriptor": "(Lcom/magmaguy/betterstructures/worldedit/Schematic$PasteBlock;)V",
+        "sampledInclusiveMs": 485,
+        "windowWeightsMs": [
+          234,
+          173,
+          49,
+          15,
+          14
+        ]
+      },
+      {
+        "nodeRef": 10068,
+        "method": "org.bukkit.craftbukkit.block.CraftBlock.setBlockData",
+        "descriptor": "(Lorg/bukkit/block/data/BlockData;)V",
+        "sampledInclusiveMs": 88,
+        "windowWeightsMs": [
+          44,
+          36,
+          2,
+          3,
+          3
+        ]
+      },
+      {
+        "nodeRef": 10067,
+        "method": "org.bukkit.craftbukkit.block.CraftBlock.setBlockData",
+        "descriptor": "(Lorg/bukkit/block/data/BlockData;Z)V",
+        "sampledInclusiveMs": 88,
+        "windowWeightsMs": [
+          44,
+          36,
+          2,
+          3,
+          3
+        ]
+      }
+    ]
+  },
+  "sampleWindows": [
+    {
+      "windowId": 29888414,
+      "startMsk": "2026-10-29T23:14:01.997000+03:00",
+      "endMsk": "2026-10-29T23:15:02.332000+03:00",
+      "tickCount": 1144,
+      "maxMspt": 2759.14109,
+      "sampledMainThreadMs": 3706,
+      "adapterInitSampledMs": 878
+    },
+    {
+      "windowId": 29888415,
+      "startMsk": "2026-10-29T23:15:02.318000+03:00",
+      "endMsk": "2026-10-29T23:16:02.249000+03:00",
+      "tickCount": 1195,
+      "maxMspt": 437.449602,
+      "sampledMainThreadMs": 1693,
+      "adapterInitSampledMs": 0
+    },
+    {
+      "windowId": 29888416,
+      "startMsk": "2026-10-29T23:16:02.249000+03:00",
+      "endMsk": "2026-10-29T23:17:02.083000+03:00",
+      "tickCount": 1196,
+      "maxMspt": 189.219005,
+      "sampledMainThreadMs": 393,
+      "adapterInitSampledMs": 0
+    },
+    {
+      "windowId": 29888417,
+      "startMsk": "2026-10-29T23:17:02.083000+03:00",
+      "endMsk": "2026-10-29T23:18:02.090000+03:00",
+      "tickCount": 1201,
+      "maxMspt": 102.487636,
+      "sampledMainThreadMs": 178,
+      "adapterInitSampledMs": 0
+    },
+    {
+      "windowId": 29888418,
+      "startMsk": "2026-10-29T23:18:02.090000+03:00",
+      "endMsk": "2026-10-29T23:19:02.061000+03:00",
+      "tickCount": 1199,
+      "maxMspt": 102.118254,
+      "sampledMainThreadMs": 366,
+      "adapterInitSampledMs": 0
+    },
+    {
+      "windowId": 29888419,
+      "startMsk": "2026-10-29T23:19:02.061000+03:00",
+      "endMsk": "2026-10-29T23:19:04.857000+03:00",
+      "tickCount": 56,
+      "maxMspt": 102.118254,
+      "sampledMainThreadMs": null,
+      "adapterInitSampledMs": null
+    }
+  ],
+  "findings": [
+    {
+      "claim": "No ServerChunkCache.syncLoad frame is present in the prepared slow-tick call tree; baseline contained 8607 inclusive sampled ms.",
+      "scope": "Absence in captured slow ticks, not proof that no synchronous read/load occurred anywhere during the run."
+    },
+    {
+      "claim": "Topology.scan is 45 inclusive sampled ms (baseline4732). The ordinary Schematic.pasteBlock -> CraftBlock.setBlockData path is88 ms; all CraftBlock.setBlockData contexts total94 ms (baseline4059). Neither current path contains syncLoad.",
+      "scope": "The measured problematic fitter and ordinary physics-wait paths have disappeared from this capture; counts are not normalized for different structures."
+    },
+    {
+      "claim": "EditSession.close/flushQueue totals1298 inclusive sampled ms. Its heightmap/read path reaches PaperweightFaweAdapter.init for878 ms, all in the first sampled window; the init subtree includes BlockState.getMaterial833 ms.",
+      "scope": "These are nested, overlapping weights. The fallback is a real part of BetterStructures normal paste semantics, not evidence that every block or clipboard is pasted through FAWE."
+    },
+    {
+      "claim": "The first minute bucket contains both the878 ms adapter initialization and the2759.14109 ms window maximum.",
+      "scope": "The aggregate tree has no exact per-tick sample correlation; co-location in a minute bucket does not prove the entire maximum tick was FAWE initialization."
+    },
+    {
+      "claim": "Native GC_active root samples total666 ms across the capture; safepoint blocking also appears in call stacks.",
+      "scope": "Not exact GC-pause duration, not an additional amount to sum with all inclusive branches, and insufficient to assign GC or CPU contention as the sole cause of the maximum tick."
+    },
+    {
+      "claim": "The coordinator completed26 jobs with83 requests/83 completions and182 holds acquired/released; failed=false, failures=0, aborted=0 and all active/pending/queued/held/retiring state is empty.",
+      "scope": "Demonstrates liveness and cleanup in this run. It does not establish a no-lag guarantee; max request32.379494 ms and max pin5.933006 ms are measured native calls."
+    }
+  ],
+  "publicNoWorldWritePrewarm": {
+    "status": "source-supported candidate; not executed in this task",
+    "provider": "Exact FAWE2.15.5-SNAPSHOT source1079481, PaperweightFaweAdapter for Minecraft1.21.11",
+    "publicCall": "BukkitAdapter.adapt(Bukkit.createBlockData(\"minecraft:stone\"));",
+    "executionPoint": "Main thread after FAWE platform/registry readiness and before the benchmark active window; measure separately as FAWE registry warmup. Do not initialize BukkitAdapter before the FAWE adapter is available because its enum constructor captures the current adapter or a SimpleBukkitAdapter fallback.",
+    "sourceProof": "BukkitAdapter.adapt(BlockData) delegates to the registered adapter. PaperweightFaweAdapter.adapt extracts the detached CraftBlockData state and calls adaptToChar; if uninitialized this invokes init, which walks BlockTypesCache.states and material registry conversion. This path uses no World/Chunk argument, EditSession or world block/entity write.",
+    "limits": "Moves the demonstrated one-time registry work into disclosed setup; does not remove its CPU/allocation cost, does not warm every FAWE subsystem, does not change the coordinator or physics, and cannot promise elimination of the entire2.759 s worst tick. No reflection or direct internal init call is proposed.",
+    "sources": [
+      {
+        "claim": "Public conversion and adapter capture",
+        "url": "https://github.com/IntellectualSites/FastAsyncWorldEdit/blob/1079481486d4cf04283aaa905309cf47cbbe9bf1/worldedit-bukkit/src/main/java/com/sk89q/worldedit/bukkit/BukkitAdapter.java#L66-L82"
+      },
+      {
+        "claim": "Public adapt(BlockData)",
+        "url": "https://github.com/IntellectualSites/FastAsyncWorldEdit/blob/1079481486d4cf04283aaa905309cf47cbbe9bf1/worldedit-bukkit/src/main/java/com/sk89q/worldedit/bukkit/BukkitAdapter.java#L440-L451"
+      },
+      {
+        "claim": "Detached conversion reaches lazy initialization",
+        "url": "https://github.com/IntellectualSites/FastAsyncWorldEdit/blob/1079481486d4cf04283aaa905309cf47cbbe9bf1/worldedit-bukkit/adapters/adapter-1_21_11/src/main/java/com/sk89q/worldedit/bukkit/adapter/impl/fawe/v1_21_11/PaperweightFaweAdapter.java#L386-L415"
+      },
+      {
+        "claim": "Initialization walks block states; material conversion constructs detached BlockData",
+        "url": "https://github.com/IntellectualSites/FastAsyncWorldEdit/blob/1079481486d4cf04283aaa905309cf47cbbe9bf1/worldedit-bukkit/adapters/adapter-1_21_11/src/main/java/com/sk89q/worldedit/bukkit/adapter/impl/fawe/v1_21_11/PaperweightFaweAdapter.java#L210-L247"
+      },
+      {
+        "claim": "Detached material conversion",
+        "url": "https://github.com/IntellectualSites/FastAsyncWorldEdit/blob/1079481486d4cf04283aaa905309cf47cbbe9bf1/worldedit-bukkit/adapters/adapter-1_21_11/src/main/java/com/sk89q/worldedit/bukkit/adapter/impl/fawe/v1_21_11/PaperweightFaweAdapter.java#L265-L269"
+      },
+      {
+        "claim": "FAWE adapter is installed during setupPreWorldData/loadAdapter",
+        "url": "https://github.com/IntellectualSites/FastAsyncWorldEdit/blob/1079481486d4cf04283aaa905309cf47cbbe9bf1/worldedit-bukkit/src/main/java/com/sk89q/worldedit/bukkit/WorldEditPlugin.java#L418-L437"
+      }
+    ]
+  },
+  "limitations": [
+    "Only Server thread and only ticks over50 ms were sampled. Work in unsampled ticks and worker threads is outside this call tree.",
+    "Spark call-tree weights are in time-window buckets, not exact tick spans; no exact causal decomposition of the2759.14109 ms tick is claimed.",
+    "Some samples have partial/native roots, including a Schematic.pasteBlock root with1362 ms; missing upper frames must not be invented.",
+    "The last statistics window has56 ticks but no corresponding sampled call-tree window. Adjacent statistics windows also have slight boundary overlap.",
+    "Startup, upstream readiness wait, idle baseline and the measured active window are different scopes. The startup entity prewarm remains explicitly reported.",
+    "This analysis makes no production runtime claim and performed no source edits, activation, reload or restart."
+  ]
+}

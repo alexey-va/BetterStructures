@@ -1,0 +1,1371 @@
+{
+  "status": "complete",
+  "message": "All zero-write regions populated; upstream observations settled",
+  "runId": "3edb25cf-0d74-4c05-884f-e3154b86de98",
+  "startedAt": "2026-10-29T20:13:48.833951846Z",
+  "server": "1.21.11-2568-f57bd86 (MC: 1.21.11)",
+  "java": "25.0.4.1",
+  "world": "rc_native_generation_lab",
+  "mode": "upstream-scan-with-lab-readiness",
+  "worldGenerator": "native-default",
+  "upstreamScanProbe": true,
+  "requireChunkPreparation": true,
+  "upstreamReadinessWaitMs": 12267.373731,
+  "upstream": {
+    "providerVersion": "2.7.10-ruscrafting.lab.5+upstream.15808b1",
+    "listenerReady": true,
+    "worldSeed": "7891980474047502678",
+    "distanceSurfaceChunks": 27,
+    "chunkPreparation": {
+      "requested": 83,
+      "collateralSuppressed": 782,
+      "originReadBoundaries": 16,
+      "world": "rc_native_generation_lab",
+      "holdsAcquired": 182,
+      "peakHeld": 25,
+      "held": 0,
+      "maxRequestMs": 32.379494,
+      "failed": false,
+      "alreadyLoaded": 1157,
+      "ringRevalidations": 35,
+      "loaded": 83,
+      "activationScope": 0,
+      "queued": 0,
+      "activeJob": false,
+      "peakActivation": 81,
+      "pasteReadBoundaries": 108309,
+      "fitReadBoundaries": 10,
+      "completed": 26,
+      "failures": 0,
+      "aborted": 0,
+      "retiringScopes": 0,
+      "requestPending": false,
+      "maxPinMs": 5.933006,
+      "notReady": 506,
+      "peakQueued": 1,
+      "holdsReleased": 182,
+      "haloRequests": 83,
+      "enabled": true,
+      "runId": "ecdb2ca4-b800-40ed-86e9-72839b620d14"
+    },
+    "maxOffsetSurfaceChunks": 5,
+    "spawnProtectionRadiusBlocks": 100,
+    "loadedRealSchematicCount": 103,
+    "loadedSchematics": [
+      "betterstructures_airballoon_barren.schem",
+      "betterstructures_airballoon_desert.schem",
+      "betterstructures_airballoon_end.schem",
+      "betterstructures_airballoon_grassy.schem",
+      "betterstructures_airballoon_nether.schem",
+      "betterstructures_airballoon_tundra.schem",
+      "betterstructures_boat_east.schem",
+      "betterstructures_boat_end.schem",
+      "betterstructures_boat_nether.schem",
+      "betterstructures_boat_north.schem",
+      "betterstructures_boat_south.schem",
+      "betterstructures_boat_west.schem",
+      "betterstructures_cistern_barren.schem",
+      "betterstructures_cistern_desert.schem",
+      "betterstructures_cistern_end.schem",
+      "betterstructures_cistern_grassy.schem",
+      "betterstructures_cistern_nether.schem",
+      "betterstructures_cistern_tundra.schem",
+      "betterstructures_cropfarm_barren.schem",
+      "betterstructures_cropfarm_desert.schem",
+      "betterstructures_cropfarm_end.schem",
+      "betterstructures_cropfarm_grassy.schem",
+      "betterstructures_cropfarm_nether.schem",
+      "betterstructures_cropfarm_tundra.schem",
+      "betterstructures_dungeon_barren.schem",
+      "betterstructures_dungeon_desert.schem",
+      "betterstructures_dungeon_end.schem",
+      "betterstructures_dungeon_grassy.schem",
+      "betterstructures_dungeon_nether.schem",
+      "betterstructures_dungeon_tundra.schem",
+      "betterstructures_graveyard_barren.schem",
+      "betterstructures_graveyard_desert.schem",
+      "betterstructures_graveyard_end.schem",
+      "betterstructures_graveyard_grassy.schem",
+      "betterstructures_graveyard_nether.schem",
+      "betterstructures_graveyard_tundra.schem",
+      "betterstructures_large_skyisland_barren.schem",
+      "betterstructures_large_skyisland_desert.schem",
+      "betterstructures_large_skyisland_end.schem",
+      "betterstructures_large_skyisland_grassy.schem",
+      "betterstructures_large_skyisland_nether.schem",
+      "betterstructures_large_skyisland_tundra.schem",
+      "betterstructures_mine_barren.schem",
+      "betterstructures_mine_connector_deep.schem",
+      "betterstructures_mine_connector_end.schem",
+      "betterstructures_mine_connector_nether.schem",
+      "betterstructures_mine_connector_shallow.schem",
+      "betterstructures_mine_desert.schem",
+      "betterstructures_mine_end.schem",
+      "betterstructures_mine_grassland.schem",
+      "betterstructures_mine_nether.schem",
+      "betterstructures_mine_oredeposit_deep.schem",
+      "betterstructures_mine_oredeposit_end.schem",
+      "betterstructures_mine_oredeposit_nether.schem",
+      "betterstructures_mine_oredeposit_shallow.schem",
+      "betterstructures_mine_storage_deep.schem",
+      "betterstructures_mine_storage_end.schem",
+      "betterstructures_mine_storage_nether.schem",
+      "betterstructures_mine_storage_shallow.schem",
+      "betterstructures_mine_surfacebore_barren.schem",
+      "betterstructures_mine_surfacebore_desert.schem",
+      "betterstructures_mine_surfacebore_end.schem",
+      "betterstructures_mine_surfacebore_grassy.schem",
+      "betterstructures_mine_surfacebore_nether.schem",
+      "betterstructures_mine_surfacebore_tundra.schem",
+      "betterstructures_mine_tailingdump_deep.schem",
+      "betterstructures_mine_tailingdump_end.schem",
+      "betterstructures_mine_tailingdump_nether.schem",
+      "betterstructures_mine_tailingdump_shallow.schem",
+      "betterstructures_mine_tundra.schem",
+      "betterstructures_raft_east.schem",
+      "betterstructures_raft_end.schem",
+      "betterstructures_raft_nether.schem",
+      "betterstructures_raft_north.schem",
+      "betterstructures_raft_south.schem",
+      "betterstructures_raft_west.schem",
+      "betterstructures_skyisland_barren.schem",
+      "betterstructures_skyisland_crimsonforest.schem",
+      "betterstructures_skyisland_desert.schem",
+      "betterstructures_skyisland_end.schem",
+      "betterstructures_skyisland_grassy.schem",
+      "betterstructures_skyisland_netherwastes.schem",
+      "betterstructures_skyisland_soulsand.schem",
+      "betterstructures_skyisland_tundra.schem",
+      "betterstructures_skyisland_warpedforest.schem",
+      "betterstructures_tomb_barren.schem",
+      "betterstructures_tomb_desert.schem",
+      "betterstructures_tomb_end.schem",
+      "betterstructures_tomb_grassy.schem",
+      "betterstructures_tomb_nether.schem",
+      "betterstructures_tomb_tundra.schem",
+      "betterstructures_waypoint_barren.schem",
+      "betterstructures_waypoint_desert.schem",
+      "betterstructures_waypoint_end.schem",
+      "betterstructures_waypoint_grassy.schem",
+      "betterstructures_waypoint_nether.schem",
+      "betterstructures_waypoint_tundra.schem",
+      "betterstructures_well_barren.schem",
+      "betterstructures_well_desert.schem",
+      "betterstructures_well_end.schem",
+      "betterstructures_well_grassy.schem",
+      "betterstructures_well_nether.schem",
+      "betterstructures_well_tundra.schem"
+    ],
+    "surfaceSchematicRegistryEntries": 54,
+    "harnessFixtureWrites": 0,
+    "plannedSurfaceGridChunks": 16,
+    "freshSurfaceGridChunkEvents": 16,
+    "buildPlaceEvents": 9,
+    "acceptedBuildPlaceEvents": 9,
+    "cancelledBuildPlaceEvents": 0,
+    "buildPasteCompleteEvents": 9,
+    "remainingBetterStructuresChunkTickets": 0,
+    "naturalStructureEvents": [
+      {
+        "schematic": "betterstructures_graveyard_grassy.schem",
+        "position": [
+          6107048,
+          70,
+          -8200
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:14:38.623010103Z"
+      },
+      {
+        "schematic": "betterstructures_graveyard_grassy.schem",
+        "position": [
+          6107041,
+          67,
+          -8210
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:14:47.165804881Z"
+      },
+      {
+        "schematic": "betterstructures_mine_surfacebore_grassy.schem",
+        "position": [
+          6109608,
+          77,
+          -8216
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:15:05.045376418Z"
+      },
+      {
+        "schematic": "betterstructures_mine_surfacebore_grassy.schem",
+        "position": [
+          6109592,
+          28,
+          -8240
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:15:16.772545789Z"
+      },
+      {
+        "schematic": "betterstructures_waypoint_grassy.schem",
+        "position": [
+          6112232,
+          70,
+          -8184
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:15:26.965455415Z"
+      },
+      {
+        "schematic": "betterstructures_waypoint_grassy.schem",
+        "position": [
+          6112224,
+          68,
+          -8187
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:15:32.600951193Z"
+      },
+      {
+        "schematic": "betterstructures_dungeon_grassy.schem",
+        "position": [
+          6114744,
+          64,
+          -8264
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:15:52.349365004Z"
+      },
+      {
+        "schematic": "betterstructures_dungeon_grassy.schem",
+        "position": [
+          6114735,
+          46,
+          -8274
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:15:57.133135771Z"
+      },
+      {
+        "schematic": "betterstructures_tomb_grassy.schem",
+        "position": [
+          6106936,
+          66,
+          -5512
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:16:14.358196992Z"
+      },
+      {
+        "schematic": "betterstructures_tomb_grassy.schem",
+        "position": [
+          6106926,
+          42,
+          -5528
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:16:22.524716257Z"
+      },
+      {
+        "schematic": "betterstructures_cistern_barren.schem",
+        "position": [
+          6109512,
+          66,
+          -5544
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:16:36.901528113Z"
+      },
+      {
+        "schematic": "betterstructures_cistern_barren.schem",
+        "position": [
+          6109507,
+          56,
+          -5552
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:16:39.319657831Z"
+      },
+      {
+        "schematic": "betterstructures_cropfarm_grassy.schem",
+        "position": [
+          6114824,
+          63,
+          -5592
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:17:05.050199305Z"
+      },
+      {
+        "schematic": "betterstructures_cropfarm_grassy.schem",
+        "position": [
+          6114813,
+          61,
+          -5604
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:17:08.920298655Z"
+      },
+      {
+        "schematic": "betterstructures_dungeon_grassy.schem",
+        "position": [
+          6114664,
+          70,
+          -2968
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:18:06.715900105Z"
+      },
+      {
+        "schematic": "betterstructures_dungeon_grassy.schem",
+        "position": [
+          6114655,
+          52,
+          -2978
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:18:10.808720852Z"
+      },
+      {
+        "schematic": "betterstructures_waypoint_barren.schem",
+        "position": [
+          6112168,
+          64,
+          -408
+        ],
+        "type": "BuildPlaceEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:18:43.651598954Z"
+      },
+      {
+        "schematic": "betterstructures_waypoint_barren.schem",
+        "position": [
+          6112160,
+          62,
+          -411
+        ],
+        "type": "BuildPasteCompleteEvent",
+        "cancelled": false,
+        "at": "2026-10-29T20:18:45.212343564Z"
+      }
+    ],
+    "surfaceGridRegions": [
+      {
+        "cellZ": -19,
+        "targetChunkX": 381689,
+        "targetChunkZ": -513,
+        "case": "upstream_surface_control16_1",
+        "cellX": 14136
+      },
+      {
+        "cellZ": -19,
+        "targetChunkX": 381850,
+        "targetChunkZ": -514,
+        "case": "upstream_surface_control16_2",
+        "cellX": 14142
+      },
+      {
+        "cellZ": -19,
+        "targetChunkX": 382013,
+        "targetChunkZ": -512,
+        "case": "upstream_surface_control16_3",
+        "cellX": 14148
+      },
+      {
+        "cellZ": -19,
+        "targetChunkX": 382171,
+        "targetChunkZ": -517,
+        "case": "upstream_surface_control16_4",
+        "cellX": 14154
+      },
+      {
+        "cellZ": -13,
+        "targetChunkX": 381683,
+        "targetChunkZ": -346,
+        "case": "upstream_surface_control16_5",
+        "cellX": 14136
+      },
+      {
+        "cellZ": -13,
+        "targetChunkX": 381844,
+        "targetChunkZ": -347,
+        "case": "upstream_surface_control16_6",
+        "cellX": 14142
+      },
+      {
+        "cellZ": -13,
+        "targetChunkX": 382007,
+        "targetChunkZ": -356,
+        "case": "upstream_surface_control16_7",
+        "cellX": 14148
+      },
+      {
+        "cellZ": -13,
+        "targetChunkX": 382176,
+        "targetChunkZ": -350,
+        "case": "upstream_surface_control16_8",
+        "cellX": 14154
+      },
+      {
+        "cellZ": -7,
+        "targetChunkX": 381684,
+        "targetChunkZ": -191,
+        "case": "upstream_surface_control16_9",
+        "cellX": 14136
+      },
+      {
+        "cellZ": -7,
+        "targetChunkX": 381843,
+        "targetChunkZ": -194,
+        "case": "upstream_surface_control16_10",
+        "cellX": 14142
+      },
+      {
+        "cellZ": -7,
+        "targetChunkX": 382008,
+        "targetChunkZ": -192,
+        "case": "upstream_surface_control16_11",
+        "cellX": 14148
+      },
+      {
+        "cellZ": -7,
+        "targetChunkX": 382166,
+        "targetChunkZ": -186,
+        "case": "upstream_surface_control16_12",
+        "cellX": 14154
+      },
+      {
+        "cellZ": -1,
+        "targetChunkX": 381686,
+        "targetChunkZ": -27,
+        "case": "upstream_surface_control16_13",
+        "cellX": 14136
+      },
+      {
+        "cellZ": -1,
+        "targetChunkX": 381845,
+        "targetChunkZ": -28,
+        "case": "upstream_surface_control16_14",
+        "cellX": 14142
+      },
+      {
+        "cellZ": -1,
+        "targetChunkX": 382010,
+        "targetChunkZ": -26,
+        "case": "upstream_surface_control16_15",
+        "cellX": 14148
+      },
+      {
+        "cellZ": -1,
+        "targetChunkX": 382168,
+        "targetChunkZ": -31,
+        "case": "upstream_surface_control16_16",
+        "cellX": 14154
+      }
+    ],
+    "observation": "Only normal BetterStructures listeners choose and place real content. Grid selection guarantees eligible coordinates, not a successful terrain fit or any minimum structure event count. Events include ancillary natural structures in this lab world."
+  },
+  "profileSpark": true,
+  "warmEntityAdapters": true,
+  "entityAdapterWarmupMs": 1416.362206,
+  "entityAdapterWarmupRegisteredEntity": false,
+  "startupPreparationMs": 2003.207898,
+  "totalMs": 316019.633669,
+  "startupPreparationWindow": "Diagnostic options and inert observer/world creation during onEnable; asynchronous BetterStructures readiness is awaited by ticks, before the idle baseline",
+  "verifyBudgetMs": 1.5,
+  "maxChunkRequestsInFlight": 1,
+  "remainingNativeChunkTickets": 0,
+  "cases": [
+    {
+      "name": "upstream_surface_control16_1",
+      "control": true,
+      "origin": [
+        6107008,
+        200,
+        -8224
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 1.520812,
+      "populationMaxChunkMs": 1.373257,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 17597.926984,
+      "maxFullRequestMs": 122.778889,
+      "maxChunkCallbackMs": 4.022534,
+      "chunksAlreadyLoadedAtRequest": 12,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 1.60807,
+      "totalCaseMs": 19604.134152,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 2.538762,
+      "ticketReadbackMs": 12.463096,
+      "finishCaseOwnMs": 21.783385
+    },
+    {
+      "name": "upstream_surface_control16_2",
+      "control": true,
+      "origin": [
+        6109584,
+        200,
+        -8240
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.329078,
+      "populationMaxChunkMs": 0.13456,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 21227.618855,
+      "maxFullRequestMs": 13.536834,
+      "maxChunkCallbackMs": 0.812418,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.408108,
+      "totalCaseMs": 23226.776035,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.178443,
+      "ticketReadbackMs": 1.880303,
+      "finishCaseOwnMs": 2.835935
+    },
+    {
+      "name": "upstream_surface_control16_3",
+      "control": true,
+      "origin": [
+        6112192,
+        200,
+        -8208
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.079843,
+      "populationMaxChunkMs": 0.010031,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 25194.13813,
+      "maxFullRequestMs": 7.687191,
+      "maxChunkCallbackMs": 3.163541,
+      "chunksAlreadyLoadedAtRequest": 12,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.066248,
+      "totalCaseMs": 27194.2945,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.218085,
+      "ticketReadbackMs": 0.538411,
+      "finishCaseOwnMs": 1.010783
+    },
+    {
+      "name": "upstream_surface_control16_4",
+      "control": true,
+      "origin": [
+        6114720,
+        200,
+        -8288
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.098852,
+      "populationMaxChunkMs": 0.012067,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 22048.333236,
+      "maxFullRequestMs": 82.123761,
+      "maxChunkCallbackMs": 1.155401,
+      "chunksAlreadyLoadedAtRequest": 12,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.187896,
+      "totalCaseMs": 24052.275576,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.182886,
+      "ticketReadbackMs": 0.648188,
+      "finishCaseOwnMs": 1.471215
+    },
+    {
+      "name": "upstream_surface_control16_5",
+      "control": true,
+      "origin": [
+        6106912,
+        200,
+        -5552
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.103134,
+      "populationMaxChunkMs": 0.009172,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 20092.248514,
+      "maxFullRequestMs": 9.411892,
+      "maxChunkCallbackMs": 2.59394,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.22551,
+      "totalCaseMs": 22092.730692,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.136508,
+      "ticketReadbackMs": 0.383517,
+      "finishCaseOwnMs": 0.976771
+    },
+    {
+      "name": "upstream_surface_control16_6",
+      "control": true,
+      "origin": [
+        6109488,
+        200,
+        -5568
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.032601,
+      "populationMaxChunkMs": 0.007553,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 25648.483224,
+      "maxFullRequestMs": 14.734226,
+      "maxChunkCallbackMs": 1.273253,
+      "chunksAlreadyLoadedAtRequest": 12,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.276659,
+      "totalCaseMs": 27648.887919,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.17198,
+      "ticketReadbackMs": 0.295006,
+      "finishCaseOwnMs": 0.910645
+    },
+    {
+      "name": "upstream_surface_control16_7",
+      "control": true,
+      "origin": [
+        6112096,
+        200,
+        -5712
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.021957,
+      "populationMaxChunkMs": 0.001772,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 12498.813299,
+      "maxFullRequestMs": 3.179322,
+      "maxChunkCallbackMs": 0.297021,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.048991,
+      "totalCaseMs": 14499.163243,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.147682,
+      "ticketReadbackMs": 0.211031,
+      "finishCaseOwnMs": 0.58906
+    },
+    {
+      "name": "upstream_surface_control16_8",
+      "control": true,
+      "origin": [
+        6114800,
+        200,
+        -5616
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.022989,
+      "populationMaxChunkMs": 0.002633,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 9298.91092,
+      "maxFullRequestMs": 2.45615,
+      "maxChunkCallbackMs": 0.299456,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.171786,
+      "totalCaseMs": 11298.943262,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.098738,
+      "ticketReadbackMs": 0.391943,
+      "finishCaseOwnMs": 0.929143
+    },
+    {
+      "name": "upstream_surface_control16_9",
+      "control": true,
+      "origin": [
+        6106928,
+        200,
+        -3072
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.019282,
+      "populationMaxChunkMs": 0.002014,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 14999.08465,
+      "maxFullRequestMs": 6.032273,
+      "maxChunkCallbackMs": 0.188746,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.17128,
+      "totalCaseMs": 17000.068079,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.114293,
+      "ticketReadbackMs": 0.536905,
+      "finishCaseOwnMs": 1.08185
+    },
+    {
+      "name": "upstream_surface_control16_10",
+      "control": true,
+      "origin": [
+        6109472,
+        200,
+        -3120
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.019684,
+      "populationMaxChunkMs": 0.00247,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 11046.661531,
+      "maxFullRequestMs": 3.547794,
+      "maxChunkCallbackMs": 0.164732,
+      "chunksAlreadyLoadedAtRequest": 12,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.153753,
+      "totalCaseMs": 13046.966465,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.251709,
+      "ticketReadbackMs": 0.23387,
+      "finishCaseOwnMs": 1.013571
+    },
+    {
+      "name": "upstream_surface_control16_11",
+      "control": true,
+      "origin": [
+        6112112,
+        200,
+        -3088
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.022647,
+      "populationMaxChunkMs": 0.002217,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 8496.799433,
+      "maxFullRequestMs": 2.088061,
+      "maxChunkCallbackMs": 0.222075,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.056821,
+      "totalCaseMs": 10497.043459,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.070644,
+      "ticketReadbackMs": 0.178229,
+      "finishCaseOwnMs": 0.562124
+    },
+    {
+      "name": "upstream_surface_control16_12",
+      "control": true,
+      "origin": [
+        6114640,
+        200,
+        -2992
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.01969,
+      "populationMaxChunkMs": 0.00188,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 14299.525549,
+      "maxFullRequestMs": 2.689645,
+      "maxChunkCallbackMs": 0.116738,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 2.534545,
+      "totalCaseMs": 16302.160473,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.100653,
+      "ticketReadbackMs": 1.069107,
+      "finishCaseOwnMs": 3.977317
+    },
+    {
+      "name": "upstream_surface_control16_13",
+      "control": true,
+      "origin": [
+        6106960,
+        200,
+        -448
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.038328,
+      "populationMaxChunkMs": 0.016851,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 19045.508468,
+      "maxFullRequestMs": 3.700735,
+      "maxChunkCallbackMs": 0.137017,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.166664,
+      "totalCaseMs": 21046.276471,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.103713,
+      "ticketReadbackMs": 1.664685,
+      "finishCaseOwnMs": 2.20322
+    },
+    {
+      "name": "upstream_surface_control16_14",
+      "control": true,
+      "origin": [
+        6109504,
+        200,
+        -464
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.021573,
+      "populationMaxChunkMs": 0.001972,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 8946.487325,
+      "maxFullRequestMs": 1.46014,
+      "maxChunkCallbackMs": 0.129648,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.191615,
+      "totalCaseMs": 10955.000518,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 1.059735,
+      "ticketReadbackMs": 1.722435,
+      "finishCaseOwnMs": 7.769256
+    },
+    {
+      "name": "upstream_surface_control16_15",
+      "control": true,
+      "origin": [
+        6112144,
+        200,
+        -432
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.024982,
+      "populationMaxChunkMs": 0.003214,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 10187.511622,
+      "maxFullRequestMs": 3.633445,
+      "maxChunkCallbackMs": 0.073065,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.041687,
+      "totalCaseMs": 12187.092508,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.059046,
+      "ticketReadbackMs": 0.224208,
+      "finishCaseOwnMs": 0.494663
+    },
+    {
+      "name": "upstream_surface_control16_16",
+      "control": true,
+      "origin": [
+        6114672,
+        200,
+        -512
+      ],
+      "chunks": 16,
+      "populationReceipts": 16,
+      "actualWrites": 0,
+      "plannedNonAir": 0,
+      "skippedAir": 0,
+      "noOps": 0,
+      "populationWorkerTotalMs": 0.022192,
+      "populationMaxChunkMs": 0.002302,
+      "populationThreadCallbacks": {
+        "Paper Common Worker #0": 16
+      },
+      "mainThreadPopulationCallbacks": 0,
+      "generationToFullMs": 10099.904955,
+      "maxFullRequestMs": 1.326964,
+      "maxChunkCallbackMs": 0.591713,
+      "chunksAlreadyLoadedAtRequest": 13,
+      "verificationMs": 0.0,
+      "maxVerificationSliceMs": 0.0,
+      "verifiedNonAirPositions": 0,
+      "mismatches": 0,
+      "expectedHash": "cbf29ce484222325",
+      "actualHash": "cbf29ce484222325",
+      "hashFormattingMs": 0.13043,
+      "totalCaseMs": 12101.170476,
+      "remainingNativeChunkTickets": 0,
+      "ticketRemovalMs": 0.078496,
+      "ticketReadbackMs": 1.307978,
+      "finishCaseOwnMs": 3.271528
+    }
+  ],
+  "tickMs": {
+    "wait_upstream": {
+      "p99Ms": 171.224807,
+      "maxMs": 961.782068,
+      "samples": 158,
+      "p95Ms": 10.509223,
+      "p50Ms": 2.033326
+    },
+    "profiler_start_wait": {
+      "p99Ms": 16.253474,
+      "maxMs": 16.253474,
+      "samples": 11,
+      "p95Ms": 16.253474,
+      "p50Ms": 5.238199
+    },
+    "baseline": {
+      "p99Ms": 14.864268,
+      "maxMs": 21.629973,
+      "samples": 200,
+      "p95Ms": 9.419022,
+      "p50Ms": 2.521585
+    },
+    "upstream_surface_control16_1.generate": {
+      "p99Ms": 132.907952,
+      "maxMs": 335.222259,
+      "samples": 345,
+      "p95Ms": 7.653357,
+      "p50Ms": 1.616651
+    },
+    "upstream_surface_control16_1.settle": {
+      "p99Ms": 135.786489,
+      "maxMs": 135.786489,
+      "samples": 40,
+      "p95Ms": 10.502206,
+      "p50Ms": 1.666266
+    },
+    "upstream_surface_control16_2.generate": {
+      "p99Ms": 218.404554,
+      "maxMs": 2759.14109,
+      "samples": 369,
+      "p95Ms": 49.551859,
+      "p50Ms": 2.386228
+    },
+    "upstream_surface_control16_2.settle": {
+      "p99Ms": 29.982181,
+      "maxMs": 29.982181,
+      "samples": 40,
+      "p95Ms": 10.101104,
+      "p50Ms": 1.260681
+    },
+    "upstream_surface_control16_3.generate": {
+      "p99Ms": 105.675197,
+      "maxMs": 142.335052,
+      "samples": 504,
+      "p95Ms": 51.753194,
+      "p50Ms": 12.940769
+    },
+    "upstream_surface_control16_3.settle": {
+      "p99Ms": 78.170546,
+      "maxMs": 78.170546,
+      "samples": 40,
+      "p95Ms": 42.832038,
+      "p50Ms": 1.477369
+    },
+    "upstream_surface_control16_4.generate": {
+      "p99Ms": 53.191301,
+      "maxMs": 89.061126,
+      "samples": 441,
+      "p95Ms": 12.320856,
+      "p50Ms": 1.065128
+    },
+    "upstream_surface_control16_4.settle": {
+      "p99Ms": 15.817524,
+      "maxMs": 15.817524,
+      "samples": 40,
+      "p95Ms": 12.306166,
+      "p50Ms": 2.073521
+    },
+    "upstream_surface_control16_5.generate": {
+      "p99Ms": 91.059574,
+      "maxMs": 437.449602,
+      "samples": 398,
+      "p95Ms": 33.747654,
+      "p50Ms": 2.892067
+    },
+    "upstream_surface_control16_5.settle": {
+      "p99Ms": 5.213324,
+      "maxMs": 5.213324,
+      "samples": 40,
+      "p95Ms": 2.082609,
+      "p50Ms": 1.376642
+    },
+    "upstream_surface_control16_6.generate": {
+      "p99Ms": 55.674974,
+      "maxMs": 189.219005,
+      "samples": 513,
+      "p95Ms": 32.312345,
+      "p50Ms": 1.837515
+    },
+    "upstream_surface_control16_6.settle": {
+      "p99Ms": 29.990596,
+      "maxMs": 29.990596,
+      "samples": 40,
+      "p95Ms": 13.027362,
+      "p50Ms": 6.246073
+    },
+    "upstream_surface_control16_7.generate": {
+      "p99Ms": 34.24145,
+      "maxMs": 41.01619,
+      "samples": 250,
+      "p95Ms": 26.378695,
+      "p50Ms": 1.935296
+    },
+    "upstream_surface_control16_7.settle": {
+      "p99Ms": 13.536584,
+      "maxMs": 13.536584,
+      "samples": 40,
+      "p95Ms": 4.725112,
+      "p50Ms": 1.302212
+    },
+    "upstream_surface_control16_8.generate": {
+      "p99Ms": 28.978673,
+      "maxMs": 38.444612,
+      "samples": 186,
+      "p95Ms": 8.486869,
+      "p50Ms": 1.142726
+    },
+    "upstream_surface_control16_8.settle": {
+      "p99Ms": 9.210606,
+      "maxMs": 9.210606,
+      "samples": 40,
+      "p95Ms": 7.245762,
+      "p50Ms": 1.106338
+    },
+    "upstream_surface_control16_9.generate": {
+      "p99Ms": 61.380155,
+      "maxMs": 102.487636,
+      "samples": 300,
+      "p95Ms": 28.180021,
+      "p50Ms": 2.358791
+    },
+    "upstream_surface_control16_9.settle": {
+      "p99Ms": 8.928119,
+      "maxMs": 8.928119,
+      "samples": 40,
+      "p95Ms": 6.366194,
+      "p50Ms": 1.256604
+    },
+    "upstream_surface_control16_10.generate": {
+      "p99Ms": 12.661419,
+      "maxMs": 23.597313,
+      "samples": 221,
+      "p95Ms": 6.490462,
+      "p50Ms": 1.109399
+    },
+    "upstream_surface_control16_10.settle": {
+      "p99Ms": 16.481892,
+      "maxMs": 16.481892,
+      "samples": 40,
+      "p95Ms": 4.935557,
+      "p50Ms": 1.986789
+    },
+    "upstream_surface_control16_11.generate": {
+      "p99Ms": 16.829947,
+      "maxMs": 29.507665,
+      "samples": 170,
+      "p95Ms": 4.879156,
+      "p50Ms": 1.041953
+    },
+    "upstream_surface_control16_11.settle": {
+      "p99Ms": 12.713936,
+      "maxMs": 12.713936,
+      "samples": 40,
+      "p95Ms": 1.856156,
+      "p50Ms": 0.966836
+    },
+    "upstream_surface_control16_12.generate": {
+      "p99Ms": 12.772354,
+      "maxMs": 32.456438,
+      "samples": 286,
+      "p95Ms": 5.128328,
+      "p50Ms": 0.985006
+    },
+    "upstream_surface_control16_12.settle": {
+      "p99Ms": 14.010743,
+      "maxMs": 14.010743,
+      "samples": 40,
+      "p95Ms": 6.836029,
+      "p50Ms": 1.36662
+    },
+    "upstream_surface_control16_13.generate": {
+      "p99Ms": 52.827364,
+      "maxMs": 97.463783,
+      "samples": 381,
+      "p95Ms": 22.938147,
+      "p50Ms": 1.79654
+    },
+    "upstream_surface_control16_13.settle": {
+      "p99Ms": 19.615534,
+      "maxMs": 19.615534,
+      "samples": 40,
+      "p95Ms": 3.95242,
+      "p50Ms": 0.949275
+    },
+    "upstream_surface_control16_14.generate": {
+      "p99Ms": 14.169193,
+      "maxMs": 54.912417,
+      "samples": 179,
+      "p95Ms": 7.284029,
+      "p50Ms": 1.085241
+    },
+    "upstream_surface_control16_14.settle": {
+      "p99Ms": 23.897206,
+      "maxMs": 23.897206,
+      "samples": 40,
+      "p95Ms": 8.66701,
+      "p50Ms": 1.214113
+    },
+    "upstream_surface_control16_15.generate": {
+      "p99Ms": 15.404232,
+      "maxMs": 32.157786,
+      "samples": 204,
+      "p95Ms": 5.791877,
+      "p50Ms": 1.155465
+    },
+    "upstream_surface_control16_15.settle": {
+      "p99Ms": 8.017072,
+      "maxMs": 8.017072,
+      "samples": 40,
+      "p95Ms": 3.422109,
+      "p50Ms": 1.321555
+    },
+    "upstream_surface_control16_16.generate": {
+      "p99Ms": 34.711605,
+      "maxMs": 85.753944,
+      "samples": 202,
+      "p95Ms": 9.890607,
+      "p50Ms": 1.335025
+    },
+    "upstream_surface_control16_16.settle": {
+      "p99Ms": 18.235851,
+      "maxMs": 18.235851,
+      "samples": 40,
+      "p95Ms": 5.052423,
+      "p50Ms": 1.068985
+    },
+    "tail": {
+      "p99Ms": 13.118111,
+      "maxMs": 102.118254,
+      "samples": 200,
+      "p95Ms": 3.845931,
+      "p50Ms": 1.027747
+    }
+  },
+  "overallActiveTickMs": {
+    "p99Ms": 59.383742,
+    "maxMs": 2759.14109,
+    "samples": 5789,
+    "p95Ms": 27.5356,
+    "p50Ms": 1.529194
+  },
+  "overallWindow": "Sixteen zero-write control regions and natural BetterStructures scans/pastes, per-region 40-tick settle and at least 200 post-release tail ticks until observed upstream tickets/events settle; excludes startup, upstream readiness wait and idle baseline",
+  "limits": [
+    "The harness performs no fixture writes; all structure blocks/entities/loot come from ordinary BetterStructures behavior",
+    "Each region contains sixteen fresh population receipts and one exact SURFACE grid chunk with a fresh ChunkLoadEvent",
+    "Listener readiness and observed new grid chunks establish normal entry conditions; private fitter execution is not instrumented",
+    "Natural terrain fitting can reject every candidate; zero structure events is an observation, not a fabricated placement success",
+    "Events include ancillary natural structures across the lab world; temporal overlap alone is not per-region attribution",
+    "The tail waits for at least 200 ticks, zero observed BetterStructures tickets and two seconds without a structure event, within the ten-minute run deadline",
+    "Server MSPT includes native generation, ticket propagation, BetterStructures scans/pastes, unload/save and GC",
+    "The single control observer stays inert in the world\u0027s populator list after completion/disable"
+  ],
+  "spark": {
+    "sha256": "1695d964a22b72dbcf8b67e3c668d8b0fdbd1de2e92c30955fcf3270d99b6716",
+    "intervalMs": 1,
+    "comment": "native-lab-3edb25cf-0d74-4c05-884f-e3154b86de98",
+    "bytes": 3679279,
+    "onlyTicksOverMs": 50,
+    "ownershipVerified": true,
+    "sparkVersion": "1.10.152",
+    "samplerStartedAtEpochMs": 1793304841985,
+    "path": "plugins/spark/profile-2026-10-29_23.19.05.sparkprofile"
+  }
+}

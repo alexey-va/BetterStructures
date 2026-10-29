@@ -189,6 +189,24 @@ and is not a performance result. The [failed report](lab-results/2026-10-29/prep
 and [receipt](lab-results/2026-10-29/prepared-lab4-failed-receipt.json) preserve
 that outcome. Lab.5 changes the retention order and adds an eviction regression.
 
+The lab.5 replay completed all 16 fresh surface-grid origins and 256 probe
+population receipts. Nine natural structures reached normal paste completion;
+26 preparation jobs completed with no failure or abort. All 83 async requests
+finished, all 182 acquired holds were released, and queued/active jobs, pending
+requests and retirement scopes were zero at acceptance. Its active maximum was
+2759.14 ms, p99 59.38 ms and p95 27.54 ms. Different fresh terrain and selected
+structures make this an observational readiness test, not a paired speedup
+comparison with the upstream probe.
+
+Spark captured 88 slow ticks at 1 ms sampling. It contains no
+`ServerChunkCache.syncLoad` frame; the previous fitting/physics wait path is
+absent from this capture. Remaining first-minute cost includes FAWE close/flush,
+heightmap processing and cold adapter initialization. Minute-bucket stack weights
+cannot attribute the entire 2759 ms tick to one method. See the
+[raw run report](lab-results/2026-10-29/prepared-lab5-report.json),
+[acceptance receipt](lab-results/2026-10-29/prepared-lab5-receipt.json) and
+[Spark analysis](lab-results/2026-10-29/prepared-lab5-spark-analysis.json).
+
 ## Real-schematic A/B result, 2026-10-29
 
 Both engines used the same four original production schematics, seed 384291,
