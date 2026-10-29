@@ -54,6 +54,19 @@ requests FULL status; Moonrise [immediately processes ticket updates on the tick
 Calling this API from a worker queues the same work on the main executor. A
 worker-call change alone would not establish lower server-tick latency.
 
+The instrumented run and bounded JFR analysis are retained as
+`2026-10-29-lab-jfr.json` and `2026-10-29-lab-jfr-analysis.json`. A 105.11 ms
+native chunk-request span overlaps a server-thread sample in chunk-holder/ticket
+propagation and no recorded GC pause. The longest 187.96 ms tick overlaps a
+99.78 ms GC pause plus entity/collision samples; GC does not explain its entire
+duration. Other long ticks include native FULL activation and chunk save/unload
+samples. Ten-millisecond sampling identifies observed work, not an exact cost
+breakdown for every method. Reproduce the bounded analysis with:
+
+```sh
+jfr print --json --events ru.ruscrafting.NativeSlice,jdk.ExecutionSample,jdk.GCPhasePause,jdk.ExecuteVMOperation,jdk.SafepointBegin recording.jfr | python3 native-prototype/analyze_jfr.py
+```
+
 ## Upstream project
 
 BetterStructures adds schematic structures and modular dungeons to Minecraft worlds. It places content on the surface, underground, in the sky, and on liquid surfaces, with generator rules for terrain, biomes, worlds, spacing, and loot.

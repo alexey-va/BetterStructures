@@ -1,0 +1,1084 @@
+{
+  "counts_by_type": {
+    "jdk.ExecuteVMOperation": 53,
+    "jdk.ExecutionSample": 6808,
+    "jdk.GCPhasePause": 25,
+    "jdk.SafepointBegin": 28,
+    "ru.ruscrafting.NativeSlice": 3966
+  },
+  "counts_by_type_truncated": false,
+  "event_count": 10880,
+  "gc_pauses": [
+    {
+      "duration_ms": 99.782,
+      "event_index": 7894,
+      "start": "2026-10-29T15:47:01.904Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 75.159,
+      "event_index": 5161,
+      "start": "2026-10-29T15:46:41.048Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 69.018,
+      "event_index": 7330,
+      "start": "2026-10-29T15:46:57.630Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 65.283,
+      "event_index": 3474,
+      "start": "2026-10-29T15:46:23.269Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 61.667,
+      "event_index": 2665,
+      "start": "2026-10-29T15:46:17.139Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 54.278,
+      "event_index": 9393,
+      "start": "2026-10-29T15:47:23.188Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 50.666,
+      "event_index": 9879,
+      "start": "2026-10-29T15:47:26.915Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 49.177,
+      "event_index": 6374,
+      "start": "2026-10-29T15:46:50.564Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 43.17,
+      "event_index": 7990,
+      "start": "2026-10-29T15:47:03.003Z",
+      "type": "jdk.GCPhasePause"
+    },
+    {
+      "duration_ms": 43.153,
+      "event_index": 3543,
+      "start": "2026-10-29T15:46:23.918Z",
+      "type": "jdk.GCPhasePause"
+    }
+  ],
+  "native_spans": [
+    {
+      "duration_ms": 300.143,
+      "end": "2026-10-29T15:45:57.023Z",
+      "event_index": 167,
+      "operations": 1,
+      "phase": "boot",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:45:56.723Z"
+    },
+    {
+      "duration_ms": 108.173,
+      "end": "2026-10-29T15:46:11.886Z",
+      "event_index": 2013,
+      "operations": 1,
+      "phase": "dense32.chunk_prepare",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:46:11.778Z"
+    },
+    {
+      "duration_ms": 105.114,
+      "end": "2026-10-29T15:46:11.884Z",
+      "event_index": 2012,
+      "operations": 1,
+      "phase": "dense32.chunk_request(1935,-512)",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:46:11.779Z"
+    },
+    {
+      "duration_ms": 34.021,
+      "end": "2026-10-29T15:46:17.874Z",
+      "event_index": 2745,
+      "operations": 1,
+      "phase": "dense32.chunk_prepare",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:46:17.839Z"
+    },
+    {
+      "duration_ms": 33.878,
+      "end": "2026-10-29T15:46:17.873Z",
+      "event_index": 2744,
+      "operations": 1,
+      "phase": "dense32.chunk_request(1935,-511)",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:46:17.840Z"
+    },
+    {
+      "duration_ms": 24.771,
+      "end": "2026-10-29T15:46:23.362Z",
+      "event_index": 3478,
+      "operations": 1,
+      "phase": "dense32.place",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:46:23.337Z"
+    },
+    {
+      "duration_ms": 15.585,
+      "end": "2026-10-29T15:47:17.843Z",
+      "event_index": 8721,
+      "operations": 1,
+      "phase": "sparse64.chunk_prepare",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:47:17.828Z"
+    },
+    {
+      "duration_ms": 15.488,
+      "end": "2026-10-29T15:47:17.843Z",
+      "event_index": 8720,
+      "operations": 1,
+      "phase": "sparse64.chunk_request(1983,-512)",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:47:17.828Z"
+    },
+    {
+      "duration_ms": 9.86,
+      "end": "2026-10-29T15:46:42.388Z",
+      "event_index": 5325,
+      "operations": 1,
+      "phase": "dense64.chunk_prepare",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:46:42.378Z"
+    },
+    {
+      "duration_ms": 9.655,
+      "end": "2026-10-29T15:46:42.388Z",
+      "event_index": 5324,
+      "operations": 1,
+      "phase": "dense64.chunk_request(1967,-512)",
+      "serverTickMs": 0,
+      "start": "2026-10-29T15:46:42.378Z"
+    }
+  ],
+  "server_thread_execution_samples": {
+    "count": 387,
+    "top_stacks": [
+      {
+        "count": 8,
+        "methods": [
+          "net/minecraft/server/MinecraftServer.runServer",
+          "net/minecraft/server/MinecraftServer.lambda$spin$2",
+          "net.minecraft.server.MinecraftServer$$Lambda/0x000000000603c360.run",
+          "java/lang/Thread.runWith",
+          "java/lang/Thread.run"
+        ]
+      },
+      {
+        "count": 5,
+        "methods": [
+          "net/minecraft/server/MinecraftServer.tickChildren",
+          "net/minecraft/server/MinecraftServer.tickServer",
+          "net/minecraft/server/dedicated/DedicatedServer.tickServer",
+          "net/minecraft/server/MinecraftServer.processPacketsAndTick",
+          "net/minecraft/server/MinecraftServer.runServer"
+        ]
+      },
+      {
+        "count": 5,
+        "methods": [
+          "net/minecraft/world/level/pathfinder/PathTypeCache.invalidate",
+          "net/minecraft/server/level/ServerLevel.sendBlockUpdated",
+          "net/minecraft/world/level/Level.notifyAndUpdatePhysics",
+          "net/minecraft/world/level/Level.setBlock",
+          "net/minecraft/world/level/Level.setBlock"
+        ]
+      },
+      {
+        "count": 4,
+        "methods": [
+          "ca/spottedleaf/moonrise/common/time/TickData.getTPSAverage",
+          "net/minecraft/server/MinecraftServer.getTPS",
+          "net/minecraft/server/MinecraftServer.computeTPS",
+          "net/minecraft/server/MinecraftServer.getTPS",
+          "net/minecraft/server/MinecraftServer.runServer"
+        ]
+      },
+      {
+        "count": 4,
+        "methods": [
+          "net/minecraft/world/level/TicketStorage.purgeStaleTickets",
+          "net/minecraft/server/level/ServerChunkCache.tick",
+          "net/minecraft/server/level/ServerLevel.tick",
+          "net/minecraft/server/MinecraftServer.tickChildren",
+          "net/minecraft/server/MinecraftServer.tickServer"
+        ]
+      },
+      {
+        "count": 3,
+        "methods": [
+          "java/util/HashMap.getNode",
+          "java/util/HashMap.get",
+          "net/minecraft/world/entity/ai/village/poi/PoiTypes.forState",
+          "net/minecraft/server/level/ServerLevel.updatePOIOnBlockStateChange",
+          "net/minecraft/world/level/Level.notifyAndUpdatePhysics"
+        ]
+      },
+      {
+        "count": 3,
+        "methods": [
+          "net/minecraft/world/level/Level.tickBlockEntities",
+          "net/minecraft/server/level/ServerLevel.tick",
+          "net/minecraft/server/MinecraftServer.tickChildren",
+          "net/minecraft/server/MinecraftServer.tickServer",
+          "net/minecraft/server/dedicated/DedicatedServer.tickServer"
+        ]
+      },
+      {
+        "count": 3,
+        "methods": [
+          "net/minecraft/world/level/chunk/LevelChunk.getBlockStateFinal",
+          "net/minecraft/world/level/chunk/LevelChunk.getBlockState",
+          "net/minecraft/world/level/chunk/LevelChunk$BoundTickingBlockEntity.tick",
+          "net/minecraft/world/level/chunk/LevelChunk$RebindableTickingBlockEntityWrapper.tick",
+          "net/minecraft/world/level/Level.tickBlockEntities"
+        ]
+      },
+      {
+        "count": 3,
+        "methods": [
+          "net/minecraft/world/level/chunk/PalettedContainer$Data.copy",
+          "net/minecraft/world/level/chunk/PalettedContainer.<init>",
+          "net/minecraft/world/level/chunk/PalettedContainer.copy",
+          "net/minecraft/world/level/chunk/LevelChunkSection.<init>",
+          "net/minecraft/world/level/chunk/LevelChunkSection.copy"
+        ]
+      },
+      {
+        "count": 3,
+        "methods": [
+          "net/minecraft/world/level/chunk/PalettedContainer.get",
+          "net/minecraft/world/level/chunk/LevelChunk.getBlockStateFinal",
+          "net/minecraft/world/level/chunk/LevelChunk.getBlockState",
+          "net/minecraft/world/level/chunk/LevelChunk$BoundTickingBlockEntity.tick",
+          "net/minecraft/world/level/chunk/LevelChunk$RebindableTickingBlockEntityWrapper.tick"
+        ]
+      }
+    ]
+  },
+  "server_ticks": [
+    {
+      "duration_ms": 187.959,
+      "end": "2026-10-29T15:47:02.066Z",
+      "event_index": 7898,
+      "operations": 0,
+      "phase": "dense64.reset.server_tick",
+      "serverTickMs": 187.959,
+      "start": "2026-10-29T15:47:01.878Z"
+    },
+    {
+      "duration_ms": 109.543,
+      "end": "2026-10-29T15:46:11.887Z",
+      "event_index": 2014,
+      "operations": 0,
+      "phase": "dense32.chunk_prepare.server_tick",
+      "serverTickMs": 109.543,
+      "start": "2026-10-29T15:46:11.778Z"
+    },
+    {
+      "duration_ms": 108.758,
+      "end": "2026-10-29T15:46:26.480Z",
+      "event_index": 3774,
+      "operations": 0,
+      "phase": "dense32.place.server_tick",
+      "serverTickMs": 108.758,
+      "start": "2026-10-29T15:46:26.371Z"
+    },
+    {
+      "duration_ms": 95.806,
+      "end": "2026-10-29T15:47:18.173Z",
+      "event_index": 8754,
+      "operations": 0,
+      "phase": "sparse64.chunk_prepare.server_tick",
+      "serverTickMs": 95.806,
+      "start": "2026-10-29T15:47:18.078Z"
+    },
+    {
+      "duration_ms": 92.56,
+      "end": "2026-10-29T15:46:33.320Z",
+      "event_index": 4177,
+      "operations": 0,
+      "phase": "dense32.settle.server_tick",
+      "serverTickMs": 92.56,
+      "start": "2026-10-29T15:46:33.228Z"
+    },
+    {
+      "duration_ms": 84.406,
+      "end": "2026-10-29T15:47:00.512Z",
+      "event_index": 7713,
+      "operations": 0,
+      "phase": "dense64.reset.server_tick",
+      "serverTickMs": 84.406,
+      "start": "2026-10-29T15:47:00.427Z"
+    },
+    {
+      "duration_ms": 58.045,
+      "end": "2026-10-29T15:46:17.836Z",
+      "event_index": 2739,
+      "operations": 0,
+      "phase": "dense32.chunk_prepare.server_tick",
+      "serverTickMs": 58.045,
+      "start": "2026-10-29T15:46:17.778Z"
+    },
+    {
+      "duration_ms": 57.028,
+      "end": "2026-10-29T15:46:33.535Z",
+      "event_index": 4210,
+      "operations": 0,
+      "phase": "sparse32.chunk_prepare.server_tick",
+      "serverTickMs": 57.028,
+      "start": "2026-10-29T15:46:33.478Z"
+    },
+    {
+      "duration_ms": 47.661,
+      "end": "2026-10-29T15:47:00.275Z",
+      "event_index": 7684,
+      "operations": 0,
+      "phase": "dense64.reset.server_tick",
+      "serverTickMs": 47.661,
+      "start": "2026-10-29T15:47:00.228Z"
+    },
+    {
+      "duration_ms": 42.73,
+      "end": "2026-10-29T15:46:54.146Z",
+      "event_index": 6841,
+      "operations": 0,
+      "phase": "dense64.chunk_prepare.server_tick",
+      "serverTickMs": 42.73,
+      "start": "2026-10-29T15:46:54.103Z"
+    }
+  ],
+  "windows": [
+    {
+      "duration_ms": 187.959,
+      "end": "2026-10-29T15:47:02.066Z",
+      "event_index": 7898,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 3,
+        "events": [
+          {
+            "duration_ms": 99.966,
+            "event_index": 7895,
+            "start": "2026-10-29T15:47:01.904Z",
+            "type": "jdk.ExecuteVMOperation"
+          },
+          {
+            "duration_ms": 99.782,
+            "event_index": 7894,
+            "start": "2026-10-29T15:47:01.904Z",
+            "type": "jdk.GCPhasePause"
+          },
+          {
+            "duration_ms": 0.026,
+            "event_index": 7893,
+            "start": "2026-10-29T15:47:01.904Z",
+            "type": "jdk.SafepointBegin"
+          }
+        ],
+        "truncated": false
+      },
+      "phase": "dense64.reset.server_tick",
+      "serverTickMs": 187.959,
+      "server_thread_samples": {
+        "count": 2,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/entity/Entity.collide",
+              "net/minecraft/world/entity/Entity.move",
+              "net/minecraft/world/entity/LivingEntity.handleRelativeFrictionAndCalculateMovement",
+              "net/minecraft/world/entity/LivingEntity.travelInAir",
+              "net/minecraft/world/entity/LivingEntity.travel"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/entity/ai/goal/GoalSelector.tick",
+              "net/minecraft/world/entity/Mob.serverAiStep",
+              "net/minecraft/world/entity/LivingEntity.aiStep",
+              "net/minecraft/world/entity/Mob.aiStep",
+              "net/minecraft/world/entity/AgeableMob.aiStep"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:47:01.878Z"
+    },
+    {
+      "duration_ms": 109.543,
+      "end": "2026-10-29T15:46:11.887Z",
+      "event_index": 2014,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense32.chunk_prepare.server_tick",
+      "serverTickMs": 109.543,
+      "server_thread_samples": {
+        "count": 1,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/server/level/ChunkHolder.<init>",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.<init>",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager.createChunkHolder",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager$2.processLevelUpdates",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ThreadedTicketLevelPropagator.performUpdate"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:46:11.778Z"
+    },
+    {
+      "duration_ms": 108.758,
+      "end": "2026-10-29T15:46:26.480Z",
+      "event_index": 3774,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense32.place.server_tick",
+      "serverTickMs": 108.758,
+      "server_thread_samples": {
+        "count": 2,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/server/MinecraftServer.registryAccess",
+              "net/minecraft/world/level/chunk/LevelChunk.<init>",
+              "net/minecraft/world/level/chunk/LevelChunk.<init>",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/task/ChunkFullTask.run",
+              "ca/spottedleaf/concurrentutil/executor/queue/PrioritisedTaskQueue$PrioritisedQueuedTask.execute"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/entity/ai/village/poi/PoiManager.moonrise$checkConsistency",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/task/ChunkFullTask.run",
+              "ca/spottedleaf/concurrentutil/executor/queue/PrioritisedTaskQueue$PrioritisedQueuedTask.execute",
+              "ca/spottedleaf/concurrentutil/executor/queue/PrioritisedTaskQueue.executeTask",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.executeAllRecentlyQueuedMainThreadTasks"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:46:26.371Z"
+    },
+    {
+      "duration_ms": 95.806,
+      "end": "2026-10-29T15:47:18.173Z",
+      "event_index": 8754,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "sparse64.chunk_prepare.server_tick",
+      "serverTickMs": 95.806,
+      "server_thread_samples": {
+        "count": 5,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/level/block/entity/BlockEntity.saveMetadata",
+              "net/minecraft/world/level/block/entity/BlockEntity.saveWithFullMetadata",
+              "net/minecraft/world/level/block/entity/BlockEntity.saveWithFullMetadata",
+              "net/minecraft/world/level/chunk/LevelChunk.getBlockEntityNbtForSaving",
+              "net/minecraft/world/level/chunk/storage/SerializableChunkData.copyOf"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/level/block/entity/SculkSensorBlockEntity.saveAdditional",
+              "net/minecraft/world/level/block/entity/BlockEntity.saveWithoutMetadata",
+              "net/minecraft/world/level/block/entity/BlockEntity.saveWithFullMetadata",
+              "net/minecraft/world/level/block/entity/BlockEntity.saveWithFullMetadata",
+              "net/minecraft/world/level/chunk/LevelChunk.getBlockEntityNbtForSaving"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/level/chunk/LevelChunk.getInhabitedTime",
+              "net/minecraft/world/level/chunk/storage/SerializableChunkData.copyOf",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.saveChunk",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.unloadStage2",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager.processUnloads"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/level/chunk/PalettedContainer$Data.copy",
+              "net/minecraft/world/level/chunk/PalettedContainer.<init>",
+              "net/minecraft/world/level/chunk/PalettedContainer.copy",
+              "net/minecraft/world/level/chunk/LevelChunkSection.<init>",
+              "net/minecraft/world/level/chunk/LevelChunkSection.copy"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/ticks/LevelChunkTicks.moonrise$isDirty",
+              "net/minecraft/world/level/chunk/LevelChunk.isUnsaved",
+              "net/minecraft/world/level/chunk/LevelChunk.tryMarkSaved",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.saveChunk",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.unloadStage2"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:47:18.078Z"
+    },
+    {
+      "duration_ms": 92.56,
+      "end": "2026-10-29T15:46:33.320Z",
+      "event_index": 4177,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense32.settle.server_tick",
+      "serverTickMs": 92.56,
+      "server_thread_samples": {
+        "count": 1,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ThreadedTicketLevelPropagator$Propagator.performDecrease",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ThreadedTicketLevelPropagator.performUpdate",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ThreadedTicketLevelPropagator.performUpdate",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager.processTicketUpdatesNoLock",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager.tick"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:46:33.228Z"
+    },
+    {
+      "duration_ms": 84.406,
+      "end": "2026-10-29T15:47:00.512Z",
+      "event_index": 7713,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense64.reset.server_tick",
+      "serverTickMs": 84.406,
+      "server_thread_samples": {
+        "count": 2,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "java/util/Objects.equals",
+              "jdk/internal/util/StrongReferenceKey.equals",
+              "java/util/concurrent/ConcurrentHashMap.get",
+              "jdk/internal/util/ReferencedKeyMap.getNoCheckStale",
+              "jdk/internal/util/ReferencedKeyMap.get"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/entity/LivingEntity.tick",
+              "net/minecraft/world/entity/Mob.tick",
+              "net/minecraft/server/level/ServerLevel.tickNonPassenger",
+              "net.minecraft.server.level.ServerLevel$$Lambda/0x0000000006a96910.accept",
+              "net/minecraft/world/level/Level.guardEntityTick"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:47:00.427Z"
+    },
+    {
+      "duration_ms": 58.045,
+      "end": "2026-10-29T15:46:17.836Z",
+      "event_index": 2739,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 3,
+        "events": [
+          {
+            "duration_ms": 0.15,
+            "event_index": 2737,
+            "start": "2026-10-29T15:46:17.810Z",
+            "type": "jdk.ExecuteVMOperation"
+          },
+          {
+            "duration_ms": 0.144,
+            "event_index": 2736,
+            "start": "2026-10-29T15:46:17.802Z",
+            "type": "jdk.ExecuteVMOperation"
+          },
+          {
+            "duration_ms": 0.123,
+            "event_index": 2735,
+            "start": "2026-10-29T15:46:17.790Z",
+            "type": "jdk.ExecuteVMOperation"
+          }
+        ],
+        "truncated": false
+      },
+      "phase": "dense32.chunk_prepare.server_tick",
+      "serverTickMs": 58.045,
+      "server_thread_samples": {
+        "count": 0,
+        "top_stacks": []
+      },
+      "start": "2026-10-29T15:46:17.778Z"
+    },
+    {
+      "duration_ms": 57.028,
+      "end": "2026-10-29T15:46:33.535Z",
+      "event_index": 4210,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "sparse32.chunk_prepare.server_tick",
+      "serverTickMs": 57.028,
+      "server_thread_samples": {
+        "count": 2,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/level/chunk/PalettedContainer$Data.copy",
+              "net/minecraft/world/level/chunk/PalettedContainer.<init>",
+              "net/minecraft/world/level/chunk/PalettedContainer.copy",
+              "net/minecraft/world/level/chunk/LevelChunkSection.<init>",
+              "net/minecraft/world/level/chunk/LevelChunkSection.copy"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/level/chunk/PalettedContainer.<init>",
+              "net/minecraft/world/level/chunk/PalettedContainer.copy",
+              "net/minecraft/world/level/chunk/LevelChunkSection.<init>",
+              "net/minecraft/world/level/chunk/LevelChunkSection.copy",
+              "net/minecraft/world/level/chunk/storage/SerializableChunkData.copyOf"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:46:33.478Z"
+    },
+    {
+      "duration_ms": 47.661,
+      "end": "2026-10-29T15:47:00.275Z",
+      "event_index": 7684,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense64.reset.server_tick",
+      "serverTickMs": 47.661,
+      "server_thread_samples": {
+        "count": 3,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.replaceProtoChunk",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/task/ChunkFullTask.run",
+              "ca/spottedleaf/concurrentutil/executor/queue/PrioritisedTaskQueue$PrioritisedQueuedTask.execute",
+              "ca/spottedleaf/concurrentutil/executor/queue/PrioritisedTaskQueue.executeTask",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.executeAllRecentlyQueuedMainThreadTasks"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/level/block/MultifaceBlock.hasFace",
+              "net/minecraft/world/level/block/MultifaceBlock.hasAnyFace",
+              "net/minecraft/world/level/block/MultifaceBlock.updateShape",
+              "net/minecraft/world/level/block/state/BlockBehaviour$BlockStateBase.updateShape",
+              "net/minecraft/world/level/block/Block.updateFromNeighbourShapes"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/world/level/chunk/LevelChunk.postProcessGeneration",
+              "ca/spottedleaf/moonrise/paper/util/BaseChunkSystemHooks.onChunkTicking",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.handleFullStatusChange",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager.processPendingFullUpdate",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager.processTicketUpdates"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:47:00.228Z"
+    },
+    {
+      "duration_ms": 42.73,
+      "end": "2026-10-29T15:46:54.146Z",
+      "event_index": 6841,
+      "kind": "server_tick",
+      "operations": 0,
+      "overlaps": {
+        "count": 1,
+        "events": [
+          {
+            "duration_ms": 0.127,
+            "event_index": 6839,
+            "start": "2026-10-29T15:46:54.134Z",
+            "type": "jdk.ExecuteVMOperation"
+          }
+        ],
+        "truncated": false
+      },
+      "phase": "dense64.chunk_prepare.server_tick",
+      "serverTickMs": 42.73,
+      "server_thread_samples": {
+        "count": 0,
+        "top_stacks": []
+      },
+      "start": "2026-10-29T15:46:54.103Z"
+    },
+    {
+      "duration_ms": 300.143,
+      "end": "2026-10-29T15:45:57.023Z",
+      "event_index": 167,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "boot",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 4,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "java/lang/StringLatin1.lastIndexOf",
+              "java/lang/String.lastIndexOf",
+              "java/lang/String.lastIndexOf",
+              "jdk/internal/loader/BuiltinClassLoader.findLoadedModule",
+              "jdk/internal/loader/BuiltinClassLoader.loadClassOrNull"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "java/lang/invoke/MethodHandleNatives.resolve",
+              "java/lang/invoke/MemberName$Factory.resolve",
+              "java/lang/invoke/MemberName$Factory.resolveOrFail",
+              "java/lang/invoke/MethodHandles$Lookup.resolveOrFail",
+              "java/lang/invoke/MethodHandles$Lookup.linkMethodHandleConstant"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "java/util/Arrays.fill",
+              "jdk/internal/classfile/impl/StackMapGenerator$Frame.checkStack",
+              "jdk/internal/classfile/impl/StackMapGenerator$Frame.pushStack",
+              "jdk/internal/classfile/impl/StackMapGenerator.processBlock",
+              "jdk/internal/classfile/impl/StackMapGenerator.processMethod"
+            ]
+          },
+          {
+            "count": 1,
+            "methods": [
+              "java/util/zip/ZipFile$Source.getEntryPos",
+              "java/util/zip/ZipFile.getEntry",
+              "java/util/jar/JarFile.getEntry",
+              "java/util/jar/JarFile.getJarEntry",
+              "jdk/internal/loader/URLClassPath$JarLoader.getResource"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:45:56.723Z"
+    },
+    {
+      "duration_ms": 108.173,
+      "end": "2026-10-29T15:46:11.886Z",
+      "event_index": 2013,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense32.chunk_prepare",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 1,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/server/level/ChunkHolder.<init>",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.<init>",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager.createChunkHolder",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager$2.processLevelUpdates",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ThreadedTicketLevelPropagator.performUpdate"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:46:11.778Z"
+    },
+    {
+      "duration_ms": 105.114,
+      "end": "2026-10-29T15:46:11.884Z",
+      "event_index": 2012,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense32.chunk_request(1935,-512)",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 1,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "net/minecraft/server/level/ChunkHolder.<init>",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.<init>",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager.createChunkHolder",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager$2.processLevelUpdates",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ThreadedTicketLevelPropagator.performUpdate"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:46:11.779Z"
+    },
+    {
+      "duration_ms": 34.021,
+      "end": "2026-10-29T15:46:17.874Z",
+      "event_index": 2745,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense32.chunk_prepare",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 1,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.schedule",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.schedule",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.processTicketLevelUpdate",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager$2.processSchedulingUpdates",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ThreadedTicketLevelPropagator.performUpdate"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:46:17.839Z"
+    },
+    {
+      "duration_ms": 33.878,
+      "end": "2026-10-29T15:46:17.873Z",
+      "event_index": 2744,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense32.chunk_request(1935,-511)",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 1,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.schedule",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkTaskScheduler.schedule",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/NewChunkHolder.processTicketLevelUpdate",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ChunkHolderManager$2.processSchedulingUpdates",
+              "ca/spottedleaf/moonrise/patches/chunk_system/scheduling/ThreadedTicketLevelPropagator.performUpdate"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:46:17.840Z"
+    },
+    {
+      "duration_ms": 24.771,
+      "end": "2026-10-29T15:46:23.362Z",
+      "event_index": 3478,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense32.place",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 0,
+        "top_stacks": []
+      },
+      "start": "2026-10-29T15:46:23.337Z"
+    },
+    {
+      "duration_ms": 15.585,
+      "end": "2026-10-29T15:47:17.843Z",
+      "event_index": 8721,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "sparse64.chunk_prepare",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 1,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "java/lang/Class.cast",
+              "java/lang/invoke/VarHandleReferences$FieldInstanceReadWrite.set",
+              "java/lang/invoke/VarHandleGuards.guard_LL_V",
+              "ca/spottedleaf/concurrentutil/collection/MultiThreadedQueue$LinkedNode.<init>",
+              "ca/spottedleaf/concurrentutil/collection/MultiThreadedQueue.offer"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:47:17.828Z"
+    },
+    {
+      "duration_ms": 15.488,
+      "end": "2026-10-29T15:47:17.843Z",
+      "event_index": 8720,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "sparse64.chunk_request(1983,-512)",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 1,
+        "top_stacks": [
+          {
+            "count": 1,
+            "methods": [
+              "java/lang/Class.cast",
+              "java/lang/invoke/VarHandleReferences$FieldInstanceReadWrite.set",
+              "java/lang/invoke/VarHandleGuards.guard_LL_V",
+              "ca/spottedleaf/concurrentutil/collection/MultiThreadedQueue$LinkedNode.<init>",
+              "ca/spottedleaf/concurrentutil/collection/MultiThreadedQueue.offer"
+            ]
+          }
+        ]
+      },
+      "start": "2026-10-29T15:47:17.828Z"
+    },
+    {
+      "duration_ms": 9.86,
+      "end": "2026-10-29T15:46:42.388Z",
+      "event_index": 5325,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense64.chunk_prepare",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 0,
+        "top_stacks": []
+      },
+      "start": "2026-10-29T15:46:42.378Z"
+    },
+    {
+      "duration_ms": 9.655,
+      "end": "2026-10-29T15:46:42.388Z",
+      "event_index": 5324,
+      "kind": "native_span",
+      "operations": 1,
+      "overlaps": {
+        "count": 0,
+        "events": [],
+        "truncated": false
+      },
+      "phase": "dense64.chunk_request(1967,-512)",
+      "serverTickMs": 0,
+      "server_thread_samples": {
+        "count": 0,
+        "top_stacks": []
+      },
+      "start": "2026-10-29T15:46:42.378Z"
+    }
+  ]
+}

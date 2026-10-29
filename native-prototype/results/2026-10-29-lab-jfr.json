@@ -1,0 +1,424 @@
+{
+  "active_plugins": [
+    "ArcNativeStructuresLab.jar"
+  ],
+  "jar_sha256": "ac11589907e36e1383610db24a60a264e2460563f77fa9fad2c3965e32fff374",
+  "jfr_bytes": 2409774,
+  "jfr_sha256": "3214cdff6e375829900bb693d76f4e67e7e5d4ee841362a3527859fd5fcbb3b5",
+  "jfr_tool": "/usr/bin/jfr",
+  "report": {
+    "cases": [
+      {
+        "actualBlocksPerSecond": 4096.100500897865,
+        "actualWrites": 32768,
+        "chunkPreparationMs": 9523.123742,
+        "chunks": 4,
+        "chunksAlreadyLoadedAtRequest": 2,
+        "decodeMs": 59.375388,
+        "maxTicketPinCallbackMs": 2.648289,
+        "name": "dense32",
+        "noOps": 0,
+        "origin": [
+          30960,
+          200,
+          -8192
+        ],
+        "paletteMs": 49.333292,
+        "placementMs": 7999.803714,
+        "remainingNativeChunkTickets": 0,
+        "resetActualWrites": 0,
+        "resetMs": 1977.778279,
+        "skippedAir": 0,
+        "totalJobMs": 21549.087683,
+        "volume": 32768
+      },
+      {
+        "actualBlocksPerSecond": 16337.629494360817,
+        "actualWrites": 4096,
+        "chunkPreparationMs": 6258.851339,
+        "chunks": 4,
+        "chunksAlreadyLoadedAtRequest": 2,
+        "decodeMs": 9.405009,
+        "maxTicketPinCallbackMs": 0.189282,
+        "name": "sparse32",
+        "noOps": 0,
+        "origin": [
+          31216,
+          200,
+          -8192
+        ],
+        "paletteMs": 86.924011,
+        "placementMs": 250.709566,
+        "remainingNativeChunkTickets": 0,
+        "resetActualWrites": 0,
+        "resetMs": 448.988709,
+        "skippedAir": 28672,
+        "totalJobMs": 9044.872771,
+        "volume": 32768
+      },
+      {
+        "actualBlocksPerSecond": 19241.519112710765,
+        "actualWrites": 262144,
+        "chunkPreparationMs": 16250.929785,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 11,
+        "decodeMs": 19.457694,
+        "maxTicketPinCallbackMs": 0.253299,
+        "name": "dense64",
+        "noOps": 0,
+        "origin": [
+          31472,
+          200,
+          -8192
+        ],
+        "paletteMs": 41.458168,
+        "placementMs": 13623.872339,
+        "remainingNativeChunkTickets": 0,
+        "resetActualWrites": 0,
+        "resetMs": 3526.20123,
+        "skippedAir": 0,
+        "totalJobMs": 35441.525246,
+        "volume": 262144
+      },
+      {
+        "actualBlocksPerSecond": 15602.30543927617,
+        "actualWrites": 32768,
+        "chunkPreparationMs": 12549.731858,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 11,
+        "decodeMs": 16.764201,
+        "maxTicketPinCallbackMs": 2.918693,
+        "name": "sparse64",
+        "noOps": 0,
+        "origin": [
+          31728,
+          200,
+          -8192
+        ],
+        "paletteMs": 50.117074,
+        "placementMs": 2100.202443,
+        "remainingNativeChunkTickets": 0,
+        "resetActualWrites": 0,
+        "resetMs": 3248.716396,
+        "skippedAir": 229376,
+        "totalJobMs": 19948.775652,
+        "volume": 262144
+      }
+    ],
+    "java": "25.0.4.1",
+    "jfrRecording": "/home/freedeeml/McFine/lab/plugins/ArcNativeStructuresLab/benchmark-recording-a444f5de-8ba2-4034-bacd-864c80dbd338.jfr",
+    "limits": [
+      "Native calls cannot be preempted; time budget is checked between calls",
+      "Ticket pinning occurs immediately with one chunk request in flight and is measured separately",
+      "Chunk preparation reports unloaded-vs-loaded, not an assumed on-disk generation state",
+      "Block entities, entities, biome changes and automatic data-version conversion are unsupported",
+      "Physics=false does not eliminate native lighting or later neighbour work; settle ticks are included",
+      "Sparse placements skip air; only benchmark fixtures receive an explicit reset"
+    ],
+    "maxChunkRequestsInFlight": 1,
+    "maxPositionsPerTick": 4096,
+    "maxPreparationOperationsPerTick": 512,
+    "message": "All fixtures completed",
+    "overallActiveTickMs": {
+      "maxMs": 187.958892,
+      "p50Ms": 1.722955,
+      "p95Ms": 12.517981,
+      "p99Ms": 38.273777,
+      "samples": 1692
+    },
+    "overallWindow": "Palette preparation, chunk preparation, reset, placement and settle; excludes boot, idle baseline and report IO",
+    "ownSliceMs": {
+      "boot": {
+        "maxMs": 300.73231,
+        "p50Ms": 0.217937,
+        "p95Ms": 300.73231,
+        "p99Ms": 300.73231,
+        "samples": 2
+      },
+      "dense32.chunk_prepare": {
+        "maxMs": 108.225603,
+        "p50Ms": 34.035417,
+        "p95Ms": 108.225603,
+        "p99Ms": 108.225603,
+        "samples": 3
+      },
+      "dense32.palette": {
+        "maxMs": 0.161437,
+        "p50Ms": 0.161437,
+        "p95Ms": 0.161437,
+        "p99Ms": 0.161437,
+        "samples": 1
+      },
+      "dense32.place": {
+        "maxMs": 24.856277,
+        "p50Ms": 1.544068,
+        "p95Ms": 4.990778,
+        "p99Ms": 9.533688,
+        "samples": 133
+      },
+      "dense32.reset": {
+        "maxMs": 4.888749,
+        "p50Ms": 1.543507,
+        "p95Ms": 4.575553,
+        "p99Ms": 4.888749,
+        "samples": 40
+      },
+      "dense64.chunk_prepare": {
+        "maxMs": 9.872468,
+        "p50Ms": 1.0485,
+        "p95Ms": 9.872468,
+        "p99Ms": 9.872468,
+        "samples": 8
+      },
+      "dense64.palette": {
+        "maxMs": 0.130929,
+        "p50Ms": 0.130929,
+        "p95Ms": 0.130929,
+        "p99Ms": 0.130929,
+        "samples": 1
+      },
+      "dense64.place": {
+        "maxMs": 7.062974,
+        "p50Ms": 1.532963,
+        "p95Ms": 2.754897,
+        "p99Ms": 6.485259,
+        "samples": 275
+      },
+      "dense64.reset": {
+        "maxMs": 3.707307,
+        "p50Ms": 0.678062,
+        "p95Ms": 2.913607,
+        "p99Ms": 3.707307,
+        "samples": 68
+      },
+      "sparse32.chunk_prepare": {
+        "maxMs": 6.67798,
+        "p50Ms": 1.753413,
+        "p95Ms": 6.67798,
+        "p99Ms": 6.67798,
+        "samples": 3
+      },
+      "sparse32.palette": {
+        "maxMs": 0.141491,
+        "p50Ms": 0.141491,
+        "p95Ms": 0.141491,
+        "p99Ms": 0.141491,
+        "samples": 1
+      },
+      "sparse32.place": {
+        "maxMs": 1.590724,
+        "p50Ms": 1.5427,
+        "p95Ms": 1.590724,
+        "p99Ms": 1.590724,
+        "samples": 5
+      },
+      "sparse32.reset": {
+        "maxMs": 1.971293,
+        "p50Ms": 1.211504,
+        "p95Ms": 1.971293,
+        "p99Ms": 1.971293,
+        "samples": 9
+      },
+      "sparse64.chunk_prepare": {
+        "maxMs": 15.600513,
+        "p50Ms": 1.056595,
+        "p95Ms": 15.600513,
+        "p99Ms": 15.600513,
+        "samples": 9
+      },
+      "sparse64.palette": {
+        "maxMs": 0.114704,
+        "p50Ms": 0.114704,
+        "p95Ms": 0.114704,
+        "p99Ms": 0.114704,
+        "samples": 1
+      },
+      "sparse64.place": {
+        "maxMs": 3.830618,
+        "p50Ms": 1.532416,
+        "p95Ms": 3.095469,
+        "p99Ms": 3.830618,
+        "samples": 42
+      },
+      "sparse64.reset": {
+        "maxMs": 3.891392,
+        "p50Ms": 0.587235,
+        "p95Ms": 0.932604,
+        "p99Ms": 3.891392,
+        "samples": 65
+      }
+    },
+    "remainingNativeChunkTickets": 0,
+    "runId": "a444f5de-8ba2-4034-bacd-864c80dbd338",
+    "server": "1.21.11-2568-f57bd86 (MC: 1.21.11)",
+    "sliceBudgetMs": 1.5,
+    "startedAt": "2026-10-29T15:46:01.679119408Z",
+    "startupWarmupMs": 300.271753,
+    "startupWarmupStates": [
+      "minecraft:air",
+      "minecraft:stone",
+      "minecraft:deepslate"
+    ],
+    "startupWarmupWindow": "Sum of main-thread createBlockData and detached createBlockState validation calls during boot; excluded from idle baseline and active benchmark",
+    "status": "complete",
+    "tickMs": {
+      "baseline": {
+        "maxMs": 10.234449,
+        "p50Ms": 1.965165,
+        "p95Ms": 6.511178,
+        "p99Ms": 9.316423,
+        "samples": 200
+      },
+      "boot": {
+        "maxMs": 3.168041,
+        "p50Ms": 3.168041,
+        "p95Ms": 3.168041,
+        "p99Ms": 3.168041,
+        "samples": 1
+      },
+      "dense32.chunk_prepare": {
+        "maxMs": 109.543265,
+        "p50Ms": 1.076974,
+        "p95Ms": 5.804599,
+        "p99Ms": 58.045331,
+        "samples": 190
+      },
+      "dense32.palette": {
+        "maxMs": 1.546903,
+        "p50Ms": 1.546903,
+        "p95Ms": 1.546903,
+        "p99Ms": 1.546903,
+        "samples": 1
+      },
+      "dense32.place": {
+        "maxMs": 108.758229,
+        "p50Ms": 4.11363,
+        "p95Ms": 11.036948,
+        "p99Ms": 41.99509,
+        "samples": 133
+      },
+      "dense32.reset": {
+        "maxMs": 8.958552,
+        "p50Ms": 3.884581,
+        "p95Ms": 6.758073,
+        "p99Ms": 8.958552,
+        "samples": 40
+      },
+      "dense32.settle": {
+        "maxMs": 92.560405,
+        "p50Ms": 1.171946,
+        "p95Ms": 4.831034,
+        "p99Ms": 92.560405,
+        "samples": 40
+      },
+      "dense64.chunk_prepare": {
+        "maxMs": 42.730453,
+        "p50Ms": 0.930638,
+        "p95Ms": 8.091089,
+        "p99Ms": 26.974118,
+        "samples": 325
+      },
+      "dense64.palette": {
+        "maxMs": 9.077112,
+        "p50Ms": 9.077112,
+        "p95Ms": 9.077112,
+        "p99Ms": 9.077112,
+        "samples": 1
+      },
+      "dense64.place": {
+        "maxMs": 25.089085,
+        "p50Ms": 5.120324,
+        "p95Ms": 14.560837,
+        "p99Ms": 21.476523,
+        "samples": 275
+      },
+      "dense64.reset": {
+        "maxMs": 187.958892,
+        "p50Ms": 7.887407,
+        "p95Ms": 39.397288,
+        "p99Ms": 187.958892,
+        "samples": 68
+      },
+      "dense64.settle": {
+        "maxMs": 20.699814,
+        "p50Ms": 1.375955,
+        "p95Ms": 2.895072,
+        "p99Ms": 20.699814,
+        "samples": 40
+      },
+      "sparse32.chunk_prepare": {
+        "maxMs": 57.028145,
+        "p50Ms": 0.829812,
+        "p95Ms": 13.220275,
+        "p99Ms": 42.410896,
+        "samples": 126
+      },
+      "sparse32.palette": {
+        "maxMs": 8.090522,
+        "p50Ms": 8.090522,
+        "p95Ms": 8.090522,
+        "p99Ms": 8.090522,
+        "samples": 1
+      },
+      "sparse32.place": {
+        "maxMs": 2.770726,
+        "p50Ms": 2.210077,
+        "p95Ms": 2.770726,
+        "p99Ms": 2.770726,
+        "samples": 5
+      },
+      "sparse32.reset": {
+        "maxMs": 4.638593,
+        "p50Ms": 1.84683,
+        "p95Ms": 4.638593,
+        "p99Ms": 4.638593,
+        "samples": 9
+      },
+      "sparse32.settle": {
+        "maxMs": 32.351857,
+        "p50Ms": 0.75538,
+        "p95Ms": 5.238701,
+        "p99Ms": 32.351857,
+        "samples": 40
+      },
+      "sparse64.chunk_prepare": {
+        "maxMs": 95.806193,
+        "p50Ms": 0.802316,
+        "p95Ms": 9.23004,
+        "p99Ms": 31.917192,
+        "samples": 251
+      },
+      "sparse64.palette": {
+        "maxMs": 3.55608,
+        "p50Ms": 3.55608,
+        "p95Ms": 3.55608,
+        "p99Ms": 3.55608,
+        "samples": 1
+      },
+      "sparse64.place": {
+        "maxMs": 11.6359,
+        "p50Ms": 2.84921,
+        "p95Ms": 6.261323,
+        "p99Ms": 11.6359,
+        "samples": 42
+      },
+      "sparse64.reset": {
+        "maxMs": 11.92943,
+        "p50Ms": 2.381182,
+        "p95Ms": 9.505277,
+        "p99Ms": 11.92943,
+        "samples": 65
+      },
+      "sparse64.settle": {
+        "maxMs": 2.28569,
+        "p50Ms": 0.768577,
+        "p95Ms": 1.665385,
+        "p99Ms": 2.28569,
+        "samples": 39
+      }
+    },
+    "totalMs": 96000.830178,
+    "world": "rc_native_lab",
+    "worldGenerator": "native-default"
+  }
+}
