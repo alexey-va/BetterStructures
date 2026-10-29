@@ -43,7 +43,8 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private long startedNanos, token, phaseStarted, startupNanos, ownTickNanos, releaseNanos, ticketReadbackNanos;
     private int observedStageTick;
     private boolean attached, observedActive;
-    private boolean profileSpark = true;
+    private boolean profileSpark = true, warmEntityAdapters;
+    private long entityAdapterWarmupNanos;
 
     @Override public void onEnable() {
         try {
@@ -65,6 +66,9 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
                     String value = options.getProperty("profileSpark", "true");
                     if (!value.equals("true") && !value.equals("false")) throw new IllegalArgumentException("profileSpark must be true or false");
                     profileSpark = Boolean.parseBoolean(value);
+                    String warm = options.getProperty("warmEntityAdapters", "false");
+                    if (!warm.equals("true") && !warm.equals("false")) throw new IllegalArgumentException("warmEntityAdapters must be true or false");
+                    warmEntityAdapters = Boolean.parseBoolean(warm);
                 }
                 List<GenerationPlan> list = new ArrayList<>();
                 list.add(GenerationPlan.control(baseX, -8192));
@@ -83,6 +87,14 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             preparePalette();
             token = fence.begin(); transition(Stage.WORLD);
             createWorld();
+            if (warmEntityAdapters) {
+                long warmStarted = System.nanoTime();
+                var detached = world.createEntity(world.getSpawnLocation(), org.bukkit.entity.ArmorStand.class);
+                if (Bukkit.getEntity(detached.getUniqueId()) != null)
+                    throw new IllegalStateException("Startup entity-adapter warmup unexpectedly registered an entity");
+                entityAdapterWarmupNanos = System.nanoTime() - warmStarted;
+            }
+            startupNanos = System.nanoTime() - startedNanos;
             ticker = Bukkit.getScheduler().runTaskTimer(this, this::tick, 1, 1);
             getLogger().info("NATIVE_GENERATION_LAB status=ready runId=" + runId + " startupPreparationMs=" + startupNanos / 1_000_000D);
         } catch (Throwable error) {
@@ -322,6 +334,9 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         report.put("server", serverVersion); report.put("java", System.getProperty("java.version")); report.put("world", LabGuard.WORLD);
         report.put("mode", "generation-native-limited-region"); report.put("worldGenerator", "native-default");
         report.put("profileSpark", profileSpark);
+        report.put("warmEntityAdapters", warmEntityAdapters);
+        report.put("entityAdapterWarmupMs", entityAdapterWarmupNanos / 1_000_000D);
+        report.put("entityAdapterWarmupRegisteredEntity", false);
         report.put("startupPreparationMs", startupNanos / 1_000_000D); report.put("totalMs", (System.nanoTime() - startedNanos) / 1_000_000D);
         report.put("startupPreparationWindow", "Fixture decode await (maximum 30 seconds), immutable palette preparation and world creation during onEnable, before the benchmark ticker starts");
         report.put("verifyBudgetMs", BUDGET_NANOS / 1_000_000D); report.put("maxChunkRequestsInFlight", 1);
