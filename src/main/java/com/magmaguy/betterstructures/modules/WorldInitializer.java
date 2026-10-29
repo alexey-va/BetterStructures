@@ -11,7 +11,7 @@ public class WorldInitializer {
     public static World generateWorld(String worldName, Player player) {
         WorldCreator worldCreator = new WorldCreator(worldName);
         worldCreator.environment(World.Environment.NORMAL);
-        worldCreator.keepSpawnInMemory(false);
+        worldCreator.keepSpawnLoaded(net.kyori.adventure.util.TriState.FALSE);
         // MagmaCore's void generator lives outside this plugin's class loader, so a world that
         // outlasts a restart-free update does not keep the replaced copy of BetterStructures loaded.
         worldCreator.generator(TemporaryWorldManager.voidGenerator());

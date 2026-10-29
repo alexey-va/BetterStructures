@@ -253,6 +253,16 @@ public class WorldEditUtils {
             }
 
             @Override
+            public void removeEntity(Entity entity) {
+                // This read-only single-block clipboard never contains entities.
+            }
+
+            @Override
+            public boolean tile(int x, int y, int z, com.fastasyncworldedit.core.nbt.FaweCompoundTag tag) {
+                return false;
+            }
+
+            @Override
             public Region getRegion() {
                 return new CuboidRegion(BlockVector3.at(0,0,0), BlockVector3.at(0,0,0));
             }

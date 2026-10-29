@@ -473,6 +473,17 @@ public final class SchematicDiskCache {
         }
 
         @Override
+        public void removeEntity(com.sk89q.worldedit.entity.Entity entity) {
+            delegate.removeEntity(entity instanceof RotationCorrectedEntity corrected ? corrected.delegate : entity);
+        }
+
+        @Override
+        public boolean tile(int x, int y, int z, com.fastasyncworldedit.core.nbt.FaweCompoundTag tag)
+                throws com.sk89q.worldedit.WorldEditException {
+            return delegate.tile(x, y, z, tag);
+        }
+
+        @Override
         public com.sk89q.worldedit.regions.Region getRegion() {
             return delegate.getRegion();
         }

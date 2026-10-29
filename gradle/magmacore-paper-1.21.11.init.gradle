@@ -1,0 +1,18 @@
+// Build-only profile for unmodified MagmaCore source 9ccd02d9413f23cdb876fb2052c697e534daf6bc.
+// Its v26 adapter requires unpublished 26.3 BuildTools artifacts and is outside this server target.
+gradle.projectsEvaluated {
+    def distribution = gradle.rootProject.project(':dist')
+    boolean removed = distribution.configurations.implementation.dependencies.removeAll {
+        it instanceof org.gradle.api.artifacts.ProjectDependency && it.path == ':nms:v26'
+    }
+    if (!removed) throw new GradleException('Expected exactly the upstream v26 distribution dependency')
+    distribution.tasks.named('shadowJar') {
+        preserveFileTimestamps = false
+        reproducibleFileOrder = true
+        manifest.attributes('Build-Upstream-Commit': '9ccd02d9413f23cdb876fb2052c697e534daf6bc',
+                'Build-Target-Minecraft': '1.21.11', 'Build-Excluded-Adapter': 'v26')
+        from(new File(distribution.rootProject.findProperty('targetBuildProfile').toString())) {
+            into 'META-INF/build'
+        }
+    }
+}

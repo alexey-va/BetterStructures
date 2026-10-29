@@ -1,4 +1,4 @@
-name: RusCrafting runtime build
+name: RusCrafting source build
 
 on:
   push:
@@ -24,19 +24,38 @@ jobs:
           distribution: temurin
           java-version: '25'
       - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
-      - run: ./gradlew --no-daemon -p ruscrafting check assemble
+      - name: Download immutable build inputs
+        shell: bash
+        run: |
+          mkdir -p build/inputs
+          curl --fail --location --retry 3 \
+            --output build/inputs/MagmaCore-2.2.0-ruscrafting.paper-1.21.11-upstream.9ccd02d.jar \
+            https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/thirdparty/magmacore-paper12111/2.2.0-source.9ccd02d/magmacore-paper12111-2.2.0-source.9ccd02d.jar
+          curl --fail --location --retry 3 \
+            --output build/inputs/FastAsyncWorldEdit-Paper-2.15.5-1079481.jar \
+            https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/thirdparty/fawe-paper-api/2.15.5-snapshot.1079481/fawe-paper-api-2.15.5-snapshot.1079481.jar
+          curl --fail --location --retry 3 \
+            --output build/inputs/EliteMobs-10.9.11.jar \
+            https://cdn.modrinth.com/data/ypMp4OVC/versions/PN80pvAb/EliteMobs.jar
+      - name: Verify and package the full source build
+        # JavaCompile/sourcesJar check input SHA-256; assemble verifies the shaded payload.
+        run: env -u MC_DIST_DIR ./gradlew --no-daemon check assemble sourcesJar
       - name: Preserve regression reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: BetterStructures-tests-${{ github.run_id }}
-          path: ruscrafting/build/reports/tests/
+          path: |
+            build/reports/tests/
+            build/test-results/test/
           retention-days: 14
           if-no-files-found: warn
-      - name: Preserve verified runtime JAR
+      - name: Preserve verified runtime and sources JARs
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: BetterStructures-${{ github.sha }}
-          path: ruscrafting/build/libs/BetterStructures-2.7.10-ruscrafting.1.jar
+          path: |
+            build/libs/BetterStructures.jar
+            build/libs/BetterStructures-2.7.10-ruscrafting.2+upstream.15808b1-sources.jar
           retention-days: 30
           if-no-files-found: error
