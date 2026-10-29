@@ -21,6 +21,7 @@ final class UpstreamScanProbe {
     private static final String SCAN_LISTENER = "com.magmaguy.betterstructures.listeners.NewChunkLoadEvent";
     private final Plugin provider;
     private final World world;
+    private final java.lang.reflect.Method chunkPreparationMetrics;
     private final int distance, offset, spawnRadius, surfaceSchematics;
     private final List<String> loadedSchematics;
     private final List<SurfaceGridPlanner.Region> regions;
@@ -36,9 +37,17 @@ final class UpstreamScanProbe {
                 .anyMatch(registered -> registered.getListener().getClass().getName().equals(SCAN_LISTENER));
     }
 
-    UpstreamScanProbe(JavaPlugin owner, Plugin provider, World world, int baseX) {
+    UpstreamScanProbe(JavaPlugin owner, Plugin provider, World world, int baseX, boolean requireChunkPreparation) {
         if (!Bukkit.isPrimaryThread() || !ready(provider)) throw new IllegalStateException("Upstream listener is not ready");
         this.provider = provider; this.world = world;
+        try {
+            // Optional public diagnostics of our lab fork; the stable upstream API lacks this class.
+            chunkPreparationMetrics = requireChunkPreparation ? Class.forName(
+                    "com.magmaguy.betterstructures.lab.LabChunkPreparation", true,
+                    provider.getClass().getClassLoader()).getMethod("metrics") : null;
+        } catch (ReflectiveOperationException failure) {
+            throw new IllegalStateException("The requested chunk-preparation lab diagnostics are unavailable", failure);
+        }
         if (!ValidWorldsConfig.isValidWorld(world))
             throw new IllegalStateException("BetterStructures ValidWorlds.yml must enable " + world.getName());
         distance = DefaultConfig.getDistanceSurface(); offset = DefaultConfig.getMaxOffsetSurface();
@@ -82,19 +91,24 @@ final class UpstreamScanProbe {
         if (eventFailure != null) throw new IllegalStateException(eventFailure);
         if (Bukkit.getPluginManager().getPlugin("BetterStructures") != provider || !ready(provider))
             throw new IllegalStateException("BetterStructures was disabled, replaced or reloaded during the probe");
+        if (chunkPreparationMetrics != null) PreparationState.settled(preparationSnapshot());
     }
     void verifyCase(GenerationPlan plan) {
         var region = regions.stream().filter(candidate -> candidate.plan() == plan).findFirst().orElseThrow();
         if (!freshTargetEvents.contains(GenerationPlan.key(region.point().chunkX(), region.point().chunkZ())))
             throw new IllegalStateException("Target surface grid chunk did not emit a fresh ChunkLoadEvent: " + plan.name);
     }
-    boolean settled() { return tickets() == 0 && System.nanoTime() - lastEventNanos >= 2_000_000_000L; }
+    boolean settled() {
+        return tickets() == 0 && (chunkPreparationMetrics == null || PreparationState.settled(preparationSnapshot()))
+                && System.nanoTime() - lastEventNanos >= 2_000_000_000L;
+    }
     void stop() { HandlerList.unregisterAll(listener); }
 
     Map<String, Object> snapshot() {
         Map<String, Object> report = new LinkedHashMap<>();
         report.put("providerVersion", provider.getDescription().getVersion()); report.put("listenerReady", ready(provider));
-        report.put("worldSeed", world.getSeed()); report.put("distanceSurfaceChunks", distance);
+        report.put("worldSeed", Long.toString(world.getSeed())); report.put("distanceSurfaceChunks", distance);
+        if (chunkPreparationMetrics != null) report.put("chunkPreparation", preparationSnapshot());
         report.put("maxOffsetSurfaceChunks", offset); report.put("spawnProtectionRadiusBlocks", spawnRadius);
         report.put("loadedRealSchematicCount", loadedSchematics.size()); report.put("loadedSchematics", loadedSchematics);
         report.put("surfaceSchematicRegistryEntries", surfaceSchematics); report.put("harnessFixtureWrites", 0);
@@ -109,11 +123,44 @@ final class UpstreamScanProbe {
         return report;
     }
     private boolean inWorld(Location location) { return location != null && location.getWorld() == world; }
+    private Map<String, Object> preparationSnapshot() {
+        try {
+            Object value = chunkPreparationMetrics.invoke(null);
+            if (!(value instanceof Map<?, ?> raw)) throw new IllegalStateException("Invalid chunk-preparation diagnostics");
+            Map<String, Object> result = new LinkedHashMap<>();
+            for (var entry : raw.entrySet()) {
+                if (!(entry.getKey() instanceof String key)) throw new IllegalStateException("Invalid diagnostic key");
+                result.put(key, entry.getValue());
+            }
+            return Map.copyOf(result);
+        } catch (ReflectiveOperationException failure) {
+            throw new IllegalStateException("Cannot read chunk-preparation diagnostics", failure);
+        }
+    }
     private int tickets() { return world.getPluginChunkTickets().getOrDefault(provider, List.of()).size(); }
     private void record(String type, Location location, String schematic, boolean cancelled) {
         if (events.size() >= 4096) { eventFailure = "Probe event receipt bound exceeded"; return; }
         lastEventNanos = System.nanoTime();
         events.add(Map.of("type", type, "at", Instant.now().toString(), "schematic", schematic,
                 "position", List.of(location.getBlockX(), location.getBlockY(), location.getBlockZ()), "cancelled", cancelled));
+    }
+}
+
+/** Pure completion oracle: tested without loading Bukkit or the optional provider API. */
+final class PreparationState {
+    static boolean settled(Map<String, Object> state) {
+        if (!Boolean.TRUE.equals(state.get("enabled")) || !Boolean.FALSE.equals(state.get("failed"))
+                || count(state, "failures") != 0)
+            throw new IllegalStateException("Chunk-preparation experiment is disabled or failed: " + state);
+        if (!(state.get("requestPending") instanceof Boolean pending))
+            throw new IllegalStateException("Missing pending-request diagnostics");
+        if (!(state.get("activeJob") instanceof Boolean active))
+            throw new IllegalStateException("Missing active-job diagnostics");
+        return !active && !pending && count(state, "queued") == 0 && count(state, "held") == 0;
+    }
+    private static long count(Map<String, Object> state, String key) {
+        if (!(state.get(key) instanceof Number n) || n.longValue() < 0 || n.longValue() != n.doubleValue())
+            throw new IllegalStateException("Invalid chunk-preparation counter: " + key);
+        return n.longValue();
     }
 }

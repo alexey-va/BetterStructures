@@ -16,6 +16,7 @@ import com.magmaguy.betterstructures.content.BSPackageRefresher;
 import com.magmaguy.betterstructures.listeners.FirstTimeSetupWarner;
 import com.magmaguy.betterstructures.listeners.NewChunkLoadEvent;
 import com.magmaguy.betterstructures.lab.NativeBackendLab;
+import com.magmaguy.betterstructures.lab.LabChunkPreparation;
 import com.magmaguy.betterstructures.modules.ModulesContainer;
 import com.magmaguy.betterstructures.modules.WFCGenerator;
 import com.magmaguy.betterstructures.schematics.SchematicContainer;
@@ -90,6 +91,7 @@ public final class BetterStructures extends JavaPlugin {
         // The opt-in lab must attach immutable population plans before its world starts generating.
         // World creation belongs to startup, never a scheduled tick after the server becomes ready.
         try {
+            LabChunkPreparation.configure(this);
             nativeBackendLab = NativeBackendLab.startIfConfigured(this);
         } catch (Exception | LinkageError failure) {
             getLogger().log(java.util.logging.Level.SEVERE, "NATIVE_STRUCTURES_BENCH status=failed phase=startup", failure);
@@ -164,7 +166,9 @@ public final class BetterStructures extends JavaPlugin {
         // Both startup and content reload use this owner. Wait before clearing registries
         // or returning control to Bukkit, which may close the plugin's resource jar.
         MagmaCore.shutdown(this);
-        Schematic.shutdown();
+        // Close/flush the active finisher while its footprint is still pinned, then fence pending loads.
+        try { Schematic.shutdown(); }
+        finally { LabChunkPreparation.shutdown(); }
         SchematicClipboardCache.shutdown();
         SchematicContainer.shutdown();
         NewChunkLoadEvent.shutdown();
@@ -356,7 +360,8 @@ public final class BetterStructures extends JavaPlugin {
                 Bukkit.getPluginManager().isPluginEnabled("EliteMobs"),
                 Bukkit.getPluginManager().isPluginEnabled("MythicMobs"));
         SchematicContainer.shutdown();
-        Schematic.shutdown();
+        try { Schematic.shutdown(); }
+        finally { LabChunkPreparation.prepareForReload(); }
         NewChunkLoadEvent.prepareForContentReload();
         ChunkPregenerator.shutdown();
         Bukkit.getServer().getScheduler().cancelTasks(MetadataHandler.PLUGIN);

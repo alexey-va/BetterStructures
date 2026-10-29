@@ -2,6 +2,7 @@ package com.magmaguy.betterstructures.worldedit;
 
 import com.magmaguy.betterstructures.MetadataHandler;
 import com.magmaguy.betterstructures.lab.NativeBackendLab;
+import com.magmaguy.betterstructures.lab.LabChunkPreparation;
 import com.magmaguy.betterstructures.config.DefaultConfig;
 import com.magmaguy.betterstructures.util.WorldEditUtils;
 import com.magmaguy.magmacore.util.Logger;
@@ -239,12 +240,19 @@ public class Schematic {
             Vector schematicOffset,
             Function<Boolean, Material> pedestalMaterialProvider,
             Runnable onComplete) {
+        pasteSchematic(schematicClipboard, location, schematicOffset, pedestalMaterialProvider, onComplete, null);
+    }
+
+    public static void pasteSchematic(
+            Clipboard schematicClipboard, Location location, Vector schematicOffset,
+            Function<Boolean, Material> pedestalMaterialProvider, Runnable onComplete,
+            LabChunkPreparation.Lease labChunks) {
         NativeBackendLab.requireLatePasteAllowed(location.getWorld());
         pasteQueue.add(new ClipboardPasteOperation(
                 schematicClipboard,
                 location.clone().add(schematicOffset),
                 pedestalMaterialProvider,
-                onComplete));
+                onComplete, labChunks));
         startQueueIfIdle();
     }
 
@@ -363,15 +371,20 @@ public class Schematic {
             operation.close();
             operation.onComplete();
         } catch (Throwable throwable) {
+            operation.onAborted();
             Logger.warn("A BetterStructures paste completion callback failed: " + throwable.getMessage());
             throwable.printStackTrace();
         }
     }
 
     private static void abortActivePaste() {
-        if (activePasteOperation != null) activePasteOperation.close();
-        activePasteOperation = null;
-        activePasteTask = null;
+        try { if (activePasteOperation != null) closeAborted(activePasteOperation); }
+        finally { activePasteOperation = null; activePasteTask = null; }
+    }
+
+    private static void closeAborted(PasteOperation operation) {
+        try { operation.close(); }
+        finally { operation.onAborted(); }
     }
 
     /** Cancels only this lab world's clipboard operations, preserving unrelated queue owners. Main thread only. */
@@ -379,7 +392,7 @@ public class Schematic {
         if (!Bukkit.isPrimaryThread()) throw new IllegalStateException("Paste cancellation requires the server thread");
         pasteQueue.removeIf(operation -> {
             if (!(operation instanceof ClipboardPasteOperation paste) || paste.adjustedLocation.getWorld() != world) return false;
-            operation.close();
+            closeAborted(operation);
             return true;
         });
         if (activePasteOperation instanceof ClipboardPasteOperation paste && paste.adjustedLocation.getWorld() == world) {
@@ -396,7 +409,10 @@ public class Schematic {
      * queue by itself.
      */
     public static void shutdown() {
-        for (PasteOperation operation : pasteQueue) operation.close();
+        for (PasteOperation operation : pasteQueue) {
+            try { closeAborted(operation); }
+            catch (Throwable failure) { Logger.warn("Failed to close a queued paste: " + failure.getMessage()); }
+        }
         pasteQueue.clear();
         if (activePasteTask != null) {
             activePasteTask.cancel();
@@ -413,6 +429,9 @@ public class Schematic {
 
         default void close() { }
 
+        /** Failure/cancellation notification, separate from close-before-success-callback resource cleanup. */
+        default void onAborted() { }
+
         void pasteNext();
 
         void onComplete();
@@ -425,12 +444,19 @@ public class Schematic {
         private final PasteCursor cursor;
         private final PasteChunkReadiness chunks;
         private final Runnable onComplete;
+        private final LabChunkPreparation.Lease labChunks;
 
         private ClipboardPasteOperation(
                 Clipboard clipboard,
                 Location adjustedLocation,
                 Function<Boolean, Material> pedestalMaterialProvider,
                 Runnable onComplete) {
+            this(clipboard, adjustedLocation, pedestalMaterialProvider, onComplete, null);
+        }
+
+        private ClipboardPasteOperation(
+                Clipboard clipboard, Location adjustedLocation, Function<Boolean, Material> pedestalMaterialProvider,
+                Runnable onComplete, LabChunkPreparation.Lease labChunks) {
             this.clipboard = clipboard;
             this.adjustedLocation = adjustedLocation;
             this.pedestalMaterialProvider = pedestalMaterialProvider;
@@ -439,15 +465,18 @@ public class Schematic {
                     clipboard.getDimensions().y(),
                     clipboard.getDimensions().z());
             this.onComplete = onComplete;
+            this.labChunks = labChunks;
             this.chunks = new PasteChunkReadiness(adjustedLocation.getWorld());
         }
 
         @Override
         public boolean ready() {
-            return chunks.ready(adjustedLocation.clone().add(cursor.x, cursor.y, cursor.z));
+            Location next = adjustedLocation.clone().add(cursor.x, cursor.y, cursor.z);
+            return labChunks == null ? chunks.ready(next) : labChunks.readyAt(next);
         }
 
         @Override public void close() { chunks.close(); }
+        @Override public void onAborted() { if (labChunks != null) labChunks.close(); }
 
         @Override
         public boolean hasNext() {
@@ -461,6 +490,7 @@ public class Schematic {
 
         @Override
         public void onComplete() {
+            if (labChunks != null) labChunks.checkActive();
             if (onComplete != null) onComplete.run();
         }
     }

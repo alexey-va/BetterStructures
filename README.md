@@ -134,7 +134,8 @@ jfr print --json --events ru.ruscrafting.NativeSlice,jdk.ExecutionSample,jdk.GCP
 
 ## Integrated BetterStructures lab backend
 
-This experimental branch builds `2.7.10-ruscrafting.lab.3+upstream.15808b1`.
+This experimental branch builds `2.7.10-ruscrafting.lab.4+upstream.15808b1`.
+The frozen four-schematic comparison below used lab.3; its runtime SHA is recorded with the results.
 Its opt-in [manifest](src/main/resources/native-lab.example.yml) lives at
 `plugins/BetterStructures/assets/native-lab.yml` and selects `DEFAULT` or
 `NATIVE_GENERATION`. It is restricted to the loopback lab at `127.0.0.1:54295`.
@@ -149,6 +150,32 @@ BARRIER preserves and BEDROCK uses an explicit constant pedestal provider;
 complete before/expected/final block hashes and settled differences are checked.
 The production artifact described below is built on `master` and excludes this
 backend. These lab builds are not production candidates.
+
+## Automatic fitting readiness experiment
+
+An additional lab-only opt-in is
+`plugins/BetterStructures/assets/chunk-preparation-lab.yml`:
+
+```yaml
+enabled: true
+world: rc_native_generation_lab
+maxQueued: 64
+maxHeld: 256
+```
+
+It retains the selected fitter and clipboard, prepares its candidate footprint
+with async FULL requests, then retains the paste footprint plus a physics halo
+through normal Preparation, Clipboard and Finishing stages. It keeps normal
+physics, NBT, loot, marker and entity handling. It accepts only the fixed
+loopback lab and world; the manifest comparison worlds are outside its scope.
+
+Paper's plugin tickets promote a two-chunk FULL activation ring. The experiment
+prepares/suppresses that separate activation contour before pinning; halo-only
+chunks never receive plugin tickets. Requests and work slices are bounded, and
+completion diagnostics include active/queued jobs, pending requests and holds.
+The probe's `requireChunkPreparation=true` option requires those counters to be
+idle before reporting completion. Runtime measurements are recorded separately
+from the frozen native/DEFAULT block-phase comparison.
 
 ## Real-schematic A/B result, 2026-10-29
 

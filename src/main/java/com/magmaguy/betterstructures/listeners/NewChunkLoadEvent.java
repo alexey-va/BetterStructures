@@ -3,6 +3,7 @@ package com.magmaguy.betterstructures.listeners;
 import com.magmaguy.betterstructures.BetterStructures;
 import com.magmaguy.betterstructures.MetadataHandler;
 import com.magmaguy.betterstructures.lab.NativeBackendLab;
+import com.magmaguy.betterstructures.lab.LabChunkPreparation;
 import com.magmaguy.betterstructures.buildingfitter.FitAirBuilding;
 import com.magmaguy.betterstructures.buildingfitter.FitLiquidBuilding;
 import com.magmaguy.betterstructures.buildingfitter.FitSurfaceBuilding;
@@ -67,6 +68,7 @@ public class NewChunkLoadEvent implements Listener {
     public void onChunkLoad(ChunkLoadEvent event) {
         Chunk chunk = event.getChunk();
         if (NativeBackendLab.manages(chunk.getWorld())) return;
+        if (LabChunkPreparation.suppresses(chunk)) return;
         LoadingChunkKey loadingChunkKey = LoadingChunkKey.from(chunk);
         boolean deferred = deferredNewChunks.contains(loadingChunkKey);
         boolean deferredDungeon = delayedDungeonScans.isDeferred(loadingChunkKey);
@@ -102,7 +104,11 @@ public class NewChunkLoadEvent implements Listener {
         // load, which can stall the server for good. Scan on the next tick
         // instead, holding the chunk until then: pregenerators such as
         // /bs pregenerate and Chunky release their chunks right after loading.
-        if (claimNewChunk(chunk, loadingChunkKey)) holdForTerrainScan(chunk, loadingChunkKey);
+        if (claimNewChunk(chunk, loadingChunkKey)) {
+            if (LabChunkPreparation.enabled(chunk.getWorld()))
+                LabChunkPreparation.prepareOrigin(chunk, ready -> chunkScanReentrancyGuard.runIfIdle(() -> runTerrainScans(ready)));
+            else holdForTerrainScan(chunk, loadingChunkKey);
+        }
     }
 
     private static void scanNewChunk(Chunk chunk, LoadingChunkKey loadingChunkKey) {

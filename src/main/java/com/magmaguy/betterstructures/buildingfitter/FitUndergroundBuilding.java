@@ -134,6 +134,10 @@ public class FitUndergroundBuilding extends FitAnything {
                 break;
         }
 
+        scanPrepared(originalLocation, () -> scanCandidates(originalLocation));
+    }
+
+    private void scanCandidates(Location originalLocation) {
         chunkScan(originalLocation, 0, 0);
         if (highestScore < 90)
             for (int chunkX = -searchRadius; chunkX < searchRadius + 1; chunkX++) {

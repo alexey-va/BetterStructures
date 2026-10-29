@@ -1,0 +1,9 @@
+# Copy to plugins/BetterStructures/assets/chunk-preparation-lab.yml only in the disposable lab.
+# This is an opt-in readiness experiment for the existing fitter/paste pipeline, not another engine.
+enabled: false
+world: rc_native_generation_lab
+maxQueued: 64
+maxHeld: 256
+# The server must bind exactly 127.0.0.1:54295. One FULL request and one prepared job at a time.
+# Overflow/timeout is reported as BS_CHUNK_PREPARATION status=failed; it never falls back silently.
+# Physics, loot, entities and NBT are unchanged. A one-chunk halo cannot bound arbitrary physics chains.

@@ -2,6 +2,8 @@ package com.magmaguy.betterstructures.buildingfitter;
 
 import com.magmaguy.betterstructures.api.BuildCustomMarkerEvent;
 import com.magmaguy.betterstructures.lab.NativeBackendLab;
+import com.magmaguy.betterstructures.lab.ChunkFootprint;
+import com.magmaguy.betterstructures.lab.LabChunkPreparation;
 import com.magmaguy.betterstructures.api.BuildPasteCompleteEvent;
 import com.magmaguy.betterstructures.api.BuildPlaceEvent;
 import com.magmaguy.betterstructures.api.ChestFillEvent;
@@ -66,6 +68,8 @@ public class FitAnything {
     protected Location location = null;
     protected GeneratorConfigFields.StructureType structureType;
     private Material pedestalMaterial = null;
+    private LabChunkPreparation.Lease labChunks;
+    private boolean pasteQueued;
 
     public FitAnything(SchematicContainer schematicContainer) {
         this.schematicContainer = schematicContainer;
@@ -113,7 +117,45 @@ public class FitAnything {
         if (buildPlaceEvent.isCancelled()) return;
 
         Schematic.enqueue(new Preparation(location.clone()));
+        if (labChunks != null) labChunks.transferToPaste();
+        pasteQueued = true;
     }
+
+    /** Snapshot selection has already happened; only the existing candidate loop is deferred. */
+    protected final void scanPrepared(Location anchor, Runnable selectedScan) {
+        if (!LabChunkPreparation.enabled(anchor.getWorld())) { selectedScan.run(); return; }
+        Location corner = anchor.clone().add(schematicOffset);
+        LabChunkPreparation.prepare(anchor.getWorld(), () -> ChunkFootprint.fit(corner.getBlockX(), corner.getBlockZ(),
+                schematicClipboard.getDimensions().x(), schematicClipboard.getDimensions().z(), this instanceof FitSurfaceBuilding), lease -> {
+            labChunks = lease;
+            try { selectedScan.run(); if (!pasteQueued) lease.complete(); }
+            catch (Throwable failure) { lease.close(); throw failure; }
+        });
+    }
+
+    private ChunkFootprint pasteFootprint(Location corner) {
+        ChunkFootprint footprint = ChunkFootprint.rectangle(corner.getBlockX(), corner.getBlockZ(),
+                schematicClipboard.getDimensions().x(), schematicClipboard.getDimensions().z(), 1);
+        // Markers and saved entities can lie outside the clipboard's block bounds. Keep their existing destinations.
+        var markers = new java.util.ArrayList<Vector>(schematicContainer.getChestLocations());
+        markers.addAll(schematicContainer.getVanillaSpawns().keySet());
+        markers.addAll(schematicContainer.getEliteMobsSpawns().keySet());
+        markers.addAll(schematicContainer.getMythicMobsSpawns().keySet());
+        markers.addAll(schematicContainer.getCustomMarkers().keySet());
+        for (Vector marker : markers) {
+            Location destination = corner.clone().add(marker);
+            footprint = footprint.union(ChunkFootprint.rectangle(destination.getBlockX(), destination.getBlockZ(), 1, 1, 1));
+        }
+        var minimum = schematicClipboard.getMinimumPoint();
+        for (var entity : schematicClipboard.getEntities()) {
+            var at = entity.getLocation();
+            Location destination = corner.clone().add(at.getX() - minimum.x(), 0, at.getZ() - minimum.z());
+            footprint = footprint.union(ChunkFootprint.rectangle(destination.getBlockX(), destination.getBlockZ(), 1, 1, 1));
+        }
+        return footprint;
+    }
+
+    private void abortPreparedPaste() { if (labChunks != null) labChunks.close(); }
 
     private void setDefaultPedestalMaterial(Location base) {
         if (pedestalMaterial != null) return;
@@ -135,11 +177,15 @@ public class FitAnything {
             this.base = base;
             corner = base.clone().add(schematicOffset);
             chunks = new PasteChunkReadiness(base.getWorld());
+            if (labChunks != null) labChunks.include(pasteFootprint(corner));
             pedestalMaterial = schematicContainer.getSchematicConfigField().getPedestalMaterial();
             if (FitAnything.this instanceof FitAirBuilding) phase = 2;
         }
         @Override public boolean hasNext() { return phase < 2; }
-        @Override public boolean ready() { return chunks.ready(corner.clone().add(x, 0, z)); }
+        @Override public boolean ready() {
+            Location next = corner.clone().add(x, 0, z);
+            return labChunks == null ? chunks.ready(next) : labChunks.readyAt(next);
+        }
         @Override public void pasteNext() {
             if (phase == 0) {
                 Block ground = corner.clone().add(x, y, z).getBlock();
@@ -167,10 +213,12 @@ public class FitAnything {
             if (x >= schematicClipboard.getDimensions().x()) { x = 0; phase++; }
         }
         @Override public void close() { chunks.close(); }
+        @Override public void onAborted() { abortPreparedPaste(); }
         @Override public void onComplete() {
+            if (labChunks != null) labChunks.checkActive();
             setDefaultPedestalMaterial(base);
             Schematic.pasteSchematic(schematicClipboard, base, schematicOffset,
-                    FitAnything.this::getPedestalMaterial, () -> Schematic.enqueue(new Finishing(base)));
+                    FitAnything.this::getPedestalMaterial, () -> Schematic.enqueue(new Finishing(base)), labChunks);
         }
     }
 
@@ -227,7 +275,7 @@ public class FitAnything {
                 var minimum = schematicClipboard.getMinimumPoint();
                 destination = corner.clone().add(at.getX() - minimum.x(), at.getY() - minimum.y(), at.getZ() - minimum.z());
             }
-            return chunks.ready(destination);
+            return labChunks == null ? chunks.ready(destination) : labChunks.readyAt(destination);
         }
         @Override public void pasteNext() {
             switch (phase) {
@@ -264,7 +312,9 @@ public class FitAnything {
             try { if (entitySession != null) entitySession.close(); }
             finally { chunks.close(); }
         }
+        @Override public void onAborted() { abortPreparedPaste(); }
         @Override public void onComplete() {
+            if (labChunks != null) labChunks.checkActive();
             var region = schematicClipboard.getRegion();
             Location highestCorner = corner.clone().add(region.getWidth() - 1, region.getHeight() - 1, region.getLength() - 1);
             List<Location> containers = schematicContainer.getChestLocations().stream()
@@ -272,6 +322,7 @@ public class FitAnything {
             Bukkit.getServer().getPluginManager().callEvent(
                     new BuildPasteCompleteEvent(FitAnything.this, corner, highestCorner, containers));
             announceComplete(base);
+            if (labChunks != null) labChunks.complete();
         }
     }
 

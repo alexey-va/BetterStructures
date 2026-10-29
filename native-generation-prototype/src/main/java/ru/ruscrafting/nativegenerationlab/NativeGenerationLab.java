@@ -44,7 +44,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private long startedNanos, token, phaseStarted, startupNanos, ownTickNanos, releaseNanos, ticketReadbackNanos;
     private int observedStageTick;
     private boolean attached, observedActive;
-    private boolean profileSpark = true, warmEntityAdapters, upstreamScanProbe;
+    private boolean profileSpark = true, warmEntityAdapters, upstreamScanProbe, requireChunkPreparation;
     private long entityAdapterWarmupNanos, upstreamReadyWaitNanos;
 
     @Override public void onEnable() {
@@ -73,7 +73,13 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
                     String probe = options.getProperty("upstreamScanProbe", "false");
                     if (!probe.equals("true") && !probe.equals("false")) throw new IllegalArgumentException("upstreamScanProbe must be true or false");
                     upstreamScanProbe = Boolean.parseBoolean(probe);
+                    String preparation = options.getProperty("requireChunkPreparation", "false");
+                    if (!preparation.equals("true") && !preparation.equals("false"))
+                        throw new IllegalArgumentException("requireChunkPreparation must be true or false");
+                    requireChunkPreparation = Boolean.parseBoolean(preparation);
                 }
+                if (requireChunkPreparation && !upstreamScanProbe)
+                    throw new IllegalArgumentException("requireChunkPreparation requires upstreamScanProbe");
                 if (upstreamScanProbe) return List.of(); // No fixture decode or fixture writes in this mode.
                 List<GenerationPlan> list = new ArrayList<>();
                 list.add(GenerationPlan.control(baseX, -8192));
@@ -209,7 +215,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         var provider = Bukkit.getPluginManager().getPlugin("BetterStructures");
         if (provider == null) throw new IllegalStateException("upstreamScanProbe requires BetterStructures to be installed");
         if (!UpstreamScanProbe.ready(provider)) { stageTicks++; return; }
-        upstreamProbe = new UpstreamScanProbe(this, provider, world, baseX);
+        upstreamProbe = new UpstreamScanProbe(this, provider, world, baseX, requireChunkPreparation);
         plans = upstreamProbe.plans();
         for (var plan : plans) prepared.add(new NativePopulator.Prepared(plan, new BlockData[0], new String[0]));
         populator.armControls(List.copyOf(prepared));
