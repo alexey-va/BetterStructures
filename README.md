@@ -14,7 +14,7 @@ This artifact targets **Paper/Purpur 1.21.11** with **FastAsyncWorldEdit
 the exact observed FAWE and EliteMobs JARs. FAWE's clipboard tile SPI is used;
 standalone WorldEdit compatibility is not claimed for this build.
 
-The only plugin source changes from that upstream commit are the equivalent
+The only plugin runtime source changes from that upstream commit are the equivalent
 Paper spawn-retention API call in `WorldInitializer` and two mechanical FAWE
 interface methods in each of the single-block and rotation-preserving clipboard
 views. The packaged version is stamped by Gradle. No experimental placement
@@ -32,8 +32,8 @@ The runtime descriptor version contains `+upstream.15808b1`; the Maven release
 coordinate uses a hyphen:
 [`ru.ruscrafting.forks:betterstructures:2.7.10-ruscrafting.2-upstream.15808b1`](https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/forks/betterstructures/2.7.10-ruscrafting.2-upstream.15808b1/betterstructures-2.7.10-ruscrafting.2-upstream.15808b1.jar).
 The complete source tree, including the wrapper, test fixtures and build pins,
-is available as a [source archive](https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/forks/betterstructures-source-tree/2.7.10-ruscrafting.2-upstream.15808b1/betterstructures-source-tree-2.7.10-ruscrafting.2-upstream.15808b1.jar).
-The [validated implementation revision](https://github.com/alexey-va/BetterStructures/actions/runs/40936018990)
+is available as a [source archive](https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/forks/betterstructures-source-tree/2.7.10-ruscrafting.2-upstream.15808b1-recipe.2/betterstructures-source-tree-2.7.10-ruscrafting.2-upstream.15808b1-recipe.2.jar).
+The [validated implementation revision](https://github.com/alexey-va/BetterStructures/actions/runs/40938405539)
 passed all 65 unit tests, assembly and production packaging guards.
 The previous binary overlay is retired; its implementation remains in Git
 history. The current runtime and CI use the root source build.
