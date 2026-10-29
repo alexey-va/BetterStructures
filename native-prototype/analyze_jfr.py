@@ -257,7 +257,7 @@ def window_summary(kind, native, pauses, samples):
 
 def analyze(document):
     recording = document.get("recording", document)
-    events = recording.get("events", []) if isinstance(recording, dict) else []
+    events = recording.get("events") if isinstance(recording, dict) else None
     if not isinstance(events, list):
         raise SystemExit("Expected recording.events to be a JSON array")
 
