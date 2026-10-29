@@ -49,6 +49,52 @@ final class ChunkPreparationTest {
         assertThrows(IllegalArgumentException.class, () -> LabChunkPreparation.validateConfig("127.0.0.1", 54295, LabChunkPreparation.WORLD, 65, 256));
     }
 
+    @Test void disabledWarmupNeverTouchesFaweReadinessOrConversion() throws Exception {
+        try (Fixture f = new Fixture()) {
+            f.coordinator.warmFaweAdapter(false, () -> fail("Default-off must not initialize FAWE"),
+                    () -> fail("Default-off must not convert BlockData"));
+            assertEquals(false, LabChunkPreparation.metrics().get("warmFaweAdapter"));
+            assertEquals(false, LabChunkPreparation.metrics().get("faweAdapterWarmupCompleted"));
+            assertEquals(0D, LabChunkPreparation.metrics().get("faweAdapterWarmupMs"));
+        }
+    }
+
+    @Test void warmupChecksReadinessBeforeOneDetachedConversionAndReportsCost() throws Exception {
+        try (Fixture f = new Fixture()) {
+            List<String> order = new ArrayList<>();
+            f.coordinator.warmFaweAdapter(true, () -> { order.add("ready"); return true; }, () -> order.add("convert"));
+            assertEquals(List.of("ready", "convert"), order);
+            assertEquals(true, LabChunkPreparation.metrics().get("warmFaweAdapter"));
+            assertEquals(true, LabChunkPreparation.metrics().get("faweAdapterWarmupCompleted"));
+            assertTrue((double) LabChunkPreparation.metrics().get("faweAdapterWarmupMs") >= 0);
+            assertEquals(0, f.requestCalls.get()); assertEquals(0, f.added.get());
+        }
+    }
+
+    @Test void unavailableOrOffThreadWarmupCannotRunConversion() throws Exception {
+        try (Fixture f = new Fixture()) {
+            assertThrows(IllegalStateException.class, () -> f.coordinator.warmFaweAdapter(true, () -> false,
+                    () -> fail("Unavailable FAWE must not initialize BukkitAdapter")));
+            f.primaryThread = false;
+            try {
+                assertThrows(IllegalStateException.class, () -> f.coordinator.warmFaweAdapter(true,
+                        () -> fail("Readiness must be checked on main"), () -> fail("Conversion must run on main")));
+            } finally { f.primaryThread = true; }
+            assertEquals(false, LabChunkPreparation.metrics().get("faweAdapterWarmupCompleted"));
+            assertEquals(0, f.requestCalls.get()); assertEquals(0, f.added.get());
+        }
+    }
+
+    @Test void conversionFailureAbortsStartupInsteadOfClaimingWarmupSuccess() throws Exception {
+        try (Fixture f = new Fixture()) {
+            IllegalStateException failure = new IllegalStateException("adapter conversion failed");
+            assertSame(failure, assertThrows(IllegalStateException.class, () -> f.coordinator.warmFaweAdapter(true,
+                    () -> true, () -> { throw failure; })));
+            assertEquals(false, LabChunkPreparation.metrics().get("faweAdapterWarmupCompleted"));
+            assertTrue((double) LabChunkPreparation.metrics().get("faweAdapterWarmupMs") >= 0);
+        }
+    }
+
     @Test void ticketActivationHasItsOwnCeilingAndNeverChangesHeldGeometry() {
         var desired = ChunkFootprint.rectangle(0, 0, 256, 256, 0).chunks();
         assertEquals(256, desired.size()); assertEquals(400, ChunkFootprint.activation(desired).size());
@@ -325,6 +371,7 @@ final class ChunkPreparationTest {
         final AtomicInteger requestCalls = new AtomicInteger();
         final AtomicLong gameTime = new AtomicLong();
         boolean transientUnloads;
+        boolean primaryThread = true;
         Consumer<ChunkFootprint.Coordinate> onPin = ignored -> { };
         final World world;
         final LabChunkPreparation coordinator;
@@ -351,7 +398,7 @@ final class ChunkPreparationTest {
                 case "getLogger" -> logger; case "isEnabled" -> true; default -> primitiveDefault(method.getReturnType());
             });
             Server server = proxy(Server.class, (p, method, args) -> switch (method.getName()) {
-                case "isPrimaryThread" -> true; case "getScheduler" -> scheduler; case "getWorld" -> world;
+                case "isPrimaryThread" -> primaryThread; case "getScheduler" -> scheduler; case "getWorld" -> world;
                 default -> primitiveDefault(method.getReturnType());
             });
             serverField.set(null, server); MetadataHandler.PLUGIN = plugin;

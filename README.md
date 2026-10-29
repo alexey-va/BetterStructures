@@ -134,7 +134,7 @@ jfr print --json --events ru.ruscrafting.NativeSlice,jdk.ExecutionSample,jdk.GCP
 
 ## Integrated BetterStructures lab backend
 
-This experimental branch builds `2.7.10-ruscrafting.lab.5+upstream.15808b1`.
+This experimental branch builds `2.7.10-ruscrafting.lab.6+upstream.15808b1`.
 The frozen four-schematic comparison below used lab.3; its runtime SHA is recorded with the results.
 Its opt-in [manifest](src/main/resources/native-lab.example.yml) lives at
 `plugins/BetterStructures/assets/native-lab.yml` and selects `DEFAULT` or
@@ -161,6 +161,7 @@ enabled: true
 world: rc_native_generation_lab
 maxQueued: 64
 maxHeld: 256
+warmFaweAdapter: false
 ```
 
 It retains the selected fitter and clipboard, prepares its candidate footprint
@@ -181,6 +182,12 @@ completion diagnostics include active/queued jobs, pending requests and holds.
 The probe's `requireChunkPreparation=true` option requires those counters to be
 idle before reporting completion. Runtime measurements are recorded separately
 from the frozen native/DEFAULT block-phase comparison.
+
+Lab.6 adds the optional `warmFaweAdapter: true`. After FAWE platform readiness,
+it converts detached STONE block data through the public Bukkit adapter during
+BetterStructures enable, without reading or changing a world. The cost is
+reported separately as `faweAdapterWarmupMs`; it moves one-time registry work
+before the active window. The option defaults to false and is lab-only.
 
 The first readiness run (lab.4) failed its liveness check: unretained FULL chunks
 unloaded while the coordinator waited for the whole contour, causing repeated

@@ -1,0 +1,30 @@
+{
+  "version": "2.7.10-ruscrafting.lab.6+upstream.15808b1",
+  "jarSha256": "d1712faa7d4be0d0f99ead498d02c4216233d796f70c3693cd8fff144cad6883",
+  "jarBytes": 7206728,
+  "testSummary": {
+    "tests": 111,
+    "failures": 0,
+    "errors": 0
+  },
+  "packagingGuard": "PASS",
+  "sourceCutoff": {
+    "files": {
+      "src/main/java/com/magmaguy/betterstructures/lab/LabChunkPreparation.java": "465f16b452202092ed7f7c3cbdac168687637cfe93373731bcdf37e780719a57",
+      "src/test/java/com/magmaguy/betterstructures/lab/ChunkPreparationTest.java": "5d5a830eb8bf516a46b0da7ff0f445b476a35e7bff3a077988471ac3a204f007",
+      "src/main/resources/chunk-preparation-lab.example.yml": "2961f1e5b08089f054c1a953148f938cd04596eb21c38e784beff87e4bacc793"
+    },
+    "tests": {
+      "tests": "22",
+      "skipped": "0",
+      "failures": "0",
+      "errors": "0"
+    },
+    "command": "env -u MC_DIST_DIR JAVA_HOME=/Users/alexey23/Library/Java/JavaVirtualMachines/openjdk-25.0.1/Contents/Home GRADLE_USER_HOME=/private/tmp/betterstructures-upstream-gradle-cache GRADLE_RO_DEP_CACHE=/Users/alexey23/.gradle/caches ./gradlew --no-daemon test --tests com.magmaguy.betterstructures.lab.ChunkPreparationTest --console=plain",
+    "frozen": true,
+    "runtimeValidated": false
+  },
+  "sourceCutoffSha256": "3e0c2811f4be028f926fe7f69421ff2aa51ba009129337700f1a5cb28df288eb",
+  "runtimeStatus": "Pending lab replay; no production activation.",
+  "independentSourceReview": "PASS: no P1/P2; lifecycle order checked against pinned FAWE/Paper sources; runtime not part of source review."
+}

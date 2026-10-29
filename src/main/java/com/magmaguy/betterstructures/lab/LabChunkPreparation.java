@@ -2,6 +2,8 @@ package com.magmaguy.betterstructures.lab;
 
 import com.google.gson.Gson;
 import com.magmaguy.betterstructures.util.PluginChunkHolds;
+import com.sk89q.worldedit.WorldEdit;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -16,6 +18,7 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.logging.Level;
@@ -45,6 +48,8 @@ public final class LabChunkPreparation {
     private long requested, loaded, alreadyLoaded, acquired, released, suppressed, originBoundaries, fitBoundaries, pasteBoundaries, notReady;
     private long completed, aborted, failures, maxRequestNanos, maxPinNanos;
     private long haloRequests, ringRevalidations;
+    private boolean warmFaweAdapter, faweAdapterWarmupCompleted;
+    private long faweAdapterWarmupNanos;
     private int peakQueued, peakHeld, peakActivation;
 
     public static void configure(Plugin plugin) throws Exception {
@@ -57,7 +62,16 @@ public final class LabChunkPreparation {
         validateVersion(plugin.getServer().getMinecraftVersion());
         validateConfig(plugin.getServer().getIp(), plugin.getServer().getPort(), config.getString("world"),
                 config.getInt("maxQueued", 64), config.getInt("maxHeld", 256));
-        active = new LabChunkPreparation(plugin, config.getInt("maxQueued", 64), config.getInt("maxHeld", 256));
+        LabChunkPreparation configured = new LabChunkPreparation(plugin, config.getInt("maxQueued", 64), config.getInt("maxHeld", 256));
+        // BetterStructures is POSTWORLD and depends on WorldEdit. The pinned FAWE provider is
+        // STARTUP and posts PlatformReadyEvent at the first WorldInit, before this onEnable hook.
+        // Warm the detached conversion before content workers/lab ticks; never initialize the
+        // BukkitAdapter enum early, when it could capture its SimpleBukkitAdapter fallback.
+        configured.warmFaweAdapter(config.getBoolean("warmFaweAdapter", false),
+                () -> plugin.getServer().getPluginManager().isPluginEnabled("FastAsyncWorldEdit")
+                        && WorldEdit.getInstance().getPlatformManager().isInitialized(),
+                () -> BukkitAdapter.adapt(Bukkit.createBlockData("minecraft:stone")));
+        active = configured;
         active.log("enabled");
     }
 
@@ -75,6 +89,17 @@ public final class LabChunkPreparation {
 
     LabChunkPreparation(Plugin plugin, int maxQueued, int maxHeld) {
         this.plugin = plugin; this.maxQueued = maxQueued; this.maxHeld = maxHeld;
+    }
+
+    void warmFaweAdapter(boolean enabled, BooleanSupplier ready, Runnable conversion) {
+        warmFaweAdapter = enabled;
+        if (!enabled) return;
+        requireMain();
+        if (!ready.getAsBoolean())
+            throw new IllegalStateException("FAWE adapter warmup requires the enabled FAWE platform before lab startup");
+        long began = System.nanoTime();
+        try { conversion.run(); faweAdapterWarmupCompleted = true; }
+        finally { faweAdapterWarmupNanos = System.nanoTime() - began; }
     }
 
     public static boolean enabled(World world) { return active != null && WORLD.equals(world.getName()); }
@@ -234,6 +259,8 @@ public final class LabChunkPreparation {
     private Map<String, Object> snapshot() {
         Map<String, Object> values = new LinkedHashMap<>();
         values.put("enabled", true); values.put("runId", runId); values.put("world", WORLD); values.put("failed", failed);
+        values.put("warmFaweAdapter", warmFaweAdapter); values.put("faweAdapterWarmupCompleted", faweAdapterWarmupCompleted);
+        values.put("faweAdapterWarmupMs", faweAdapterWarmupNanos / 1e6);
         values.put("requested", requested); values.put("loaded", loaded); values.put("alreadyLoaded", alreadyLoaded);
         values.put("holdsAcquired", acquired); values.put("holdsReleased", released); values.put("held", acquired - released);
         values.put("peakHeld", peakHeld); values.put("queued", queued.size()); values.put("peakQueued", peakQueued);
