@@ -1,0 +1,44 @@
+{
+  "target": {
+    "purpur": "1.21.11-2568-f57bd86",
+    "paperCommit": "bd74bf6581ce81e59bdab07eadbfbe5d485eefa7",
+    "cpuAffinity": "0-1",
+    "maxHeapGiB": 2
+  },
+  "backgroundProfile": {
+    "sha256": "ec20b429284647a124628950757e015ca5abc85d5e7d897ad8d4ce912bbd39e6",
+    "bytes": 955852,
+    "intervalMs": 10,
+    "startMsk": "2026-10-29 20:31:08",
+    "endMsk": "2026-10-29 20:39:53",
+    "maxTickMs": 892.820174,
+    "coldCraftEntityTypesSampledMs": 820,
+    "fallingBlockFallSampledMs": 870,
+    "firstWindowOnly": true,
+    "decoderConservation": "PASS"
+  },
+  "foregroundProfile": {
+    "sha256": "67ccb780138caa7718aa6fe28d2dbeae1e58f0591658f71ab00d7e9589990768",
+    "bytes": 784823,
+    "intervalMs": 1,
+    "onlyTicksOverMs": 50,
+    "sampledTicks": 25,
+    "totalTicks": 2094,
+    "maxTickMs": 157.9,
+    "decoderConservation": "PASS"
+  },
+  "warmupReplay": {
+    "runtimeSha256": "db1e6bf0063e91eaa35a550829120d8ac592d8530e7b7ab8f3302229226213ac",
+    "warmupMs": 1656.609562,
+    "activeMaxTickMs": 207.190824,
+    "maxFullRequestMs": 200.181385,
+    "registeredEntity": false
+  },
+  "limits": [
+    "Older 1183.88ms tick has no contemporaneous profile and cannot be attributed exactly",
+    "Sampling weights are not exact per-method elapsed time",
+    "One controlled pair; fresh terrain regions differ",
+    "No production or client load acceptance",
+    "FULL activation, save/unload, physics and GC spikes remain"
+  ]
+}

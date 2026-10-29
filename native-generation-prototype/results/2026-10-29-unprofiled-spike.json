@@ -1,0 +1,354 @@
+{
+  "report": {
+    "cases": [
+      {
+        "actualHash": "cbf29ce484222325",
+        "actualWrites": 0,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 9,
+        "control": true,
+        "expectedHash": "cbf29ce484222325",
+        "finishCaseOwnMs": 10.741692,
+        "generationToFullMs": 18192.567825,
+        "hashFormattingMs": 0.229443,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 2.440555,
+        "maxFullRequestMs": 217.908122,
+        "maxVerificationSliceMs": 0,
+        "mismatches": 0,
+        "name": "vanilla_control16",
+        "noOps": 0,
+        "origin": [
+          2426368,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 0,
+        "populationMaxChunkMs": 2.012924,
+        "populationReceipts": 16,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 16
+        },
+        "populationWorkerTotalMs": 2.100875,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 0,
+        "ticketReadbackMs": 7.126781,
+        "ticketRemovalMs": 2.424045,
+        "totalCaseMs": 20193.237506,
+        "verificationMs": 0,
+        "verifiedNonAirPositions": 0
+      },
+      {
+        "actualHash": "a3ce85905a51dd25",
+        "actualWrites": 32768,
+        "chunks": 4,
+        "chunksAlreadyLoadedAtRequest": 2,
+        "control": false,
+        "expectedHash": "a3ce85905a51dd25",
+        "finishCaseOwnMs": 0.847923,
+        "generationToFullMs": 6488.735207,
+        "hashFormattingMs": 0.135256,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 0.445793,
+        "maxFullRequestMs": 4.969346,
+        "maxVerificationSliceMs": 6.175081,
+        "mismatches": 0,
+        "name": "dense32",
+        "noOps": 0,
+        "origin": [
+          2430464,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 32768,
+        "populationMaxChunkMs": 23.680523,
+        "populationReceipts": 4,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 4
+        },
+        "populationWorkerTotalMs": 76.580805,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 0,
+        "ticketReadbackMs": 0.386507,
+        "ticketRemovalMs": 0.170396,
+        "totalCaseMs": 12639.018074,
+        "verificationMs": 4153.177742,
+        "verifiedNonAirPositions": 32768
+      },
+      {
+        "actualHash": "b145556a51305325",
+        "actualWrites": 4096,
+        "chunks": 4,
+        "chunksAlreadyLoadedAtRequest": 2,
+        "control": false,
+        "expectedHash": "b145556a51305325",
+        "finishCaseOwnMs": 3.758402,
+        "generationToFullMs": 8298.59418,
+        "hashFormattingMs": 0.119988,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 0.333105,
+        "maxFullRequestMs": 8.188833,
+        "maxVerificationSliceMs": 4.218907,
+        "mismatches": 0,
+        "name": "sparse32",
+        "noOps": 0,
+        "origin": [
+          2434560,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 4096,
+        "populationMaxChunkMs": 0.71178,
+        "populationReceipts": 4,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 4
+        },
+        "populationWorkerTotalMs": 2.341965,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 28672,
+        "ticketReadbackMs": 3.202065,
+        "ticketRemovalMs": 0.29228,
+        "totalCaseMs": 10899.523393,
+        "verificationMs": 600.298645,
+        "verifiedNonAirPositions": 4096
+      },
+      {
+        "actualHash": "f7f7428d50d55b25",
+        "actualWrites": 262144,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 11,
+        "control": false,
+        "expectedHash": "f7f7428d50d55b25",
+        "finishCaseOwnMs": 0.818395,
+        "generationToFullMs": 12095.48212,
+        "hashFormattingMs": 0.102612,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 0.202621,
+        "maxFullRequestMs": 8.301015,
+        "maxVerificationSliceMs": 3.179623,
+        "mismatches": 0,
+        "name": "dense64",
+        "noOps": 0,
+        "origin": [
+          2438656,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 262144,
+        "populationMaxChunkMs": 26.030851,
+        "populationReceipts": 16,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 16
+        },
+        "populationWorkerTotalMs": 179.895318,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 0,
+        "ticketReadbackMs": 0.196547,
+        "ticketRemovalMs": 0.173466,
+        "totalCaseMs": 21645.442016,
+        "verificationMs": 7550.346743,
+        "verifiedNonAirPositions": 262144
+      },
+      {
+        "actualHash": "1f484b275ab7b225",
+        "actualWrites": 32768,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 11,
+        "control": false,
+        "expectedHash": "1f484b275ab7b225",
+        "finishCaseOwnMs": 1.109588,
+        "generationToFullMs": 11148.928638,
+        "hashFormattingMs": 0.126139,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 2.54131,
+        "maxFullRequestMs": 3.185518,
+        "maxVerificationSliceMs": 1.069194,
+        "mismatches": 0,
+        "name": "sparse64",
+        "noOps": 0,
+        "origin": [
+          2442752,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 32768,
+        "populationMaxChunkMs": 2.847112,
+        "populationReceipts": 16,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 16
+        },
+        "populationWorkerTotalMs": 20.019811,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 229376,
+        "ticketReadbackMs": 0.376424,
+        "ticketRemovalMs": 0.348928,
+        "totalCaseMs": 16349.173827,
+        "verificationMs": 3200.233281,
+        "verifiedNonAirPositions": 32768
+      }
+    ],
+    "java": "25.0.4.1",
+    "limits": [
+      "FULL request, native ticket propagation, vanilla generation, unload/save and GC still affect server ticks",
+      "One 16-chunk vanilla control matches 64x64 footprint; 32x32 cases have only four chunks",
+      "Population callback timings are concurrent worker durations, not main-thread MSPT or elapsed time",
+      "Independent main-thread readback and hashing are benchmark validation only; their VERIFY phase is separate from generation but included in overall ticks",
+      "Native calls are indivisible; 1.5 ms readback budget is checked between calls",
+      "Only non-air targets are written and verified; surrounding terrain/air is preserved",
+      "Entities, block entities, biomes and automatic DataVersion conversion are unsupported",
+      "Every planned chunk, including control, must populate this run; missing receipts fail instead of accepting old chunks",
+      "This fresh-boot-only lab retains one deactivated populator until world/server shutdown; it performs no further writes"
+    ],
+    "maxChunkRequestsInFlight": 1,
+    "message": "All generation plans verified",
+    "mode": "generation-native-limited-region",
+    "overallActiveTickMs": {
+      "maxMs": 892.820174,
+      "p50Ms": 0.993987,
+      "p95Ms": 9.420732,
+      "p99Ms": 29.285623,
+      "samples": 1823
+    },
+    "overallWindow": "Control/fixture FULL generation, readback, per-case 40-tick settle and 200-tick final post-release tail; excludes startup and idle baseline",
+    "profileSpark": false,
+    "remainingNativeChunkTickets": 0,
+    "runId": "ade38b2e-01a7-499b-b678-c0803d989f03",
+    "server": "1.21.11-2568-f57bd86 (MC: 1.21.11)",
+    "startedAt": "2026-10-29T17:31:04.903923680Z",
+    "startupPreparationMs": 1909.809428,
+    "startupPreparationWindow": "Fixture decode await (maximum 30 seconds), immutable palette preparation and world creation during onEnable, before the benchmark ticker starts",
+    "status": "complete",
+    "tickMs": {
+      "baseline": {
+        "maxMs": 118.929563,
+        "p50Ms": 3.012651,
+        "p95Ms": 7.673366,
+        "p99Ms": 16.387211,
+        "samples": 199
+      },
+      "dense32.generate": {
+        "maxMs": 38.092841,
+        "p50Ms": 0.851133,
+        "p95Ms": 13.588077,
+        "p99Ms": 36.09681,
+        "samples": 130
+      },
+      "dense32.settle": {
+        "maxMs": 28.554831,
+        "p50Ms": 2.191631,
+        "p95Ms": 12.802896,
+        "p99Ms": 28.554831,
+        "samples": 40
+      },
+      "dense32.verify": {
+        "maxMs": 94.373258,
+        "p50Ms": 3.564688,
+        "p95Ms": 12.300451,
+        "p99Ms": 94.373258,
+        "samples": 83
+      },
+      "dense64.generate": {
+        "maxMs": 55.365317,
+        "p50Ms": 0.853091,
+        "p95Ms": 9.420732,
+        "p99Ms": 38.940161,
+        "samples": 242
+      },
+      "dense64.settle": {
+        "maxMs": 18.483359,
+        "p50Ms": 0.830791,
+        "p95Ms": 1.575248,
+        "p99Ms": 18.483359,
+        "samples": 40
+      },
+      "dense64.verify": {
+        "maxMs": 18.984785,
+        "p50Ms": 2.903514,
+        "p95Ms": 9.446178,
+        "p99Ms": 18.531354,
+        "samples": 151
+      },
+      "sparse32.generate": {
+        "maxMs": 24.295694,
+        "p50Ms": 0.790998,
+        "p95Ms": 5.95149,
+        "p99Ms": 14.23717,
+        "samples": 166
+      },
+      "sparse32.settle": {
+        "maxMs": 38.299824,
+        "p50Ms": 0.973201,
+        "p95Ms": 3.116165,
+        "p99Ms": 38.299824,
+        "samples": 40
+      },
+      "sparse32.verify": {
+        "maxMs": 7.628917,
+        "p50Ms": 2.324017,
+        "p95Ms": 7.628917,
+        "p99Ms": 7.628917,
+        "samples": 12
+      },
+      "sparse64.generate": {
+        "maxMs": 60.069399,
+        "p50Ms": 0.762027,
+        "p95Ms": 6.929884,
+        "p99Ms": 27.452765,
+        "samples": 223
+      },
+      "sparse64.settle": {
+        "maxMs": 20.691856,
+        "p50Ms": 4.907349,
+        "p95Ms": 11.963699,
+        "p99Ms": 20.691856,
+        "samples": 40
+      },
+      "sparse64.verify": {
+        "maxMs": 57.550553,
+        "p50Ms": 6.54542,
+        "p95Ms": 15.673716,
+        "p99Ms": 57.550553,
+        "samples": 64
+      },
+      "tail": {
+        "maxMs": 62.109757,
+        "p50Ms": 0.540903,
+        "p95Ms": 3.715701,
+        "p99Ms": 11.705257,
+        "samples": 200
+      },
+      "vanilla_control16.generate": {
+        "maxMs": 892.820174,
+        "p50Ms": 0.940417,
+        "p95Ms": 5.557091,
+        "p99Ms": 38.304085,
+        "samples": 352
+      },
+      "vanilla_control16.settle": {
+        "maxMs": 76.142111,
+        "p50Ms": 1.292708,
+        "p95Ms": 22.134754,
+        "p99Ms": 76.142111,
+        "samples": 40
+      }
+    },
+    "totalMs": 105004.696696,
+    "verifyBudgetMs": 1.5,
+    "world": "rc_native_generation_lab",
+    "worldGenerator": "native-default"
+  },
+  "slow_ticks": [
+    "[20:31:08] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=baseline stageTick=1 tickMs=118.929563 ownTaskMs=0.034072",
+    "[20:31:18] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.generate stageTick=0 tickMs=224.06882 ownTaskMs=222.826463",
+    "[20:31:32] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.generate stageTick=0 tickMs=64.02245 ownTaskMs=0.015839",
+    "[20:31:34] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.generate stageTick=0 tickMs=892.820174 ownTaskMs=0.006704",
+    "[20:31:38] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.settle stageTick=39 tickMs=76.142111 ownTaskMs=14.326504",
+    "[20:31:47] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense32.verify stageTick=0 tickMs=57.544132 ownTaskMs=1.507814",
+    "[20:31:48] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense32.verify stageTick=0 tickMs=94.373258 ownTaskMs=1.511745",
+    "[20:32:08] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense64.generate stageTick=0 tickMs=52.725014 ownTaskMs=0.414289",
+    "[20:32:13] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense64.generate stageTick=0 tickMs=55.365317 ownTaskMs=0.008041",
+    "[20:32:34] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.generate stageTick=0 tickMs=60.069399 ownTaskMs=0.214818",
+    "[20:32:35] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.verify stageTick=0 tickMs=57.550553 ownTaskMs=0.450455",
+    "[20:32:40] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=tail stageTick=16 tickMs=62.109757 ownTaskMs=0.004186"
+  ]
+}

@@ -132,6 +132,32 @@ jfr print --json --events ru.ruscrafting.NativeSlice,jdk.ExecutionSample,jdk.GCP
 
 
 
+## Cold tick investigation, 2026-10-29
+
+A replay reproduced a **892.82 ms** vanilla-control tick with no structure
+writes; the runner used only **0.0067 ms** of that tick. The saved Spark
+background profile identifies the first `CraftEntityTypes.<clinit>` beneath
+`FallingBlockEntity.fall` → `Entity.getBukkitEntity`: 820 ms of sampled time in
+the first minute, with no later occurrence of that class initializer. Sampling
+supports this cause for the reproduced spike; the older 1183.88 ms tick had no
+matching profile and cannot be attributed exactly.
+
+An opt-in startup warmup creates a detached ArmorStand through Paper's public
+`World.createEntity`, verifies that it is absent from the world entity registry,
+and reports its cost separately. In the controlled replay it moved **1656.61 ms**
+of adapter initialization into startup; the active maximum fell to **207.19 ms**.
+This is one controlled pair on a two-CPU/2 GiB lab, not a global no-spike result.
+Native FULL requests, chunk activation/save/unload, physics and GC can still
+exceed 50 ms. The warmup remains an explicit lab option and is not in the
+production snapshot.
+
+[Unwarmed replay](native-generation-prototype/results/2026-10-29-unprofiled-spike.json),
+[warmed replay](native-generation-prototype/results/2026-10-29-entity-adapter-warmup.json),
+[filtered Spark replay](native-generation-prototype/results/2026-10-29-spark-slow50.json).
+The foreground run sampled only ticks over 50 ms; the background capture retained
+the reproduced cold spike. Profile hashes and attribution limits are recorded
+in the [investigation receipt](native-generation-prototype/results/2026-10-29-cold-spike-cause.json).
+
 ## RusCrafting source build: 2.7.10-ruscrafting.2+upstream.15808b1
 
 This build compiles the normal `src/main` tree from upstream commit

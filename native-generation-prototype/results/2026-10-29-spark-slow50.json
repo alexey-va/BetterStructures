@@ -1,0 +1,381 @@
+{
+  "report": {
+    "cases": [
+      {
+        "actualHash": "cbf29ce484222325",
+        "actualWrites": 0,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 12,
+        "control": true,
+        "expectedHash": "cbf29ce484222325",
+        "finishCaseOwnMs": 12.835266,
+        "generationToFullMs": 16497.533239,
+        "hashFormattingMs": 0.275869,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 4.251273,
+        "maxFullRequestMs": 94.134403,
+        "maxVerificationSliceMs": 0,
+        "mismatches": 0,
+        "name": "vanilla_control16",
+        "noOps": 0,
+        "origin": [
+          4813312,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 0,
+        "populationMaxChunkMs": 3.237788,
+        "populationReceipts": 16,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 16
+        },
+        "populationWorkerTotalMs": 3.322228,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 0,
+        "ticketReadbackMs": 8.034358,
+        "ticketRemovalMs": 3.129129,
+        "totalCaseMs": 18502.176405,
+        "verificationMs": 0,
+        "verifiedNonAirPositions": 0
+      },
+      {
+        "actualHash": "4e7890926fa2ed25",
+        "actualWrites": 32768,
+        "chunks": 4,
+        "chunksAlreadyLoadedAtRequest": 2,
+        "control": false,
+        "expectedHash": "4e7890926fa2ed25",
+        "finishCaseOwnMs": 1.381412,
+        "generationToFullMs": 7481.298026,
+        "hashFormattingMs": 0.121263,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 0.656488,
+        "maxFullRequestMs": 9.552869,
+        "maxVerificationSliceMs": 37.766265,
+        "mismatches": 0,
+        "name": "dense32",
+        "noOps": 0,
+        "origin": [
+          4817408,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 32768,
+        "populationMaxChunkMs": 29.515373,
+        "populationReceipts": 4,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 4
+        },
+        "populationWorkerTotalMs": 96.582186,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 0,
+        "ticketReadbackMs": 0.884033,
+        "ticketRemovalMs": 0.145344,
+        "totalCaseMs": 14831.824348,
+        "verificationMs": 5350.752419,
+        "verifiedNonAirPositions": 32768
+      },
+      {
+        "actualHash": "6ee2b7618c311925",
+        "actualWrites": 4096,
+        "chunks": 4,
+        "chunksAlreadyLoadedAtRequest": 2,
+        "control": false,
+        "expectedHash": "6ee2b7618c311925",
+        "finishCaseOwnMs": 0.604337,
+        "generationToFullMs": 7048.027918,
+        "hashFormattingMs": 0.143074,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 0.231429,
+        "maxFullRequestMs": 9.72302,
+        "maxVerificationSliceMs": 3.974948,
+        "mismatches": 0,
+        "name": "sparse32",
+        "noOps": 0,
+        "origin": [
+          4821504,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 4096,
+        "populationMaxChunkMs": 0.753643,
+        "populationReceipts": 4,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 4
+        },
+        "populationWorkerTotalMs": 2.611863,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 28672,
+        "ticketReadbackMs": 0.233585,
+        "ticketRemovalMs": 0.121265,
+        "totalCaseMs": 9498.473436,
+        "verificationMs": 450.167685,
+        "verifiedNonAirPositions": 4096
+      },
+      {
+        "actualHash": "ddfdfef5632adb25",
+        "actualWrites": 262144,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 11,
+        "control": false,
+        "expectedHash": "ddfdfef5632adb25",
+        "finishCaseOwnMs": 1.018889,
+        "generationToFullMs": 10099.102716,
+        "hashFormattingMs": 0.116059,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 0.233511,
+        "maxFullRequestMs": 8.468015,
+        "maxVerificationSliceMs": 55.853255,
+        "mismatches": 0,
+        "name": "dense64",
+        "noOps": 0,
+        "origin": [
+          4825600,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 262144,
+        "populationMaxChunkMs": 8.262942,
+        "populationReceipts": 16,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 16
+        },
+        "populationWorkerTotalMs": 110.813621,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 0,
+        "ticketReadbackMs": 0.314148,
+        "ticketRemovalMs": 0.128469,
+        "totalCaseMs": 20049.377606,
+        "verificationMs": 7950.688025,
+        "verifiedNonAirPositions": 262144
+      },
+      {
+        "actualHash": "a70ce208648adb25",
+        "actualWrites": 32768,
+        "chunks": 16,
+        "chunksAlreadyLoadedAtRequest": 11,
+        "control": false,
+        "expectedHash": "a70ce208648adb25",
+        "finishCaseOwnMs": 1.173616,
+        "generationToFullMs": 17599.628958,
+        "hashFormattingMs": 0.232219,
+        "mainThreadPopulationCallbacks": 0,
+        "maxChunkCallbackMs": 0.143613,
+        "maxFullRequestMs": 8.011742,
+        "maxVerificationSliceMs": 3.266021,
+        "mismatches": 0,
+        "name": "sparse64",
+        "noOps": 0,
+        "origin": [
+          4829696,
+          200,
+          -8192
+        ],
+        "plannedNonAir": 32768,
+        "populationMaxChunkMs": 4.479254,
+        "populationReceipts": 16,
+        "populationThreadCallbacks": {
+          "Paper Common Worker #0": 16
+        },
+        "populationWorkerTotalMs": 26.83488,
+        "remainingNativeChunkTickets": 0,
+        "skippedAir": 229376,
+        "ticketReadbackMs": 0.390182,
+        "ticketRemovalMs": 0.242838,
+        "totalCaseMs": 22998.918753,
+        "verificationMs": 3400.17413,
+        "verifiedNonAirPositions": 32768
+      }
+    ],
+    "java": "25.0.4.1",
+    "limits": [
+      "FULL request, native ticket propagation, vanilla generation, unload/save and GC still affect server ticks",
+      "One 16-chunk vanilla control matches 64x64 footprint; 32x32 cases have only four chunks",
+      "Population callback timings are concurrent worker durations, not main-thread MSPT or elapsed time",
+      "Independent main-thread readback and hashing are benchmark validation only; their VERIFY phase is separate from generation but included in overall ticks",
+      "Native calls are indivisible; 1.5 ms readback budget is checked between calls",
+      "Only non-air targets are written and verified; surrounding terrain/air is preserved",
+      "Entities, block entities, biomes and automatic DataVersion conversion are unsupported",
+      "Every planned chunk, including control, must populate this run; missing receipts fail instead of accepting old chunks",
+      "This fresh-boot-only lab retains one deactivated populator until world/server shutdown; it performs no further writes"
+    ],
+    "maxChunkRequestsInFlight": 1,
+    "message": "All generation plans verified",
+    "mode": "generation-native-limited-region",
+    "overallActiveTickMs": {
+      "maxMs": 157.90428,
+      "p50Ms": 1.137384,
+      "p95Ms": 16.201918,
+      "p99Ms": 58.820415,
+      "samples": 1895
+    },
+    "overallWindow": "Control/fixture FULL generation, readback, per-case 40-tick settle and 200-tick final post-release tail; excludes startup and idle baseline",
+    "remainingNativeChunkTickets": 0,
+    "runId": "b335b890-df6f-4ba7-902b-140961febe39",
+    "server": "1.21.11-2568-f57bd86 (MC: 1.21.11)",
+    "spark": {
+      "bytes": 784823,
+      "commandDispatched": true,
+      "intervalMs": 1,
+      "onlyTicksOverMs": 50,
+      "path": "plugins/spark/profile-2026-10-29_20.16.13.sparkprofile",
+      "sha256": "67ccb780138caa7718aa6fe28d2dbeae1e58f0591658f71ab00d7e9589990768"
+    },
+    "startedAt": "2026-10-29T17:14:24.475973240Z",
+    "startupPreparationMs": 1354.472889,
+    "startupPreparationWindow": "Fixture decode await (maximum 30 seconds), immutable palette preparation and world creation during onEnable, before the benchmark ticker starts",
+    "status": "complete",
+    "tickMs": {
+      "baseline": {
+        "maxMs": 137.095639,
+        "p50Ms": 2.665746,
+        "p95Ms": 9.144804,
+        "p99Ms": 107.853448,
+        "samples": 199
+      },
+      "dense32.generate": {
+        "maxMs": 80.579976,
+        "p50Ms": 0.9516,
+        "p95Ms": 19.272616,
+        "p99Ms": 41.16695,
+        "samples": 150
+      },
+      "dense32.settle": {
+        "maxMs": 21.175933,
+        "p50Ms": 1.105159,
+        "p95Ms": 4.773525,
+        "p99Ms": 21.175933,
+        "samples": 40
+      },
+      "dense32.verify": {
+        "maxMs": 86.769006,
+        "p50Ms": 4.347197,
+        "p95Ms": 19.858945,
+        "p99Ms": 47.092571,
+        "samples": 107
+      },
+      "dense64.generate": {
+        "maxMs": 84.312828,
+        "p50Ms": 0.990334,
+        "p95Ms": 14.00354,
+        "p99Ms": 49.086574,
+        "samples": 202
+      },
+      "dense64.settle": {
+        "maxMs": 14.880843,
+        "p50Ms": 0.989475,
+        "p95Ms": 5.515119,
+        "p99Ms": 14.880843,
+        "samples": 40
+      },
+      "dense64.verify": {
+        "maxMs": 60.946617,
+        "p50Ms": 2.968145,
+        "p95Ms": 18.207812,
+        "p99Ms": 33.118521,
+        "samples": 159
+      },
+      "sparse32.generate": {
+        "maxMs": 60.434362,
+        "p50Ms": 0.724668,
+        "p95Ms": 12.144604,
+        "p99Ms": 48.295631,
+        "samples": 141
+      },
+      "sparse32.settle": {
+        "maxMs": 15.207425,
+        "p50Ms": 0.937862,
+        "p95Ms": 5.445364,
+        "p99Ms": 15.207425,
+        "samples": 40
+      },
+      "sparse32.verify": {
+        "maxMs": 4.753422,
+        "p50Ms": 1.937013,
+        "p95Ms": 4.753422,
+        "p99Ms": 4.753422,
+        "samples": 9
+      },
+      "sparse64.generate": {
+        "maxMs": 69.143147,
+        "p50Ms": 0.835779,
+        "p95Ms": 11.196415,
+        "p99Ms": 38.040759,
+        "samples": 352
+      },
+      "sparse64.settle": {
+        "maxMs": 34.170327,
+        "p50Ms": 5.915814,
+        "p95Ms": 26.691399,
+        "p99Ms": 34.170327,
+        "samples": 40
+      },
+      "sparse64.verify": {
+        "maxMs": 84.473781,
+        "p50Ms": 12.122875,
+        "p95Ms": 69.021342,
+        "p99Ms": 84.473781,
+        "samples": 68
+      },
+      "tail": {
+        "maxMs": 124.385035,
+        "p50Ms": 0.578351,
+        "p95Ms": 9.179347,
+        "p99Ms": 63.784802,
+        "samples": 200
+      },
+      "vanilla_control16.generate": {
+        "maxMs": 98.271157,
+        "p50Ms": 1.147553,
+        "p95Ms": 5.748774,
+        "p99Ms": 48.97647,
+        "samples": 307
+      },
+      "vanilla_control16.settle": {
+        "maxMs": 157.90428,
+        "p50Ms": 2.282693,
+        "p95Ms": 37.729831,
+        "p99Ms": 157.90428,
+        "samples": 40
+      }
+    },
+    "totalMs": 108311.027406,
+    "verifyBudgetMs": 1.5,
+    "world": "rc_native_generation_lab",
+    "worldGenerator": "native-default"
+  },
+  "slow_ticks": [
+    "[20:14:27] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=baseline stageTick=1 tickMs=107.853448 ownTaskMs=0.025387",
+    "[20:14:30] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=baseline stageTick=69 tickMs=137.095639 ownTaskMs=0.079871",
+    "[20:14:30] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=baseline stageTick=70 tickMs=74.334426 ownTaskMs=2.259787",
+    "[20:14:36] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.generate stageTick=0 tickMs=98.271157 ownTaskMs=95.789195",
+    "[20:14:41] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.generate stageTick=0 tickMs=54.44702 ownTaskMs=0.022702",
+    "[20:14:42] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.generate stageTick=0 tickMs=65.193417 ownTaskMs=55.286396",
+    "[20:14:55] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.settle stageTick=36 tickMs=56.673118 ownTaskMs=0.010318",
+    "[20:14:55] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=vanilla_control16.settle stageTick=39 tickMs=157.90428 ownTaskMs=19.08753",
+    "[20:14:55] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense32.generate stageTick=0 tickMs=80.579976 ownTaskMs=0.012905",
+    "[20:15:07] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense32.verify stageTick=0 tickMs=86.769006 ownTaskMs=37.834285",
+    "[20:15:10] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse32.generate stageTick=0 tickMs=60.434362 ownTaskMs=0.012213",
+    "[20:15:27] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense64.generate stageTick=0 tickMs=74.710565 ownTaskMs=0.009023",
+    "[20:15:29] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense64.generate stageTick=0 tickMs=84.312828 ownTaskMs=0.01238",
+    "[20:15:31] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=dense64.verify stageTick=0 tickMs=60.946617 ownTaskMs=55.870078",
+    "[20:15:56] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.generate stageTick=0 tickMs=69.143147 ownTaskMs=0.015849",
+    "[20:15:58] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.verify stageTick=0 tickMs=64.99918 ownTaskMs=0.554267",
+    "[20:15:58] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.verify stageTick=0 tickMs=56.867915 ownTaskMs=0.647851",
+    "[20:15:58] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.verify stageTick=0 tickMs=74.539307 ownTaskMs=2.627147",
+    "[20:15:58] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.verify stageTick=0 tickMs=84.473781 ownTaskMs=1.723453",
+    "[20:15:59] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.verify stageTick=0 tickMs=69.021342 ownTaskMs=0.455786",
+    "[20:15:59] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.verify stageTick=0 tickMs=58.820415 ownTaskMs=0.51394",
+    "[20:16:00] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=sparse64.verify stageTick=0 tickMs=76.826587 ownTaskMs=0.629396",
+    "[20:16:03] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=tail stageTick=6 tickMs=124.385035 ownTaskMs=0.007555",
+    "[20:16:03] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=tail stageTick=7 tickMs=63.784802 ownTaskMs=0.008149",
+    "[20:16:03] [Server thread/INFO]: [ArcNativeStructuresLab] NATIVE_TICK_SLOW phase=tail stageTick=16 tickMs=108.623703 ownTaskMs=0.006534"
+  ],
+  "spark_lines": [
+    "[20:14:19] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling",
+    "[20:14:26] [Server thread/INFO]: [spark] Starting background profiler...",
+    "[20:16:13] [Paper Async Task Handler Thread - 0/INFO]: [⚡] Data has been written to: plugins/spark/profile-2026-10-29_20.16.13.sparkprofile",
+    "[20:16:13] [Paper Async Task Handler Thread - 0/INFO]: [⚡] You can view the profile file using the web app @ https://spark.lucko.me/",
+    "[20:16:13] [Paper Async Task Handler Thread - 0/INFO]: [⚡] Restarted the background profiler. (If you don't want this to happen, run: /spark profiler cancel)"
+  ]
+}
