@@ -29,6 +29,31 @@ post-release observation window. This variant uses its own
 `rc_native_generation_lab` world and the same lab-only plugin identity; install
 one candidate at a time.
 
+The pinned API's [BlockPopulator contract](https://github.com/PaperMC/Paper/blob/bd74bf6581ce81e59bdab07eadbfbe5d485eefa7/paper-api/src/main/java/org/bukkit/generator/BlockPopulator.java)
+requires concurrent-safe callbacks and limits access to `LimitedRegion` during
+population. The server [invokes the LimitedRegion overload](https://github.com/PaperMC/Paper/blob/bd74bf6581ce81e59bdab07eadbfbe5d485eefa7/paper-server/patches/sources/net/minecraft/world/level/chunk/ChunkGenerator.java.patch#L96-L119)
+and [fires WorldInitEvent before initial generation](https://github.com/PaperMC/Paper/blob/bd74bf6581ce81e59bdab07eadbfbe5d485eefa7/paper-server/patches/sources/net/minecraft/server/MinecraftServer.java.patch#L371-L382).
+The benchmark refuses placement on the main thread and requires a fresh
+population receipt for every planned chunk, including the vanilla control.
+
+The first generation run is preserved in
+`native-generation-prototype/results/2026-10-29-generation-first.json`. All 56
+planned chunks produced fresh receipts on `Paper Common Worker #0`; all four
+structures matched independent final-world hashes and released their tickets.
+Dense 64³ wrote 262,144 blocks in 140.39 ms of summed population-worker time;
+its entire generation-to-FULL phase took 13.50 s, against 13.80 s for the
+16-chunk control. Worker time is not time-to-ready, and the regions have different
+terrain. Native generation phases reached 49.23 ms / 46.77 ms maxima for the
+dense/sparse 64³ cases; the control reached 75.15 ms during generation and
+1078.51 ms during settle. This is not evidence of globally spike-free operation.
+The first creation of the secondary test world also took a 22.14 s server tick
+and triggered watchdog diagnostics; that harness startup path is recorded
+separately from structure placement.
+The current candidate prepares fixtures/palettes and creates the lab world in
+`onEnable`, before starting the benchmark ticker. The decode worker has a
+30-second await limit and never depends on main-thread tasks. Startup cost stays
+explicit in the report rather than appearing as an in-game WORLD phase.
+
 ```sh
 ./gradlew -p native-generation-prototype test assemble
 ```

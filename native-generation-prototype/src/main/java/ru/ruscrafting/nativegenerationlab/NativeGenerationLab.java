@@ -19,7 +19,7 @@ import java.util.logging.Level;
 
 /** Generation-only lab: main thread coordinates native FULL loads and independent bounded readback. */
 public final class NativeGenerationLab extends JavaPlugin implements Listener, CommandExecutor {
-    private enum Stage { PREPARE, PALETTE, WORLD, BASELINE, GENERATE, VERIFY, SETTLE, TAIL, REPORT, IDLE, STOPPED }
+    private enum Stage { WORLD, BASELINE, GENERATE, VERIFY, SETTLE, TAIL, REPORT, IDLE, STOPPED }
     private static final long BUDGET_NANOS = 1_500_000L, DEADLINE_NANOS = TimeUnit.MINUTES.toNanos(10);
     private static final int MAX_POSITIONS = 4096;
     private final RunFence fence = new RunFence();
@@ -35,12 +35,10 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private World world;
     private Stage stage = Stage.STOPPED;
     private List<GenerationPlan> plans;
-    private BlockData[] buildingPalette;
-    private String[] buildingCanonical;
     private Case current;
     private Path folder;
     private String runId, startedAt, serverVersion, observedPhase = "startup", terminalStatus, terminalMessage;
-    private int planCursor, paletteCursor, caseCursor, stageTicks, dataVersion, remainingTickets = -1;
+    private int caseCursor, stageTicks, dataVersion, remainingTickets = -1;
     private long startedNanos, token, phaseStarted, startupNanos;
     private boolean attached, observedActive;
 
@@ -66,10 +64,16 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             });
             getServer().getPluginManager().registerEvents(this, this);
             Objects.requireNonNull(getCommand("nativegeneration")).setExecutor(this);
-            token = fence.begin(); transition(Stage.PREPARE);
+            // All blocking startup work finishes in onEnable, before the server becomes ready.
+            // The worker performs only fixture I/O and pure geometry; it never waits for main-thread work.
+            plans = decode.get(30, TimeUnit.SECONDS);
+            preparePalette();
+            token = fence.begin(); transition(Stage.WORLD);
+            createWorld();
             ticker = Bukkit.getScheduler().runTaskTimer(this, this::tick, 1, 1);
-            getLogger().info("NATIVE_GENERATION_LAB status=preparing runId=" + runId);
+            getLogger().info("NATIVE_GENERATION_LAB status=ready runId=" + runId + " startupPreparationMs=" + startupNanos / 1_000_000D);
         } catch (Throwable error) {
+            if (error instanceof InterruptedException) Thread.currentThread().interrupt();
             getLogger().log(Level.SEVERE, "NATIVE_STRUCTURES_BENCH status=failed phase=startup", error);
             Bukkit.getPluginManager().disablePlugin(this);
         }
@@ -93,9 +97,6 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             observedActive = stage == Stage.GENERATE || stage == Stage.VERIFY || stage == Stage.SETTLE || stage == Stage.TAIL;
             SliceBudget budget = new SliceBudget(System::nanoTime, BUDGET_NANOS, MAX_POSITIONS);
             switch (stage) {
-                case PREPARE -> { if (decode.isDone()) { plans = decode.get(); transition(Stage.PALETTE); } }
-                case PALETTE -> preparePalette(budget);
-                case WORLD -> createWorld();
                 case BASELINE -> { if (++stageTicks >= 200) startCase(); }
                 case GENERATE -> requestNextChunk();
                 case VERIFY -> verify(budget);
@@ -123,29 +124,24 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         }
     }
 
-    private void preparePalette(SliceBudget budget) {
-        while (planCursor < plans.size() && budget.next()) {
-            GenerationPlan plan = plans.get(planCursor);
+    private void preparePalette() {
+        for (GenerationPlan plan : plans) {
             if (plan.control()) {
-                prepared.add(new NativePopulator.Prepared(plan, new BlockData[0], new String[0])); planCursor++; continue;
+                prepared.add(new NativePopulator.Prepared(plan, new BlockData[0], new String[0])); continue;
             }
-            if (buildingPalette == null) {
-                if (plan.schematic.dataVersion > dataVersion) throw new IllegalArgumentException("Newer DataVersion unsupported");
-                buildingPalette = new BlockData[plan.schematic.palette.size()]; buildingCanonical = new String[buildingPalette.length];
-            }
-            if (paletteCursor < buildingPalette.length) {
-                int index = paletteCursor++; String state = plan.schematic.palette.get(index);
+            if (plan.schematic.dataVersion > dataVersion) throw new IllegalArgumentException("Newer DataVersion unsupported");
+            BlockData[] palette = new BlockData[plan.schematic.palette.size()];
+            String[] canonical = new String[palette.length];
+            for (int index = 0; index < palette.length; index++) {
+                String state = plan.schematic.palette.get(index);
                 if (state == null) continue;
                 BlockData data = Bukkit.createBlockData(state);
                 if (data.createBlockState() instanceof TileState) throw new IllegalArgumentException("Block-entity material unsupported: " + state);
-                buildingPalette[index] = data; buildingCanonical[index] = data.getAsString();
+                palette[index] = data; canonical[index] = data.getAsString();
             }
-            if (paletteCursor == buildingPalette.length) {
-                prepared.add(new NativePopulator.Prepared(plan, buildingPalette, buildingCanonical));
-                buildingPalette = null; buildingCanonical = null; paletteCursor = 0; planCursor++;
-            }
+            prepared.add(new NativePopulator.Prepared(plan, palette, canonical));
         }
-        if (planCursor == plans.size()) { populator = new NativePopulator(List.copyOf(prepared), Thread.currentThread().threadId()); transition(Stage.WORLD); }
+        populator = new NativePopulator(List.copyOf(prepared), Thread.currentThread().threadId());
     }
     private void createWorld() {
         world = new WorldCreator(LabGuard.WORLD).createWorld();
@@ -294,6 +290,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         report.put("server", serverVersion); report.put("java", System.getProperty("java.version")); report.put("world", LabGuard.WORLD);
         report.put("mode", "generation-native-limited-region"); report.put("worldGenerator", "native-default");
         report.put("startupPreparationMs", startupNanos / 1_000_000D); report.put("totalMs", (System.nanoTime() - startedNanos) / 1_000_000D);
+        report.put("startupPreparationWindow", "Fixture decode await (maximum 30 seconds), immutable palette preparation and world creation during onEnable, before the benchmark ticker starts");
         report.put("verifyBudgetMs", BUDGET_NANOS / 1_000_000D); report.put("maxChunkRequestsInFlight", 1);
         report.put("remainingNativeChunkTickets", remainingTickets); report.put("cases", new ArrayList<>(results));
         Map<String, Object> phases = new LinkedHashMap<>(); tickSamples.forEach((phase, samples) -> phases.put(phase, samples.summary()));
