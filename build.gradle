@@ -229,7 +229,7 @@ def verifyProductionJar = tasks.register('verifyProductionJar') {
                 if (zip.getEntry(required) == null) throw new GradleException("Missing production class: ${required}")
             }
             zip.entries().each { entry ->
-                if (entry.name.startsWith('ru/ruscrafting/native') || entry.name.contains('/v26/') ||
+                if (entry.name.startsWith('ru/ruscrafting/native') || entry.name.startsWith('com/magmaguy/betterstructures/lab/') || entry.name.contains('/v26/') ||
                         entry.name.startsWith('org/bukkit/') || entry.name.startsWith('com/sk89q/worldedit/') ||
                         entry.name.startsWith('com/magmaguy/elitemobs/'))
                     throw new GradleException("Unexpected packaged platform or experimental class: ${entry.name}")
