@@ -25,6 +25,6 @@
     "runtimeValidated": false
   },
   "sourceCutoffSha256": "3e0c2811f4be028f926fe7f69421ff2aa51ba009129337700f1a5cb28df288eb",
-  "runtimeStatus": "Pending lab replay; no production activation.",
+  "runtimeStatus": "Completed lab replay; see prepared-lab6-receipt.json. No production activation.",
   "independentSourceReview": "PASS: no P1/P2; lifecycle order checked against pinned FAWE/Paper sources; runtime not part of source review."
 }

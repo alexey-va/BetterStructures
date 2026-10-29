@@ -214,6 +214,21 @@ cannot attribute the entire 2759 ms tick to one method. See the
 [acceptance receipt](lab-results/2026-10-29/prepared-lab5-receipt.json) and
 [Spark analysis](lab-results/2026-10-29/prepared-lab5-spark-analysis.json).
 
+The lab.6 warmup replay completed 16 fresh origins, 256 probe population receipts
+and ten natural placements. All 26 preparation jobs completed without failure or
+abort; all 75 requests finished and all 144 acquired holds were released. The
+public detached-conversion warmup took 640.72 ms during startup. The measured
+active maximum was 680.47 ms, p99 62.39 ms and p95 28.99 ms. Both synchronous
+chunk waits and FAWE registry initialization are absent from the captured slow
+stack tree; other work still exceeds 50 ms. Different terrain and structures
+prevent a paired speedup estimate. Spark's minute-bucket stacks cannot attribute
+an exact tick; its metadata/window counters also differ by one tick. Paper
+tick-end observations supply the active timing above.
+
+[Warmup run report](lab-results/2026-10-29/prepared-lab6-report.json),
+[acceptance receipt](lab-results/2026-10-29/prepared-lab6-receipt.json),
+[filtered Spark analysis](lab-results/2026-10-29/prepared-lab6-spark-analysis.json).
+
 ## Real-schematic A/B result, 2026-10-29
 
 Both engines used the same four original production schematics, seed 384291,
