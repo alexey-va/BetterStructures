@@ -32,6 +32,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private Future<Path> reportWrite;
     private BukkitTask ticker;
     private NativePopulator populator;
+    private SparkCapture sparkCapture;
     private World world;
     private Stage stage = Stage.STOPPED;
     private List<GenerationPlan> plans;
@@ -39,7 +40,8 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private Path folder;
     private String runId, startedAt, serverVersion, observedPhase = "startup", terminalStatus, terminalMessage;
     private int caseCursor, stageTicks, dataVersion, remainingTickets = -1;
-    private long startedNanos, token, phaseStarted, startupNanos;
+    private long startedNanos, token, phaseStarted, startupNanos, ownTickNanos, releaseNanos, ticketReadbackNanos;
+    private int observedStageTick;
     private boolean attached, observedActive;
 
     @Override public void onEnable() {
@@ -67,6 +69,8 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
             // All blocking startup work finishes in onEnable, before the server becomes ready.
             // The worker performs only fixture I/O and pure geometry; it never waits for main-thread work.
             plans = decode.get(30, TimeUnit.SECONDS);
+            Path sparkDirectory = folder.resolveSibling("spark");
+            sparkCapture = worker.submit(() -> new SparkCapture(sparkDirectory)).get(5, TimeUnit.SECONDS);
             preparePalette();
             token = fence.begin(); transition(Stage.WORLD);
             createWorld();
@@ -88,16 +92,21 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
 
     private void tick() {
         if (stage == Stage.STOPPED || stage == Stage.IDLE) return;
+        long ownStarted = System.nanoTime();
         try {
             LabGuard.server(getServer().getIp(), getServer().getPort());
             if (stage != Stage.REPORT && System.nanoTime() - startedNanos > DEADLINE_NANOS)
                 throw new TimeoutException("Generation lab exceeded ten minutes");
             if (populator != null && populator.failure() != null) throw new IllegalStateException(populator.failure());
             observedPhase = phaseName();
+            observedStageTick = stageTicks;
             observedActive = stage == Stage.GENERATE || stage == Stage.VERIFY || stage == Stage.SETTLE || stage == Stage.TAIL;
             SliceBudget budget = new SliceBudget(System::nanoTime, BUDGET_NANOS, MAX_POSITIONS);
             switch (stage) {
-                case BASELINE -> { if (++stageTicks >= 200) startCase(); }
+                case BASELINE -> {
+                    if (!sparkCapture.dispatched()) sparkCapture.start(runId);
+                    if (++stageTicks >= 200) startCase();
+                }
                 case GENERATE -> requestNextChunk();
                 case VERIFY -> verify(budget);
                 case SETTLE -> { if (++stageTicks >= 40) finishCase(); }
@@ -121,7 +130,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
                 getLogger().log(Level.WARNING, "NATIVE_GENERATION_LAB status=failed phase=" + phaseName(), error);
                 complete("failed", error.toString());
             }
-        }
+        } finally { ownTickNanos = System.nanoTime() - ownStarted; }
     }
 
     private void preparePalette() {
@@ -231,6 +240,7 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     }
 
     private void finishCase() {
+        long finishStarted = System.nanoTime();
         Case done = current; GenerationPlan plan = done.prepared.plan;
         int writes = 0, air = 0, noOps = 0, mainCallbacks = 0;
         long populationNanos = 0, maximumNanos = 0;
@@ -254,9 +264,14 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
         result.put("maxChunkCallbackMs", done.maxCallbackNanos / 1_000_000D); result.put("chunksAlreadyLoadedAtRequest", done.alreadyLoaded);
         result.put("verificationMs", done.verificationNanos / 1_000_000D); result.put("maxVerificationSliceMs", done.maxVerifySliceNanos / 1_000_000D);
         result.put("verifiedNonAirPositions", done.verified); result.put("mismatches", done.mismatches);
+        long hashStarted = System.nanoTime();
         result.put("expectedHash", done.expectedHash.hex()); result.put("actualHash", done.actualHash.hex());
+        result.put("hashFormattingMs", (System.nanoTime() - hashStarted) / 1_000_000D);
         result.put("totalCaseMs", (System.nanoTime() - done.started) / 1_000_000D);
         releaseCase(); result.put("remainingNativeChunkTickets", remainingTickets); results.add(result);
+        result.put("ticketRemovalMs", releaseNanos / 1_000_000D);
+        result.put("ticketReadbackMs", ticketReadbackNanos / 1_000_000D);
+        result.put("finishCaseOwnMs", (System.nanoTime() - finishStarted) / 1_000_000D);
         if (remainingTickets != 0) throw new IllegalStateException("Native plugin chunk tickets remain after release: " + remainingTickets);
         getLogger().info("NATIVE_GENERATION_JOB status=complete name=" + plan.name + " actualWrites=" + writes);
         caseCursor++; startCase();
@@ -266,11 +281,15 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     private String phaseName() { return current == null ? stage.name().toLowerCase(Locale.ROOT) : current.prepared.plan.name + "." + stage.name().toLowerCase(Locale.ROOT); }
     @EventHandler public void tickEnd(ServerTickEndEvent event) {
         if (stage != Stage.STOPPED && stage != Stage.IDLE && stage != Stage.REPORT) {
+            if (event.getTickDuration() > 50) getLogger().info("NATIVE_TICK_SLOW phase=" + observedPhase
+                    + " stageTick=" + observedStageTick + " tickMs=" + event.getTickDuration()
+                    + " ownTaskMs=" + ownTickNanos / 1_000_000D);
             tickSamples.computeIfAbsent(observedPhase, ignored -> new Samples()).add(event.getTickDuration());
             if (observedActive) activeTicks.add(event.getTickDuration());
         }
     }
     private void releaseCase() {
+        long releaseStarted = System.nanoTime();
         Case old = current; current = null;
         if (old != null) {
             if (old.pending != null) old.pending.cancel(false);
@@ -278,13 +297,17 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
                 world.removePluginChunkTicket(held.x, held.z, this);
             old.held.clear();
         }
+        releaseNanos = System.nanoTime() - releaseStarted;
+        long readbackStarted = System.nanoTime();
         remainingTickets = world != null && Bukkit.getWorld(world.getUID()) == world
                 ? world.getPluginChunkTickets().getOrDefault(this, List.of()).size() : -1;
+        ticketReadbackNanos = System.nanoTime() - readbackStarted;
     }
     private void complete(String status, String message) {
         fence.cancel(); if (populator != null) populator.deactivate(); releaseCase();
         if (decode != null && !decode.isDone()) decode.cancel(true);
         terminalStatus = status; terminalMessage = message;
+        if (sparkCapture != null) sparkCapture.stop(runId);
         Map<String, Object> report = new LinkedHashMap<>();
         report.put("status", status); report.put("message", message); report.put("runId", runId); report.put("startedAt", startedAt);
         report.put("server", serverVersion); report.put("java", System.getProperty("java.version")); report.put("world", LabGuard.WORLD);
@@ -306,8 +329,10 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
                 "Every planned chunk, including control, must populate this run; missing receipts fail instead of accepting old chunks",
                 "This fresh-boot-only lab retains one deactivated populator until world/server shutdown; it performs no further writes"));
         Path target = folder.resolve("generation-report-" + runId + ".json"); long reportToken = fence.begin();
+        SparkCapture completedCapture = sparkCapture;
         transition(Stage.REPORT);
         reportWrite = worker.submit(() -> {
+            if (completedCapture != null) report.put("spark", completedCapture.awaitReceipt());
             Files.createDirectories(target.getParent()); Path temporary = Files.createTempFile(target.getParent(), ".generation-report-", ".tmp");
             try {
                 if (!fence.accepts(reportToken)) throw new CancellationException("Retired report");
@@ -329,6 +354,10 @@ public final class NativeGenerationLab extends JavaPlugin implements Listener, C
     @Override public void onDisable() {
         fence.cancel(); stage = Stage.STOPPED;
         if (populator != null) populator.deactivate();
+        if (sparkCapture != null) {
+            try { sparkCapture.stop(runId); }
+            catch (RuntimeException error) { getLogger().log(Level.WARNING, "Could not stop owned spark capture", error); }
+        }
         if (ticker != null) ticker.cancel();
         HandlerList.unregisterAll((org.bukkit.plugin.Plugin) this);
         if (decode != null) decode.cancel(true); if (reportWrite != null) reportWrite.cancel(true);
