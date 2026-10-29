@@ -31,6 +31,10 @@ the [build recipe](docs/build-upstream-15808b1.md).
 The runtime descriptor version contains `+upstream.15808b1`; the Maven release
 coordinate uses a hyphen:
 [`ru.ruscrafting.forks:betterstructures:2.7.10-ruscrafting.2-upstream.15808b1`](https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/forks/betterstructures/2.7.10-ruscrafting.2-upstream.15808b1/betterstructures-2.7.10-ruscrafting.2-upstream.15808b1.jar).
+The complete source tree, including the wrapper, test fixtures and build pins,
+is available as a [source archive](https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/forks/betterstructures-source-tree/2.7.10-ruscrafting.2-upstream.15808b1/betterstructures-source-tree-2.7.10-ruscrafting.2-upstream.15808b1.jar).
+The [validated implementation revision](https://github.com/alexey-va/BetterStructures/actions/runs/40936018990)
+passed all 65 unit tests, assembly and production packaging guards.
 The previous binary overlay is retired; its implementation remains in Git
 history. The current runtime and CI use the root source build.
 
@@ -125,7 +129,8 @@ env -u MC_DIST_DIR ./gradlew --no-daemon check assemble sourcesJar
 versions and checksums are committed in `gradle.lockfile` and
 `gradle/verification-metadata.xml`; the two optional compile-only SNAPSHOT APIs
 also have explicit SHA-256 guards. EliteMobs is downloaded directly from its immutable official Modrinth version.
-The FAWE mirror preserves the installed snapshot, whose embedded commit is
+The FAWE mirror preserves the observed installed snapshot/custom build. Its
+embedded commit is
 [`1079481486d4cf04283aaa905309cf47cbbe9bf1`](https://github.com/IntellectualSites/FastAsyncWorldEdit/commit/1079481486d4cf04283aaa905309cf47cbbe9bf1);
 its corresponding source archive is available alongside the mirrored binary.
 [FAWE source archive](https://repo.rus-crafting.ru/grocermc/ru/ruscrafting/thirdparty/fawe-paper-api-sources/2.15.5-snapshot.1079481/fawe-paper-api-sources-2.15.5-snapshot.1079481.jar).
