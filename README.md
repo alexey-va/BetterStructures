@@ -42,6 +42,18 @@ native-state warmup took 287.88 ms outside the active window. These synthetic
 measurements are from the isolated Purpur 1.21.11 lab with two-CPU affinity and a
 2 GiB maximum heap; they are not production or player-client acceptance.
 
+The diagnostic build records bounded JFR (32 MiB / ten minutes), including native
+request/pin spans, placement phases, timestamped server-tick durations, execution
+samples and GC/safepoints. It dumps an immutable UUID receipt off-thread next to
+the JSON report. Profiling results must be identified separately from unprofiled
+performance runs.
+
+The exact lab server [pins Paper bd74bf6](https://github.com/PurpurMC/Purpur/blob/f57bd8659b5c3cbaf03984ee5a8ecdcc0849040a/gradle.properties#L6).
+Its [CraftWorld async API](https://github.com/PaperMC/Paper/blob/bd74bf6581ce81e59bdab07eadbfbe5d485eefa7/paper-server/src/main/java/org/bukkit/craftbukkit/CraftWorld.java#L1989-L1998)
+requests FULL status; Moonrise [immediately processes ticket updates on the tick thread](https://github.com/PaperMC/Paper/blob/bd74bf6581ce81e59bdab07eadbfbe5d485eefa7/paper-server/patches/features/0001-Moonrise-optimisation-patches.patch#L8698-L8705).
+Calling this API from a worker queues the same work on the main executor. A
+worker-call change alone would not establish lower server-tick latency.
+
 ## Upstream project
 
 BetterStructures adds schematic structures and modular dungeons to Minecraft worlds. It places content on the surface, underground, in the sky, and on liquid surfaces, with generator rules for terrain, biomes, worlds, spacing, and loot.

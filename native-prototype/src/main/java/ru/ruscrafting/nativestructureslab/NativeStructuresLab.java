@@ -30,6 +30,7 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
     private final List<Map<String, Object>> results = new ArrayList<>();
     private Samples overallTicks = new Samples();
     private ExecutorService worker;
+    private LabRecording recording;
     private BukkitTask ticker;
     private Future<List<Fixtures.Fixture>> fixtureLoad;
     private Future<SchematicCodec.Schematic> manualLoad;
@@ -76,6 +77,7 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
             fixtureLoad = worker.submit(() -> Fixtures.prepare(fixtureFolder, fixtureDataVersion));
             Objects.requireNonNull(getCommand("nativestructures")).setExecutor(this);
             Bukkit.getPluginManager().registerEvents(this, this);
+            recording = LabRecording.start();
             stage = Stage.BOOT; stageTicks = 0;
             runStarted = System.nanoTime();
             ticker = Bukkit.getScheduler().runTaskTimer(this, this::tickSafely, 1L, 1L);
@@ -99,7 +101,10 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
                     || stage == Stage.RESET || stage == Stage.APPLY || stage == Stage.SETTLE;
             int hardLimit = stage == Stage.RESET || stage == Stage.APPLY ? MAX_POSITIONS : MAX_PREPARATION_OPERATIONS;
             SliceBudget budget = new SliceBudget(System::nanoTime, SLICE_NANOS, hardLimit);
-            switch (stage) {
+            LabRecording.NativeSlice event = new LabRecording.NativeSlice();
+            event.phase = observedPhase;
+            event.begin();
+            try { switch (stage) {
                 case BOOT -> {
                     while (warmupCursor < WARMUP_STATES.size() && budget.next()) {
                         long started = System.nanoTime();
@@ -127,6 +132,10 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
                 case SETTLE -> { if (++stageTicks >= 40) finishJob(); }
                 case REPORT -> finishReportIfReady();
                 default -> { }
+            } } finally {
+                event.operations = budget.used();
+                event.end();
+                if (event.shouldCommit()) event.commit();
             }
             if (budget.used() > 0) sliceSamples.computeIfAbsent(observedPhase, ignored -> new Samples())
                     .add(budget.elapsed() / 1_000_000D);
@@ -183,7 +192,12 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
             if (world.isChunkLoaded(position.x(), position.z())) job.alreadyLoaded++;
             Job requestedJob = job;
             long requestedToken = token;
-            CompletableFuture<Chunk> future = world.getChunkAtAsync(position.x(), position.z(), true);
+            LabRecording.NativeSlice requestEvent = new LabRecording.NativeSlice();
+            requestEvent.phase = requestedJob.name + ".chunk_request(" + position.x() + "," + position.z() + ")";
+            requestEvent.operations = 1; requestEvent.begin();
+            CompletableFuture<Chunk> future;
+            try { future = world.getChunkAtAsync(position.x(), position.z(), true); }
+            finally { requestEvent.end(); requestEvent.commit(); }
             requestedJob.pending.put(position.key(), future);
             future.whenComplete((chunk, failure) -> {
                 // Paper 1.21.11 completes this future on the main server thread.
@@ -191,6 +205,9 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
                 requestedJob.pending.remove(position.key());
                 if (failure != null) { requestedJob.failure = failure; return; }
                 long started = System.nanoTime();
+                LabRecording.NativeSlice pinEvent = new LabRecording.NativeSlice();
+                pinEvent.phase = requestedJob.name + ".chunk_pin(" + position.x() + "," + position.z() + ")";
+                pinEvent.operations = 1; pinEvent.begin();
                 try {
                     if (!Bukkit.isPrimaryThread() || chunk == null || chunk.getWorld() != world || !chunk.isLoaded())
                         throw new IllegalStateException("Chunk completed outside the loaded lab-world/main-thread boundary");
@@ -198,7 +215,10 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
                     boolean owned = chunk.addPluginChunkTicket(this);
                     requestedJob.held.put(position.key(), new HeldChunk(chunk, owned));
                 } catch (Throwable error) { requestedJob.failure = error; }
-                finally { requestedJob.maxPinNanos = Math.max(requestedJob.maxPinNanos, System.nanoTime() - started); }
+                finally {
+                    requestedJob.maxPinNanos = Math.max(requestedJob.maxPinNanos, System.nanoTime() - started);
+                    pinEvent.end(); pinEvent.commit();
+                }
             });
         }
         if (job.failure != null) throw new IllegalStateException("Asynchronous chunk preparation failed", job.failure);
@@ -272,6 +292,10 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
     }
     @EventHandler public void tickEnded(ServerTickEndEvent event) {
         if (collecting) {
+            LabRecording.NativeSlice tickEvent = new LabRecording.NativeSlice();
+            tickEvent.phase = observedPhase + ".server_tick";
+            tickEvent.serverTickMs = event.getTickDuration();
+            tickEvent.commit();
             tickSamples.computeIfAbsent(observedPhase, ignored -> new Samples()).add(event.getTickDuration());
             if (observedActive) overallTicks.add(event.getTickDuration());
         }
@@ -301,12 +325,16 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
         int remainingTickets = remainingNativeChunkTickets;
         Path reportFolder = dataFolder;
         String reportId = UUID.randomUUID().toString();
+        LabRecording completedRecording = benchReport ? recording : null;
         long reportingToken = fence.begin();
         transition(Stage.REPORT);
         reportWrite = worker.submit(() -> {
+            Path recordingPath = completedRecording == null ? null : completedRecording.stopAndDump(
+                    reportFolder.resolve("benchmark-recording-" + reportId + ".jfr"));
             Map<String, Object> report = new LinkedHashMap<>();
             report.put("status", status); report.put("message", message); report.put("startedAt", startTimestamp);
             report.put("runId", reportId);
+            if (recordingPath != null) report.put("jfrRecording", recordingPath.toString());
             report.put("server", version); report.put("java", System.getProperty("java.version"));
             report.put("world", LabGuard.WORLD); report.put("totalMs", totalNanos / 1_000_000D);
             report.put("worldGenerator", generator);
@@ -400,6 +428,7 @@ public final class NativeStructuresLab extends JavaPlugin implements Listener, C
         if (manualLoad != null) manualLoad.cancel(true);
         if (reportWrite != null) reportWrite.cancel(true);
         releaseJob();
+        if (recording != null) { recording.close(); recording = null; }
         if (worker != null) { worker.shutdownNow(); worker = null; }
         getLogger().info("NATIVE_STRUCTURES_LAB status=stopped nativeTicketsReleased=true");
     }
